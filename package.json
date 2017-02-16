@@ -7,13 +7,19 @@
   "author": "Scott Taylor <scott.c.taylor@mac.com>",
   "license": "MIT",
   "dependencies": {
+    "babel-preset-kyt-react": "^0.1.1",
+    "babel-relay-plugin": "^0.11.0",
     "compression": "^1.6.2",
     "enzyme": "^2.4.1",
     "express": "^4.14.0",
+    "http-proxy-middleware": "^0.17.3",
+    "isomorphic-relay": "^0.7.4",
+    "isomorphic-relay-router": "^0.8.6",
     "kyt": "^0.4.0",
     "react": "^15.3.0",
     "react-addons-test-utils": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-relay": "^0.10.0",
     "react-router": "^3.0.2"
   },
   "scripts": {

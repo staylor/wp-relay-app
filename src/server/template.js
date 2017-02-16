@@ -17,11 +17,12 @@ export default vo => `
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     ${vo.cssBundle ? '<link rel="stylesheet" type="text/css" href="' + vo.cssBundle + '">' : ''}
 
-    <title>Universal React Starter Kyt</title>
+    <title>WordPress Relay App</title>
   </head>
 
   <body>
-    <div id="root"><div>${vo.root}</div></div>
+    <main id="main">${vo.root}</main>
+    <script id="preloadedData" type="application/json">${encodeURIComponent(JSON.stringify(vo.data))}</script>
     <script src="${vo.jsBundle}"></script>
   </body>
 

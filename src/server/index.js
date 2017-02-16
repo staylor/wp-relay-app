@@ -1,14 +1,9 @@
-
+/* eslint-disable import/imports-first */
+import router from './router';
 import express from 'express';
+import proxy from 'http-proxy-middleware';
 import compression from 'compression';
 import path from 'path';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import RouterContext from 'react-router/lib/RouterContext';
-import createMemoryHistory from 'react-router/lib/createMemoryHistory';
-import match from 'react-router/lib/match';
-import template from './template';
-import routes from '../routes';
 
 const clientAssets = require(KYT.ASSETS_MANIFEST); // eslint-disable-line import/no-dynamic-require
 const app = express();
@@ -22,27 +17,22 @@ app.use(compression());
 // Setup the public directory so that we can server static assets.
 app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 
-// Setup server side routing.
-app.get('*', (request, response) => {
-  const history = createMemoryHistory(request.originalUrl);
+// use a local GQL server by default
+const gqlHost = process.env.GQL_HOST || 'http://localhost:8080';
 
-  match({ routes, history }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      response.status(500).send(error.message);
-    } else if (redirectLocation) {
-      response.redirect(302, `${redirectLocation.pathname}${redirectLocation.search}`);
-    } else if (renderProps) {
-      // When a React Router route is matched then we render
-      // the components and assets into the template.
-      response.status(200).send(template({
-        root: renderToString(<RouterContext {...renderProps} />),
-        jsBundle: clientAssets.main.js,
-        cssBundle: clientAssets.main.css,
-      }));
-    } else {
-      response.status(404).send('Not found');
-    }
-  });
-});
+// the pathname is dervied from samizdat
+const gqlPath = process.env.GQL_PATH || '/graphql';
+
+// proxy to the graphql server
+app.use(gqlPath, proxy({
+  target: gqlHost,
+  changeOrigin: true,
+}));
+
+app.get('*', router({
+  gqlUrl: gqlHost + gqlPath,
+  jsBundle: clientAssets.main.js,
+  cssBundle: clientAssets.main.css,
+}));
 
 app.listen(parseInt(KYT.SERVER_PORT, 10));

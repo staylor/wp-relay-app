@@ -1,26 +1,44 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import Relay from 'react-relay';
+import IsomorphicRelay from 'isomorphic-relay';
+import IsomorphicRouter from 'isomorphic-relay-router';
 import { AppContainer } from 'react-hot-loader';
-import Root from './Root';
+import { browserHistory, match, Router } from 'react-router';
+import AppRoutes from '../routes';
 
-const root = document.querySelector('#root');
+const data = JSON.parse(decodeURIComponent(document.getElementById('preloadedData').textContent));
 
-const mount = (RootComponent) => {
-  render(
-    <AppContainer>
-      <RootComponent />
-    </AppContainer>,
-    root
-  );
+const environment = new Relay.Environment();
+const networkLayer = new Relay.DefaultNetworkLayer('/graphql');
+
+environment.injectNetworkLayer(networkLayer);
+
+IsomorphicRelay.injectPreparedData(environment, data);
+
+const root = document.querySelector('#main');
+
+const mount = (routes = AppRoutes) => {
+  match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
+    IsomorphicRouter.prepareInitialRender(environment, renderProps).then((props) => {
+      render(
+        <AppContainer>
+          <Router {...props} />
+        </AppContainer>,
+        root
+      );
+    });
+  });
 };
 
+mount();
+
 if (module.hot) {
-  module.hot.accept('./Root', () => {
-    // eslint-disable-next-line global-require,import/newline-after-import
-    const RootComponent = require('./Root').default;
-    mount(RootComponent);
+  // Rerender after any changes to the following.
+  module.hot.accept('../routes', () => {
+    const newRoutes = require('../routes').default; // eslint-disable-line global-require
+
+    mount(newRoutes);
   });
 }
-
-mount(Root);
