@@ -1,21 +1,33 @@
-
 import React from 'react';
+import Relay from 'react-relay';
 import styles from './styles.scss';
 
-function Home() {
-  return (
-    <section>
-      <p className={styles.paragraph}>
-        Welcome to the <strong>Universal React Starter-kyt</strong>.
-        This starter kyt should serve as the base for an advanced,
-        server-rendered React app.
-      </p>
-      <p className={styles.paragraph}>
-        Check out the Tools section for an outline of the libraries that
-        are used in this Starter-kyt.
-      </p>
-    </section>
-  );
-}
+/* eslint-disable react/prop-types */
 
-export default Home;
+const Home = ({ posts }) => (
+  <section>
+    {posts.map(({ title, author }) => (
+      <div>
+        <h3>{title.rendered}</h3>
+        <p className={styles.paragraph}>
+          {author.name}
+        </p>
+      </div>
+    ))}
+  </section>
+);
+
+export default Relay.createContainer(Home, {
+  fragments: {
+    posts: () => Relay.QL`
+      fragment on Post {
+        title {
+          rendered
+        }
+        author {
+          name
+        }
+      }
+    `,
+  },
+});
