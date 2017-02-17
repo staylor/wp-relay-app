@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import { Link } from 'react-router';
-import Image from 'components/Image';
+import Media from 'components/Media';
 import styles from './styles.scss';
 
 /* eslint-disable react/prop-types */
@@ -19,7 +19,7 @@ import styles from './styles.scss';
           rendered
         }
         featured_media {
-          ${Image.getFragment('image')}
+          ${Media.getFragment('media')}
         }
       }
     `,
@@ -27,13 +27,13 @@ import styles from './styles.scss';
 })
 export default class Post extends Component {
   render() {
-    const { id, title, author, featured_media } = this.props.post;
+    const { id, title, featured_media } = this.props.post;
     return (
       <article>
         <h3 className={styles.title}>
           <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title.rendered }} />
         </h3>
-        {featured_media && <Image image={featured_media} />}
+        {featured_media && <Media media={featured_media} />}
       </article>
     );
   }
