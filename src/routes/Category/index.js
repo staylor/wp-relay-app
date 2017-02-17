@@ -7,19 +7,11 @@ import Post from 'components/Post';
 @withRelay({
   initialVariables: {
     total: 10,
-    totalStickies: 5,
   },
   fragments: {
-    stickies: () => Relay.QL`
-      fragment on PostCollection {
-        results(first: $totalStickies) {
-          edges {
-            node {
-              ${Post.getFragment('post')}
-            }
-            cursor
-          }
-        }
+    category: () => Relay.QL`
+      fragment on Category {
+        name
       }
     `,
     posts: () => Relay.QL`
@@ -36,23 +28,17 @@ import Post from 'components/Post';
     `,
   },
 })
-export default class Home extends Component {
+export default class Category extends Component {
   render() {
     const {
       relay,
-      stickies: { results: { edges: stickies } },
+      category,
       posts: { results: { edges: posts } },
     } = this.props;
     return (
       <div className="sections">
-        {stickies && (<section>
-          <h3>Latest</h3>
-          <ul>
-            {stickies.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
-          </ul>
-        </section>)}
-        {posts && (<section>
-          <h3>Read This</h3>
+        {category && (<section>
+          <h3>{category.name}</h3>
           <ul>
             {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
           </ul>

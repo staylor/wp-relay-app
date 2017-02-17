@@ -11,7 +11,9 @@ const Image = ({ image: { source_url } }) => {
   }
 
   return (
-    <img className={styles.image} src={source_url} role="presentation" />
+    <figure>
+      <img className={styles.image} src={source_url} role="presentation" />
+    </figure>
   );
 };
 

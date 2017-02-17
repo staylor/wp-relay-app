@@ -47,7 +47,10 @@ export default class Post extends Component {
           <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title.rendered }} />
         </header>
         {featured_media && <Image image={featured_media} />}
-        <section dangerouslySetInnerHTML={{ __html: content.rendered }} />
+        <section
+          className={styles.content}
+          dangerouslySetInnerHTML={{ __html: content.rendered }}
+        />
       </article>
     );
   }

@@ -20,8 +20,8 @@ const importPost = (nextState, cb) => {
     .catch((e) => { throw e; });
 };
 
-const importTools = (nextState, cb) => {
-  System.import('./Tools')
+const importCategory = (nextState, cb) => {
+  System.import('./Category')
     .then(module => cb(null, module.default))
     .catch((e) => { throw e; });
 };
@@ -29,7 +29,11 @@ const importTools = (nextState, cb) => {
 // We use `getComponent` to dynamically load routes.
 // https://github.com/reactjs/react-router/blob/master/docs/guides/DynamicRouting.md
 const routes = (
-  <Route path="/" component={App}>
+  <Route
+    path="/"
+    component={App}
+    queries={{ categories: () => Relay.QL`query { categories(exclude: "Q2F0ZWdvcnk6MQ==") }` }}
+  >
     <IndexRoute
       getComponent={importHome}
       queries={{
@@ -42,7 +46,14 @@ const routes = (
       getComponent={importPost}
       queries={{ post: () => Relay.QL`query { post(id: $id) }` }}
     />
-    <Route path="tools" getComponent={importTools} />
+    <Route
+      path="category/:id"
+      getComponent={importCategory}
+      queries={{
+        category: () => Relay.QL`query { category(id: $id) }`,
+        posts: () => Relay.QL`query { posts(categories: $id) }`,
+      }}
+    />
   </Route>
 );
 
@@ -50,9 +61,10 @@ const routes = (
 // routes so we need to require them here as a workaround.
 // https://github.com/gaearon/react-hot-loader/issues/288
 if (module.hot) {
-  require('./Home');    // eslint-disable-line global-require
-  require('./Tools');   // eslint-disable-line global-require
-  require('./Post');   // eslint-disable-line global-require
+  /* eslint-disable global-require */
+  require('./Home');
+  require('./Category');
+  require('./Post');
 }
 
 export default routes;

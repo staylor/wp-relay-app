@@ -18,9 +18,6 @@ import styles from './styles.scss';
         title {
           rendered
         }
-        author {
-          name
-        }
         featured_media {
           ${Image.getFragment('image')}
         }
@@ -32,15 +29,12 @@ export default class Post extends Component {
   render() {
     const { id, title, author, featured_media } = this.props.post;
     return (
-      <div>
+      <article>
         <h3 className={styles.title}>
           <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title.rendered }} />
         </h3>
         {featured_media && <Image image={featured_media} />}
-        <p className={styles.paragraph}>
-          {author.name}
-        </p>
-      </div>
+      </article>
     );
   }
 }
