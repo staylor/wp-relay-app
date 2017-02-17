@@ -1,51 +1,33 @@
-import React from 'react';
-import Relay from 'react-relay';
-import { Link } from 'react-router';
-import Image from '../../components/Image';
-import styles from './styles.scss';
+import React, { Component } from 'react';
+import Relay, { withRelay } from 'decorators/withRelay';
+import Post from 'components/Post';
 
 /* eslint-disable react/prop-types */
-/* eslint-disable camelcase */
 
-const Home = ({ relay, posts: { results: { edges } } }) => (
-  <section>
-    {edges.map(({ node: { id, title, author, featured_media } }) => (
-      <div key={id}>
-        <h3 className={styles.title}>
-          <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title.rendered }} />
-        </h3>
-        {featured_media && <Image image={featured_media} />}
-        <p className={styles.paragraph}>
-          {author.name}
-        </p>
-      </div>
-    ))}
-    <button onClick={() => relay.setVariables({ total: relay.variables.total + 10 })}>
-      MORE
-    </button>
-  </section>
-);
-
-export default Relay.createContainer(Home, {
+@withRelay({
   initialVariables: {
     total: 10,
+    totalStickies: 5,
   },
   fragments: {
+    stickies: () => Relay.QL`
+      fragment on PostCollection {
+        results(first: $totalStickies) {
+          edges {
+            node {
+              ${Post.getFragment('post')}
+            }
+            cursor
+          }
+        }
+      }
+    `,
     posts: () => Relay.QL`
       fragment on PostCollection {
         results(first: $total) {
           edges {
             node {
-              id
-              title {
-                rendered
-              }
-              author {
-                name
-              }
-              featured_media {
-                ${Image.getFragment('image')}
-              }
+              ${Post.getFragment('post')}
             }
             cursor
           }
@@ -53,4 +35,32 @@ export default Relay.createContainer(Home, {
       }
     `,
   },
-});
+})
+export default class Home extends Component {
+  render() {
+    const {
+      relay,
+      stickies: { results: { edges: stickies } },
+      posts: { results: { edges: posts } },
+    } = this.props;
+    return (
+      <div className="sections">
+        {stickies && (<section>
+          <h3>Latest</h3>
+          <ul>
+            {stickies.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
+          </ul>
+        </section>)}
+        {posts && (<section>
+          <h3>Read This</h3>
+          <ul>
+            {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
+            <button onClick={() => relay.setVariables({ total: relay.variables.total + 10 })}>
+              MORE
+            </button>
+          </ul>
+        </section>)}
+      </div>
+    );
+  }
+}

@@ -1,5 +1,13 @@
 
-@import '../../shared-styles/variables';
+@import '../../styles/variables';
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+a {
+  color: deeppink;
+}
 
 .header {
   text-align: center;
@@ -23,7 +31,6 @@
 
 .link {
   padding: $padding;
-  color: #00a68f;
   font-size: 18px;
 }
 

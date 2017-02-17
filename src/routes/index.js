@@ -32,7 +32,10 @@ const routes = (
   <Route path="/" component={App}>
     <IndexRoute
       getComponent={importHome}
-      queries={{ posts: () => Relay.QL`query { posts }` }}
+      queries={{
+        stickies: () => Relay.QL`query { stickies }`,
+        posts: () => Relay.QL`query { posts }`,
+      }}
     />
     <Route
       path="post/:id"

@@ -6,7 +6,7 @@ import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import { AppContainer } from 'react-hot-loader';
 import { browserHistory, match, Router } from 'react-router';
-import AppRoutes from '../routes';
+import AppRoutes from 'routes';
 
 const data = JSON.parse(decodeURIComponent(document.getElementById('preloadedData').textContent));
 

@@ -3,6 +3,14 @@
     "babel-preset-kyt-react"
   ],
   "plugins": [
-    "./tools/babelRelayPlugin.js"
+    "./tools/babelRelayPlugin.js",
+    "babel-plugin-transform-decorators-legacy",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "components": "./components",
+        "routes": "./routes"
+      }
+    }]
   ]
 }
