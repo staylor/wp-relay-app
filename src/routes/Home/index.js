@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Post from 'components/Post';
+import styles from './Home.scss';
 
 /* eslint-disable react/prop-types */
 
@@ -44,7 +45,7 @@ export default class Home extends Component {
       posts: { results: { edges: posts } },
     } = this.props;
     return (
-      <div className="sections">
+      <div className={styles.section}>
         {stickies && (<section>
           <h3>Latest</h3>
           <ul>

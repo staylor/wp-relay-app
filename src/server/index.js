@@ -1,7 +1,9 @@
 /* eslint-disable import/imports-first */
+import 'isomorphic-fetch';
 import router from './router';
 import express from 'express';
 import proxy from 'http-proxy-middleware';
+import morgan from 'morgan';
 import compression from 'compression';
 import path from 'path';
 
@@ -14,6 +16,10 @@ app.disable('x-powered-by');
 // Compress (gzip) assets in production.
 app.use(compression());
 
+// Standard Apache combined log output.
+// https://github.com/expressjs/morgan#combined
+app.use(morgan('combined'));
+
 // Setup the public directory so that we can server static assets.
 app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 
@@ -22,6 +28,7 @@ const gqlHost = process.env.GQL_HOST || 'http://localhost:8080';
 
 // the pathname is dervied from samizdat
 const gqlPath = process.env.GQL_PATH || '/graphql';
+const gqlBatchPath = process.env.GQL_BATCH_PATH || '/graphql/batch';
 
 // proxy to the graphql server
 app.use(gqlPath, proxy({
@@ -31,6 +38,7 @@ app.use(gqlPath, proxy({
 
 app.get('*', router({
   gqlUrl: gqlHost + gqlPath,
+  gqlBatchUrl: gqlHost + gqlBatchPath,
   jsBundle: clientAssets.main.js,
   cssBundle: clientAssets.main.css,
 }));

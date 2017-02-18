@@ -1,0 +1,16 @@
+@mixin size-height ($size, $height: 1) {
+  font-size: ($size + px);
+  font-size: (($size/16) + rem);
+  line-height: ($height + px);
+  line-height: (($height/16) + rem);
+}
+
+@mixin clear() {
+  &::after {
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}

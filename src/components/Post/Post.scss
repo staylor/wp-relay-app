@@ -1,0 +1,64 @@
+@import '../../styles/variables';
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+.paragraph {
+  margin: 0 0 20px;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+}
+
+.content {
+  p {
+    margin: 0 0 20px;
+  }
+}
+
+.placeholder {
+  display: block;
+  height: auto !important;
+  max-width: 100%;
+  position: relative;
+
+  img {
+    height: auto;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  span {
+    background: deeppink;
+    border-radius: 10px;
+    height: 52px;
+    left: 50%;
+    margin: -21px 0 0 -48px;
+    opacity: .8;
+    position: absolute;
+    top: 50%;
+    width: 76px;
+    z-index: 2;
+
+    .arrow {
+      border-bottom: 10px solid transparent;
+      border-left: 20px solid #fff;
+      border-top: 10px solid transparent;
+      height: 0;
+      left: 31px;
+      position: absolute;
+      top: 16px;
+      width: 0;
+    }
+  }
+
+  &:hover span {
+    background: #000;
+  }
+}

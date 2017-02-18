@@ -1,18 +1,18 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Relay from 'react-relay';
+import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import { match } from 'react-router';
 import template from './template';
 import routes from '../routes';
 
-export default function router({ gqlUrl, jsBundle, cssBundle }) {
-  const networkLayer = new Relay.DefaultNetworkLayer(
-    gqlUrl,
-    {
-      retryDelays: [], // disable retries
-    }
-  );
+export default function router({ gqlUrl, gqlBatchUrl, jsBundle, cssBundle }) {
+  const networkLayer = new RelayNetworkLayer([
+    urlMiddleware({
+      url: gqlUrl,
+      batchUrl: gqlBatchUrl,
+    }),
+  ], { disableBatchQuery: false });
 
   return (req, res, next) => {
     match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {

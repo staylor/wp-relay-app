@@ -14,8 +14,8 @@ const importHome = (nextState, cb) => {
     .catch((e) => { throw e; });
 };
 
-const importPost = (nextState, cb) => {
-  System.import('./Post')
+const importSingle = (nextState, cb) => {
+  System.import('./Single')
     .then(module => cb(null, module.default))
     .catch((e) => { throw e; });
 };
@@ -43,7 +43,7 @@ const routes = (
     />
     <Route
       path="post/:id"
-      getComponent={importPost}
+      getComponent={importSingle}
       queries={{ post: () => Relay.QL`query { post(id: $id) }` }}
     />
     <Route
@@ -64,7 +64,7 @@ if (module.hot) {
   /* eslint-disable global-require */
   require('./Home');
   require('./Category');
-  require('./Post');
+  require('./Single');
 }
 
 export default routes;

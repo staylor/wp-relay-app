@@ -2,6 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Relay from 'react-relay';
+import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import { AppContainer } from 'react-hot-loader';
@@ -11,7 +12,12 @@ import AppRoutes from 'routes';
 const data = JSON.parse(decodeURIComponent(document.getElementById('preloadedData').textContent));
 
 const environment = new Relay.Environment();
-const networkLayer = new Relay.DefaultNetworkLayer('/graphql');
+const networkLayer = new RelayNetworkLayer([
+  urlMiddleware({
+    url: '/graphql',
+    batchUrl: '/graphql/batch',
+  }),
+], { disableBatchQuery: false });
 
 environment.injectNetworkLayer(networkLayer);
 

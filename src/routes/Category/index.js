@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Post from 'components/Post';
+import styles from './Category.scss';
 
 /* eslint-disable react/prop-types */
 
@@ -36,7 +37,7 @@ export default class Category extends Component {
       posts: { results: { edges: posts } },
     } = this.props;
     return (
-      <div className="sections">
+      <div className={styles.sections}>
         {category && (<section>
           <h3>{category.name}</h3>
           <ul>

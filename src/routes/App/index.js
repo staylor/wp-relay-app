@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import { Link } from 'react-router';
-import styles from './styles.scss';
+import styles from './App.scss';
 
 @withRelay({
   fragments: {

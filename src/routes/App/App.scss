@@ -9,6 +9,11 @@ a {
   color: deeppink;
 }
 
+blockquote,
+em {
+  font-style: italic;
+}
+
 .header {
   text-align: center;
 }
@@ -40,9 +45,10 @@ a {
 }
 
 .logo {
-  display: block;
-  width: 600px;
-  height: 300px;
-  margin: $padding auto;
   background: url('../../images/react-graphql.png');
+  background-size: contain;
+  display: block;
+  height: 100px;
+  margin: $padding auto;
+  width: 200px;
 }
