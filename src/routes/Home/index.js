@@ -1,38 +1,31 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
-import Post from 'components/Post';
+import Archive from 'components/Archive';
 import styles from './Home.scss';
 
 /* eslint-disable react/prop-types */
+/* eslint-disable react/prefer-stateless-function */
 
 @withRelay({
-  initialVariables: {
-    total: 10,
-    totalStickies: 5,
-  },
   fragments: {
     stickies: () => Relay.QL`
       fragment on PostCollection {
-        results(first: $totalStickies) {
-          edges {
-            node {
-              ${Post.getFragment('post')}
-            }
-            cursor
-          }
-        }
+        ${Archive.getFragment('posts')}
       }
     `,
-    posts: () => Relay.QL`
+    readThis: () => Relay.QL`
       fragment on PostCollection {
-        results(first: $total) {
-          edges {
-            node {
-              ${Post.getFragment('post')}
-            }
-            cursor
-          }
-        }
+        ${Archive.getFragment('posts')}
+      }
+    `,
+    watchThis: () => Relay.QL`
+      fragment on PostCollection {
+        ${Archive.getFragment('posts')}
+      }
+    `,
+    listenToThis: () => Relay.QL`
+      fragment on PostCollection {
+        ${Archive.getFragment('posts')}
       }
     `,
   },
@@ -40,27 +33,22 @@ import styles from './Home.scss';
 export default class Home extends Component {
   render() {
     const {
-      relay,
-      stickies: { results: { edges: stickies } },
-      posts: { results: { edges: posts } },
+      stickies,
+      readThis,
+      watchThis,
+      listenToThis,
     } = this.props;
+
     return (
       <div className={styles.section}>
-        {stickies && (<section>
-          <h3>Latest</h3>
-          <ul>
-            {stickies.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
-          </ul>
-        </section>)}
-        {posts && (<section>
-          <h3>Read This</h3>
-          <ul>
-            {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
-          </ul>
-          <button onClick={() => relay.setVariables({ total: relay.variables.total + 10 })}>
-            MORE
-          </button>
-        </section>)}
+        <h3>Latest</h3>
+        {stickies && <Archive posts={stickies} infinite={false} />}
+        <h3>Read This</h3>
+        {readThis && <Archive posts={readThis} infinite={false} />}
+        <h3>Watch This</h3>
+        {watchThis && <Archive posts={watchThis} infinite={false} />}
+        <h3>Listen To This</h3>
+        {listenToThis && <Archive posts={listenToThis} infinite={false} />}
       </div>
     );
   }

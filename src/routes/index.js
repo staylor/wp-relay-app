@@ -44,7 +44,9 @@ const routes = (
       getComponent={importHome}
       getQueries={() => ({
         stickies: () => Relay.QL`query { stickies }`,
-        posts: () => Relay.QL`query { posts }`,
+        readThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6Mw==") }`,
+        watchThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6NA==") }`,
+        listenToThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6NQ==") }`,
       })}
       render={({ error, props, element }) => {
         if (error || props) {

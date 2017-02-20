@@ -26,13 +26,12 @@ export default class App extends Component {
     return (
       <div className={styles.page}>
         <Header categories={categories} />
-        <div id="main">
-          <div id="primary">
-            <div id="content" className={styles.content}>
-              {children}
-            </div>
-          </div>
+        <div className={styles.content}>
+          {children}
         </div>
+        <p className={styles.footerCredits}>&copy; Scott Taylor ...&nbsp;
+          New York, NY ... <a href="https://twitter.com/wonderboymusic">@wonderboymusic</a>&nbsp;
+        ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis / SCSS</p>
       </div>
     );
   }

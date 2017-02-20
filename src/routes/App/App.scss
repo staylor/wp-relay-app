@@ -1,8 +1,13 @@
-
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 body {
+  @include size-height(13, 18);
+  background: #e2e2e2;
+  color: #444;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: 0 2em;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -14,8 +19,37 @@ em {
   font-style: italic;
 }
 
+h1,
+h2,
+h3 {
+  font-family: $futura;
+  font-weight: bold;
+}
+
+h1 {
+  @include size-height(32, 40);
+}
+
+h2 {
+  @include size-height(24, 32);
+}
+
+h3 {
+  @include size-height(18, 24);
+}
+
 .page {
   background: $white;
   margin: 0 auto;
   max-width: $content-width;
+  padding: 0 2em;
+}
+
+.content {
+  padding: 2em 0;
+}
+
+.footerCredits {
+  padding: 2em 0;
+  text-align: center;
 }

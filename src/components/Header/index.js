@@ -30,7 +30,7 @@ export default class Header extends Component {
     } = this.props;
 
     return (
-      <header className={styles.branding} role="banner">
+      <header className={styles.header} role="banner">
         <hgroup>
           <h1 className={styles.siteTitle}>
             <Link to="/">High For This.</Link>
@@ -40,12 +40,11 @@ export default class Header extends Component {
         <nav className={styles.access} role="navigation">
           <ul className={styles.nav}>
             <li className={styles.navItem}>
-              <Link className={styles.link} to="/">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             {categories.map(({ node: { id, name }, cursor }) => (
               <li key={cursor} className={styles.navItem}>
                 <Link
-                  className={styles.link}
                   activeClassName={styles.activeLink}
                   to={`/category/${id}`}
                 >

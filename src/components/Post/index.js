@@ -5,6 +5,8 @@ import Media from 'components/Media';
 import styles from './Post.scss';
 
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-danger */
+/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable camelcase */
 
 @withRelay({
@@ -16,9 +18,6 @@ import styles from './Post.scss';
       fragment on Post {
         id
         title {
-          rendered
-        }
-        content {
           rendered
         }
         featured_media {
@@ -33,23 +32,17 @@ export default class Post extends Component {
     const {
       id,
       title: { rendered: title },
-      content: { rendered: content },
       featured_media,
     } = this.props.post;
+
     return (
       <article>
-        <h3 className={styles.title}>
-          <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
-        </h3>
+        <header>
+          <h1 className={styles.title}>
+            <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
+          </h1>
+        </header>
         {featured_media && <Media media={featured_media} />}
-        <section
-          className={styles.content}
-          dangerouslySetInnerHTML={{
-            __html: content
-              .replace(/hft-oembed-placeholder/g, styles.placeholder)
-              .replace(/"arrow"/g, `"${styles.arrow}"`),
-          }}
-        />
       </article>
     );
   }

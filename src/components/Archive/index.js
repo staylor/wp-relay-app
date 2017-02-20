@@ -3,7 +3,6 @@ import Relay, { withRelay } from 'decorators/withRelay';
 import Post from 'components/Post';
 
 /* eslint-disable react/prop-types */
-/* eslint-disable react/prefer-stateless-function */
 
 @withRelay({
   initialVariables: {
@@ -25,9 +24,12 @@ import Post from 'components/Post';
   },
 })
 export default class Archive extends Component {
+  defaultProps = {
+    infinite: true,
+  };
+
   render() {
     const {
-      relay,
       posts: { results: { edges: posts } },
     } = this.props;
     return (
@@ -35,9 +37,17 @@ export default class Archive extends Component {
         <ul>
           {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
         </ul>
-        <button onClick={() => relay.setVariables({ total: relay.variables.total + 10 })}>
-          MORE
-        </button>
+        {this.props.infinite && (
+          <button
+            onClick={() => {
+              this.props.relay.setVariables({
+                total: this.props.relay.variables.total + 10,
+              });
+            }}
+          >
+            MORE
+          </button>
+      )}
       </section>
     );
   }
