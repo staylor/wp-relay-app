@@ -1,0 +1,7 @@
+@import '../../styles/variables';
+
+.loading {
+  background: $white url('../../images/icons/icon-activity-indicator.gif') no-repeat 50% 10px;
+  height: 56px;
+  width: 100%;
+}

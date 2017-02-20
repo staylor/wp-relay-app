@@ -1,7 +1,7 @@
-
 import React from 'react';
 import Relay from 'react-relay';
 import { Route, IndexRoute } from 'react-router';
+import LoadingPage from 'components/LoadingPage';
 import App from './App';
 
 // Webpack 2 supports ES2015 `System.import` by auto-
@@ -20,8 +20,14 @@ const importSingle = (nextState, cb) => {
     .catch((e) => { throw e; });
 };
 
-const importCategory = (nextState, cb) => {
-  System.import('./Category')
+const importTerm = (nextState, cb) => {
+  System.import('./Term')
+    .then(module => cb(null, module.default))
+    .catch((e) => { throw e; });
+};
+
+const importAuthor = (nextState, cb) => {
+  System.import('./Author')
     .then(module => cb(null, module.default))
     .catch((e) => { throw e; });
 };
@@ -32,26 +38,81 @@ const routes = (
   <Route
     path="/"
     component={App}
-    queries={{ categories: () => Relay.QL`query { categories(exclude: "Q2F0ZWdvcnk6MQ==") }` }}
+    getQueries={() => ({ categories: () => Relay.QL`query { categories(exclude: "Q2F0ZWdvcnk6MQ==") }` })}
   >
     <IndexRoute
       getComponent={importHome}
-      queries={{
+      getQueries={() => ({
         stickies: () => Relay.QL`query { stickies }`,
         posts: () => Relay.QL`query { posts }`,
+      })}
+      render={({ error, props, element }) => {
+        if (error || props) {
+          return React.cloneElement(element, props);
+        }
+        return <LoadingPage />;
       }}
     />
     <Route
       path="post/:id"
       getComponent={importSingle}
-      queries={{ post: () => Relay.QL`query { post(id: $id) }` }}
+      getQueries={({ location }) => (location.state ?
+        { post: () => Relay.QL`query { node(id: $id) }` } :
+        { post: () => Relay.QL`query { post(id: $id) }` })
+      }
+      render={({ error, props, element }) => {
+        if (error || props) {
+          return React.cloneElement(element, props);
+        }
+        return <LoadingPage />;
+      }}
     />
     <Route
       path="category/:id"
-      getComponent={importCategory}
-      queries={{
-        category: () => Relay.QL`query { category(id: $id) }`,
+      getComponent={importTerm}
+      getQueries={({ location }) => ({
+        term: () => (location.state ?
+          Relay.QL`query { node(id: $id) }` :
+          Relay.QL`query { category(id: $id) }`),
         posts: () => Relay.QL`query { posts(categories: $id) }`,
+      })}
+      render={({ error, props, element }) => {
+        if (error || props) {
+          return React.cloneElement(element, props);
+        }
+        return <LoadingPage />;
+      }}
+    />
+    <Route
+      path="tag/:id"
+      getComponent={importTerm}
+      getQueries={({ location }) => ({
+        term: () => (location.state ?
+          Relay.QL`query { node(id: $id) }` :
+          Relay.QL`query { tag(id: $id) }`),
+        posts: () => Relay.QL`query { posts(tags: $id) }`,
+      })}
+      render={({ error, props, element }) => {
+        if (error || props) {
+          return React.cloneElement(element, props);
+        }
+        return <LoadingPage />;
+      }}
+    />
+    <Route
+      path="author/:id"
+      getComponent={importAuthor}
+      getQueries={({ location }) => ({
+        author: () => (location.state ?
+          Relay.QL`query { node(id: $id) }` :
+          Relay.QL`query { user(id: $id) }`),
+        posts: () => Relay.QL`query { posts(author: $id) }`,
+      })}
+      render={({ error, props, element }) => {
+        if (error || props) {
+          return React.cloneElement(element, props);
+        }
+        return <LoadingPage />;
       }}
     />
   </Route>
@@ -63,8 +124,9 @@ const routes = (
 if (module.hot) {
   /* eslint-disable global-require */
   require('./Home');
-  require('./Category');
   require('./Single');
+  require('./Term');
+  require('./Author');
 }
 
 export default routes;

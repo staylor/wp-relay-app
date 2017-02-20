@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Post from 'components/Post';
-import styles from './Category.scss';
 
 /* eslint-disable react/prop-types */
+/* eslint-disable react/prefer-stateless-function */
 
 @withRelay({
   initialVariables: {
     total: 10,
   },
   fragments: {
-    category: () => Relay.QL`
-      fragment on Category {
-        name
-      }
-    `,
     posts: () => Relay.QL`
       fragment on PostCollection {
         results(first: $total) {
@@ -29,25 +24,21 @@ import styles from './Category.scss';
     `,
   },
 })
-export default class Category extends Component {
+export default class Archive extends Component {
   render() {
     const {
       relay,
-      category,
       posts: { results: { edges: posts } },
     } = this.props;
     return (
-      <div className={styles.sections}>
-        {category && (<section>
-          <h3>{category.name}</h3>
-          <ul>
-            {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
-          </ul>
-          <button onClick={() => relay.setVariables({ total: relay.variables.total + 10 })}>
-            MORE
-          </button>
-        </section>)}
-      </div>
+      <section>
+        <ul>
+          {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
+        </ul>
+        <button onClick={() => relay.setVariables({ total: relay.variables.total + 10 })}>
+          MORE
+        </button>
+      </section>
     );
   }
 }

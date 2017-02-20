@@ -9,7 +9,7 @@ import { AppContainer } from 'react-hot-loader';
 import { browserHistory, match, Router } from 'react-router';
 import AppRoutes from 'routes';
 
-const data = JSON.parse(decodeURIComponent(document.getElementById('preloadedData').textContent));
+const data = JSON.parse(document.getElementById('preloadedData').textContent);
 
 const environment = new Relay.Environment();
 const networkLayer = new RelayNetworkLayer([
