@@ -51,7 +51,19 @@ h3 {
 }
 
 .content {
+  @include clear;
+
   padding: 2em 0;
+}
+
+.primary {
+  float: left;
+  width: 78%
+}
+
+.secondary {
+  float: right;
+  width: 20%;
 }
 
 .footerCredits {

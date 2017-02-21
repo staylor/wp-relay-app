@@ -38,7 +38,10 @@ const routes = (
   <Route
     path="/"
     component={App}
-    getQueries={() => ({ categories: () => Relay.QL`query { categories(exclude: "Q2F0ZWdvcnk6MQ==") }` })}
+    getQueries={() => ({
+      categories: () => Relay.QL`query { categories(exclude: "Q2F0ZWdvcnk6MQ==") }`,
+      sidebar: () => Relay.QL`query { sidebar(id: "U2lkZWJhcjpzaWRlYmFyLTE=") }`,
+    })}
   >
     <IndexRoute
       getComponent={importHome}

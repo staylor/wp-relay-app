@@ -17,7 +17,7 @@ ${vo.cssBundle ? '<link rel="stylesheet" type="text/css" href="' + vo.cssBundle 
 </head>
 <body>
 <main id="main">${vo.root}</main>
-<script id="preloadedData" type="application/json">${JSON.stringify(vo.data)}</script>
+<script id="preloadedData" type="application/json">${JSON.stringify(vo.data).replace(/\//g, '\\/')}</script>
 <script src="${vo.jsBundle}"></script>
 </body>
 </html>`;
