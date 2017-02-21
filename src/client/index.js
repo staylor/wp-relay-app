@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import Relay from 'react-relay';
 import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
+import { IntlProvider } from 'react-intl';
 import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import { AppContainer } from 'react-hot-loader';
@@ -32,7 +33,9 @@ const mount = (routes = AppRoutes) => {
     IsomorphicRouter.prepareInitialRender(environment, renderProps).then((props) => {
       render(
         <AppContainer>
-          <Router {...props} />
+          <IntlProvider locale="en">
+            <Router {...props} />
+          </IntlProvider>
         </AppContainer>,
         root
       );

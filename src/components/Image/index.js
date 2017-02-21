@@ -27,6 +27,24 @@ export default class Image extends Component {
     crop: 'medium',
   };
 
+  getCrop(sizes) {
+    let chosen;
+    const choices = [
+      this.props.crop,
+      'full',
+      this.constructor.defaultProps.crop,
+    ];
+
+    for (let i = 0; i < choices.length; i += 1) {
+      chosen = sizes.find(size => size.name === choices[i]);
+      if (chosen) {
+        return chosen;
+      }
+    }
+
+    return null;
+  }
+
   render() {
     const {
       source_url,
@@ -37,7 +55,10 @@ export default class Image extends Component {
       return '';
     }
 
-    const chosen = sizes.find(size => size.name === this.props.crop);
+    const chosen = this.getCrop(sizes);
+    if (!chosen) {
+      return null;
+    }
 
     return (
       <figure>

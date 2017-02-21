@@ -1,7 +1,9 @@
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import match from 'react-router/lib/match';
+import { IntlProvider } from 'react-intl';
 import template from './template';
 import routes from '../routes';
 
@@ -26,7 +28,11 @@ export default function router({ gqlUrl, gqlBatchUrl, jsBundle, cssBundle }) {
       IsomorphicRouter
         .prepareData(renderProps, networkLayer)
         .then(({ data, props }) => {
-          const root = renderToString(IsomorphicRouter.render(props));
+          const root = renderToString((
+            <IntlProvider locale="en">
+              {IsomorphicRouter.render(props)}
+            </IntlProvider>
+          ));
 
           res.status(200);
           if (process.env.NODE_ENV === 'production') {

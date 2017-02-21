@@ -62,10 +62,12 @@ const routes = (
     <Route
       path="post/:id"
       getComponent={importSingle}
-      getQueries={({ location }) => (location.state ?
-        { post: () => Relay.QL`query { node(id: $id) }` } :
-        { post: () => Relay.QL`query { post(id: $id) }` })
-      }
+      getQueries={({ location }) => ({
+        post: () => (location.state ?
+          Relay.QL`query { node(id: $id) }` :
+          Relay.QL`query { post(id: $id) }`),
+        comments: () => Relay.QL`query { comments(post: $id) }`,
+      })}
       render={({ error, props, element }) => {
         if (error || props) {
           return React.cloneElement(element, props);
@@ -123,16 +125,5 @@ const routes = (
     />
   </Route>
 );
-
-// Unfortunately, HMR breaks when we dynamically resolve
-// routes so we need to require them here as a workaround.
-// https://github.com/gaearon/react-hot-loader/issues/288
-if (module.hot) {
-  /* eslint-disable global-require */
-  require('./Home');
-  require('./Single');
-  require('./Term');
-  require('./Author');
-}
 
 export default routes;

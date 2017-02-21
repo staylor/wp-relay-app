@@ -1,0 +1,32 @@
+@import '../../styles/mixins';
+
+.comments {
+  margin: 55px 0 0;
+  max-width: 100%;
+  width: 450px;
+
+  ul {
+    ul {
+      margin: 20px 0 20px 20px;
+    }
+  }
+}
+
+.levels {
+  border-bottom: 1px solid #ccc;
+}
+
+.comment {
+  margin: 10px 0 20px;
+}
+
+.author {
+  text-transform: uppercase;
+}
+
+.content {
+  p {
+    @include size-height(11, 14);
+    margin: 10px 0;
+  }
+}

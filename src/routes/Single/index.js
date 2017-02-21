@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Link from 'react-router/lib/Link';
+import { FormattedRelative } from 'react-intl';
 import Media from 'components/Media';
+import Comments from 'components/Comments';
 import { convertPlaceholders } from 'utils';
 import styles from './Single.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
+/* eslint-disable react/style-prop-object */
 /* eslint-disable camelcase */
 
 @withRelay({
@@ -14,6 +17,7 @@ import styles from './Single.scss';
     post: () => Relay.QL`
       fragment on Post {
         id
+        date
         title {
           rendered
         }
@@ -27,6 +31,11 @@ import styles from './Single.scss';
           id
           name
         }
+      }
+    `,
+    comments: () => Relay.QL`
+      fragment on CommentCollection {
+        ${Comments.getFragment('comments')}
       }
     `,
   },
@@ -59,12 +68,16 @@ export default class Single extends Component {
 
   render() {
     const {
-      id,
-      title: { rendered: title },
-      content: { rendered: content },
-      featured_media,
-      tags,
-    } = this.props.post;
+      post: {
+        id,
+        date,
+        title: { rendered: title },
+        content: { rendered: content },
+        featured_media,
+        tags,
+      },
+      comments,
+    } = this.props;
 
     return (
       <article className={styles.content}>
@@ -72,6 +85,10 @@ export default class Single extends Component {
           <h1 className={styles.title}>
             <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
           </h1>
+
+          <div className={styles.meta}>
+            Posted: <FormattedRelative value={Date.parse(date)} style="numeric" />
+          </div>
         </header>
         {featured_media && <Media media={featured_media} crop={'large'} />}
         <section
@@ -85,6 +102,7 @@ export default class Single extends Component {
             <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>
           ))}
         </footer>)}
+        <Comments comments={comments} />
       </article>
     );
   }
