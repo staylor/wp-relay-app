@@ -11,6 +11,7 @@ import styles from './Term.scss';
     term: () => Relay.QL`
       fragment on TermInterface {
         name
+        taxonomy
       }
     `,
     posts: () => Relay.QL`
@@ -21,12 +22,23 @@ import styles from './Term.scss';
   },
 })
 export default class Term extends Component {
+  static getTaxonomyDisplay(taxonomy) {
+    switch (taxonomy) {
+      case 'post_tag':
+        return 'Tagged';
+      default:
+        return taxonomy.toUpperCase();
+    }
+  }
+
   render() {
     const { term, posts } = this.props;
+    const label = this.constructor.getTaxonomyDisplay(term.taxonomy);
+
     return (
       <div className={styles.sections}>
         {term && (<section>
-          <h3>{term.name}</h3>
+          <h3 className={styles.label}>{label}: {term.name}</h3>
           <Archive posts={posts} />
         </section>)}
       </div>

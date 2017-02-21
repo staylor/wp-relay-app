@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
-import styles from './styles.scss';
+import styles from './Image.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */

@@ -10,32 +10,37 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+iframe {
+  max-width: 100%;
+}
+
 a {
   color: $pink;
 }
 
-blockquote,
-em {
-  font-style: italic;
+blockquote {
+  margin: 0 20px;
 }
 
-h1,
-h2,
-h3 {
-  font-family: $futura;
-  font-weight: bold;
+em {
+  text-decoration: underline;
 }
 
 h1 {
   @include size-height(32, 40);
+  font-family: $futura;
 }
 
 h2 {
   @include size-height(24, 32);
+  font-family: $futura;
 }
 
 h3 {
   @include size-height(18, 24);
+  font-family: $futura;
+  letter-spacing: .5px;
+  text-transform: uppercase;
 }
 
 .page {

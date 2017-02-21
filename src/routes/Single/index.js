@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import { Link } from 'react-router';
 import Media from 'components/Media';
+import { convertPlaceholders } from 'utils';
 import styles from './Single.scss';
 
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-danger */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable camelcase */
 
@@ -41,19 +43,16 @@ export default class Single extends Component {
     } = this.props.post;
 
     return (
-      <article>
+      <article className={styles.content}>
         <header>
           <h1 className={styles.title}>
             <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
           </h1>
         </header>
-        {featured_media && <Media media={featured_media} />}
+        {featured_media && <Media media={featured_media} crop={'large'} />}
         <section
-          className={styles.content}
           dangerouslySetInnerHTML={{
-            __html: content
-              .replace(/hft-oembed-placeholder/g, styles.placeholder)
-              .replace(/"arrow"/g, `"${styles.arrow}"`),
+            __html: convertPlaceholders(content, styles),
           }}
         />
         {tags && (<footer className={styles.footer}>

@@ -40,15 +40,35 @@ export default class Home extends Component {
     } = this.props;
 
     return (
-      <div className={styles.section}>
-        <h3>Latest</h3>
-        {stickies && <Archive posts={stickies} infinite={false} />}
-        <h3>Read This</h3>
-        {readThis && <Archive posts={readThis} infinite={false} />}
-        <h3>Watch This</h3>
-        {watchThis && <Archive posts={watchThis} infinite={false} />}
-        <h3>Listen To This</h3>
-        {listenToThis && <Archive posts={listenToThis} infinite={false} />}
+      <div className={styles.columns}>
+        <div className={styles.columnA}>
+          {stickies && (
+            <section className={styles.section}>
+              <h3>Latest</h3>
+              <Archive posts={stickies} infinite={false} />
+            </section>
+          )}
+          {readThis && (
+            <section className={styles.section}>
+              <h3>Read This</h3>
+              <Archive posts={readThis} infinite={false} />
+            </section>
+          )}
+        </div>
+        <div className={styles.columnB}>
+          {watchThis && (
+            <section className={styles.section}>
+              <h3>Watch This</h3>
+              <Archive posts={watchThis} infinite={false} />
+            </section>
+          )}
+          {listenToThis && (
+            <section className={styles.section}>
+              <h3>Listen To This</h3>
+              <Archive posts={listenToThis} infinite={false} />
+            </section>
+          )}
+        </div>
       </div>
     );
   }

@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.button {
+  @include size-height(16, 16);
+  appearance: none;
+  background: $white;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: pointer;
+  height: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 400ms;
+  width: 80px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border: 1px solid $black;
+    color: $black;
+    outline: 0 none;
+  }
+}

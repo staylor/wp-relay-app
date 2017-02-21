@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import { Link } from 'react-router';
 import Media from 'components/Media';
+import { convertPlaceholders } from 'utils';
 import styles from './Post.scss';
 
 /* eslint-disable react/prop-types */
@@ -20,6 +21,12 @@ import styles from './Post.scss';
         title {
           rendered
         }
+        content {
+          rendered
+        }
+        excerpt {
+          rendered
+        }
         featured_media {
           ${Media.getFragment('media')}
         }
@@ -32,6 +39,8 @@ export default class Post extends Component {
     const {
       id,
       title: { rendered: title },
+      content: { rendered: content },
+      excerpt: { rendered: excerpt },
       featured_media,
     } = this.props.post;
 
@@ -42,7 +51,17 @@ export default class Post extends Component {
             <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
           </h1>
         </header>
-        {featured_media && <Media media={featured_media} />}
+        {featured_media && (
+          <Link to={`/post/${id}`}>
+            <Media media={featured_media} />
+          </Link>
+        )}
+        <section
+          className={styles.content}
+          dangerouslySetInnerHTML={{
+            __html: excerpt || convertPlaceholders(content, styles),
+          }}
+        />
       </article>
     );
   }

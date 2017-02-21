@@ -10,7 +10,8 @@
       "root": ["./src"],
       "alias": {
         "components": "./components",
-        "routes": "./routes"
+        "routes": "./routes",
+        "utils": "./utils"
       }
     }]
   ]

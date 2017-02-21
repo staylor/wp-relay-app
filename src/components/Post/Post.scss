@@ -4,7 +4,6 @@
 .title {
   @include size-height(18, 24);
   clear: both;
-  font-weight: bold;
   margin: 0 0 10px;
 
   a {
@@ -57,6 +56,8 @@
     opacity: .8;
     position: absolute;
     top: 50%;
+    transition: 600ms;
+    transition-property: background;
     width: 76px;
     z-index: 2;
 

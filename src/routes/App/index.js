@@ -30,7 +30,7 @@ export default class App extends Component {
           {children}
         </div>
         <p className={styles.footerCredits}>&copy; Scott Taylor ...&nbsp;
-          New York, NY ... <a href="https://twitter.com/wonderboymusic">@wonderboymusic</a>&nbsp;
+          Brooklyn, NY ... <a href="https://twitter.com/wonderboymusic">@wonderboymusic</a>&nbsp;
         ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis / SCSS</p>
       </div>
     );
