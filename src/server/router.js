@@ -1,8 +1,7 @@
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRouter from 'isomorphic-relay-router';
-import { match } from 'react-router';
+import match from 'react-router/lib/match';
 import template from './template';
 import routes from '../routes';
 

@@ -26,6 +26,10 @@ em {
   text-decoration: underline;
 }
 
+strong {
+  font-weight: 700;
+}
+
 h1 {
   @include size-height(32, 40);
   font-family: $futura;

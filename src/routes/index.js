@@ -1,6 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
-import { Route, IndexRoute } from 'react-router';
+import Route from 'react-router/lib/Route';
+import IndexRoute from 'react-router/lib/IndexRoute';
 import LoadingPage from 'components/LoadingPage';
 import App from './App';
 

@@ -10,20 +10,41 @@ import styles from './Sidebar.scss';
   fragments: {
     sidebar: () => Relay.QL`
       fragment on Sidebar {
-        widgets
+        widgets {
+          classname
+          content {
+            rendered
+          }
+        }
       }
     `,
   },
 })
 export default class Sidebar extends Component {
+  static transformStyles(classname, html) {
+    if (classname === 'widget_go_to_this') {
+      return html
+        .replace(/widget-title/g, styles.title)
+        .replace(/widget_go_to_this/g, styles.goToThis);
+    }
+    return html;
+  }
+
   render() {
     const {
-      sidebar: { widgets },
-    } = this.props;
+      widgets,
+    } = this.props.sidebar;
 
     return (
       <ul className={styles.widgets}>
-        {widgets.map((widget, i) => <li key={i} dangerouslySetInnerHTML={{ __html: widget }} />)}
+        {widgets.map(({ classname, content: { rendered: widget } }, i) => (
+          <li
+            key={i}
+            dangerouslySetInnerHTML={{
+              __html: this.constructor.transformStyles(classname, widget),
+            }}
+          />
+        ))}
       </ul>
     );
   }

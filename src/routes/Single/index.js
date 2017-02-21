@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import Media from 'components/Media';
 import { convertPlaceholders } from 'utils';
 import styles from './Single.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
-/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable camelcase */
 
 @withRelay({
@@ -33,6 +32,31 @@ import styles from './Single.scss';
   },
 })
 export default class Single extends Component {
+  content = null;
+  bindRef = (node) => { this.content = node; };
+
+  componentDidMount() {
+    const nodes = this.content.querySelectorAll('.hft-yt-placeholder');
+    if (!nodes) {
+      return;
+    }
+    nodes.forEach((node) => {
+      node.onclick = (e) => {
+        e.preventDefault();
+
+        const elem = e.currentTarget;
+        const iframe = `<iframe
+          width="${elem.getAttribute('data-yt-w')}"
+          height="${elem.getAttribute('data-yt-h')}"
+          src="http://www.youtube.com/embed/${elem.getAttribute('data-yt-id')}?autoplay=1"
+          frameborder="0"
+          webkitAllowFullScreen mozallowfullscreen allowFullScreen><iframe>`;
+
+        elem.outerHTML = iframe;
+      };
+    });
+  }
+
   render() {
     const {
       id,
@@ -51,6 +75,7 @@ export default class Single extends Component {
         </header>
         {featured_media && <Media media={featured_media} crop={'large'} />}
         <section
+          ref={this.bindRef}
           dangerouslySetInnerHTML={{
             __html: convertPlaceholders(content, styles),
           }}

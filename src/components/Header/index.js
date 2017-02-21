@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import styles from './Header.scss';
 
 /* eslint-disable react/prop-types */

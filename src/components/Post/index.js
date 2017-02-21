@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
+import browserHistory from 'react-router/lib/browserHistory';
 import Media from 'components/Media';
 import { convertPlaceholders } from 'utils';
 import styles from './Post.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
-/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable camelcase */
 
 @withRelay({
@@ -35,6 +35,23 @@ import styles from './Post.scss';
   },
 })
 export default class Post extends Component {
+  content = null;
+  bindRef = (node) => { this.content = node; };
+
+  componentDidMount() {
+    const nodes = this.content.querySelectorAll('.hft-yt-placeholder');
+    if (!nodes) {
+      return;
+    }
+    nodes.forEach((node) => {
+      node.onclick = (e) => {
+        e.preventDefault();
+
+        browserHistory.push(`/post/${this.props.post.id}`);
+      };
+    });
+  }
+
   render() {
     const {
       id,
@@ -57,6 +74,7 @@ export default class Post extends Component {
           </Link>
         )}
         <section
+          ref={this.bindRef}
           className={styles.content}
           dangerouslySetInnerHTML={{
             __html: excerpt || convertPlaceholders(content, styles),

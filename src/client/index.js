@@ -6,7 +6,9 @@ import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import { AppContainer } from 'react-hot-loader';
-import { browserHistory, match, Router } from 'react-router';
+import Router from 'react-router/lib/Router';
+import browserHistory from 'react-router/lib/browserHistory';
+import match from 'react-router/lib/match';
 import AppRoutes from 'routes';
 
 const data = JSON.parse(document.getElementById('preloadedData').textContent);
