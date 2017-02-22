@@ -29,9 +29,7 @@ import styles from './Comments.scss';
                 size
                 url
               }
-              parent {
-                id
-              }
+              parent
             }
           }
         }
@@ -46,18 +44,19 @@ export default class Comments extends Component {
     const nested = {
       top: [],
     };
-
-    comments.reverse().forEach(({ node }) => {
+    comments.forEach(({ node }) => {
       if (!node.parent) {
         nested.top.push(node);
         return;
       }
 
-      if (!nested[node.parent.id]) {
-        nested[node.parent.id] = [];
+      if (!nested[node.parent]) {
+        nested[node.parent] = [];
       }
-      nested[node.parent.id].push(node);
+      nested[node.parent].push(node);
     });
+
+    nested.top.reverse();
 
     return nested;
   }
