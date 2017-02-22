@@ -34,7 +34,7 @@ const mount = (routes = AppRoutes) => {
       render(
         <AppContainer>
           <IntlProvider locale="en">
-            <Router {...props} />
+            <Router {...props} onUpdate={() => { window.scrollTo(0, 0); }} />
           </IntlProvider>
         </AppContainer>,
         root

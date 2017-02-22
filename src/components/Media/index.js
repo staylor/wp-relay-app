@@ -17,7 +17,7 @@ import Image from 'components/Image';
 })
 export default class Media extends Component {
   static defaultProps = {
-    crop: 'medium',
+    crop: 'large',
     media: null,
   };
 

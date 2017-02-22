@@ -46,7 +46,9 @@ export default class Archive extends Component {
     return (
       <section>
         <ul>
-          {posts.map(({ cursor, node }) => <Post key={cursor} post={node} />)}
+          {posts.map(({ cursor, node }) => (
+            <li key={cursor}><Post post={node} /></li>
+          ))}
         </ul>
         {this.props.infinite && hasNextPage && (
           <button

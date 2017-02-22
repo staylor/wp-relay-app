@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
-import { FormattedRelative } from 'react-intl';
+import withIntl from 'decorators/withIntl';
 import styles from './Comments.scss';
 
 /* eslint-disable react/prop-types */
@@ -37,8 +37,10 @@ import styles from './Comments.scss';
     `,
   },
 })
+@withIntl
 export default class Comments extends Component {
   sorted = null;
+  level = 0;
 
   static sortComments(comments) {
     const nested = {
@@ -63,17 +65,28 @@ export default class Comments extends Component {
 
   parseComment({
     id,
+    date,
     author_url,
     author_name,
+    author_avatar_urls,
     content: { rendered: content },
   }) {
-    const li = [`<li class=${styles.comment}>
-      <span class=${styles.author}>
-        ${author_url ? `<a href=${author_url}>${author_name}</a>` : author_name}
-      </span>
-      <div class=${styles.content}>${content}</div>`];
+    const avatar = author_avatar_urls && author_avatar_urls.find(data => data.size === 48);
+
+    const li = [`<li class="${styles.comment} ${styles[`level${this.level}`]}">
+      <div class="${styles.meta}">
+        ${avatar ? `<img class="${styles.image}" src="${avatar.url}"/>` : null}
+        <span class="${styles.author}">
+          ${author_url ? `<a href="${author_url}">${author_name}</a>` : author_name}
+        </span>
+        <span class="${styles.time}">
+          ${this.props.intl.formatRelative(date)}
+        </span>
+      </div>
+      <div class="${styles.content}">${content}</div>`];
 
     if (this.sorted[id]) {
+      this.level += 1;
       li.push(this.walk(this.sorted[id]));
     }
 
@@ -82,8 +95,11 @@ export default class Comments extends Component {
   }
 
   walk(node) {
-    const fragments = [`<ul class=${styles.levels}>`];
+    const fragments = [`<ul class="${styles.levels}">`];
     node.forEach((child) => {
+      if (!child.parent) {
+        this.level = 0;
+      }
       const li = this.parseComment(child);
       fragments.push(li);
     });

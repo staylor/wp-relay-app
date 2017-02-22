@@ -24,15 +24,15 @@ import styles from './Image.scss';
 })
 export default class Image extends Component {
   static defaultProps = {
-    crop: 'medium',
+    crop: 'large',
   };
 
   getCrop(sizes) {
     let chosen;
     const choices = [
       this.props.crop,
-      'full',
       this.constructor.defaultProps.crop,
+      'full',
     ];
 
     for (let i = 0; i < choices.length; i += 1) {

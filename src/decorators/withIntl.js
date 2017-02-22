@@ -1,3 +1,3 @@
-import { injectIntl as inject } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
-export const injectIntl = spec => component => inject(component, spec);
+export default component => injectIntl(component);
