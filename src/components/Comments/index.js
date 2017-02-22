@@ -95,7 +95,7 @@ export default class Comments extends Component {
   }
 
   walk(node) {
-    const fragments = [`<ul class="${styles.levels}">`];
+    const fragments = ['<ul>'];
     node.forEach((child) => {
       if (!child.parent) {
         this.level = 0;
@@ -120,10 +120,10 @@ export default class Comments extends Component {
     const commentHtml = this.walk(this.sorted.top);
 
     return (
-      <section className={styles.comments}>
+      <aside className={styles.comments}>
         <h3>Comments</h3>
-        <div dangerouslySetInnerHTML={{ __html: commentHtml }} />
-      </section>
+        <section dangerouslySetInnerHTML={{ __html: commentHtml }} />
+      </aside>
     );
   }
 }
