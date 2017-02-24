@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { renderToString } from 'react-dom/server';
 import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRouter from 'isomorphic-relay-router';
@@ -33,6 +34,7 @@ export default function router({ gqlUrl, gqlBatchUrl, jsBundle, cssBundle }) {
               {IsomorphicRouter.render(props)}
             </IntlProvider>
           ));
+          const head = Helmet.rewind();
 
           res.status(200);
           if (process.env.NODE_ENV === 'production') {
@@ -43,6 +45,7 @@ export default function router({ gqlUrl, gqlBatchUrl, jsBundle, cssBundle }) {
             jsBundle,
             cssBundle,
             data,
+            head,
           }));
         })
         .catch((error) => {

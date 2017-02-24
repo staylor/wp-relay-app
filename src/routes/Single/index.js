@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Link from 'react-router/lib/Link';
 import { FormattedRelative } from 'react-intl';
@@ -81,6 +82,10 @@ export default class Single extends Component {
 
     return (
       <article className={styles.content}>
+        <Helmet
+          title={title}
+          link={[{ rel: 'canonical', href: `https://highforthis.com/post/${id}` }]}
+        />
         <header>
           <h1 className={styles.title}>
             <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />

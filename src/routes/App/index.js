@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
@@ -32,6 +33,26 @@ export default class App extends Component {
 
     return (
       <div className={styles.page}>
+        <Helmet
+          htmlAttributes={{ lang: 'en' }}
+          title="Music as it happens."
+          titleTemplate="%s - High for This"
+          defaultTitle="High for This"
+          meta={[
+            { charset: 'utf-8' },
+            { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+            { 'http-equiv': 'Content-Language', content: 'en' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+          ]}
+          script={[
+            { src: '//use.typekit.net/tts4dcv.js', type: 'text/javascript' },
+            { innerHTML: 'try{Typekit.load();}catch(e){}', type: 'text/javascript' },
+          ]}
+          link={[
+            { id: 'favicon', rel: 'shortcut icon', href: '/kyt-favicon.png', sizes: '16x16 32x32', type: 'image/png' },
+            { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' },
+          ]}
+        />
         <Header categories={categories} />
         <div className={styles.content}>
           <section className={styles.primary}>
