@@ -1,6 +1,8 @@
 {
   "presets": [
-    "babel-preset-kyt-react"
+    "babel-preset-kyt-react",
+    "es2015",
+    "stage-0"
   ],
   "plugins": [
     "./tools/babelRelayPlugin.js",
