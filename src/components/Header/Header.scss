@@ -30,90 +30,10 @@
 
 .siteDescription {
   @include size-height(24, 24);
-  bottom: 15%;
+  bottom: 40%;
   color: #7a7a7a;
   position: absolute;
   right: 32px;
-}
-
-.access {
-  display: block;
-  float: left;
-  margin: 0 auto 6px;
-  width: 100%;
-
-  ul {
-    @include clear;
-    @include size-height(14, 14);
-    list-style: none;
-    margin: 0 0 0 -1em;
-    padding-left: 0;
-
-    ul {
-      display: none;
-      float: left;
-      margin: 0;
-      position: absolute;
-      top: 28px;
-      left: 14px;
-      width: 188px;
-      z-index: 99999;
-
-      a {
-        background: #f9f9f9;
-        border-bottom: 1px dotted #ddd;
-        color: #444;
-        @include size-height(13, 20);
-        font-weight: normal;
-        height: auto;
-        padding: 10px 10px;
-        width: 168px;
-      }
-
-      ul {
-        left: 100%;
-        top: 0;
-      }
-    }
-  }
-
-  li {
-    float: left;
-    position: relative;
-  }
-
-  a {
-    color: $black;
-    display: block;
-    line-height: 2em;
-    padding: 0 1.2125em;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  li:hover > a,
-  ul ul :hover > a,
-  a:focus {
-    background: #efefef;
-  }
-
-  li:hover > a,
-  a:focus {
-    color: #373737;
-  }
-
-  ul li:hover > ul {
-    display: block;
-  }
-}
-
-.navItem {
-  display: inline-block;
-}
-
-.activeLink {
-  color: $black;
-  text-decoration: none;
 }
 
 .logo {

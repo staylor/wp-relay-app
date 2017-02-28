@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Relay, { withRelay } from 'decorators/withRelay';
 import Link from 'react-router/lib/Link';
+import NavMenu from 'components/NavMenu';
 import styles from './Header.scss';
 
 /* eslint-disable react/prop-types */
@@ -8,26 +9,17 @@ import styles from './Header.scss';
 
 @withRelay({
   fragments: {
-    categories: () => Relay.QL`
-      fragment on CategoryCollection {
-        results(first: 10) {
-          edges {
-            node {
-              id
-              name
-            }
-            cursor
-          }
-        }
+    navMenu: () => Relay.QL`
+      fragment on NavMenu {
+        ${NavMenu.getFragment('navMenu')}
       }
     `,
   },
 })
 export default class Header extends Component {
+
   render() {
-    const {
-      categories: { results: { edges: categories } },
-    } = this.props;
+    const { navMenu } = this.props;
 
     return (
       <header className={styles.header} role="banner">
@@ -37,23 +29,7 @@ export default class Header extends Component {
           </h1>
           <h2 className={styles.siteDescription}>Music As It Happens.</h2>
         </hgroup>
-        <nav className={styles.access} role="navigation">
-          <ul className={styles.nav}>
-            <li className={styles.navItem}>
-              <Link to="/">Home</Link>
-            </li>
-            {categories.map(({ node: { id, name }, cursor }) => (
-              <li key={cursor} className={styles.navItem}>
-                <Link
-                  activeClassName={styles.activeLink}
-                  to={`/category/${id}`}
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <NavMenu navMenu={navMenu} />
       </header>
     );
   }

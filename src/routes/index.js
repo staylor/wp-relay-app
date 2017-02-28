@@ -40,7 +40,7 @@ const routes = (
     path="/"
     component={App}
     getQueries={() => ({
-      categories: () => Relay.QL`query { categories(exclude: "Q2F0ZWdvcnk6MQ==") }`,
+      navMenu: () => Relay.QL`query { navMenu(id: "TmF2TWVudToy") }`,
       sidebar: () => Relay.QL`query { sidebar(id: "U2lkZWJhcjpzaWRlYmFyLTE=") }`,
     })}
   >

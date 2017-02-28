@@ -10,9 +10,9 @@ import styles from './App.scss';
 
 @withRelay({
   fragments: {
-    categories: () => Relay.QL`
-      fragment on CategoryCollection {
-        ${Header.getFragment('categories')}
+    navMenu: () => Relay.QL`
+      fragment on NavMenu {
+        ${Header.getFragment('navMenu')}
       }
     `,
     sidebar: () => Relay.QL`
@@ -27,8 +27,8 @@ export default class App extends Component {
   render() {
     const {
       children,
-      categories,
       sidebar,
+      navMenu,
     } = this.props;
 
     return (
@@ -53,7 +53,7 @@ export default class App extends Component {
             { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' },
           ]}
         />
-        <Header categories={categories} />
+        <Header navMenu={navMenu} />
         <div className={styles.content}>
           <section className={styles.primary}>
             {children}
