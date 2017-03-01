@@ -35,8 +35,8 @@ const importAuthor = (nextState, cb) => {
     .catch((e) => { throw e; });
 };
 
-const importPosts = (nextState, cb) => {
-  System.import('./Posts')
+const importAmbiguous = (nextState, cb) => {
+  System.import('./Ambiguous')
     .then(module => cb(null, module.default))
     .catch((e) => { throw e; });
 };
@@ -47,6 +47,9 @@ const loadOrRender = ({ error, props, element }) => {
   }
   return <LoadingPage />;
 };
+
+const getSlug = location => location.pathname.split('/').pop();
+const isYear = location => getSlug(location).match(/[0-9]{4}/);
 
 // We use `getComponent` to dynamically load routes.
 // https://github.com/reactjs/react-router/blob/master/docs/guides/DynamicRouting.md
@@ -115,13 +118,11 @@ const routes = (
     />
     <Route
       path=":slug"
-      getComponent={importPosts}
+      getComponent={importAmbiguous}
       getQueries={({ location }) => {
-        const slug = location.pathname.split('/').pop();
-        // no regex allowed in paths, so we must do it here
-        if (slug.match(/[0-9]{4}/)) {
+        if (isYear(location)) {
           return {
-            posts: () => Relay.QL`query { posts(year: $slug) }`,
+            year: () => Relay.QL`query { posts(year: $slug) }`,
           };
         }
         return {

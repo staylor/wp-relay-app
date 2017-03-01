@@ -1,12 +1,14 @@
-/* eslint-disable prefer-template, max-len */
+import Helmet from 'react-helmet';
 
 export default ({
-  head,
   root,
   data,
   cssBundle,
   jsBundle,
-}) => `<!DOCTYPE html>
+}) => {
+  const head = Helmet.rewind();
+
+  return `<!DOCTYPE html>
 <html ${head.htmlAttributes.toString()}>
 <head>
 ${head.meta.toString()}
@@ -21,3 +23,4 @@ ${cssBundle ? `<link rel="stylesheet" type="text/css" href="${cssBundle}" />` : 
 <script src="${jsBundle}"></script>
 </body>
 </html>`;
+};

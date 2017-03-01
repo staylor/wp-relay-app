@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { renderToString } from 'react-dom/server';
 import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import IsomorphicRouter from 'isomorphic-relay-router';
@@ -8,7 +7,37 @@ import { IntlProvider } from 'react-intl';
 import template from './template';
 import routes from '../routes';
 
-export default function router({ gqlUrl, gqlBatchUrl, jsBundle, cssBundle }) {
+const errorHandler = (error) => {
+  // `fetchWithRetries` errors includes the response body
+  // https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/fetch/fetchWithRetries.js#L93
+  const isfetchWithRetriesError =
+    !!error.response &&
+    error.response.constructor.name === 'Body';
+
+  // Include GQL's error response in addition
+  // to the generic `fetchWithRetries` message
+  if (isfetchWithRetriesError) {
+    return error.response.text().then((payload) => {
+      throw new Error(
+        `${error.message} \n` +
+        `Status Code: ${error.response.status} ${error.response.statusText} \n` +
+        `Request URL: ${error.response.url} \n` +
+        `Request Payload: \n` +
+        `${payload} \n`
+      );
+    });
+  }
+
+  // Rethrow any errors that are not caused by `fetchWithRetries`
+  throw error;
+};
+
+export default ({
+  gqlUrl,
+  gqlBatchUrl,
+  jsBundle,
+  cssBundle,
+}) => {
   const networkLayer = new RelayNetworkLayer([
     urlMiddleware({
       url: gqlUrl,
@@ -34,46 +63,18 @@ export default function router({ gqlUrl, gqlBatchUrl, jsBundle, cssBundle }) {
               {IsomorphicRouter.render(props)}
             </IntlProvider>
           ));
-          const head = Helmet.rewind();
 
           res.status(200);
-          if (process.env.NODE_ENV === 'production') {
-            res.set('Cache-Control', 's-maxage=180'); // 180 second cache in fastly
-          }
           res.send(template({
             root,
             jsBundle,
             cssBundle,
             data,
-            head,
           }));
         })
-        .catch((error) => {
-          // `fetchWithRetries` errors includes the response body
-          // https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/fetch/fetchWithRetries.js#L93
-          const isfetchWithRetriesError =
-            !!error.response &&
-            error.response.constructor.name === 'Body';
-
-          // Include GQL's error response in addition
-          // to the generic `fetchWithRetries` message
-          if (isfetchWithRetriesError) {
-            return error.response.text().then((payload) => {
-              throw new Error(
-                `${error.message} \n` +
-                `Status Code: ${error.response.status} ${error.response.statusText} \n` +
-                `Request URL: ${error.response.url} \n` +
-                `Request Payload: \n` +
-                `${payload} \n`
-              );
-            });
-          }
-
-          // Rethrow any errors that are not caused by `fetchWithRetries`
-          throw error;
-        })
+        .catch(errorHandler)
         .catch(next);
       return null;
     });
   };
-}
+};
