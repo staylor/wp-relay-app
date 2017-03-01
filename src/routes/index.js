@@ -5,6 +5,8 @@ import IndexRoute from 'react-router/lib/IndexRoute';
 import LoadingPage from 'components/LoadingPage';
 import App from './App';
 
+/* eslint-disable react/prop-types */
+
 // Webpack 2 supports ES2015 `System.import` by auto-
 // chunking assets. Check out the following for more:
 // https://gist.github.com/sokra/27b24881210b56bbaff7#code-splitting-with-es6
@@ -33,6 +35,19 @@ const importAuthor = (nextState, cb) => {
     .catch((e) => { throw e; });
 };
 
+const importPosts = (nextState, cb) => {
+  System.import('./Posts')
+    .then(module => cb(null, module.default))
+    .catch((e) => { throw e; });
+};
+
+const loadOrRender = ({ error, props, element }) => {
+  if (error || props) {
+    return React.cloneElement(element, props);
+  }
+  return <LoadingPage />;
+};
+
 // We use `getComponent` to dynamically load routes.
 // https://github.com/reactjs/react-router/blob/master/docs/guides/DynamicRouting.md
 const routes = (
@@ -52,12 +67,7 @@ const routes = (
         watchThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6NA==") }`,
         listenToThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6NQ==") }`,
       })}
-      render={({ error, props, element }) => {
-        if (error || props) {
-          return React.cloneElement(element, props);
-        }
-        return <LoadingPage />;
-      }}
+      render={loadOrRender}
     />
     <Route
       path="post/:id"
@@ -68,12 +78,7 @@ const routes = (
           Relay.QL`query { post(id: $id) }`),
         comments: () => Relay.QL`query { comments(post: $id) }`,
       })}
-      render={({ error, props, element }) => {
-        if (error || props) {
-          return React.cloneElement(element, props);
-        }
-        return <LoadingPage />;
-      }}
+      render={loadOrRender}
     />
     <Route
       path="category/:id"
@@ -84,12 +89,7 @@ const routes = (
           Relay.QL`query { category(id: $id) }`),
         posts: () => Relay.QL`query { posts(categories: $id) }`,
       })}
-      render={({ error, props, element }) => {
-        if (error || props) {
-          return React.cloneElement(element, props);
-        }
-        return <LoadingPage />;
-      }}
+      render={loadOrRender}
     />
     <Route
       path="tag/:id"
@@ -100,12 +100,7 @@ const routes = (
           Relay.QL`query { tag(id: $id) }`),
         posts: () => Relay.QL`query { posts(tags: $id) }`,
       })}
-      render={({ error, props, element }) => {
-        if (error || props) {
-          return React.cloneElement(element, props);
-        }
-        return <LoadingPage />;
-      }}
+      render={loadOrRender}
     />
     <Route
       path="author/:id"
@@ -116,12 +111,24 @@ const routes = (
           Relay.QL`query { user(id: $id) }`),
         posts: () => Relay.QL`query { posts(author: $id) }`,
       })}
-      render={({ error, props, element }) => {
-        if (error || props) {
-          return React.cloneElement(element, props);
+      render={loadOrRender}
+    />
+    <Route
+      path=":slug"
+      getComponent={importPosts}
+      getQueries={({ location }) => {
+        const slug = location.pathname.split('/').pop();
+        // no regex allowed in paths, so we must do it here
+        if (slug.match(/[0-9]{4}/)) {
+          return {
+            posts: () => Relay.QL`query { posts(year: $slug) }`,
+          };
         }
-        return <LoadingPage />;
+        return {
+          page: () => Relay.QL`query { page(slug: $slug) }`,
+        };
       }}
+      render={loadOrRender}
     />
   </Route>
 );

@@ -69,7 +69,7 @@ export default class NavMenu extends Component {
       path = `/${object}/${object_id}`;
     } else {
       const urlObj = url.parse(itemUrl);
-      path = urlObj.path;
+      path = urlObj.path.replace(/\/$/, '');
     }
 
     if (this.sorted[id]) {
