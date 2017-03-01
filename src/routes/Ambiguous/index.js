@@ -22,6 +22,11 @@ import styles from './Ambiguous.scss';
   },
 })
 export default class Ambiguous extends Component {
+  static defaultProps = {
+    year: null,
+    page: null,
+  };
+
   render() {
     const { year, page } = this.props;
     if (page) {
