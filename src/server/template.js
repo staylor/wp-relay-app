@@ -16,6 +16,7 @@ ${head.title.toString()}
 ${head.script.toString()}
 ${head.link.toString()}
 ${cssBundle ? `<link rel="stylesheet" type="text/css" href="${cssBundle}" />` : ''}
+<link rel="stylesheet" type="text/css" href="/css/gigpress.css" />
 </head>
 <body>
 <main id="main">${root}</main>
