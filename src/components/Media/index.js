@@ -3,7 +3,6 @@ import Relay, { withRelay } from 'decorators/withRelay';
 import Image from 'components/Image';
 
 /* eslint-disable react/prop-types */
-/* eslint-disable camelcase */
 
 @withRelay({
   fragments: {

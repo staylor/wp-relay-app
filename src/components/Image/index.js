@@ -3,7 +3,6 @@ import Relay, { withRelay } from 'decorators/withRelay';
 import styles from './Image.scss';
 
 /* eslint-disable react/prop-types */
-/* eslint-disable camelcase */
 
 @withRelay({
   fragments: {
@@ -47,11 +46,11 @@ export default class Image extends Component {
 
   render() {
     const {
-      source_url,
+      source_url: sourceUrl,
       media_details: { sizes },
     } = this.props.image;
 
-    if (!source_url) {
+    if (!sourceUrl) {
       return '';
     }
 
@@ -62,7 +61,7 @@ export default class Image extends Component {
 
     return (
       <figure>
-        <img className={styles.image} src={chosen.source_url} role="presentation" />
+        <img alt="" className={styles.image} src={chosen.source_url} role="presentation" />
       </figure>
     );
   }

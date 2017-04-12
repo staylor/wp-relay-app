@@ -8,7 +8,6 @@ import styles from './Post.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
-/* eslint-disable camelcase */
 
 @withRelay({
   initialVariables: {
@@ -58,7 +57,7 @@ export default class Post extends Component {
       title: { rendered: title },
       content: { rendered: content },
       excerpt: { rendered: excerpt },
-      featured_media,
+      featured_media: featuredMedia,
     } = this.props.post;
 
     return (
@@ -68,9 +67,9 @@ export default class Post extends Component {
             <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
           </h1>
         </header>
-        {featured_media && (
+        {featuredMedia && (
           <Link to={`/post/${id}`}>
-            <Media media={featured_media} />
+            <Media media={featuredMedia} />
           </Link>
         )}
         <section

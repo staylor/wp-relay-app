@@ -7,7 +7,6 @@ import styles from './Comments.scss';
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/style-prop-object */
-/* eslint-disable camelcase */
 
 @withRelay({
   initialVariables: {
@@ -67,12 +66,12 @@ export default class Comments extends Component {
   parseComment({
     id,
     date,
-    author_url,
-    author_name,
-    author_avatar_urls,
+    author_url: authorUrl,
+    author_name: authorName,
+    author_avatar_urls: avatarUrls,
     content: { rendered: content },
   }) {
-    const avatar = author_avatar_urls && author_avatar_urls.find(data => data.size === 48);
+    const avatar = avatarUrls && avatarUrls.find(data => data.size === 48);
 
     if (this.sorted[id]) {
       this.level += 1;
@@ -81,9 +80,9 @@ export default class Comments extends Component {
     return (
       <li key={id} className={cn(styles.comment, styles[`level${this.level}`])}>
         <div className={styles.meta}>
-          {avatar ? <img role="presentation" className={styles.image} src={avatar.url} /> : null}
+          {avatar ? <img alt="" role="presentation" className={styles.image} src={avatar.url} /> : null}
           <span className={styles.author}>
-            {author_url ? <a href={author_url}>{author_name}</a> : author_name}
+            {authorUrl ? <a href={authorUrl}>{authorName}</a> : authorName}
           </span>
           <span className={styles.time}>
             {this.props.intl.formatRelative(date)}

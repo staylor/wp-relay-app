@@ -5,7 +5,6 @@ import Archive from 'components/Archive';
 import styles from './Term.scss';
 
 /* eslint-disable react/prop-types */
-/* eslint-disable react/prefer-stateless-function */
 
 @withRelay({
   fragments: {
@@ -24,7 +23,7 @@ import styles from './Term.scss';
       }
     `,
   },
-})
+}) // eslint-disable-next-line react/prefer-stateless-function
 export default class Term extends Component {
   static getTaxonomyDisplay(taxonomy) {
     switch (taxonomy) {

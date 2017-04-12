@@ -7,7 +7,6 @@ import styles from './NavMenu.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
-/* eslint-disable camelcase */
 
 @withRelay({
   fragments: {
@@ -62,11 +61,11 @@ export default class NavMenu extends Component {
     title,
     url: itemUrl,
     object,
-    object_id,
+    object_id: objectId,
   }) {
     let path;
     if (object === 'category' || object === 'post') {
-      path = `/${object}/${object_id}`;
+      path = `/${object}/${objectId}`;
     } else {
       const urlObj = url.parse(itemUrl);
       if (urlObj.path === '/') {
