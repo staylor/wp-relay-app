@@ -5,7 +5,7 @@
     "stage-0"
   ],
   "plugins": [
-    "./tools/babelRelayPlugin.js",
+    ["relay", {"schema": "./tools/schema.graphql"}],
     "babel-plugin-transform-decorators-legacy",
     "babel-plugin-transform-class-properties",
     ["module-resolver", {

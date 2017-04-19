@@ -1,45 +1,18 @@
 import React from 'react';
-import Relay from 'react-relay';
-import Route from 'react-router/lib/Route';
-import IndexRoute from 'react-router/lib/IndexRoute';
-import LoadingPage from 'components/LoadingPage';
+import Route from 'react-router-dom';
+import LoadingPage from '../components/LoadingPage';
 import App from './App';
+import Home from './Home';
+import Single from '../containers/Single';
+import Page from '../containers/Page';
 
 /* eslint-disable react/prop-types */
 
-// Webpack 2 supports ES2015 `System.import` by auto-
-// chunking assets. Check out the following for more:
-// https://gist.github.com/sokra/27b24881210b56bbaff7#code-splitting-with-es6
-
-const importHome = (nextState, cb) => {
-  System.import('./Home')
+const getComponent = loader => (nextState, cb) => (
+  loader()
     .then(module => cb(null, module.default))
-    .catch((e) => { throw e; });
-};
-
-const importSingle = (nextState, cb) => {
-  System.import('./Single')
-    .then(module => cb(null, module.default))
-    .catch((e) => { throw e; });
-};
-
-const importTerm = (nextState, cb) => {
-  System.import('./Term')
-    .then(module => cb(null, module.default))
-    .catch((e) => { throw e; });
-};
-
-const importAuthor = (nextState, cb) => {
-  System.import('./Author')
-    .then(module => cb(null, module.default))
-    .catch((e) => { throw e; });
-};
-
-const importAmbiguous = (nextState, cb) => {
-  System.import('./Ambiguous')
-    .then(module => cb(null, module.default))
-    .catch((e) => { throw e; });
-};
+    .catch((e) => { throw e; })
+);
 
 const loadOrRender = ({ error, props, element }) => {
   if (error || props) {
@@ -51,82 +24,54 @@ const loadOrRender = ({ error, props, element }) => {
 const getSlug = location => location.pathname.split('/').pop();
 const isYear = location => getSlug(location).match(/[0-9]{4}/);
 
-// We use `getComponent` to dynamically load routes.
-// https://github.com/reactjs/react-router/blob/master/docs/guides/DynamicRouting.md
-const routes = (
-  <Route
-    path="/"
-    component={App}
-    getQueries={() => ({
-      navMenu: () => Relay.QL`query { navMenu(id: "TmF2TWVudToy") }`,
-      sidebar: () => Relay.QL`query { sidebar(id: "U2lkZWJhcjpzaWRlYmFyLTE=") }`,
-    })}
-  >
-    <IndexRoute
-      getComponent={importHome}
+const Routes = (
+  <Route path="/" component={App}>
+    <Route exact path="/" component={Home} />
+    <Route path="post/:id" component={Single}
       getQueries={() => ({
-        stickies: () => Relay.QL`query { stickies }`,
-        readThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6Mw==") }`,
-        watchThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6NA==") }`,
-        listenToThis: () => Relay.QL`query { posts(categories: "Q2F0ZWdvcnk6NQ==") }`,
-      })}
-      render={loadOrRender}
-    />
-    <Route
-      path="post/:id"
-      getComponent={importSingle}
-      getQueries={({ location }) => ({
-        post: () => (location.state ?
-          Relay.QL`query { node(id: $id) }` :
-          Relay.QL`query { post(id: $id) }`),
-        comments: () => Relay.QL`query { comments(post: $id) }`,
+        post: `query { post(id: $id) }`,
+        comments: `query { comments(post: $id) }`,
       })}
       render={loadOrRender}
     />
     <Route
       path="category/:id"
-      getComponent={importTerm}
-      getQueries={({ location }) => ({
-        term: () => (location.state ?
-          Relay.QL`query { node(id: $id) }` :
-          Relay.QL`query { category(id: $id) }`),
-        posts: () => Relay.QL`query { posts(categories: $id) }`,
+      getComponent={getComponent(() => import('./Term'))}
+      getQueries={() => ({
+        term: `query { category(id: $id) }`,
+        posts: `query { posts(categories: $id) }`,
       })}
       render={loadOrRender}
     />
     <Route
       path="tag/:id"
-      getComponent={importTerm}
-      getQueries={({ location }) => ({
-        term: () => (location.state ?
-          Relay.QL`query { node(id: $id) }` :
-          Relay.QL`query { tag(id: $id) }`),
-        posts: () => Relay.QL`query { posts(tags: $id) }`,
+      getComponent={getComponent(() => import('./Term'))}
+      getQueries={() => ({
+        term: `query { tag(id: $id) }`,
+        posts: `query { posts(tags: $id) }`,
       })}
       render={loadOrRender}
     />
     <Route
       path="author/:id"
-      getComponent={importAuthor}
-      getQueries={({ location }) => ({
-        author: () => (location.state ?
-          Relay.QL`query { node(id: $id) }` :
-          Relay.QL`query { user(id: $id) }`),
-        posts: () => Relay.QL`query { posts(author: $id) }`,
+      getComponent={getComponent(() => import('./Author'))}
+      getQueries={() => ({
+        author: `query { user(id: $id) }`,
+        posts: `query { posts(author: $id) }`,
       })}
       render={loadOrRender}
     />
     <Route
       path=":slug"
-      getComponent={importAmbiguous}
+      getComponent={getComponent(() => import('./Ambiguous'))}
       getQueries={({ location }) => {
         if (isYear(location)) {
           return {
-            year: () => Relay.QL`query { posts(year: $slug) }`,
+            year: `query { posts(year: $slug) }`,
           };
         }
         return {
-          page: () => Relay.QL`query { page(slug: $slug) }`,
+          page: `query { page(slug: $slug) }`,
         };
       }}
       render={loadOrRender}
@@ -134,4 +79,4 @@ const routes = (
   </Route>
 );
 
-export default routes;
+export default Routes;

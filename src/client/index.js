@@ -1,46 +1,20 @@
-
 import React from 'react';
 import { render } from 'react-dom';
-import Relay from 'react-relay';
-import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import { IntlProvider } from 'react-intl';
-import IsomorphicRelay from 'isomorphic-relay';
-import IsomorphicRouter from 'isomorphic-relay-router';
-import { AppContainer } from 'react-hot-loader';
-import Router from 'react-router/lib/Router';
-import browserHistory from 'react-router/lib/browserHistory';
-import match from 'react-router/lib/match';
-import AppRoutes from 'routes';
-
-const data = JSON.parse(document.getElementById('preloadedData').textContent);
-
-const environment = new Relay.Environment();
-const networkLayer = new RelayNetworkLayer([
-  urlMiddleware({
-    url: '/graphql',
-    batchUrl: '/graphql/batch',
-  }),
-], { disableBatchQuery: false });
-
-environment.injectNetworkLayer(networkLayer);
-
-IsomorphicRelay.injectPreparedData(environment, data);
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from '../routes';
 
 const root = document.querySelector('#main');
 
-const mount = (routes = AppRoutes) => {
-  match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
-    IsomorphicRouter.prepareInitialRender(environment, renderProps).then((props) => {
-      render(
-        <AppContainer>
-          <IntlProvider locale="en">
-            <Router {...props} onUpdate={() => { window.scrollTo(0, 0); }} />
-          </IntlProvider>
-        </AppContainer>,
-        root
-      );
-    });
-  });
+const mount = (Routes = AppRoutes) => {
+  render(
+    <IntlProvider locale="en">
+      <Router onUpdate={() => { window.scrollTo(0, 0); }}>
+        <Routes />
+      </Router>
+    </IntlProvider>,
+    root
+  );
 };
 
 mount();
