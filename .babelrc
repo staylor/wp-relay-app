@@ -1,19 +1,19 @@
 {
   "presets": [
     "babel-preset-kyt-react",
-    "es2015",
     "stage-0"
   ],
   "plugins": [
-    ["relay", {"schema": "./tools/schema.graphql"}],
+    ["relay", {"compat": true, "schema": "./tools/schema.graphql"}],
     "babel-plugin-transform-decorators-legacy",
     "babel-plugin-transform-class-properties",
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "components": "./components",
-        "routes": "./routes",
-        "utils": "./utils"
+        "routes": "./src/routes",
+        "components": "./src/components",
+        "routes": "./src/routes",
+        "utils": "./src/utils"
       }
     }]
   ]

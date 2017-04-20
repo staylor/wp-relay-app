@@ -1,11 +1,9 @@
-/* eslint-disable import/imports-first */
-import 'isomorphic-fetch';
-import router from './router';
 import express from 'express';
 import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
 import compression from 'compression';
 import path from 'path';
+import router from './router';
 
 const clientAssets = require(KYT.ASSETS_MANIFEST); // eslint-disable-line import/no-dynamic-require
 const app = express();

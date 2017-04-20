@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { IntlProvider } from 'react-intl';
 import template from './template';
-import Routes from '../routes';
+import App from 'components/App';
 
 export default ({
   jsBundle,
@@ -17,7 +17,7 @@ export default ({
           location={req.url}
           context={context}
         >
-          <Routes />
+          <App />
         </StaticRouter>
       </IntlProvider>
     ));
@@ -27,7 +27,6 @@ export default ({
       root,
       jsBundle,
       cssBundle,
-      data,
     }));
   }
 );

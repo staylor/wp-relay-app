@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import fetch from 'fbjs/lib/fetch';
 import {
   Environment,
   Network,
