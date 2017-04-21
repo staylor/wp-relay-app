@@ -1,14 +1,33 @@
 import url from 'url';
 import React, { Component } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
+import GraphQL from 'decorators/GraphQL';
+import withFragment from 'decorators/withFragment';
+import NavMenuQuery from 'queries/NavMenu';
 import styles from './NavMenu.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
-class NavMenu extends Component {
+@GraphQL(NavMenuQuery)
+@withFragment(graphql`
+  fragment NavMenu_menu on NavMenu {
+    id
+    name
+    items {
+      id
+      title
+      url
+      parent
+      order
+      object
+      object_id
+    }
+  }`
+)
+export default class NavMenu extends Component {
   sorted = null;
   level = 0;
 
@@ -81,13 +100,13 @@ class NavMenu extends Component {
   }
 
   render() {
-    const { navMenu } = this.props;
+    const menu = this.props.navMenu;
 
-    if (!navMenu) {
+    if (!menu) {
       return null;
     }
 
-    this.sorted = this.constructor.sortItems(navMenu.items);
+    this.sorted = this.constructor.sortItems(menu.menu);
     const navMenuHtml = this.walk(this.sorted.top);
 
     return (
@@ -97,20 +116,3 @@ class NavMenu extends Component {
     );
   }
 }
-
-export default createFragmentContainer(NavMenu, graphql`
-  fragment NavMenu_navMenu on NavMenu {
-    id
-    name
-    items {
-      id
-      title
-      url
-      parent
-      order
-      object
-      object_id
-    }
-  }
-  `
-);

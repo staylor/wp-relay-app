@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-relay';
 import withPagination from 'decorators/withPagination';
 import Archive from 'components/Archive';
+import styles from '../Home.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
@@ -35,6 +36,11 @@ import Archive from 'components/Archive';
 export default class WatchThis extends Component {
   render() {
     const { posts } = this.props;
-    return <Archive posts={posts} infinite={false} />;
+    return (
+      <section className={styles.section}>
+        <h3>Watch This</h3>
+        <Archive posts={posts} infinite={false} />
+      </section>
+    );
   }
 }

@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Stickies_posts.graphql
- * @generated SignedSource<<bdd3cc3397d104c696ddbcc6b7c8fba6>>
+ * @generated SignedSource<<02ca695963924a37fe61563af1dfbbd0>>
  * @flow
  * @nogrep
  */
@@ -16,9 +16,12 @@ export type Stickies_posts = {
   results?: ?Stickies_posts_results;
 };
 
+export type Stickies_posts_results_edges_node = {
+  id: string;
+};
+
 export type Stickies_posts_results_edges = {
-  node?: ?any;
-  cursor: string;
+  node?: ?Stickies_posts_results_edges_node;
 };
 
 export type Stickies_posts_results = {
@@ -81,18 +84,18 @@ const fragment /*: ConcreteFragment*/ = {
               "plural": false,
               "selections": [
                 {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "id",
+                  "storageKey": null
+                },
+                {
                   "kind": "FragmentSpread",
                   "name": "Post_post",
                   "args": null
                 }
               ],
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "cursor",
               "storageKey": null
             }
           ],

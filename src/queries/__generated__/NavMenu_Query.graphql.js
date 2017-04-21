@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule NavMenu_Query.graphql
- * @generated SignedSource<<f7f4cacf08bac6e8066e6d186bfe4a26>>
- * @relayHash 6de4670bfe6242452ab887686392fc83
+ * @generated SignedSource<<cb8ad8d5a7dff955f4b47875cf40d0dd>>
+ * @relayHash ef9bd3cfd5e47d301ae2bd66787f2f12
  * @flow
  * @nogrep
  */
@@ -23,12 +23,12 @@ query NavMenu_Query(
   $id: ID!
 ) {
   navMenu(id: $id) {
-    ...NavMenu_navMenu
+    ...NavMenu_menu
     id
   }
 }
 
-fragment NavMenu_navMenu on NavMenu {
+fragment NavMenu_menu on NavMenu {
   id
   name
   items {
@@ -74,7 +74,7 @@ const batch /*: ConcreteBatch*/ = {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "NavMenu_navMenu",
+            "name": "NavMenu_menu",
             "args": null
           }
         ],
@@ -194,7 +194,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query NavMenu_Query(\n  $id: ID!\n) {\n  navMenu(id: $id) {\n    ...NavMenu_navMenu\n    id\n  }\n}\n\nfragment NavMenu_navMenu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    object\n    object_id\n  }\n}\n"
+  "text": "query NavMenu_Query(\n  $id: ID!\n) {\n  navMenu(id: $id) {\n    ...NavMenu_menu\n    id\n  }\n}\n\nfragment NavMenu_menu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    object\n    object_id\n  }\n}\n"
 };
 
 module.exports = batch;

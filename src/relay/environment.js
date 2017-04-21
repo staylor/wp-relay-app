@@ -5,6 +5,7 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
+import handlerProvider from './handlerProvider';
 
 function fetchQuery(
   operation,
@@ -28,6 +29,7 @@ const source = new RecordSource();
 const store = new Store(source);
 
 const environment = new Environment({
+  handlerProvider,
   network,
   store,
 });

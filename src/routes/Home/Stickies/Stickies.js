@@ -9,9 +9,23 @@ import styles from '../Home.scss';
 
 @withPagination(
   graphql`
-    query Stickies_Query(
+    query Stickies_Query {
+      stickies {
+        results(first: 5) {
+          edges {
+            node {
+              id
+              ...Post_post
+            }
+          }
+        }
+      }
+    }
+  `,
+  graphql`
+    query StickiesPaginationQuery(
       $count: Int!
-      $cursor: String!
+      $cursor: String
     ) {
       stickies {
         ...Stickies_posts
@@ -19,24 +33,28 @@ import styles from '../Home.scss';
     }
   `,
   graphql`
-  fragment Stickies_posts on PostCollection {
-    results(first: $count, after: $cursor) @connection(key: "Stickies_results") {
-      edges {
-        node {
-          ...Post_post
+    fragment Stickies_posts on PostCollection {
+      results(
+        first: $count
+        after: $cursor
+      ) @connection(key: "Stickies_results") {
+        edges {
+          node {
+            id
+            ...Post_post
+          }
         }
-        cursor
       }
     }
-  }
-`)
+  `
+)
 export default class Stickies extends Component {
   render() {
-    const { posts } = this.props;
+    const { posts, relay } = this.props;
     return (
       <section className={styles.section}>
         <h3>Latest</h3>
-        <Archive posts={posts} infinite={false} />
+
       </section>
     );
   }

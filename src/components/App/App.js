@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Route } from 'react-router-dom';
 import Header from 'components/Header';
-import Sidebar from 'containers/Sidebar';
+import Sidebar from 'components/Sidebar';
 import Home from 'routes/Home';
 import Single from 'routes/Single';
 import Tag from 'routes/Tag';
@@ -44,7 +44,7 @@ const App = () => (
         <Route path="author/:id" render={renderComponent(Author)} />
       </section>
       <section className={styles.secondary}>
-        <Sidebar />
+        <Sidebar id="U2lkZWJhcjpzaWRlYmFyLTE=" />
       </section>
     </div>
     <footer className={styles.footerCredits}>&copy; Scott Taylor ...&nbsp;
