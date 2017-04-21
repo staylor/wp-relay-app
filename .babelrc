@@ -12,8 +12,10 @@
       "alias": {
         "routes": "./src/routes",
         "components": "./src/components",
-        "routes": "./src/routes",
-        "utils": "./src/utils"
+        "utils": "./src/utils",
+        "queries": "./src/queries",
+        "relay": "./src/relay",
+        "server": "./src/server"
       }
     }]
   ]

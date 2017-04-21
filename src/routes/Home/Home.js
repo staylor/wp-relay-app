@@ -1,44 +1,27 @@
 import React from 'react';
-import Stickies from 'containers/Stickies';
-import HomeCollection from 'containers/HomeCollection';
+import Stickies from './Stickies';
+import ReadThis from './ReadThis';
+import WatchThis from './WatchThis';
+import ListenToThis from './ListenToThis';
 import styles from './Home.scss';
 
 /* eslint-disable react/prop-types */
 
-const Home = ({
-  stickies,
-  readThis,
-  watchThis,
-  listenToThis,
-}) => (
+const Home = () => (
   <div className={styles.columns}>
     <div className={styles.columnA}>
-      {stickies && (
-        <section className={styles.section}>
-          <h3>Latest</h3>
-          <Stickies />
-        </section>
-      )}
-      {readThis && (
-        <section className={styles.section}>
-          <h3>Read This</h3>
-          <HomeCollection categoryID="Q2F0ZWdvcnk6Mw==" />
-        </section>
-      )}
+      <Stickies total={10} />
+      <ReadThis categories="Q2F0ZWdvcnk6Mw==" />
     </div>
     <div className={styles.columnB}>
-      {watchThis && (
-        <section className={styles.section}>
-          <h3>Watch This</h3>
-          <HomeCollection categoryID="Q2F0ZWdvcnk6NA==" />
-        </section>
-      )}
-      {listenToThis && (
-        <section className={styles.section}>
-          <h3>Listen To This</h3>
-          <HomeCollection categoryID="Q2F0ZWdvcnk6NQ==" />
-        </section>
-      )}
+      <section className={styles.section}>
+        <h3>Watch This</h3>
+        <WatchThis categories="Q2F0ZWdvcnk6NA==" />
+      </section>
+      <section className={styles.section}>
+        <h3>Listen To This</h3>
+        <ListenToThis categories="Q2F0ZWdvcnk6NQ==" />
+      </section>
     </div>
   </div>
 );

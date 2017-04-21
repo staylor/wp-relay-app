@@ -21,7 +21,7 @@ class Post extends Component {
       node.onclick = (e) => {
         e.preventDefault();
 
-        //browserHistory.push(`/post/${this.props.post.id}`);
+        // browserHistory.push(`/post/${this.props.post.id}`);
       };
     });
   }

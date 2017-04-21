@@ -1,25 +1,17 @@
 import React from 'react';
-import {
-  QueryRenderer,
-  graphql,
-} from 'react-relay';
+import { QueryRenderer } from 'react-relay';
+import NavMenu from 'components/NavMenu';
+import NavMenuQuery from 'queries/NavMenu';
 import environment from '../relay/environment';
-import NavMenu from '../components/NavMenu';
 
 /* eslint-disable react/prop-types */
 
-export default ({ menuID = 'TmF2TWVudToy' }) => (
+export default ({ id = 'TmF2TWVudToy' }) => (
   <QueryRenderer
     environment={environment}
-    query={graphql`
-      query NavMenu_Query($menuID: ID!) {
-        navMenu(id: $menuID) {
-          ...NavMenu_navMenu
-        }
-      }
-    `}
+    query={NavMenuQuery}
     variables={{
-      menuID,
+      id,
     }}
     render={({ error, props }) => {
       if (error) {

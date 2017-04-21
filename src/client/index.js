@@ -5,10 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import App from 'components/App';
 
 const root = document.querySelector('#main');
+const onUpdate = () => window.scrollTo(0, 0);
 
 render(
   <IntlProvider locale="en">
-    <BrowserRouter onUpdate={() => { window.scrollTo(0, 0); }}>
+    <BrowserRouter onUpdate={onUpdate}>
       <App />
     </BrowserRouter>
   </IntlProvider>,

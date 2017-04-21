@@ -1,31 +1,31 @@
-import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
-import Archive from 'components/Archive';
+import React, { Component } from 'react';
+import { graphql } from 'react-relay';
+import GraphQL from 'decorators/GraphQL';
+import withFragment from 'decorators/withFragment';
+import AuthorQuery from 'queries/Author';
+import AuthorArchive from './AuthorArchive';
 import styles from './Author.scss';
 
 /* eslint-disable react/prop-types */
+/* eslint-disable react/prefer-stateless-function */
 
-const Author = () => {
-  const { user, posts } = this.props;
-  return (
-    <div className={styles.sections}>
-      <section>
-        <h3>{user.name}</h3>
-        <Archive posts={posts} />
-      </section>
-    </div>
-  );
-};
-
-export default createFragmentContainer(Author, {
-  author: graphql`
-    fragment Author_author on User {
-      name
-    }
-  `,
-  posts: graphql`
-    fragment Author_posts on PostCollection {
-      ...Archive_posts
-    }
-  `,
-});
+@GraphQL(AuthorQuery)
+@withFragment(graphql`
+  fragment Author_author on User {
+    id
+    name
+  }
+`)
+export default class Author extends Component {
+  render() {
+    const { author } = this.props;
+    return (
+      <div className={styles.sections}>
+        <section>
+          <h3>{author.name}</h3>
+          <AuthorArchive id={author.id} />
+        </section>
+      </div>
+    );
+  }
+}

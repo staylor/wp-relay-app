@@ -1,23 +1,15 @@
 import React from 'react';
-import {
-  QueryRenderer,
-  graphql,
-} from 'react-relay';
+import { QueryRenderer } from 'react-relay';
+import Page from 'routes/Page';
+import PageQuery from 'queries/Page';
 import environment from '../relay/environment';
-import Page from '../routes/Page';
 
 /* eslint-disable react/prop-types */
 
 export default () => (
   <QueryRenderer
     environment={environment}
-    query={graphql`
-      query Page_Query($slug: String!) {
-        page(slug: $slug) {
-          ...Page_page
-        }
-      }
-    `}
+    query={PageQuery}
     render={({ error, props }) => {
       if (error) {
         console.log(error.message);

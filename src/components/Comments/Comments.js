@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import cn from 'classnames';
 import withIntl from 'decorators/withIntl';
+import GraphQL from 'decorators/GraphQL';
+import withFragment from 'decorators/withFragment';
+import CommentsQuery from 'queries/Comments';
 import styles from './Comments.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/style-prop-object */
 
+@GraphQL(CommentsQuery)
+@withFragment(graphql`
+  fragment Comments_comments on CommentCollection {
+    results(first: $total) {
+      edges {
+        node {
+          id
+          author_name
+          author_url
+          date
+          content {
+            rendered
+          }
+          author_avatar_urls {
+            size
+            url
+          }
+          parent
+        }
+      }
+    }
+  }
+`)
 @withIntl
-class Comments extends Component {
+export default class Comments extends Component {
   sorted = null;
   level = 0;
 
@@ -98,26 +124,3 @@ class Comments extends Component {
     );
   }
 }
-
-export default createFragmentContainer(Comments, graphql`
-  fragment Comments_comments on CommentCollection {
-    results(first: $total) {
-      edges {
-        node {
-          id
-          author_name
-          author_url
-          date
-          content {
-            rendered
-          }
-          author_avatar_urls {
-            size
-            url
-          }
-          parent
-        }
-      }
-    }
-  }
-`);

@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import { Link } from 'react-router-dom';
 import { FormattedRelative } from 'react-intl';
+import GraphQL from 'decorators/GraphQL';
+import withFragment from 'decorators/withFragment';
 import Media from 'components/Media';
 import Comments from 'components/Comments';
 import { convertPlaceholders } from 'utils';
+import SingleQuery from 'queries/Single';
 import styles from './Single.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/style-prop-object */
 
-class Single extends Component {
+@GraphQL(SingleQuery)
+@withFragment(graphql`
+  fragment Single_post on Post {
+    id
+    date
+    title {
+      rendered
+    }
+    content {
+      rendered
+    }
+    featured_media {
+      ...Media_media
+    }
+    tags {
+      id
+      name
+    }
+  }
+`)
+export default class Single extends Component {
   content = null;
   bindRef = (node) => { this.content = node; };
 
@@ -48,7 +71,6 @@ class Single extends Component {
         featured_media: featuredMedia,
         tags,
       },
-      comments,
     } = this.props;
 
     return (
@@ -78,35 +100,8 @@ class Single extends Component {
             <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>
           ))}
         </footer>)}
-        <Comments comments={comments} />
+        <Comments id={id} />
       </article>
     );
   }
 }
-
-export default createFragmentContainer(Single, {
-  post: graphql`
-    fragment Single_post on Post {
-      id
-      date
-      title {
-        rendered
-      }
-      content {
-        rendered
-      }
-      featured_media {
-        ...Media_media
-      }
-      tags {
-        id
-        name
-      }
-    }
-  `,
-  comments: graphql`
-    fragment Single_comments on CommentCollection {
-      ...Comments_comments
-    }
-  `,
-});

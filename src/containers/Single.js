@@ -1,23 +1,15 @@
 import React from 'react';
-import {
-  QueryRenderer,
-  graphql,
-} from 'react-relay';
+import { QueryRenderer } from 'react-relay';
+import Single from 'routes/Single';
+import SingleQuery from 'queries/Single';
 import environment from '../relay/environment';
-import Single from '../routes/Single';
 
 /* eslint-disable react/prop-types */
 
 export default () => (
   <QueryRenderer
     environment={environment}
-    query={graphql`
-      query Single_Query($id: ID!) {
-        post(id: $id) {
-          ...Single_post
-        }
-      }
-    `}
+    query={SingleQuery}
     render={({ error, props }) => {
       if (error) {
         console.log(error.message);

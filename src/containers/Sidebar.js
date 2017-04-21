@@ -1,23 +1,15 @@
 import React from 'react';
-import {
-  QueryRenderer,
-  graphql,
-} from 'react-relay';
+import { QueryRenderer } from 'react-relay';
+import Sidebar from 'components/Sidebar';
+import SidebarQuery from 'queries/Sidebar';
 import environment from '../relay/environment';
-import Sidebar from '../components/Sidebar';
 
 export default () => (
   <QueryRenderer
     environment={environment}
-    query={graphql`
-      query Sidebar_Query($sidebarID: ID!) {
-        sidebar(id: $sidebarID) {
-          ...Sidebar_sidebar
-        }
-      }
-    `}
+    query={SidebarQuery}
     variables={{
-      sidebarID: 'U2lkZWJhcjpzaWRlYmFyLTE=',
+      id: 'U2lkZWJhcjpzaWRlYmFyLTE=',
     }}
     render={({ error, props }) => {
       if (error) {

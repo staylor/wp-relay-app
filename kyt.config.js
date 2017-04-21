@@ -3,6 +3,6 @@
 // Edit these properties to make changes.
 
 module.exports = {
-  reactHotLoader: true,
+  reactHotLoader: false,
   debug: false,
 };

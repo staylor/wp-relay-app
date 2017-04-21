@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { IntlProvider } from 'react-intl';
-import template from './template';
+import template from 'server/template';
 import App from 'components/App';
 
 export default ({

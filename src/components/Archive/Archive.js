@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
 import Post from '../Post';
 import styles from './Archive.scss';
 
@@ -15,9 +14,6 @@ class Archive extends Component {
       posts: {
         results: {
           edges: posts,
-          pageInfo: {
-            hasNextPage,
-          },
         },
       },
     } = this.props;
@@ -28,13 +24,19 @@ class Archive extends Component {
             <li key={cursor}><Post post={node} /></li>
           ))}
         </ul>
-        {this.props.infinite && hasNextPage && (
+        {this.props.infinite && this.props.relay.hasMore() && (
           <button
             className={styles.button}
             onClick={() => {
-              this.props.relay.setVariables({
-                total: this.props.relay.variables.total + 10,
-              });
+              if (this.props.relay.isLoading()) {
+                return;
+              }
+
+              this.props.relay.loadMore(
+                10,
+                // eslint-disable-next-line no-console
+                e => console.log(e)
+              );
             }}
           >
             MORE
@@ -45,18 +47,4 @@ class Archive extends Component {
   }
 }
 
-export default createFragmentContainer(Archive, graphql`
-  fragment Archive_posts on PostCollection {
-    results(first: $total) {
-      edges {
-        node {
-          ...Post_post
-        }
-        cursor
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-`);
+export default Archive;

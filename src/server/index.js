@@ -3,7 +3,7 @@ import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
 import compression from 'compression';
 import path from 'path';
-import router from './router';
+import router from 'server/router';
 
 const clientAssets = require(KYT.ASSETS_MANIFEST); // eslint-disable-line import/no-dynamic-require
 const app = express();
@@ -26,7 +26,6 @@ const gqlHost = process.env.GQL_HOST || 'http://localhost:8080';
 
 // the pathname is dervied from samizdat
 const gqlPath = process.env.GQL_PATH || '/graphql';
-const gqlBatchPath = process.env.GQL_BATCH_PATH || '/graphql/batch';
 
 // proxy to the graphql server
 app.use(gqlPath, proxy({
@@ -35,8 +34,6 @@ app.use(gqlPath, proxy({
 }));
 
 app.get('*', router({
-  gqlUrl: gqlHost + gqlPath,
-  gqlBatchUrl: gqlHost + gqlBatchPath,
   jsBundle: clientAssets.main.js,
   cssBundle: clientAssets.main.css,
 }));

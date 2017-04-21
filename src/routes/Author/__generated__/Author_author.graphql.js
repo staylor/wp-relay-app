@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Author_author.graphql
- * @generated SignedSource<<2f48d721c47155b5dd4186576c0fb88c>>
+ * @generated SignedSource<<1f78492f0e387d251a11d3c9f4f30928>>
  * @flow
  * @nogrep
  */
@@ -13,6 +13,7 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type Author_author = {
+  id: string;
   name?: ?string;
 };
 */
@@ -25,6 +26,13 @@ const fragment /*: ConcreteFragment*/ = {
   "metadata": null,
   "name": "Author_author",
   "selections": [
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "id",
+      "storageKey": null
+    },
     {
       "kind": "ScalarField",
       "alias": null,
