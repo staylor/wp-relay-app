@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Route } from 'react-router-dom';
+import { Switch } from 'react-router';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Home from 'routes/Home';
@@ -37,14 +38,16 @@ const App = () => (
     <Header />
     <div className={styles.content}>
       <section className={styles.primary}>
-        <Route path="" component={Home} />
-        <Route path="post/:id" render={renderComponent(Single)} />
-        <Route path="category/:id" render={renderComponent(Category)} />
-        <Route path="tag/:id" render={renderComponent(Tag)} />
-        <Route path="author/:id" render={renderComponent(Author)} />
+        <Switch>
+          <Route path="" component={Home} />
+          <Route path="post/:id" render={renderComponent(Single)} />
+          <Route path="category/:id" render={renderComponent(Category)} />
+          <Route path="tag/:id" render={renderComponent(Tag)} />
+          <Route path="author/:id" render={renderComponent(Author)} />
+        </Switch>
       </section>
       <section className={styles.secondary}>
-        <Sidebar id="U2lkZWJhcjpzaWRlYmFyLTE=" />
+        <Sidebar id="U2lkZWJhcjpzaWRlYmFyLTE" />
       </section>
     </div>
     <footer className={styles.footerCredits}>&copy; Scott Taylor ...&nbsp;

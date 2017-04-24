@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { graphql } from 'react-relay';
 import QueryRenderer from 'decorators/QueryRenderer';
 import Archive from 'components/Archive';
-import styles from '../Home.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
 @QueryRenderer(graphql`
-  query StickiesQuery($total: Int) {
-    stickies {
+  query FeaturedQuery(
+    $categories: String
+    $total: Int
+  ) {
+    posts(categories: $categories) {
       results(first: $total) {
         edges {
           node {
@@ -42,17 +44,12 @@ import styles from '../Home.scss';
     }
   }
 `)
-class Stickies extends Component {
+class Featured extends Component {
   render() {
-    const { stickies } = this.props;
+    const { posts } = this.props;
 
-    return (
-      <section className={styles.section}>
-        <h3>Latest</h3>
-        <Archive posts={stickies} />
-      </section>
-    );
+    return <Archive posts={posts} />;
   }
 }
 
-export default Stickies;
+export default Featured;

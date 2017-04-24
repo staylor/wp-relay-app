@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-relay';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
-import SidebarQuery from 'queries/Sidebar';
+import QueryRenderer from 'decorators/QueryRenderer';
+import SidebarQuery from 'queries/SidebarQuery';
 import styles from './Sidebar.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
-@GraphQL(SidebarQuery)
-@withFragment(graphql`
-  fragment Sidebar_sidebar on Sidebar {
-    widgets {
-      classname
-      content {
-        rendered
-      }
-    }
-  }`
-)
+@QueryRenderer(SidebarQuery)
 export default class Sidebar extends Component {
   static transformStyles(classname, html) {
     if (classname === 'widget_go_to_this') {
@@ -30,9 +18,7 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    console.log(this.props.sidebar);
-    console.log(this.props.sidebar.widgets);
-    const { widgets } = this.props.sidebar;
+    const { sidebar } = this.props;
 
     let i = 0;
     const key = () => {
@@ -42,7 +28,7 @@ export default class Sidebar extends Component {
 
     return (
       <ul className={styles.widgets}>
-        {widgets.map(({ classname, content: { rendered: widget } }) => (
+        {sidebar.widgets.map(({ classname, content: { rendered: widget } }) => (
           <li
             key={key()}
             dangerouslySetInnerHTML={{

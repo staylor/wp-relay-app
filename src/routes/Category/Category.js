@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
 import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
-import CategoryQuery from 'queries/Category';
 import CategoryArchive from './CategoryArchive';
 import styles from './Category.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
-@GraphQL(CategoryQuery)
-@withFragment(graphql`
+export const categoryFragment = graphql`
   fragment Category_term on Category {
     id
     name
@@ -20,7 +16,8 @@ import styles from './Category.scss';
       slug
     }
   }
-`)
+`;
+
 export default class Category extends Component {
   render() {
     const { term } = this.props;

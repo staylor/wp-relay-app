@@ -1,32 +1,15 @@
 import url from 'url';
 import React, { Component } from 'react';
-import { graphql } from 'react-relay';
 import { Link } from 'react-router-dom';
+import QueryRenderer from 'decorators/QueryRenderer';
+import NavMenuQuery from 'queries/NavMenuQuery';
 import cn from 'classnames';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
-import NavMenuQuery from 'queries/NavMenu';
 import styles from './NavMenu.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
-@GraphQL(NavMenuQuery)
-@withFragment(graphql`
-  fragment NavMenu_menu on NavMenu {
-    id
-    name
-    items {
-      id
-      title
-      url
-      parent
-      order
-      object
-      object_id
-    }
-  }`
-)
+@QueryRenderer(NavMenuQuery)
 export default class NavMenu extends Component {
   sorted = null;
   level = 0;
@@ -100,13 +83,13 @@ export default class NavMenu extends Component {
   }
 
   render() {
-    const menu = this.props.navMenu;
+    const { navMenu } = this.props;
 
-    if (!menu) {
+    if (!navMenu) {
       return null;
     }
 
-    this.sorted = this.constructor.sortItems(menu.menu);
+    this.sorted = this.constructor.sortItems(navMenu.items);
     const navMenuHtml = this.walk(this.sorted.top);
 
     return (

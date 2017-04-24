@@ -1,12 +1,10 @@
 import { createPaginationContainer } from 'react-relay';
-import GraphQL from 'decorators/GraphQL';
 
 export default (
-  initialQuery,
   pagedQuery,
   fragments
 ) => Component => (
-  GraphQL(initialQuery)(createPaginationContainer(
+  createPaginationContainer(
     Component,
     fragments,
     {
@@ -26,5 +24,5 @@ export default (
       },
       query: pagedQuery,
     }
-  ))
+  )
 );

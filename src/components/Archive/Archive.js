@@ -4,35 +4,30 @@ import styles from './Archive.scss';
 
 /* eslint-disable react/prop-types */
 
-class Archive extends Component {
+export default class Archive extends Component {
   static defaultProps = {
-    infinite: true,
+    infinite: false,
   };
 
   render() {
-    const {
-      posts: {
-        results: {
-          edges: posts,
-        },
-      },
-    } = this.props;
+    const { posts, relay, infinite } = this.props;
+
     return (
       <section>
         <ul>
-          {posts.map(({ cursor, node }) => (
+          {posts.results.edges.map(({ cursor, node }) => (
             <li key={cursor}><Post post={node} /></li>
           ))}
         </ul>
-        {this.props.infinite && this.props.relay.hasMore() && (
+        {infinite && relay.hasMore() && (
           <button
             className={styles.button}
             onClick={() => {
-              if (this.props.relay.isLoading()) {
+              if (relay.isLoading()) {
                 return;
               }
 
-              this.props.relay.loadMore(
+              relay.loadMore(
                 10,
                 // eslint-disable-next-line no-console
                 e => console.log(e)
@@ -46,5 +41,3 @@ class Archive extends Component {
     );
   }
 }
-
-export default Archive;
