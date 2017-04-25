@@ -13,7 +13,8 @@
       "alias": {
         "components": "./components",
         "routes": "./routes",
-        "utils": "./utils"
+        "utils": "./utils",
+        "relay": "./relay"
       }
     }]
   ]

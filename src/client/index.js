@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { render } from 'react-dom';
 import Relay from 'react-relay';
 import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
 import { IntlProvider } from 'react-intl';
-import IsomorphicRelay from 'isomorphic-relay';
-import IsomorphicRouter from 'isomorphic-relay-router';
+import IsomorphicRelay from 'relay/Isomorphic';
+import IsomorphicRouter from 'relay/Isomorphic/Router';
 import { AppContainer } from 'react-hot-loader';
 import Router from 'react-router/lib/Router';
 import browserHistory from 'react-router/lib/browserHistory';
