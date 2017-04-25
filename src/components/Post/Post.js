@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import { Link } from 'react-router-dom';
+import FragmentContainer from 'decorators/FragmentContainer';
 import Media from '../Media';
 import { convertPlaceholders } from '../../utils';
 import styles from './Post.scss';
@@ -8,7 +9,24 @@ import styles from './Post.scss';
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
-class Post extends Component {
+@FragmentContainer(graphql`
+  fragment Post_post on Post {
+    id
+    title {
+      rendered
+    }
+    content {
+      rendered
+    }
+    excerpt {
+      rendered
+    }
+    featured_media {
+      ...Media_media
+    }
+  }
+`)
+export default class Post extends Component {
   content = null;
   bindRef = (node) => { this.content = node; };
 
@@ -58,21 +76,3 @@ class Post extends Component {
     );
   }
 }
-
-export default createFragmentContainer(Post, graphql`
-  fragment Post_post on Post {
-    id
-    title {
-      rendered
-    }
-    content {
-      rendered
-    }
-    excerpt {
-      rendered
-    }
-    featured_media {
-      ...Media_media
-    }
-  }
-`);

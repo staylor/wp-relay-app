@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { graphql } from 'react-relay';
 import cn from 'classnames';
 import withIntl from 'decorators/withIntl';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
+import QueryRenderer from 'decorators/QueryRenderer';
+import FragmentContainer from 'decorators/FragmentContainer';
 import CommentsQuery from 'queries/Comments';
 import styles from './Comments.scss';
 
@@ -11,8 +11,8 @@ import styles from './Comments.scss';
 /* eslint-disable react/no-danger */
 /* eslint-disable react/style-prop-object */
 
-@GraphQL(CommentsQuery)
-@withFragment(graphql`
+@QueryRenderer(CommentsQuery)
+@FragmentContainer(graphql`
   fragment Comments_comments on CommentCollection {
     results(first: $total) {
       edges {

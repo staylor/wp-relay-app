@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-relay';
-import withPagination from 'decorators/withPagination';
+import PaginationContainer from 'decorators/PaginationContainer';
 import Archive from 'components/Archive';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
-@withPagination(
+@PaginationContainer(
   graphql`
     query TagArchive_Query(
       $tags: String!

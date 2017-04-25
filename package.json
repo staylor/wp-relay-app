@@ -30,7 +30,7 @@
     "react-relay": "dev",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "react-static-container": "^1.0.1"
+    "react-static-container": "^1.0.1",
   },
   "scripts": {
     "dev": "kyt dev",

@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Archive_posts.graphql
- * @generated SignedSource<<a46e48595c3e9467d10994e87c4c17b9>>
+ * @generated SignedSource<<98b16baaf64421661cda33a2b2236280>>
  * @flow
  * @nogrep
  */
@@ -16,43 +16,8 @@ export type Archive_posts = {
   results?: ?Archive_posts_results;
 };
 
-export type Archive_posts_results_edges_node_title = {
-  rendered?: ?string;
-};
-
-export type Archive_posts_results_edges_node_content = {
-  rendered?: ?string;
-};
-
-export type Archive_posts_results_edges_node_excerpt = {
-  rendered?: ?string;
-};
-
-export type Archive_posts_results_edges_node_featured_media_media_details_sizes = {
-  name?: ?string;
-  source_url?: ?string;
-};
-
-export type Archive_posts_results_edges_node_featured_media_media_details = {
-  sizes?: ?Array<?Archive_posts_results_edges_node_featured_media_media_details_sizes>;
-};
-
-export type Archive_posts_results_edges_node_featured_media = {
-  __typename: string;
-  source_url?: ?string;
-  media_details?: ?Archive_posts_results_edges_node_featured_media_media_details;
-};
-
-export type Archive_posts_results_edges_node = {
-  id: string;
-  title?: ?Archive_posts_results_edges_node_title;
-  content?: ?Archive_posts_results_edges_node_content;
-  excerpt?: ?Archive_posts_results_edges_node_excerpt;
-  featured_media?: ?Archive_posts_results_edges_node_featured_media;
-};
-
 export type Archive_posts_results_edges = {
-  node?: ?Archive_posts_results_edges_node;
+  node?: ?any;
   cursor: string;
 };
 
@@ -107,132 +72,9 @@ const fragment /*: ConcreteFragment*/ = {
               "plural": false,
               "selections": [
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "id",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Title",
-                  "name": "title",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "rendered",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Content",
-                  "name": "content",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "rendered",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Excerpt",
-                  "name": "excerpt",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "rendered",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": null,
-                  "name": "featured_media",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "__typename",
-                      "storageKey": null
-                    },
-                    {
-                      "kind": "InlineFragment",
-                      "type": "Image",
-                      "selections": [
-                        {
-                          "kind": "ScalarField",
-                          "alias": null,
-                          "args": null,
-                          "name": "source_url",
-                          "storageKey": null
-                        },
-                        {
-                          "kind": "LinkedField",
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "ImageDetails",
-                          "name": "media_details",
-                          "plural": false,
-                          "selections": [
-                            {
-                              "kind": "LinkedField",
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "MediaSize",
-                              "name": "sizes",
-                              "plural": true,
-                              "selections": [
-                                {
-                                  "kind": "ScalarField",
-                                  "alias": null,
-                                  "args": null,
-                                  "name": "name",
-                                  "storageKey": null
-                                },
-                                {
-                                  "kind": "ScalarField",
-                                  "alias": null,
-                                  "args": null,
-                                  "name": "source_url",
-                                  "storageKey": null
-                                }
-                              ],
-                              "storageKey": null
-                            }
-                          ],
-                          "storageKey": null
-                        }
-                      ]
-                    }
-                  ],
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "Post_post",
+                  "args": null
                 }
               ],
               "storageKey": null

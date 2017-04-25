@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-relay';
+import FragmentContainer from 'decorators/FragmentContainer';
 import Post from '../Post';
 import styles from './Archive.scss';
 
 /* eslint-disable react/prop-types */
 
+@FragmentContainer(graphql`
+  fragment Archive_posts on PostCollection {
+    results(first: $total) {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
+    }
+  }
+`)
 export default class Archive extends Component {
   static defaultProps = {
     infinite: false,

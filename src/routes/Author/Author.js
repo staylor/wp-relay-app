@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-relay';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
+import QueryRenderer from 'decorators/QueryRenderer';
+import FragmentContainer from 'decorators/FragmentContainer';
 import AuthorQuery from 'queries/Author';
 import AuthorArchive from './AuthorArchive';
 import styles from './Author.scss';
@@ -9,8 +9,8 @@ import styles from './Author.scss';
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
-@GraphQL(AuthorQuery)
-@withFragment(graphql`
+@QueryRenderer(AuthorQuery)
+@FragmentContainer(graphql`
   fragment Author_author on User {
     id
     name

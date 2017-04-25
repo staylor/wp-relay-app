@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
+import FragmentContainer from 'decorators/FragmentContainer';
 import styles from './Image.scss';
 
 /* eslint-disable react/prop-types */
 
-class Image extends Component {
+@FragmentContainer(graphql`
+  fragment Image_image on Media {
+    ... on Image {
+      source_url
+      media_details {
+        sizes {
+          name
+          source_url
+        }
+      }
+    }
+  }
+`)
+export default class Image extends Component {
   static defaultProps = {
     crop: 'large',
   };
@@ -49,17 +63,3 @@ class Image extends Component {
     );
   }
 }
-
-export default createFragmentContainer(Image, graphql`
-  fragment Image_image on Media {
-    ... on Image {
-      source_url
-      media_details {
-        sizes {
-          name
-          source_url
-        }
-      }
-    }
-  }
-`);

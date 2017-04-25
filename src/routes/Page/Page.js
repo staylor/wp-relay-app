@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
+import QueryRenderer from 'decorators/QueryRenderer';
+import FragmentContainer from 'decorators/FragmentContainer';
 import { Link } from 'react-router-dom';
 import Media from 'components/Media';
 import PageQuery from 'queries/Page';
@@ -12,8 +12,8 @@ import styles from './Page.scss';
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/no-danger */
 
-@GraphQL(PageQuery)
-@withFragment(graphql`
+@QueryRenderer(PageQuery)
+@FragmentContainer(graphql`
   fragment Page_page on Page {
     id
     slug

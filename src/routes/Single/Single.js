@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import { Link } from 'react-router-dom';
 import { FormattedRelative } from 'react-intl';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
+import QueryRenderer from 'decorators/QueryRenderer';
+import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import Comments from 'components/Comments';
 import { convertPlaceholders } from 'utils';
@@ -15,8 +15,8 @@ import styles from './Single.scss';
 /* eslint-disable react/no-danger */
 /* eslint-disable react/style-prop-object */
 
-@GraphQL(SingleQuery)
-@withFragment(graphql`
+@QueryRenderer(SingleQuery)
+@FragmentContainer(graphql`
   fragment Single_post on Post {
     id
     date

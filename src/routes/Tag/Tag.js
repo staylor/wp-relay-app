@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
-import GraphQL from 'decorators/GraphQL';
-import withFragment from 'decorators/withFragment';
+import QueryRenderer from 'decorators/QueryRenderer';
+import FragmentContainer from 'decorators/FragmentContainer';
 import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
 import TagQuery from 'queries/Tag';
 import TagArchive from './TagArchive';
@@ -11,8 +11,8 @@ import styles from './Tag.scss';
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
-@GraphQL(TagQuery)
-@withFragment(graphql`
+@QueryRenderer(TagQuery)
+@FragmentContainer(graphql`
   fragment Tag_term on TermInterface {
     id
     name
