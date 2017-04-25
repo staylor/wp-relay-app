@@ -13,10 +13,13 @@
     "babel-preset-stage-0": "^6.24.1",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
+    "create-react-class": "^15.5.2",
     "enzyme": "^2.8.2",
     "express": "^4.15.2",
     "http-proxy-middleware": "^0.17.4",
+    "invariant": "^2.2.2",
     "kyt": "^0.5.4",
+    "lodash": "^4.17.4",
     "morgan": "^1.8.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
@@ -26,7 +29,8 @@
     "react-intl": "^2.2.3",
     "react-relay": "dev",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-static-container": "^1.0.1"
   },
   "scripts": {
     "dev": "kyt dev",
@@ -43,7 +47,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.2",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-module-resolver": "^2.7.0",
     "babel-plugin-relay": "dev",
     "eslint-import-resolver-babel-module": "^3.0.0",
