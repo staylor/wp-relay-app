@@ -3,27 +3,26 @@
  *   relay-compiler
  *
  * @providesModule Tag_term.graphql
- * @generated SignedSource<<7d278de1baf02c7dff087d5ee89f758e>>
+ * @generated SignedSource<<08c77b1f5a37a991439d1279d57d1199>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Tag_term = {
-  id: string;
-  name?: ?string;
-  taxonomy?: ?Tag_term_taxonomy;
-};
-
-export type Tag_term_taxonomy = {
-  slug?: ?string;
-};
+export type Tag_term = {|
+  +id: string;
+  +name: ?string;
+  +taxonomy: ?{|
+    +slug: ?string;
+  |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

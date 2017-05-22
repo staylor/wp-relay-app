@@ -3,34 +3,29 @@
  *   relay-compiler
  *
  * @providesModule TagArchive_posts.graphql
- * @generated SignedSource<<ad2d37c1c7c2c2749630551d792ad7f0>>
+ * @generated SignedSource<<d0447d978a4a7b7933c9ce4d62d29564>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type TagArchive_posts = {
-  results?: ?TagArchive_posts_results;
-};
-
-export type TagArchive_posts_results_edges_node = {
-  id: string;
-};
-
-export type TagArchive_posts_results_edges = {
-  node?: ?TagArchive_posts_results_edges_node;
-  cursor: string;
-};
-
-export type TagArchive_posts_results = {
-  edges?: ?Array<?TagArchive_posts_results_edges>;
-};
+export type TagArchive_posts = {|
+  +results: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{|
+        +id: string;
+      |};
+      +cursor: string;
+    |}>;
+  |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [

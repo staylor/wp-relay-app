@@ -100,7 +100,7 @@ export default class Single extends Component {
             <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>
           ))}
         </footer>)}
-        <Comments id={id} />
+        <Comments id={id} total={10} />
       </article>
     );
   }

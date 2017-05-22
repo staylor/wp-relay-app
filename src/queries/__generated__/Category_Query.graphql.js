@@ -3,11 +3,13 @@
  *   relay-compiler
  *
  * @providesModule Category_Query.graphql
- * @generated SignedSource<<0144b603e93384aec0ffdaefa3b767f7>>
- * @relayHash 25442c805c8cfaa20ba26a45d00ed39b
+ * @generated SignedSource<<9e0ae7f0fee74fbf0047b33c01aeddca>>
+ * @relayHash b12922f8d05361f7419ff3be07829bae
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
@@ -16,19 +18,18 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 /*
 query Category_Query(
   $id: ID!
 ) {
   category(id: $id) {
-    ...Category_term
+    ...Category_category
     id
   }
 }
 
-fragment Category_term on Category {
+fragment Category_category on Category {
   id
   name
   taxonomy {
@@ -69,7 +70,7 @@ const batch /*: ConcreteBatch*/ = {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "Category_term",
+            "name": "Category_category",
             "args": null
           }
         ],
@@ -154,7 +155,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Category_Query(\n  $id: ID!\n) {\n  category(id: $id) {\n    ...Category_term\n    id\n  }\n}\n\nfragment Category_term on Category {\n  id\n  name\n  taxonomy {\n    slug\n    id\n  }\n}\n"
+  "text": "query Category_Query(\n  $id: ID!\n) {\n  category(id: $id) {\n    ...Category_category\n    id\n  }\n}\n\nfragment Category_category on Category {\n  id\n  name\n  taxonomy {\n    slug\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

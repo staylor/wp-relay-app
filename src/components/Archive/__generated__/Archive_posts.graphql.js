@@ -3,30 +3,27 @@
  *   relay-compiler
  *
  * @providesModule Archive_posts.graphql
- * @generated SignedSource<<98b16baaf64421661cda33a2b2236280>>
+ * @generated SignedSource<<92265b78bb7b0c01464f98f26e6d4aac>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Archive_posts = {
-  results?: ?Archive_posts_results;
-};
-
-export type Archive_posts_results_edges = {
-  node?: ?any;
-  cursor: string;
-};
-
-export type Archive_posts_results = {
-  edges?: ?Array<?Archive_posts_results_edges>;
-};
+export type Archive_posts = {|
+  +results: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{| |};
+      +cursor: string;
+    |}>;
+  |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [

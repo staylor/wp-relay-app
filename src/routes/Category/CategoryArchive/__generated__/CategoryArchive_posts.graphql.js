@@ -3,34 +3,29 @@
  *   relay-compiler
  *
  * @providesModule CategoryArchive_posts.graphql
- * @generated SignedSource<<1be823941c501e502ae60c07f3d53bc2>>
+ * @generated SignedSource<<d2eb8200c7145a72f8abf73dce474517>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type CategoryArchive_posts = {
-  results?: ?CategoryArchive_posts_results;
-};
-
-export type CategoryArchive_posts_results_edges_node = {
-  id: string;
-};
-
-export type CategoryArchive_posts_results_edges = {
-  node?: ?CategoryArchive_posts_results_edges_node;
-  cursor: string;
-};
-
-export type CategoryArchive_posts_results = {
-  edges?: ?Array<?CategoryArchive_posts_results_edges>;
-};
+export type CategoryArchive_posts = {|
+  +results: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{|
+        +id: string;
+      |};
+      +cursor: string;
+    |}>;
+  |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [

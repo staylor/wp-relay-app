@@ -3,22 +3,23 @@
  *   relay-compiler
  *
  * @providesModule Author_author.graphql
- * @generated SignedSource<<1f78492f0e387d251a11d3c9f4f30928>>
+ * @generated SignedSource<<d0bfc276d75d6fb20e59f363979c51dd>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Author_author = {
-  id: string;
-  name?: ?string;
-};
+export type Author_author = {|
+  +id: string;
+  +name: ?string;
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

@@ -8,6 +8,19 @@ import Archive from 'components/Archive';
 
 @PaginationContainer(
   graphql`
+    fragment AuthorArchive_posts on PostCollection {
+      results(first: $count, after: $cursor) @connection(key: "AuthorArchive_results") {
+        edges {
+          node {
+            id
+            ...Post_post
+          }
+          cursor
+        }
+      }
+    }
+  `,
+  graphql`
     query AuthorArchive_Query(
       $id: String!
       $count: Int!
@@ -22,19 +35,6 @@ import Archive from 'components/Archive';
             }
             cursor
           }
-        }
-      }
-    }
-  `,
-  graphql`
-    fragment AuthorArchive_posts on PostCollection {
-      results(first: $count, after: $cursor) @connection(key: "AuthorArchive_results") {
-        edges {
-          node {
-            id
-            ...Post_post
-          }
-          cursor
         }
       }
     }

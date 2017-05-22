@@ -3,31 +3,28 @@
  *   relay-compiler
  *
  * @providesModule Image_image.graphql
- * @generated SignedSource<<7aff42968883ae76cc6335832bacebf9>>
+ * @generated SignedSource<<18f582934b65aa7a7efb29fe828b0863>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Image_image = {
-  source_url?: ?string;
-  media_details?: ?Image_image_media_details;
-};
-
-export type Image_image_media_details_sizes = {
-  name?: ?string;
-  source_url?: ?string;
-};
-
-export type Image_image_media_details = {
-  sizes?: ?Array<?Image_image_media_details_sizes>;
-};
+export type Image_image = {|
+  +source_url?: ?string;
+  +media_details?: ?{|
+    +sizes: ?$ReadOnlyArray<?{|
+      +name: ?string;
+      +source_url: ?string;
+    |}>;
+  |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

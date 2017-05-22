@@ -3,33 +3,30 @@
  *   relay-compiler
  *
  * @providesModule Page_page.graphql
- * @generated SignedSource<<f2ea2128599481f0b16b4862e96f589e>>
+ * @generated SignedSource<<d5f72b54db07043a235403eaafdb14b5>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Page_page = {
-  id: string;
-  slug?: ?string;
-  title?: ?Page_page_title;
-  content?: ?Page_page_content;
-  featured_media?: ?any;
-};
-
-export type Page_page_title = {
-  rendered?: ?string;
-};
-
-export type Page_page_content = {
-  rendered?: ?string;
-};
+export type Page_page = {|
+  +id: string;
+  +slug: ?string;
+  +title: ?{|
+    +rendered: ?string;
+  |};
+  +content: ?{|
+    +rendered: ?string;
+  |};
+  +featured_media: ?{| |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

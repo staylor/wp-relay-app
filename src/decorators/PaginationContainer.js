@@ -1,8 +1,8 @@
 import { createPaginationContainer } from 'react-relay';
 
 export default (
-  pagedQuery,
-  fragments
+  fragments,
+  pagedQuery
 ) => Component => (
   createPaginationContainer(
     Component,

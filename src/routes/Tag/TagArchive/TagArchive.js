@@ -8,17 +8,6 @@ import Archive from 'components/Archive';
 
 @PaginationContainer(
   graphql`
-    query TagArchive_Query(
-      $tags: String!
-      $count: Int!
-      $cursor: String!
-    ) {
-      posts(tags: $tags) {
-        ...TagArchive_posts
-      }
-    }
-  `,
-  graphql`
     fragment TagArchive_posts on PostCollection {
       results(first: $count, after: $cursor) @connection(key: "TagArchive_results") {
         edges {
@@ -28,6 +17,17 @@ import Archive from 'components/Archive';
           }
           cursor
         }
+      }
+    }
+  `,
+  graphql`
+    query TagArchive_Query(
+      $tags: String!
+      $count: Int!
+      $cursor: String!
+    ) {
+      posts(tags: $tags) {
+        ...TagArchive_posts
       }
     }
   `

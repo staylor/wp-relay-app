@@ -3,11 +3,13 @@
  *   relay-compiler
  *
  * @providesModule CategoryArchive_Query.graphql
- * @generated SignedSource<<99d7e8ca585cae9c3e2e211e160cbb08>>
- * @relayHash 84b0e25a2e0818994385e3f128a86f49
+ * @generated SignedSource<<eedfd2b4f974e2d15b796051be22c88e>>
+ * @relayHash ba03f834df6d94fa9393fce34fe3ef97
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
@@ -16,15 +18,14 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 /*
 query CategoryArchive_Query(
-  $categories: String!
+  $id: String!
   $count: Int!
-  $cursor: String!
+  $cursor: String
 ) {
-  posts(categories: $categories) {
+  posts(categories: $id) {
     ...CategoryArchive_posts
   }
 }
@@ -97,7 +98,7 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "categories",
+        "name": "id",
         "type": "String!",
         "defaultValue": null
       },
@@ -110,7 +111,7 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LocalArgument",
         "name": "cursor",
-        "type": "String!",
+        "type": "String",
         "defaultValue": null
       }
     ],
@@ -125,7 +126,7 @@ const batch /*: ConcreteBatch*/ = {
           {
             "kind": "Variable",
             "name": "categories",
-            "variableName": "categories",
+            "variableName": "id",
             "type": "String"
           }
         ],
@@ -152,7 +153,7 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "categories",
+        "name": "id",
         "type": "String!",
         "defaultValue": null
       },
@@ -165,7 +166,7 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LocalArgument",
         "name": "cursor",
-        "type": "String!",
+        "type": "String",
         "defaultValue": null
       }
     ],
@@ -180,7 +181,7 @@ const batch /*: ConcreteBatch*/ = {
           {
             "kind": "Variable",
             "name": "categories",
-            "variableName": "categories",
+            "variableName": "id",
             "type": "String"
           }
         ],
@@ -475,7 +476,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query CategoryArchive_Query(\n  $categories: String!\n  $count: Int!\n  $cursor: String!\n) {\n  posts(categories: $categories) {\n    ...CategoryArchive_posts\n  }\n}\n\nfragment CategoryArchive_posts on PostCollection {\n  results(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        ...Post_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query CategoryArchive_Query(\n  $id: String!\n  $count: Int!\n  $cursor: String\n) {\n  posts(categories: $id) {\n    ...CategoryArchive_posts\n  }\n}\n\nfragment CategoryArchive_posts on PostCollection {\n  results(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        ...Post_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

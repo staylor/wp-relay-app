@@ -3,48 +3,39 @@
  *   relay-compiler
  *
  * @providesModule Comments_comments.graphql
- * @generated SignedSource<<3ad06fe936c3f7dc1f276f64858e470a>>
+ * @generated SignedSource<<cc85fcab41b1209995bd6925075d2a0e>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Comments_comments = {
-  results?: ?Comments_comments_results;
-};
-
-export type Comments_comments_results_edges_node_content = {
-  rendered?: ?string;
-};
-
-export type Comments_comments_results_edges_node_author_avatar_urls = {
-  size?: ?number;
-  url?: ?string;
-};
-
-export type Comments_comments_results_edges_node = {
-  id: string;
-  author_name?: ?string;
-  author_url?: ?string;
-  date?: ?string;
-  content?: ?Comments_comments_results_edges_node_content;
-  author_avatar_urls?: ?Array<?Comments_comments_results_edges_node_author_avatar_urls>;
-  parent?: ?string;
-};
-
-export type Comments_comments_results_edges = {
-  node?: ?Comments_comments_results_edges_node;
-};
-
-export type Comments_comments_results = {
-  edges?: ?Array<?Comments_comments_results_edges>;
-};
+export type Comments_comments = {|
+  +results: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{|
+        +id: string;
+        +author_name: ?string;
+        +author_url: ?string;
+        +date: ?string;
+        +content: ?{|
+          +rendered: ?string;
+        |};
+        +author_avatar_urls: ?$ReadOnlyArray<?{|
+          +size: ?number;
+          +url: ?string;
+        |}>;
+        +parent: ?string;
+      |};
+    |}>;
+  |};
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [

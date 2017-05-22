@@ -18,9 +18,10 @@ const siteName = 'High for This';
 const tagline = 'Music as it happens.';
 const description = 'High for This aggregates the best music content on the web.';
 
-const renderComponent = Component => ({ match, ...otherProps }) => (
-  <Component id={match.params.id} {...otherProps} />
-);
+const renderComponent = Component => ({ match, ...otherProps }) => {
+  console.log(match);
+  return <Component id={match.params.id} {...otherProps} />;
+};
 
 const App = () => (
   <div className={styles.page}>
@@ -39,11 +40,11 @@ const App = () => (
     <div className={styles.content}>
       <section className={styles.primary}>
         <Switch>
-          <Route path="" component={Home} />
-          <Route path="post/:id" render={renderComponent(Single)} />
-          <Route path="category/:id" render={renderComponent(Category)} />
-          <Route path="tag/:id" render={renderComponent(Tag)} />
-          <Route path="author/:id" render={renderComponent(Author)} />
+          <Route path="/post/:id" render={renderComponent(Single)} />
+          <Route path="/category/:id" render={renderComponent(Category)} />
+          <Route path="/tag/:id" render={renderComponent(Tag)} />
+          <Route path="/author/:id" render={renderComponent(Author)} />
+          <Route path="/" component={Home} />
         </Switch>
       </section>
       <section className={styles.secondary}>

@@ -3,21 +3,22 @@
  *   relay-compiler
  *
  * @providesModule Media_media.graphql
- * @generated SignedSource<<a05d1fb92000cfe3b06a15df024f9ac1>>
+ * @generated SignedSource<<5137dd6d954542cf9d71c5d05f7e67f0>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Media_media = {
-  __typename: string;
-};
+export type Media_media = {|
+  +__typename: string;
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

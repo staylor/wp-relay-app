@@ -3,39 +3,34 @@
  *   relay-compiler
  *
  * @providesModule Single_post.graphql
- * @generated SignedSource<<135b7982db8d63aadc2a170e9cf54e68>>
+ * @generated SignedSource<<10449c764801951cce217385c63ba1db>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Single_post = {
-  id: string;
-  date?: ?string;
-  title?: ?Single_post_title;
-  content?: ?Single_post_content;
-  featured_media?: ?any;
-  tags?: ?Array<?Single_post_tags>;
-};
-
-export type Single_post_title = {
-  rendered?: ?string;
-};
-
-export type Single_post_content = {
-  rendered?: ?string;
-};
-
-export type Single_post_tags = {
-  id: string;
-  name?: ?string;
-};
+export type Single_post = {|
+  +id: string;
+  +date: ?string;
+  +title: ?{|
+    +rendered: ?string;
+  |};
+  +content: ?{|
+    +rendered: ?string;
+  |};
+  +featured_media: ?{| |};
+  +tags: ?$ReadOnlyArray<?{|
+    +id: string;
+    +name: ?string;
+  |}>;
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],
