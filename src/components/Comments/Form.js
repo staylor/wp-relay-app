@@ -16,22 +16,17 @@ export default class CommentsForm extends Component {
     e.preventDefault();
 
     const variables = {
-      input: {
-
-      },
+      input: {},
     };
 
-    commitMutation(
-      environment,
-      {
-        AddCommentMutation,
-        variables,
-        onCompleted: (response) => {
-          console.log('Success!')
-        },
-        onError: err => console.error(err),
+    commitMutation(environment, {
+      AddCommentMutation,
+      variables,
+      onCompleted: (response) => {
+        console.log('Success!');
       },
-    );
+      onError: err => console.error(err),
+    });
   }
 
   render() {
@@ -53,11 +48,9 @@ export default class CommentsForm extends Component {
           <label htmlFor="content">Comment:</label>
           <textarea rows="6" name="content" />
         </p>
-        <button
-          type="submit"
-          className={styles.button}
-          onClick={e => this.onClick(e)}
-        >Submit</button>
+        <button type="submit" className={styles.button} onClick={e => this.onClick(e)}>
+          Submit
+        </button>
       </form>
     );
   }

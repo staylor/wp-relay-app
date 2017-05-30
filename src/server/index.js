@@ -1,6 +1,6 @@
 import express from 'express';
 import proxy from 'http-proxy-middleware';
-import cookiesMiddleware from 'universal-cookie-express';
+// import cookiesMiddleware from 'universal-cookie-express';
 import morgan from 'morgan';
 import compression from 'compression';
 import path from 'path';
@@ -31,14 +31,20 @@ const gqlHost = process.env.GQL_HOST || 'http://localhost:8080';
 const gqlPath = process.env.GQL_PATH || '/graphql';
 
 // proxy to the graphql server
-app.use(gqlPath, proxy({
-  target: gqlHost,
-  changeOrigin: true,
-}));
+app.use(
+  gqlPath,
+  proxy({
+    target: gqlHost,
+    changeOrigin: true,
+  })
+);
 
-app.get('*', router({
-  jsBundle: clientAssets.main.js,
-  cssBundle: clientAssets.main.css,
-}));
+app.get(
+  '*',
+  router({
+    jsBundle: clientAssets.main.js,
+    cssBundle: clientAssets.main.css,
+  })
+);
 
 app.listen(parseInt(KYT.SERVER_PORT, 10));

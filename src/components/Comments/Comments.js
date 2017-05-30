@@ -33,11 +33,8 @@ import styles from './Comments.scss';
   }
 `)
 export default class Comments extends Component {
-
   render() {
-    const {
-      comments: { results: { edges: comments } },
-    } = this.props;
+    const { comments: { results: { edges: comments } } } = this.props;
 
     if (!comments.length) {
       return null;

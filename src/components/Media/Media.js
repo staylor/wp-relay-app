@@ -19,9 +19,12 @@ Media.defaultProps = {
   media: null,
 };
 
-export default createFragmentContainer(Media, graphql`
+export default createFragmentContainer(
+  Media,
+  graphql`
   fragment Media_media on Media {
     __typename
     ...Image_image
   }
-`);
+`
+);

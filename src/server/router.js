@@ -18,18 +18,17 @@ import template from 'server/template';
 //   )
 // );
 
-export default ({
-  jsBundle,
-  cssBundle,
-}) => (req, res) => {
+export default ({ jsBundle, cssBundle }) => (req, res) => {
   // const context = {};
   // const root = renderTree(req, context);
   const root = '';
 
   res.status(200);
-  res.send(template({
-    root,
-    jsBundle,
-    cssBundle,
-  }));
+  res.send(
+    template({
+      root,
+      jsBundle,
+      cssBundle,
+    })
+  );
 };

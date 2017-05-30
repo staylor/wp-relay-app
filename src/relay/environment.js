@@ -1,9 +1,4 @@
-import {
-  Environment,
-  Network,
-  RecordSource,
-  Store,
-} from 'relay-runtime';
+import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import handlerProvider from './handlerProvider';
 import fetchQuery from './fetchQuery';
 

@@ -1,10 +1,6 @@
 import Helmet from 'react-helmet';
 
-export default ({
-  root,
-  cssBundle,
-  jsBundle,
-}) => {
+export default ({ root, cssBundle, jsBundle }) => {
   const helmet = Helmet.rewind();
 
   return `<!DOCTYPE html>

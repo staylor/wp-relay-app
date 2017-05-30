@@ -33,7 +33,8 @@ export default class Archive extends Component {
             <li key={cursor}><Post post={node} /></li>
           ))}
         </ul>
-        {infinite && relay.hasMore() && (
+        {infinite &&
+          relay.hasMore() &&
           <button
             className={styles.button}
             onClick={() => {
@@ -49,8 +50,7 @@ export default class Archive extends Component {
             }}
           >
             MORE
-          </button>
-      )}
+          </button>}
       </section>
     );
   }

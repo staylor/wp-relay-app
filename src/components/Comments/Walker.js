@@ -48,7 +48,9 @@ export default class CommentsWalker extends Component {
     return (
       <li key={id} className={cn(styles.comment, styles[`level${this.level}`])}>
         <div className={styles.meta}>
-          {avatar ? <img alt="" role="presentation" className={styles.image} src={avatar.url} /> : null}
+          {avatar
+            ? <img alt="" role="presentation" className={styles.image} src={avatar.url} />
+            : null}
           <span className={styles.author}>
             {authorUrl ? <a href={authorUrl}>{authorName}</a> : authorName}
           </span>

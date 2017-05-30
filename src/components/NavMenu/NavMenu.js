@@ -39,13 +39,7 @@ export default class NavMenu extends Component {
     return nested;
   }
 
-  parseItem({
-    id,
-    title,
-    url: itemUrl,
-    object,
-    object_id: objectId,
-  }) {
+  parseItem({ id, title, url: itemUrl, object, object_id: objectId }) {
     let path;
     if (object === 'category' || object === 'post') {
       path = `/${object}/${objectId}`;

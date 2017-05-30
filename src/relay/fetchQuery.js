@@ -1,9 +1,6 @@
 import fetch from 'fbjs/lib/fetch';
 
-export default function fetchQuery(
-  operation,
-  variables
-) {
+export default function fetchQuery(operation, variables) {
   return fetch('http://localhost:3000/graphql', {
     method: 'POST',
     headers: {

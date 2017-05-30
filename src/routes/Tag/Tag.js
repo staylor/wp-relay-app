@@ -34,10 +34,11 @@ export default class Tag extends Component {
           <title>{title}</title>
           <link rel="canonical" href={`https://highforthis.com/${rewriteSlug}/${term.id}`} />
         </Helmet>
-        {term && (<section>
-          <h3 className={styles.label}>{title}</h3>
-          <TagArchive id={term.id} />
-        </section>)}
+        {term &&
+          <section>
+            <h3 className={styles.label}>{title}</h3>
+            <TagArchive id={term.id} />
+          </section>}
       </div>
     );
   }

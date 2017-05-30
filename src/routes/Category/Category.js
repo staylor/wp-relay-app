@@ -34,10 +34,11 @@ export default class Category extends Component {
           <title>{title}</title>
           <link rel="canonical" href={`https://highforthis.com/${rewriteSlug}/${category.id}`} />
         </Helmet>
-        {category && (<section>
-          <h3 className={styles.label}>{title}</h3>
-          <CategoryArchive id={category.id} count={10} />
-        </section>)}
+        {category &&
+          <section>
+            <h3 className={styles.label}>{title}</h3>
+            <CategoryArchive id={category.id} count={10} />
+          </section>}
       </div>
     );
   }

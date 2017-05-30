@@ -37,7 +37,9 @@ import styles from './Single.scss';
 `)
 export default class Single extends Component {
   content = null;
-  bindRef = (node) => { this.content = node; };
+  bindRef = (node) => {
+    this.content = node;
+  };
 
   componentDidMount() {
     const nodes = this.content.querySelectorAll('.hft-yt-placeholder');
@@ -95,11 +97,10 @@ export default class Single extends Component {
             __html: convertPlaceholders(content, styles),
           }}
         />
-        {tags && (<footer className={styles.footer}>
-          Tags: {tags.map(tag => (
-            <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>
-          ))}
-        </footer>)}
+        {tags &&
+          <footer className={styles.footer}>
+            Tags: {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
+          </footer>}
         <Comments id={id} total={10} />
       </article>
     );

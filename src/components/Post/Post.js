@@ -28,7 +28,9 @@ import styles from './Post.scss';
 `)
 export default class Post extends Component {
   content = null;
-  bindRef = (node) => { this.content = node; };
+  bindRef = (node) => {
+    this.content = node;
+  };
 
   componentDidMount() {
     const nodes = this.content.querySelectorAll('.hft-yt-placeholder');
@@ -60,11 +62,10 @@ export default class Post extends Component {
             <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
           </h1>
         </header>
-        {featuredMedia && (
+        {featuredMedia &&
           <Link to={`/post/${id}`}>
             <Media media={featuredMedia} />
-          </Link>
-        )}
+          </Link>}
         <section
           ref={this.bindRef}
           className={styles.content}

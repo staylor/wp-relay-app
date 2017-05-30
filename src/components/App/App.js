@@ -18,16 +18,11 @@ const siteName = 'High for This';
 const tagline = 'Music as it happens.';
 const description = 'High for This aggregates the best music content on the web.';
 
-const renderComponent = Component => ({ match, ...otherProps }) => {
-  return <Component id={match.params.id} {...otherProps} />;
-};
+const renderComponent = Component => ({ match, ...otherProps }) => <Component id={match.params.id} {...otherProps} />;
 
 const App = () => (
   <div className={styles.page}>
-    <Helmet
-      titleTemplate={`%s - ${siteName}`}
-      defaultTitle={siteName}
-    >
+    <Helmet titleTemplate={`%s - ${siteName}`} defaultTitle={siteName}>
       <html lang="en" prefix="og: http://ogp.me/ns#" />
       <title>{tagline}</title>
       <meta httpEquiv="Content-Language" content="en" />
@@ -50,9 +45,11 @@ const App = () => (
         <Sidebar id="U2lkZWJhcjpzaWRlYmFyLTE" />
       </section>
     </div>
-    <footer className={styles.footerCredits}>&copy; Scott Taylor ...&nbsp;
+    <footer className={styles.footerCredits}>
+      © Scott Taylor ...&nbsp;
       Brooklyn, NY ... <a href="https://twitter.com/wonderboymusic">@wonderboymusic</a>&nbsp;
-    ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis / SCSS</footer>
+      ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis / SCSS
+    </footer>
   </div>
 );
 

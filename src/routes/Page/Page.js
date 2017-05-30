@@ -52,9 +52,7 @@ export default class Page extends Component {
           </h1>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-        <section
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <section dangerouslySetInnerHTML={{ __html: content }} />
       </article>
     );
   }
