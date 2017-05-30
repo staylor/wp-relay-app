@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import { Link } from 'react-router-dom';
@@ -36,6 +37,16 @@ import styles from './Single.scss';
   }
 `)
 export default class Single extends Component {
+  static childContextTypes = {
+    postId: PropTypes.string,
+  };
+
+  getChildContext() {
+    return {
+      postId: this.props.post.id,
+    };
+  }
+
   content = null;
   bindRef = (node) => {
     this.content = node;
@@ -101,7 +112,7 @@ export default class Single extends Component {
           <footer className={styles.footer}>
             Tags: {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
           </footer>}
-        <Comments id={id} total={10} />
+        <Comments id={id} total={100} />
       </article>
     );
   }

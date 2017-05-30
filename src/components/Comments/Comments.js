@@ -12,7 +12,7 @@ import styles from './Comments.scss';
 @QueryRenderer(CommentsQuery)
 @FragmentContainer(graphql`
   fragment Comments_comments on CommentCollection {
-    results(first: $total) {
+    results(first: $total) @connection(key: "Comments_results") {
       edges {
         node {
           id
@@ -35,10 +35,6 @@ import styles from './Comments.scss';
 export default class Comments extends Component {
   render() {
     const { comments: { results: { edges: comments } } } = this.props;
-
-    if (!comments.length) {
-      return null;
-    }
 
     return (
       <aside className={styles.comments}>

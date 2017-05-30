@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Comments_Query.graphql
- * @generated SignedSource<<eefac04093a22366485687f8e3143a79>>
- * @relayHash 48a96ffd922b0836870beb996866d586
+ * @generated SignedSource<<6304c7f54b0f3f3d6c12adfdfc2b1eea>>
+ * @relayHash 2198af16336ee0848fb55164d18991c3
  * @flow
  * @nogrep
  */
@@ -45,7 +45,15 @@ fragment Comments_comments on CommentCollection {
           url
         }
         parent
+        __typename
       }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }
@@ -243,8 +251,61 @@ const batch /*: ConcreteBatch*/ = {
                         "args": null,
                         "name": "parent",
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "__typename",
+                        "storageKey": null
                       }
                     ],
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "cursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "startCursor",
                     "storageKey": null
                   }
                 ],
@@ -252,13 +313,29 @@ const batch /*: ConcreteBatch*/ = {
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "total",
+                "type": "Int"
+              }
+            ],
+            "handle": "connection",
+            "name": "results",
+            "key": "Comments_results",
+            "filters": null
           }
         ],
         "storageKey": null
       }
     ]
   },
-  "text": "query Comments_Query(\n  $id: ID!\n  $total: Int\n) {\n  comments(post: $id) {\n    ...Comments_comments\n  }\n}\n\nfragment Comments_comments on CommentCollection {\n  results(first: $total) {\n    edges {\n      node {\n        id\n        author_name\n        author_url\n        date\n        content {\n          rendered\n        }\n        author_avatar_urls {\n          size\n          url\n        }\n        parent\n      }\n    }\n  }\n}\n"
+  "text": "query Comments_Query(\n  $id: ID!\n  $total: Int\n) {\n  comments(post: $id) {\n    ...Comments_comments\n  }\n}\n\nfragment Comments_comments on CommentCollection {\n  results(first: $total) {\n    edges {\n      node {\n        id\n        author_name\n        author_url\n        date\n        content {\n          rendered\n        }\n        author_avatar_urls {\n          size\n          url\n        }\n        parent\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Comments_comments.graphql
- * @generated SignedSource<<cc85fcab41b1209995bd6925075d2a0e>>
+ * @generated SignedSource<<c0dfeace0429a71c451281a98adfecea>>
  * @flow
  * @nogrep
  */
@@ -46,22 +46,26 @@ const fragment /*: ConcreteFragment*/ = {
     }
   ],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": "total",
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "results"
+        ]
+      }
+    ]
+  },
   "name": "Comments_comments",
   "selections": [
     {
       "kind": "LinkedField",
-      "alias": null,
-      "args": [
-        {
-          "kind": "Variable",
-          "name": "first",
-          "variableName": "total",
-          "type": "Int"
-        }
-      ],
+      "alias": "results",
+      "args": null,
       "concreteType": "CommentConnection",
-      "name": "results",
+      "name": "__Comments_results_connection",
       "plural": false,
       "selections": [
         {
