@@ -19,7 +19,6 @@ const tagline = 'Music as it happens.';
 const description = 'High for This aggregates the best music content on the web.';
 
 const renderComponent = Component => ({ match, ...otherProps }) => {
-  console.log(match);
   return <Component id={match.params.id} {...otherProps} />;
 };
 

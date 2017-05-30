@@ -3,11 +3,13 @@
  *   relay-compiler
  *
  * @providesModule Comments_Query.graphql
- * @generated SignedSource<<2d0afef7e0ec7b89169437a7679fa4f3>>
- * @relayHash 8dcc292281cca65b255f81c760365797
+ * @generated SignedSource<<eefac04093a22366485687f8e3143a79>>
+ * @relayHash 48a96ffd922b0836870beb996866d586
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
@@ -16,11 +18,11 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 /*
 query Comments_Query(
   $id: ID!
+  $total: Int
 ) {
   comments(post: $id) {
     ...Comments_comments
@@ -56,6 +58,12 @@ const batch /*: ConcreteBatch*/ = {
         "kind": "LocalArgument",
         "name": "id",
         "type": "ID!",
+        "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "total",
+        "type": "Int",
         "defaultValue": null
       }
     ],
@@ -99,6 +107,12 @@ const batch /*: ConcreteBatch*/ = {
         "kind": "LocalArgument",
         "name": "id",
         "type": "ID!",
+        "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "total",
+        "type": "Int",
         "defaultValue": null
       }
     ],
@@ -244,7 +258,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Comments_Query(\n  $id: ID!\n) {\n  comments(post: $id) {\n    ...Comments_comments\n  }\n}\n\nfragment Comments_comments on CommentCollection {\n  results(first: $total) {\n    edges {\n      node {\n        id\n        author_name\n        author_url\n        date\n        content {\n          rendered\n        }\n        author_avatar_urls {\n          size\n          url\n        }\n        parent\n      }\n    }\n  }\n}\n"
+  "text": "query Comments_Query(\n  $id: ID!\n  $total: Int\n) {\n  comments(post: $id) {\n    ...Comments_comments\n  }\n}\n\nfragment Comments_comments on CommentCollection {\n  results(first: $total) {\n    edges {\n      node {\n        id\n        author_name\n        author_url\n        date\n        content {\n          rendered\n        }\n        author_avatar_urls {\n          size\n          url\n        }\n        parent\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
