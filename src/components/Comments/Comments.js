@@ -1,6 +1,5 @@
 import React from 'react';
-import Form from './Form';
-import Walker from './Walker';
+import { Form, Walker } from 'components/Comments';
 import styles from './Comments.scss';
 
 /* eslint-disable react/prop-types */

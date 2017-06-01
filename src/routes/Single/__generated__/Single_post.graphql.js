@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Single_post.graphql
- * @generated SignedSource<<876c9b92f3944cae1f7e1e9156176082>>
+ * @generated SignedSource<<561b9ae7ba731723ea54b06648d24fe0>>
  * @flow
  * @nogrep
  */
@@ -32,17 +32,6 @@ export type Single_post = {|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string;
-        +author_name: ?string;
-        +author_url: ?string;
-        +date: ?string;
-        +content: ?{|
-          +rendered: ?string;
-        |};
-        +author_avatar_urls: ?$ReadOnlyArray<?{|
-          +size: ?number;
-          +url: ?string;
-        |}>;
-        +parent: ?string;
       |};
     |}>;
   |};
@@ -190,75 +179,9 @@ const fragment /*: ConcreteFragment*/ = {
                   "storageKey": null
                 },
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "author_name",
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "author_url",
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "date",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Content",
-                  "name": "content",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "rendered",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Avatar",
-                  "name": "author_avatar_urls",
-                  "plural": true,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "size",
-                      "storageKey": null
-                    },
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "url",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "parent",
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "Comment_comment",
+                  "args": null
                 }
               ],
               "storageKey": null

@@ -1,0 +1,40 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.form {
+  margin: 20px 0 40px;
+  width: 300px;
+
+  p {
+    margin: 5px 0;
+  }
+
+  label {
+    @include size-height(16, 20);
+    display: block;
+    font-family: $futura;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  textarea {
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 6px;
+    width: 100%;
+  }
+}
+
+.button {
+  @include size-height(16, 20);
+  background: $black;
+  border: 0 none;
+  color: $white;
+  display: block;
+  font-family: $futura;
+  padding: 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+  width: 120px;
+}

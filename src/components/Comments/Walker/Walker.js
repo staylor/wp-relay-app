@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
-import withIntl from 'decorators/withIntl';
-import styles from './Comments.scss';
+import { Comment } from 'components/Comments';
+import styles from './Walker.scss';
 
 /* eslint-disable react/prop-types */
-/* eslint-disable react/no-danger */
 
-@withIntl
 export default class CommentsWalker extends Component {
   sorted = null;
   level = 0;
@@ -31,34 +29,15 @@ export default class CommentsWalker extends Component {
 
     return nested;
   }
-  parseComment({
-    id,
-    date,
-    author_url: authorUrl,
-    author_name: authorName,
-    author_avatar_urls: avatarUrls,
-    content: { rendered: content },
-  }) {
-    const avatar = avatarUrls && avatarUrls.find(data => data.size === 48);
-
+  parseComment(comment) {
+    const { id } = comment;
     if (this.sorted[id]) {
       this.level += 1;
     }
 
     return (
       <li key={id} className={cn(styles.comment, styles[`level${this.level}`])}>
-        <div className={styles.meta}>
-          {avatar
-            ? <img alt="" role="presentation" className={styles.image} src={avatar.url} />
-            : null}
-          <span className={styles.author}>
-            {authorUrl ? <a href={authorUrl}>{authorName}</a> : authorName}
-          </span>
-          <span className={styles.time}>
-            {this.props.intl.formatRelative(date)}
-          </span>
-        </div>
-        <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+        <Comment comment={comment} />
         {this.sorted[id] ? this.walk(this.sorted[id]) : null}
       </li>
     );

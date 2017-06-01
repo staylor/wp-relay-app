@@ -25,10 +25,9 @@ app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 // app.use(cookiesMiddleware);
 
 // use a local GQL server by default
-const gqlHost = process.env.GQL_HOST || 'http://localhost:8080';
+const gqlHost = 'http://localhost:8080';
 
-// the pathname is dervied from samizdat
-const gqlPath = process.env.GQL_PATH || '/graphql';
+const gqlPath = '/graphql';
 
 // proxy to the graphql server
 app.use(

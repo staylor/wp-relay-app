@@ -38,17 +38,7 @@ import styles from './Single.scss';
       edges {
         node {
           id
-          author_name
-          author_url
-          date
-          content {
-            rendered
-          }
-          author_avatar_urls {
-            size
-            url
-          }
-          parent
+          ...Comment_comment
         }
       }
     }

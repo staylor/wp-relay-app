@@ -4,7 +4,7 @@ import { commitMutation } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import AddCommentMutation from 'mutations/AddComment';
 import environment from 'relay/environment';
-import styles from './Comments.scss';
+import styles from './Form.scss';
 
 /* eslint-disable react/prop-types */
 
@@ -27,6 +27,37 @@ export default class Form extends Component {
     };
   }
 
+  getOptimisticResponse = () => ({
+    addComment: {
+      comment: {
+        id: null,
+        author_name: this.state.comment.author_name,
+        author_email: this.state.comment.author_email,
+        author_url: this.state.comment.author_url,
+        date: (new Date()).toISOString(),
+        content: {
+          rendered: this.state.comment.content,
+        },
+        author_avatar_urls: [{
+          size: 48,
+          url: 'http://2.gravatar.com/avatar/hash?s=48&d=mm&r=g',
+        }],
+        parent: 0,
+      },
+      status: 'new',
+      cookies: '',
+    },
+  });
+
+  updateConnection = (store) => {
+    const payload = store.getRootField('addComment');
+    const newComment = payload.getLinkedRecord('comment');
+    const storeRoot = store.get(this.context.postId);
+    const connection = ConnectionHandler.getConnection(storeRoot, 'Single_comments');
+    const newEdge = ConnectionHandler.createEdge(store, connection, newComment, 'CommentEdge');
+    ConnectionHandler.insertEdgeAfter(connection, newEdge);
+  };
+
   onClick = (e) => {
     e.preventDefault();
 
@@ -41,18 +72,22 @@ export default class Form extends Component {
       variables,
       onCompleted: (response) => {
         if (response.addComment) {
-          console.log(response);
+          this.setState({
+            comment: {
+              author_name: '',
+              author_email: '',
+              author_url: '',
+              content: '',
+              post: this.context.postId,
+            },
+          });
         }
       },
+      // eslint-disable-next-line no-console
       onError: err => console.error(err),
-      updater: (store) => {
-        const payload = store.getRootField('addComment');
-        const newComment = payload.getLinkedRecord('comment');
-        const storeRoot = store.get(this.context.postId);
-        const connection = ConnectionHandler.getConnection(storeRoot, 'Single_comments');
-        const newEdge = ConnectionHandler.createEdge(store, connection, newComment, 'CommentEdge');
-        ConnectionHandler.insertEdgeAfter(connection, newEdge);
-      },
+      updater: this.updateConnection,
+      optimisticUpdater: this.updateConnection,
+      optimisticResponse: this.getOptimisticResponse,
     });
   };
 

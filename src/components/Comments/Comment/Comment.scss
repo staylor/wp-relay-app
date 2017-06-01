@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.image {
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+.meta {
+  @include clear;
+}
+
+.author {
+  display: block;
+  text-transform: uppercase;
+}
+
+.time {
+  display: block;
+}
+
+.content {
+  p {
+    @include size-height(12, 15);
+  }
+}
