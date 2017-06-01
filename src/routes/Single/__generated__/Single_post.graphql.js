@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Single_post.graphql
- * @generated SignedSource<<10449c764801951cce217385c63ba1db>>
+ * @generated SignedSource<<876c9b92f3944cae1f7e1e9156176082>>
  * @flow
  * @nogrep
  */
@@ -28,6 +28,24 @@ export type Single_post = {|
     +id: string;
     +name: ?string;
   |}>;
+  +comments: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{|
+        +id: string;
+        +author_name: ?string;
+        +author_url: ?string;
+        +date: ?string;
+        +content: ?{|
+          +rendered: ?string;
+        |};
+        +author_avatar_urls: ?$ReadOnlyArray<?{|
+          +size: ?number;
+          +url: ?string;
+        |}>;
+        +parent: ?string;
+      |};
+    |}>;
+  |};
 |};
 */
 
@@ -35,7 +53,18 @@ export type Single_post = {|
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": null,
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "comments"
+        ]
+      }
+    ]
+  },
   "name": "Single_post",
   "selections": [
     {
@@ -124,6 +153,117 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "name": "name",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    },
+    {
+      "kind": "LinkedField",
+      "alias": "comments",
+      "args": null,
+      "concreteType": "CommentConnection",
+      "name": "__Single_comments_connection",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "CommentEdge",
+          "name": "edges",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "Comment",
+              "name": "node",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "id",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "author_name",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "author_url",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "date",
+                  "storageKey": null
+                },
+                {
+                  "kind": "LinkedField",
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "Content",
+                  "name": "content",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "rendered",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                },
+                {
+                  "kind": "LinkedField",
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "Avatar",
+                  "name": "author_avatar_urls",
+                  "plural": true,
+                  "selections": [
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "size",
+                      "storageKey": null
+                    },
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "url",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "parent",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            }
+          ],
           "storageKey": null
         }
       ],

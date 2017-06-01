@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule AddComment_Mutation.graphql
- * @generated SignedSource<<15fbfd0615b2b32c8f3599319f5574b8>>
- * @relayHash 2ffe0eb9dcba8fc768904ac7e4cde416
+ * @generated SignedSource<<94142371d79071731e14b52608f9cf7b>>
+ * @relayHash c716780a096675fee5cc89579640b315
  * @flow
  * @nogrep
  */
@@ -26,32 +26,28 @@ export type AddCommentInput = {
 };
 
 export type AddComment_MutationResponse = {
-  commentEdge?: ?AddComment_MutationResponse_commentEdge;
+  comment?: ?AddComment_MutationResponse_comment;
   cookies?: ?string;
   status?: ?string;
 };
 
-export type AddComment_MutationResponse_commentEdge_node_content = {
+export type AddComment_MutationResponse_comment_content = {
   rendered?: ?string;
 };
 
-export type AddComment_MutationResponse_commentEdge_node_post_title = {
-  rendered?: ?string;
+export type AddComment_MutationResponse_comment_author_avatar_urls = {
+  size?: ?number;
+  url?: ?string;
 };
 
-export type AddComment_MutationResponse_commentEdge_node_post = {
+export type AddComment_MutationResponse_comment = {
   id: string;
-  title?: ?AddComment_MutationResponse_commentEdge_node_post_title;
-};
-
-export type AddComment_MutationResponse_commentEdge_node = {
-  id: string;
-  content?: ?AddComment_MutationResponse_commentEdge_node_content;
-  post?: ?AddComment_MutationResponse_commentEdge_node_post;
-};
-
-export type AddComment_MutationResponse_commentEdge = {
-  node?: ?AddComment_MutationResponse_commentEdge_node;
+  author_name?: ?string;
+  author_url?: ?string;
+  date?: ?string;
+  content?: ?AddComment_MutationResponse_comment_content;
+  author_avatar_urls?: ?Array<?AddComment_MutationResponse_comment_author_avatar_urls>;
+  parent?: ?string;
 };
 */
 
@@ -61,19 +57,19 @@ mutation AddComment_Mutation(
   $input: AddCommentInput!
 ) {
   addComment(input: $input) {
-    commentEdge {
-      node {
-        id
-        content {
-          rendered
-        }
-        post {
-          id
-          title {
-            rendered
-          }
-        }
+    comment {
+      id
+      author_name
+      author_url
+      date
+      content {
+        rendered
       }
+      author_avatar_urls {
+        size
+        url
+      }
+      parent
     }
     cookies
     status
@@ -114,80 +110,86 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "LinkedField",
             "alias": null,
             "args": null,
-            "concreteType": "CommentEdge",
-            "name": "commentEdge",
+            "concreteType": "Comment",
+            "name": "comment",
             "plural": false,
             "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "author_name",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "author_url",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "date",
+                "storageKey": null
+              },
               {
                 "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "concreteType": "Comment",
-                "name": "node",
+                "concreteType": "Content",
+                "name": "content",
                 "plural": false,
                 "selections": [
                   {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Content",
-                    "name": "content",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "rendered",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Post",
-                    "name": "post",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Title",
-                        "name": "title",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "rendered",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      }
-                    ],
+                    "name": "rendered",
                     "storageKey": null
                   }
                 ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "Avatar",
+                "name": "author_avatar_urls",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "size",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "url",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "parent",
                 "storageKey": null
               }
             ],
@@ -249,80 +251,86 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "LinkedField",
             "alias": null,
             "args": null,
-            "concreteType": "CommentEdge",
-            "name": "commentEdge",
+            "concreteType": "Comment",
+            "name": "comment",
             "plural": false,
             "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "author_name",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "author_url",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "date",
+                "storageKey": null
+              },
               {
                 "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "concreteType": "Comment",
-                "name": "node",
+                "concreteType": "Content",
+                "name": "content",
                 "plural": false,
                 "selections": [
                   {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Content",
-                    "name": "content",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "rendered",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Post",
-                    "name": "post",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Title",
-                        "name": "title",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "rendered",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      }
-                    ],
+                    "name": "rendered",
                     "storageKey": null
                   }
                 ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "Avatar",
+                "name": "author_avatar_urls",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "size",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "url",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "parent",
                 "storageKey": null
               }
             ],
@@ -347,7 +355,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation AddComment_Mutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    commentEdge {\n      node {\n        id\n        content {\n          rendered\n        }\n        post {\n          id\n          title {\n            rendered\n          }\n        }\n      }\n    }\n    cookies\n    status\n  }\n}\n"
+  "text": "mutation AddComment_Mutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    comment {\n      id\n      author_name\n      author_url\n      date\n      content {\n        rendered\n      }\n      author_avatar_urls {\n        size\n        url\n      }\n      parent\n    }\n    cookies\n    status\n  }\n}\n"
 };
 
 module.exports = batch;

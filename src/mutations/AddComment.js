@@ -3,19 +3,19 @@ import { graphql } from 'react-relay';
 export default graphql`
   mutation AddComment_Mutation($input: AddCommentInput!) {
     addComment(input: $input) {
-      commentEdge {
-        node {
-          id
-          content {
-            rendered
-          }
-          post {
-            id
-            title {
-              rendered
-            }
-          }
+      comment {
+        id
+        author_name
+        author_url
+        date
+        content {
+          rendered
         }
+        author_avatar_urls {
+          size
+          url
+        }
+        parent
       }
       cookies
       status

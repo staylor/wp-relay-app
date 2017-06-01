@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Comments_comments.graphql
- * @generated SignedSource<<c0dfeace0429a71c451281a98adfecea>>
+ * @generated SignedSource<<8e5b3f91a627b74861312e3bd6e99258>>
  * @flow
  * @nogrep
  */
@@ -14,165 +14,23 @@
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Comments_comments = {|
-  +results: ?{|
-    +edges: ?$ReadOnlyArray<?{|
-      +node: ?{|
-        +id: string;
-        +author_name: ?string;
-        +author_url: ?string;
-        +date: ?string;
-        +content: ?{|
-          +rendered: ?string;
-        |};
-        +author_avatar_urls: ?$ReadOnlyArray<?{|
-          +size: ?number;
-          +url: ?string;
-        |}>;
-        +parent: ?string;
-      |};
-    |}>;
-  |};
-|};
+export type Comments_comments = {| |};
 */
 
 
 const fragment /*: ConcreteFragment*/ = {
-  "argumentDefinitions": [
-    {
-      "kind": "RootArgument",
-      "name": "total",
-      "type": "Int"
-    }
-  ],
+  "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": {
-    "connection": [
-      {
-        "count": "total",
-        "cursor": null,
-        "direction": "forward",
-        "path": [
-          "results"
-        ]
-      }
-    ]
-  },
+  "metadata": null,
   "name": "Comments_comments",
   "selections": [
     {
-      "kind": "LinkedField",
-      "alias": "results",
-      "args": null,
-      "concreteType": "CommentConnection",
-      "name": "__Comments_results_connection",
-      "plural": false,
-      "selections": [
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "args": null,
-          "concreteType": "CommentEdge",
-          "name": "edges",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "Comment",
-              "name": "node",
-              "plural": false,
-              "selections": [
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "id",
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "author_name",
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "author_url",
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "date",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Content",
-                  "name": "content",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "rendered",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Avatar",
-                  "name": "author_avatar_urls",
-                  "plural": true,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "size",
-                      "storageKey": null
-                    },
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "url",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "parent",
-                  "storageKey": null
-                }
-              ],
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
-        }
-      ],
-      "storageKey": null
+      "kind": "FragmentSpread",
+      "name": "Walker_comments",
+      "args": null
     }
   ],
-  "type": "CommentCollection"
+  "type": "CommentEdge"
 };
 
 module.exports = fragment;

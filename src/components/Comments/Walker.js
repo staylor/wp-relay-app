@@ -78,8 +78,8 @@ export default class CommentsWalker extends Component {
   }
 
   render() {
-    const { comments } = this.props;
-    this.sorted = this.constructor.sortComments(comments);
+    const { comments: { edges } } = this.props;
+    this.sorted = this.constructor.sortComments(edges);
     return this.walk(this.sorted.top);
   }
 }

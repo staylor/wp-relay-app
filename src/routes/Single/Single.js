@@ -34,6 +34,24 @@ import styles from './Single.scss';
       id
       name
     }
+    comments(first: 100) @connection(key: "Single_comments") {
+      edges {
+        node {
+          id
+          author_name
+          author_url
+          date
+          content {
+            rendered
+          }
+          author_avatar_urls {
+            size
+            url
+          }
+          parent
+        }
+      }
+    }
   }
 `)
 export default class Single extends Component {
@@ -83,6 +101,7 @@ export default class Single extends Component {
         content: { rendered: content },
         featured_media: featuredMedia,
         tags,
+        comments,
       },
     } = this.props;
 
@@ -112,7 +131,7 @@ export default class Single extends Component {
           <footer className={styles.footer}>
             Tags: {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
           </footer>}
-        <Comments id={id} total={100} />
+        <Comments comments={comments} />
       </article>
     );
   }
