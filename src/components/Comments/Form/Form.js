@@ -8,22 +8,23 @@ import styles from './Form.scss';
 
 /* eslint-disable react/prop-types */
 
+const getDefaultState = () => ({
+  author_name: '',
+  author_email: '',
+  author_url: '',
+  content: '',
+});
+
 export default class Form extends Component {
   static contextTypes = {
     postId: PropTypes.string,
   };
 
-  constructor(props, context) {
+  constructor(props) {
     super(props);
 
     this.state = {
-      comment: {
-        author_name: '',
-        author_email: '',
-        author_url: '',
-        content: '',
-        post: context.postId,
-      },
+      comment: getDefaultState(),
     };
   }
 
@@ -36,7 +37,7 @@ export default class Form extends Component {
         author_url: this.state.comment.author_url,
         date: (new Date()).toISOString(),
         content: {
-          rendered: this.state.comment.content,
+          rendered: `<p>${this.state.comment.content}</p>`,
         },
         author_avatar_urls: [{
           size: 48,
@@ -60,10 +61,12 @@ export default class Form extends Component {
 
   onClick = (e) => {
     e.preventDefault();
+    e.currentTarget.blur();
 
     const variables = {
       input: {
         ...this.state.comment,
+        post: this.context.postId,
       },
     };
 
@@ -73,13 +76,7 @@ export default class Form extends Component {
       onCompleted: (response) => {
         if (response.addComment) {
           this.setState({
-            comment: {
-              author_name: '',
-              author_email: '',
-              author_url: '',
-              content: '',
-              post: this.context.postId,
-            },
+            comment: getDefaultState(),
           });
         }
       },
