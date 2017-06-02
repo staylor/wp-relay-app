@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
 import { Form, Comment } from 'components/Comments';
+import { sortHierarchy } from 'utils/walker';
 import styles from './Walker.scss';
 
 /* eslint-disable react/prop-types */
@@ -8,29 +9,6 @@ import styles from './Walker.scss';
 export default class CommentsWalker extends Component {
   sorted = null;
   level = 0;
-
-  static sortComments(comments) {
-    const nested = {
-      top: [],
-    };
-    comments.forEach(({ node }) => {
-      if (!node.parent) {
-        nested.top.push(node);
-        return;
-      }
-
-      if (!nested[node.parent]) {
-        nested[node.parent] = [];
-      }
-      nested[node.parent].push(node);
-    });
-
-    Object.keys(nested).forEach((key) => {
-      nested[key].reverse();
-    });
-
-    return nested;
-  }
 
   parseComment(comment) {
     const { id } = comment;
@@ -66,12 +44,12 @@ export default class CommentsWalker extends Component {
 
   render() {
     const { comments: { edges } } = this.props;
-    this.sorted = this.constructor.sortComments(edges);
+    this.sorted = sortHierarchy(edges);
     return (
-      <div>
+      <section>
         {this.walk(this.sorted.top)}
         {!this.props.replyTo && <Form post={this.props.post} setReplyTo={this.props.setReplyTo} />}
-      </div>
+      </section>
     );
   }
 }

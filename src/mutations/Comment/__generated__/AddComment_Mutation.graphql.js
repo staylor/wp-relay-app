@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule AddComment_Mutation.graphql
- * @generated SignedSource<<94142371d79071731e14b52608f9cf7b>>
- * @relayHash c716780a096675fee5cc89579640b315
+ * @generated SignedSource<<6ce6729a8ed912e4886c6ab61b795b90>>
+ * @relayHash e8f58b790824cff8347fbe3c05cde525
  * @flow
  * @nogrep
  */
@@ -20,7 +20,6 @@ export type AddCommentInput = {
   author_name?: ?string;
   content?: ?string;
   post?: ?string;
-  author?: ?string;
   author_url?: ?string;
   parent?: ?string;
 };
@@ -33,6 +32,7 @@ export type AddComment_MutationResponse = {
 
 export type AddComment_MutationResponse_comment_content = {
   rendered?: ?string;
+  raw?: ?string;
 };
 
 export type AddComment_MutationResponse_comment_author_avatar_urls = {
@@ -64,6 +64,7 @@ mutation AddComment_Mutation(
       date
       content {
         rendered
+        raw
       }
       author_avatar_urls {
         size
@@ -155,6 +156,13 @@ const batch /*: ConcreteBatch*/ = {
                     "alias": null,
                     "args": null,
                     "name": "rendered",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "raw",
                     "storageKey": null
                   }
                 ],
@@ -297,6 +305,13 @@ const batch /*: ConcreteBatch*/ = {
                     "args": null,
                     "name": "rendered",
                     "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "raw",
+                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -355,7 +370,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation AddComment_Mutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    comment {\n      id\n      author_name\n      author_url\n      date\n      content {\n        rendered\n      }\n      author_avatar_urls {\n        size\n        url\n      }\n      parent\n    }\n    cookies\n    status\n  }\n}\n"
+  "text": "mutation AddComment_Mutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    comment {\n      id\n      author_name\n      author_url\n      date\n      content {\n        rendered\n        raw\n      }\n      author_avatar_urls {\n        size\n        url\n      }\n      parent\n    }\n    cookies\n    status\n  }\n}\n"
 };
 
 module.exports = batch;

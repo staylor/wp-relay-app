@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Single_Query.graphql
- * @generated SignedSource<<b41745c3c9ce8d231ce1d80b3998426c>>
- * @relayHash 762a7bd29357d85bd0fe1463cdf0a37e
+ * @generated SignedSource<<c7fbdca3fe0ee93d18d83d9a6b8fa32d>>
+ * @relayHash c4fe3db90a1bb40057355955f1c45cc1
  * @flow
  * @nogrep
  */
@@ -87,12 +87,16 @@ fragment Comment_comment on Comment {
   date
   content {
     rendered
+    raw
   }
   author_avatar_urls {
     size
     url
   }
   parent
+  post {
+    id
+  }
 }
 
 fragment Image_image on Media {
@@ -442,6 +446,13 @@ const batch /*: ConcreteBatch*/ = {
                             "args": null,
                             "name": "rendered",
                             "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "raw",
+                            "storageKey": null
                           }
                         ],
                         "storageKey": null
@@ -466,6 +477,24 @@ const batch /*: ConcreteBatch*/ = {
                             "alias": null,
                             "args": null,
                             "name": "url",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Post",
+                        "name": "post",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "id",
                             "storageKey": null
                           }
                         ],
@@ -554,7 +583,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  post(id: $id) {\n    ...Single_post\n    id\n  }\n}\n\nfragment Single_post on Post {\n  id\n  date\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  tags {\n    id\n    name\n  }\n  comments(first: 100) {\n    edges {\n      node {\n        id\n        parent\n        ...Comment_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $id: ID!\n) {\n  post(id: $id) {\n    ...Single_post\n    id\n  }\n}\n\nfragment Single_post on Post {\n  id\n  date\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  tags {\n    id\n    name\n  }\n  comments(first: 100) {\n    edges {\n      node {\n        id\n        parent\n        ...Comment_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post {\n    id\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

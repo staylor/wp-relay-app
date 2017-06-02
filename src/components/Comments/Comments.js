@@ -19,14 +19,12 @@ export default class Comments extends Component {
     return (
       <aside className={styles.comments}>
         <h3>Comments</h3>
-        <section>
-          <Walker
-            setReplyTo={this.setReplyTo}
-            post={post}
-            comments={comments}
-            replyTo={this.state.replyTo}
-          />
-        </section>
+        <Walker
+          setReplyTo={this.setReplyTo}
+          post={post}
+          comments={comments}
+          replyTo={this.state.replyTo}
+        />
       </aside>
     );
   }

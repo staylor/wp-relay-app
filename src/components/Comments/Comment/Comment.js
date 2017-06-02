@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { graphql, commitMutation } from 'react-relay';
+import { graphql } from 'react-relay';
 import { withCookies, Cookies } from 'react-cookie';
 import FragmentContainer from 'decorators/FragmentContainer';
 import withIntl from 'decorators/withIntl';
-import UpdateCommentMutation from 'mutations/UpdateComment';
-import environment from 'relay/environment';
 import { AUTHOR_NAME_COOKIE, AUTHOR_EMAIL_COOKIE, AUTHOR_URL_COOKIE } from 'components/Comments';
+import DeleteCommentMutation from 'mutations/Comment/DeleteComment';
+import EditComment from './Edit/Edit';
 import styles from './Comment.scss';
 
 /* eslint-disable react/prop-types */
@@ -23,12 +23,16 @@ import styles from './Comment.scss';
     date
     content {
       rendered
+      raw
     }
     author_avatar_urls {
       size
       url
     }
     parent
+    post {
+      id
+    }
   }
 `)
 @withIntl
@@ -40,7 +44,6 @@ export default class Comment extends Component {
 
   state = {
     editing: false,
-    content: '',
   };
 
   onClick = (id) => {
@@ -51,50 +54,20 @@ export default class Comment extends Component {
     }
   };
 
-  getOptimisticResponse = () => ({
-    updateComment: {
-      comment: {
-        ...this.props.comment,
-        content: {
-          rendered: `<p>${this.state.content}</p>`,
-        },
-      },
-      status: 'new',
-      cookies: '',
-    },
-  });
-
   onEditClick = () => {
     this.setState({
       editing: true,
-      content: this.props.comment.content.rendered,
     });
   };
 
-  onEdit = () => {
-    const variables = {
-      input: {
-        id: this.props.comment.id,
-        content: this.state.content,
-      },
-    };
-
-    commitMutation(environment, {
-      mutation: UpdateCommentMutation,
-      variables,
-      // eslint-disable-next-line no-console
-      onError: err => console.error(err),
-      optimisticResponse: this.getOptimisticResponse,
-    });
-
-    this.setState({ editing: false });
-  };
-  onDelete = () => {};
-
-  onChange = (e) => {
+  onEditSubmit = () => {
     this.setState({
-      [e.target.name]: e.target.value,
+      editing: false,
     });
+  };
+
+  onDelete = () => {
+    DeleteCommentMutation.commit(this.props.comment);
   };
 
   viewerOwns() {
@@ -135,20 +108,9 @@ export default class Comment extends Component {
             {this.props.intl.formatRelative(date)}
           </span>
         </div>
-        {
-          // this.state.editing
-          // ? <div>
-          //   <textarea
-          //     rows="6"
-          //     name="content"
-          //     value={this.state.content}
-          //     onChange={this.onChange}
-          //   />
-          //   <button onClick={this.onEdit}>Submit</button>
-          // </div>
-          // : <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
-        }
-        <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+        {this.state.editing
+          ? <EditComment comment={this.props.comment} onEditSubmit={this.onEditSubmit} />
+          : <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />}
         <button
           className={cn(styles.reply, {
             [styles.active]: this.props.active,
@@ -157,13 +119,12 @@ export default class Comment extends Component {
         >
           ↵
         </button>
-        {
-          // this.viewerOwns() &&
-          // <div className={styles.actions}>
-          //   <button className={styles.edit} onClick={this.onEditClick}>Edit</button>
-          //   <button className={styles.deletion} onClick={this.onDelete}>Delete</button>
-          // </div>
-        }
+        {this.viewerOwns() &&
+          !this.state.editing &&
+          <div className={styles.actions}>
+            <button className={styles.edit} onClick={this.onEditClick}>Edit</button>
+            <button className={styles.deletion} onClick={this.onDelete}>Delete</button>
+          </div>}
       </div>
     );
   }

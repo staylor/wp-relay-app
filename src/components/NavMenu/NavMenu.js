@@ -1,9 +1,10 @@
 import url from 'url';
+import cn from 'classnames';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import QueryRenderer from 'decorators/QueryRenderer';
 import NavMenuQuery from 'queries/NavMenuQuery';
-import cn from 'classnames';
+import { sortOrderedHierarchy } from 'utils/walker';
 import styles from './NavMenu.scss';
 
 /* eslint-disable react/prop-types */
@@ -13,31 +14,6 @@ import styles from './NavMenu.scss';
 export default class NavMenu extends Component {
   sorted = null;
   level = 0;
-
-  static sortItems(items) {
-    const nested = {
-      top: [],
-    };
-    items.forEach((item) => {
-      const { parent, order } = item;
-      if (!parent) {
-        nested.top[order] = item;
-        return;
-      }
-
-      if (!nested[parent]) {
-        nested[parent] = [];
-      }
-      nested[parent][order] = item;
-    });
-
-    Object.keys(nested).forEach((key) => {
-      nested[key].sort((a, b) => a.order - b.order);
-      nested[key] = nested[key].filter(() => true);
-    });
-
-    return nested;
-  }
 
   parseItem({ id, title, url: itemUrl, object, object_id: objectId }) {
     let path;
@@ -83,7 +59,7 @@ export default class NavMenu extends Component {
       return null;
     }
 
-    this.sorted = this.constructor.sortItems(navMenu.items);
+    this.sorted = sortOrderedHierarchy(navMenu.items);
     const navMenuHtml = this.walk(this.sorted.top);
 
     return (
