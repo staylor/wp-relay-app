@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { commitMutation } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
+import cn from 'classnames';
 import AddCommentMutation from 'mutations/AddComment';
 import environment from 'relay/environment';
 import styles from './Form.scss';
@@ -16,8 +16,8 @@ const getDefaultState = () => ({
 });
 
 export default class Form extends Component {
-  static contextTypes = {
-    postId: PropTypes.string,
+  static defaultProps = {
+    replyTo: 0,
   };
 
   constructor(props) {
@@ -35,15 +35,17 @@ export default class Form extends Component {
         author_name: this.state.comment.author_name,
         author_email: this.state.comment.author_email,
         author_url: this.state.comment.author_url,
-        date: (new Date()).toISOString(),
+        date: new Date().toISOString(),
         content: {
           rendered: `<p>${this.state.comment.content}</p>`,
         },
-        author_avatar_urls: [{
-          size: 48,
-          url: 'http://2.gravatar.com/avatar/hash?s=48&d=mm&r=g',
-        }],
-        parent: 0,
+        author_avatar_urls: [
+          {
+            size: 48,
+            url: 'http://2.gravatar.com/avatar/hash?s=48&d=mm&r=g',
+          },
+        ],
+        parent: this.props.replyTo,
       },
       status: 'new',
       cookies: '',
@@ -53,10 +55,10 @@ export default class Form extends Component {
   updateConnection = (store) => {
     const payload = store.getRootField('addComment');
     const newComment = payload.getLinkedRecord('comment');
-    const storeRoot = store.get(this.context.postId);
+    const storeRoot = store.get(this.props.post);
     const connection = ConnectionHandler.getConnection(storeRoot, 'Single_comments');
     const newEdge = ConnectionHandler.createEdge(store, connection, newComment, 'CommentEdge');
-    ConnectionHandler.insertEdgeAfter(connection, newEdge);
+    ConnectionHandler.insertEdgeBefore(connection, newEdge);
   };
 
   onClick = (e) => {
@@ -66,7 +68,8 @@ export default class Form extends Component {
     const variables = {
       input: {
         ...this.state.comment,
-        post: this.context.postId,
+        post: this.props.post,
+        parent: this.props.replyTo,
       },
     };
 
@@ -97,6 +100,10 @@ export default class Form extends Component {
     });
   };
 
+  onCancel = () => {
+    this.props.setReplyTo(null);
+  };
+
   render() {
     const fields = {
       author_name: 'Name',
@@ -105,7 +112,7 @@ export default class Form extends Component {
     };
 
     return (
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={e => e.preventDefault()}>
         {Object.keys(fields).map(field => (
           <p key={field}>
             <label htmlFor={field}>{fields[field]}:</label>
@@ -129,6 +136,15 @@ export default class Form extends Component {
         <button type="submit" className={styles.button} onClick={this.onClick}>
           Submit
         </button>
+        {this.props.replyTo
+          ? <button
+            type="reset"
+            className={cn(styles.button, styles.reset)}
+            onClick={this.onCancel}
+          >
+              Cancel
+            </button>
+          : null}
       </form>
     );
   }

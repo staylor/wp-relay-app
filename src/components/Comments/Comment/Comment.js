@@ -9,6 +9,7 @@ import styles from './Comment.scss';
 
 @FragmentContainer(graphql`
   fragment Comment_comment on Comment {
+    id
     author_name
     author_url
     date
@@ -24,9 +25,18 @@ import styles from './Comment.scss';
 `)
 @withIntl
 export default class Comment extends Component {
+  onClick = (id) => {
+    if (this.props.active) {
+      this.props.setReplyTo(null);
+    } else {
+      this.props.setReplyTo(id);
+    }
+  };
+
   render() {
     const {
       comment: {
+        id,
         date,
         author_url: authorUrl,
         author_name: authorName,
@@ -37,7 +47,7 @@ export default class Comment extends Component {
     const avatar = avatarUrls && avatarUrls.find(data => data.size === 48);
 
     return (
-      <div>
+      <div className={styles.comment}>
         <div className={styles.meta}>
           {avatar
             ? <img alt="" role="presentation" className={styles.image} src={avatar.url} />
@@ -54,6 +64,7 @@ export default class Comment extends Component {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: content }}
         />
+        <button className={styles.reply} onClick={() => this.onClick(id)}>↵</button>
       </div>
     );
   }

@@ -19,22 +19,38 @@
   input[type="email"],
   input[type="url"],
   textarea {
-    border: 1px solid #eee;
+    border: 1px solid $detail;
     margin: 0;
     padding: 6px;
     width: 100%;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      box-shadow: 0 0 0 1000px $white inset;
+      color: $dark;
+      transition: background-color 5000s ease-in-out 0s;
+    }
   }
 }
 
 .button {
   @include size-height(16, 20);
-  background: $black;
-  border: 0 none;
+  background: $dark;
+  border: 1px solid $dark;
   color: $white;
-  display: block;
+  cursor: pointer;
+  display: inline-block;
   font-family: $futura;
   padding: 10px 0;
   text-align: center;
   text-transform: uppercase;
-  width: 120px;
+  width: 100px;
+}
+
+.reset {
+  background: $white;
+  color: $dark;
+  margin: 0 10px;
 }

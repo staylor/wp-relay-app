@@ -38,6 +38,7 @@ import styles from './Single.scss';
       edges {
         node {
           id
+          parent
           ...Comment_comment
         }
       }
@@ -45,16 +46,6 @@ import styles from './Single.scss';
   }
 `)
 export default class Single extends Component {
-  static childContextTypes = {
-    postId: PropTypes.string,
-  };
-
-  getChildContext() {
-    return {
-      postId: this.props.post.id,
-    };
-  }
-
   content = null;
   bindRef = (node) => {
     this.content = node;
@@ -121,7 +112,7 @@ export default class Single extends Component {
           <footer className={styles.footer}>
             Tags: {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
           </footer>}
-        <Comments comments={comments} />
+        <Comments post={id} comments={comments} />
       </article>
     );
   }

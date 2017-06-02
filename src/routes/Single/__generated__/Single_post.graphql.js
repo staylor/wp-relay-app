@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Single_post.graphql
- * @generated SignedSource<<561b9ae7ba731723ea54b06648d24fe0>>
+ * @generated SignedSource<<50cae2e17801c0ccee037b7e03ab152c>>
  * @flow
  * @nogrep
  */
@@ -32,6 +32,7 @@ export type Single_post = {|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string;
+        +parent: ?string;
       |};
     |}>;
   |};
@@ -176,6 +177,13 @@ const fragment /*: ConcreteFragment*/ = {
                   "alias": null,
                   "args": null,
                   "name": "id",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "parent",
                   "storageKey": null
                 },
                 {

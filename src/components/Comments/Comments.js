@@ -1,17 +1,33 @@
-import React from 'react';
-import { Form, Walker } from 'components/Comments';
+import React, { Component } from 'react';
+import { Walker } from 'components/Comments';
 import styles from './Comments.scss';
 
 /* eslint-disable react/prop-types */
 
-export default function Comments({ comments }) {
-  return (
-    <aside className={styles.comments}>
-      <h3>Comments</h3>
-      <section>
-        <Form />
-        <Walker comments={comments} />
-      </section>
-    </aside>
-  );
+export default class Comments extends Component {
+  state = {
+    replyTo: null,
+  };
+
+  setReplyTo = (id) => {
+    this.setState({ replyTo: id });
+  };
+
+  render() {
+    const { post, comments } = this.props;
+
+    return (
+      <aside className={styles.comments}>
+        <h3>Comments</h3>
+        <section>
+          <Walker
+            setReplyTo={this.setReplyTo}
+            post={post}
+            comments={comments}
+            replyTo={this.state.replyTo}
+          />
+        </section>
+      </aside>
+    );
+  }
 }
