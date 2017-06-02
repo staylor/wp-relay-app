@@ -2,7 +2,7 @@
 @import '../../../styles/mixins';
 
 .comment {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $detail;
   position: relative;
 }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { commitMutation } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
+import { withCookies, Cookies } from 'react-cookie';
 import cn from 'classnames';
 import AddCommentMutation from 'mutations/AddComment';
 import environment from 'relay/environment';
@@ -8,14 +10,30 @@ import styles from './Form.scss';
 
 /* eslint-disable react/prop-types */
 
-const getDefaultState = () => ({
-  author_name: '',
-  author_email: '',
-  author_url: '',
-  content: '',
-});
+const fields = {
+  author_name: { name: 'Name', cookie: 'comment_author' },
+  author_email: { name: 'Email', cookie: 'comment_author_email' },
+  author_url: { name: 'URL', cookie: 'comment_author_url' },
+};
 
+const getDefaultState = (props) => {
+  const state = {
+    content: '',
+  };
+
+  Object.keys(fields).forEach((field) => {
+    state[field] = props.cookies.get(fields[field].cookie) || '';
+  });
+
+  return state;
+};
+
+@withCookies
 export default class Form extends Component {
+  static propTypes = {
+    cookies: PropTypes.instanceOf(Cookies).isRequired,
+  };
+
   static defaultProps = {
     replyTo: 0,
   };
@@ -24,7 +42,7 @@ export default class Form extends Component {
     super(props);
 
     this.state = {
-      comment: getDefaultState(),
+      comment: getDefaultState(props),
     };
   }
 
@@ -55,6 +73,9 @@ export default class Form extends Component {
   updateConnection = (store) => {
     const payload = store.getRootField('addComment');
     const newComment = payload.getLinkedRecord('comment');
+    if (!newComment) {
+      return;
+    }
     const storeRoot = store.get(this.props.post);
     const connection = ConnectionHandler.getConnection(storeRoot, 'Single_comments');
     const newEdge = ConnectionHandler.createEdge(store, connection, newComment, 'CommentEdge');
@@ -69,17 +90,24 @@ export default class Form extends Component {
       input: {
         ...this.state.comment,
         post: this.props.post,
-        parent: this.props.replyTo,
       },
     };
+
+    if (this.props.replyTo) {
+      variables.input.parent = this.props.replyTo;
+    }
 
     commitMutation(environment, {
       mutation: AddCommentMutation,
       variables,
       onCompleted: (response) => {
-        if (response.addComment) {
+        if (response.addComment && response.addComment.cookies) {
+          const values = response.addComment.cookies.split(',');
+          values.forEach((cookie) => {
+            document.cookie = cookie;
+          });
           this.setState({
-            comment: getDefaultState(),
+            comment: getDefaultState(this.props),
           });
         }
       },
@@ -105,25 +133,25 @@ export default class Form extends Component {
   };
 
   render() {
-    const fields = {
-      author_name: 'Name',
-      author_email: 'Email',
-      author_url: 'URL',
-    };
+    const { cookies } = this.props;
 
     return (
       <form className={styles.form} onSubmit={e => e.preventDefault()}>
-        {Object.keys(fields).map(field => (
-          <p key={field}>
-            <label htmlFor={field}>{fields[field]}:</label>
-            <input
-              type="text"
-              name={field}
-              value={this.state.comment[field]}
-              onChange={this.onChange}
-            />
-          </p>
-        ))}
+        {Object.keys(fields).map((field) => {
+          const cookieVal = cookies.get(fields[field].cookie);
+          return (
+            <p key={field}>
+              <label htmlFor={field}>{fields[field].name}:</label>
+              {cookieVal ||
+                <input
+                  type="text"
+                  name={field}
+                  value={this.state.comment[field]}
+                  onChange={this.onChange}
+                />}
+            </p>
+          );
+        })}
         <p>
           <label htmlFor="content">Comment:</label>
           <textarea
