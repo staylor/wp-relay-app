@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Comment_comment.graphql
- * @generated SignedSource<<a315f38332ac43235a82c829f8716a88>>
+ * @generated SignedSource<<b3936dafce79fbc37726ab1219e141be>>
  * @flow
  * @nogrep
  */
@@ -18,6 +18,7 @@ export type Comment_comment = {|
   +id: string;
   +author_name: ?string;
   +author_url: ?string;
+  +author_hash: ?string;
   +date: ?string;
   +content: ?{|
     +rendered: ?string;
@@ -56,6 +57,13 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "name": "author_url",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "author_hash",
       "storageKey": null
     },
     {

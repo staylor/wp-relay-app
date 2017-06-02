@@ -6122,6 +6122,18 @@
             "deprecationReason": null
           },
           {
+            "name": "author_hash",
+            "description": "Hashed representation of the comment author.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "status",
             "description": "State of the object.",
             "args": [],
@@ -9069,16 +9081,6 @@
             "defaultValue": null
           },
           {
-            "name": "author",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "author_url",
             "description": null,
             "type": {
@@ -9189,16 +9191,6 @@
                 "name": "ID",
                 "ofType": null
               }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "author",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
             },
             "defaultValue": null
           },

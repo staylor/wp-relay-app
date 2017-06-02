@@ -31,7 +31,7 @@
 }
 
 .reply {
-  @include size-height(18, 20);
+  @include size-height(16, 20);
   background: none;
   border: 0;
   cursor: pointer;
@@ -39,4 +39,37 @@
   position: absolute;
   right: 0;
   top: 0;
+
+  &:active,
+  &:focus {
+    outline: 0 none;
+  }
+}
+
+.active {
+  color: $pink;
+}
+
+.actions {
+  margin: 5px 0;
+}
+
+.edit {
+  background: transparent;
+  border: 1px solid $detail;
+  cursor: pointer;
+  transition: 600ms;
+
+  &:hover {
+    border: 1px solid $dark;
+  }
+}
+
+.deletion {
+  background: transparent;
+  border: 0 none;
+  color: red;
+  cursor: pointer;
+  margin: 0 5px;
+  text-decoration: underline;
 }

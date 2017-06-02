@@ -6,14 +6,15 @@ import { withCookies, Cookies } from 'react-cookie';
 import cn from 'classnames';
 import AddCommentMutation from 'mutations/AddComment';
 import environment from 'relay/environment';
+import { AUTHOR_NAME_COOKIE, AUTHOR_EMAIL_COOKIE, AUTHOR_URL_COOKIE } from 'components/Comments';
 import styles from './Form.scss';
 
 /* eslint-disable react/prop-types */
 
 const fields = {
-  author_name: { name: 'Name', cookie: 'comment_author' },
-  author_email: { name: 'Email', cookie: 'comment_author_email' },
-  author_url: { name: 'URL', cookie: 'comment_author_url' },
+  author_name: { name: 'Name', cookie: AUTHOR_NAME_COOKIE },
+  author_email: { name: 'Email', cookie: AUTHOR_EMAIL_COOKIE },
+  author_url: { name: 'URL', cookie: AUTHOR_URL_COOKIE },
 };
 
 const getDefaultState = (props) => {

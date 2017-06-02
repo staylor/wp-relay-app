@@ -3,7 +3,6 @@ input AddCommentInput {
   author_name: String!
   content: String!
   post: ID!
-  author: ID
   author_url: String
   parent: ID
   clientMutationId: String
@@ -184,6 +183,9 @@ type Comment {
 
   # URL for the object author.
   author_url: String
+
+  # Hashed representation of the comment author.
+  author_hash: String
 
   # State of the object.
   status: String
@@ -1532,7 +1534,6 @@ type TypeLinks {
 
 input UpdateCommentInput {
   id: ID!
-  author: ID
   content: String!
   clientMutationId: String
 }

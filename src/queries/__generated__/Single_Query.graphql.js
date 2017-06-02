@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Single_Query.graphql
- * @generated SignedSource<<b1412c6197f6c4eee316aaecad13b594>>
- * @relayHash 61cd40fe859223bfdf43b6e8f011027e
+ * @generated SignedSource<<b41745c3c9ce8d231ce1d80b3998426c>>
+ * @relayHash 762a7bd29357d85bd0fe1463cdf0a37e
  * @flow
  * @nogrep
  */
@@ -83,6 +83,7 @@ fragment Comment_comment on Comment {
   id
   author_name
   author_url
+  author_hash
   date
   content {
     rendered
@@ -417,6 +418,13 @@ const batch /*: ConcreteBatch*/ = {
                         "kind": "ScalarField",
                         "alias": null,
                         "args": null,
+                        "name": "author_hash",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
                         "name": "date",
                         "storageKey": null
                       },
@@ -546,7 +554,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  post(id: $id) {\n    ...Single_post\n    id\n  }\n}\n\nfragment Single_post on Post {\n  id\n  date\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  tags {\n    id\n    name\n  }\n  comments(first: 100) {\n    edges {\n      node {\n        id\n        parent\n        ...Comment_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  date\n  content {\n    rendered\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $id: ID!\n) {\n  post(id: $id) {\n    ...Single_post\n    id\n  }\n}\n\nfragment Single_post on Post {\n  id\n  date\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  tags {\n    id\n    name\n  }\n  comments(first: 100) {\n    edges {\n      node {\n        id\n        parent\n        ...Comment_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
