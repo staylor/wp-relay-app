@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Form, Comment } from 'components/Comments';
+import { CommentConnectionType } from 'components/Comments/types';
 import { sortHierarchy } from 'utils/walker';
 import styles from './Walker.scss';
 
-/* eslint-disable react/prop-types */
-
 export default class CommentsWalker extends Component {
+  static propTypes = {
+    post: PropTypes.string.isRequired,
+    replyTo: PropTypes.string,
+    setReplyTo: PropTypes.func.isRequired,
+    comments: CommentConnectionType.isRequired,
+  };
+
+  static defaultProps = {
+    replyTo: null,
+  };
+
   sorted = null;
   level = 0;
 

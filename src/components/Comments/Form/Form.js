@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
-import cn from 'classnames';
 import AddCommentMutation from 'mutations/Comment/AddComment';
-import { AUTHOR_NAME_COOKIE, AUTHOR_EMAIL_COOKIE, AUTHOR_URL_COOKIE } from 'components/Comments';
+import {
+  AUTHOR_NAME_COOKIE,
+  AUTHOR_EMAIL_COOKIE,
+  AUTHOR_URL_COOKIE,
+} from 'components/Comments/constants';
 import styles from './Form.scss';
-
-/* eslint-disable react/prop-types */
 
 const fields = {
   author_name: { name: 'Name', cookie: AUTHOR_NAME_COOKIE },
@@ -30,10 +31,13 @@ const getDefaultState = (props) => {
 export default class Form extends Component {
   static propTypes = {
     cookies: PropTypes.instanceOf(Cookies).isRequired,
+    post: PropTypes.string.isRequired,
+    replyTo: PropTypes.string,
+    setReplyTo: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    replyTo: 0,
+    replyTo: null,
   };
 
   constructor(props) {

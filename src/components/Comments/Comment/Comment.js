@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { graphql } from 'react-relay';
 import { withCookies, Cookies } from 'react-cookie';
+import { intlShape } from 'react-intl';
 import FragmentContainer from 'decorators/FragmentContainer';
 import withIntl from 'decorators/withIntl';
-import { AUTHOR_NAME_COOKIE, AUTHOR_EMAIL_COOKIE, AUTHOR_URL_COOKIE } from 'components/Comments';
+import {
+  AUTHOR_NAME_COOKIE,
+  AUTHOR_EMAIL_COOKIE,
+  AUTHOR_URL_COOKIE,
+} from 'components/Comments/constants';
+import { CommentType } from 'components/Comments/types';
 import DeleteCommentMutation from 'mutations/Comment/DeleteComment';
 import EditComment from './Edit/Edit';
 import styles from './Comment.scss';
 
-/* eslint-disable react/prop-types */
-/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/no-danger */
 
 @FragmentContainer(graphql`
@@ -40,6 +44,10 @@ import styles from './Comment.scss';
 export default class Comment extends Component {
   static propTypes = {
     cookies: PropTypes.instanceOf(Cookies).isRequired,
+    active: PropTypes.bool.isRequired,
+    setReplyTo: PropTypes.func.isRequired,
+    comment: CommentType.isRequired,
+    intl: intlShape.isRequired,
   };
 
   state = {

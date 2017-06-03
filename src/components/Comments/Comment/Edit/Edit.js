@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import UpdateCommentMutation from 'mutations/Comment/UpdateComment';
+import { CommentType } from 'components/Comments/types';
 import styles from './Edit.scss';
 
-/* eslint-disable react/prop-types */
-
 export default class Edit extends Component {
+  static propTypes = {
+    comment: CommentType.isRequired,
+    onEditSubmit: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -43,7 +48,7 @@ export default class Edit extends Component {
           onChange={this.onChange}
         />
         <button type="submit" className={styles.button} onClick={this.onEdit}>Submit</button>
-        <button type="reset" className={styles.cancel} onClick={this.props.onEditComplete}>
+        <button type="reset" className={styles.cancel} onClick={this.props.onEditSubmit}>
           Cancel
         </button>
       </form>
