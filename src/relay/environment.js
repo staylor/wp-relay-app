@@ -12,4 +12,4 @@ const environment = new Environment({
   store,
 });
 
-export default environment;
+export { environment, source };

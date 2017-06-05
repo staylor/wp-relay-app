@@ -1,6 +1,7 @@
 import Helmet from 'react-helmet';
+import serialize from 'serialize-javascript';
 
-export default ({ root, cssBundle, jsBundle }) => {
+export default ({ root, data, cssBundle, jsBundle }) => {
   const helmet = Helmet.rewind();
 
   return `<!DOCTYPE html>
@@ -19,6 +20,7 @@ ${cssBundle ? `<link rel="stylesheet" type="text/css" href="${cssBundle}" />` : 
 ${helmet.meta.toString()}${helmet.link.toString()}${helmet.script.toString()}
 </head>
 <body>
+<script>window.__RELAY_STORE__ = ${serialize(data, { isJSON: true })};</script>
 <main id="main">${root}</main>
 <script src="${jsBundle}"></script>
 </body>

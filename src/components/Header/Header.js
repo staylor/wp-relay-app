@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'found';
 import NavMenu from 'components/NavMenu';
 import styles from './Header.scss';
 
@@ -11,7 +11,6 @@ const Header = () => (
       </h1>
       <h2 className={styles.siteDescription}>Music As It Happens.</h2>
     </hgroup>
-    <NavMenu id="TmF2TWVudToy" />
   </header>
 );
 

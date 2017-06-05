@@ -1,6 +1,6 @@
 import express from 'express';
 import proxy from 'http-proxy-middleware';
-// import cookiesMiddleware from 'universal-cookie-express';
+import cookiesMiddleware from 'universal-cookie-express';
 import morgan from 'morgan';
 import compression from 'compression';
 import path from 'path';
@@ -22,7 +22,7 @@ app.use(morgan('combined'));
 // Setup the public directory so that we can server static assets.
 app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 
-// app.use(cookiesMiddleware);
+app.use(cookiesMiddleware());
 
 // use a local GQL server by default
 const gqlHost = 'http://localhost:8080';

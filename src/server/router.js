@@ -1,34 +1,51 @@
-// import React from 'react';
-// import { renderToString } from 'react-dom/server';
-// import { StaticRouter } from 'react-router';
-// import { IntlProvider } from 'react-intl';
-// import App from 'components/App';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { getFarceResult } from 'found/lib/server';
+import { RecordSource } from 'relay-runtime';
+import { CookiesProvider } from 'react-cookie';
+import { IntlProvider } from 'react-intl';
 import template from 'server/template';
 
-// const renderTree = (req, context) => (
-//   renderToString(
-//     <IntlProvider locale="en">
-//       <StaticRouter
-//         location={req.url}
-//         context={context}
-//       >
-//         <App />
-//       </StaticRouter>
-//     </IntlProvider>
-//   )
-// );
+import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
 
-export default ({ jsBundle, cssBundle }) => (req, res) => {
-  // const context = {};
-  // const root = renderTree(req, context);
-  const root = '';
+export default ({ jsBundle, cssBundle }) => async (req, res) => {
+  const graphqlUrl = 'http://localhost:3000/graphql';
+  const recordSource = new RecordSource();
 
-  res.status(200);
-  res.send(
-    template({
-      root,
-      jsBundle,
-      cssBundle,
+  console.log('BEFORE');
+
+  getFarceResult({
+    url: req.url,
+    historyMiddlewares,
+    routeConfig,
+    resolver: createResolver(graphqlUrl, recordSource),
+    render,
+  })
+    .then(({ redirect, element }) => {
+      if (redirect) {
+        res.redirect(302, redirect.url);
+        return;
+      }
+
+      const root = renderToString(
+        <IntlProvider locale="en">
+          <CookiesProvider cookies={req.universalCookies}>{element}</CookiesProvider>
+        </IntlProvider>
+      );
+      const data = recordSource.toJSON();
+
+      res.status(200);
+      res.send(
+        template({
+          root,
+          data,
+          jsBundle,
+          cssBundle,
+        })
+      );
     })
-  );
+    .catch((e) => {
+      console.error(e);
+      res.send(JSON.stringify(e));
+    });
 };

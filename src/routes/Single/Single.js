@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
-import { Link } from 'react-router-dom';
+import { Link } from 'found';
 import { FormattedRelative } from 'react-intl';
-import QueryRenderer from 'decorators/QueryRenderer';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import Comments from 'components/Comments';
 import { convertPlaceholders } from 'utils';
-import SingleQuery from 'queries/Single';
 import styles from './Single.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/style-prop-object */
 
-@QueryRenderer(SingleQuery)
 @FragmentContainer(graphql`
   fragment Single_post on Post {
     id

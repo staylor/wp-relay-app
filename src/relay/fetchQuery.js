@@ -1,15 +1,24 @@
-import fetch from 'fbjs/lib/fetch';
+import 'isomorphic-fetch';
 
-export default function fetchQuery(operation, variables) {
-  return fetch('http://localhost:3000/graphql', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: operation.text,
-      variables,
-    }),
-  }).then(response => response.json());
+export default function createFetch(url) {
+  return async function fetchQuery(operation, variables) {
+    let response;
+    try {
+      response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: operation.text,
+          variables,
+        }),
+      });
+    } catch (e) {
+      throw e;
+    }
+
+    return response.json();
+  };
 }

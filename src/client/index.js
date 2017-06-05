@@ -1,20 +1,28 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { IntlProvider } from 'react-intl';
-import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import BrowserProtocol from 'farce/lib/BrowserProtocol';
+import createInitialFarceRouter from 'found/lib/createInitialFarceRouter';
+import { RecordSource } from 'relay-runtime';
 import { CookiesProvider } from 'react-cookie';
-import App from 'components/App';
+import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
 
-const root = document.querySelector('#main');
-const onUpdate = () => window.scrollTo(0, 0);
+(async () => {
+  // eslint-disable-next-line no-underscore-dangle
+  const recordSource = new RecordSource(window.__RELAY_STORE__);
+  const resolver = createResolver('/graphql', recordSource);
 
-render(
-  <CookiesProvider>
-    <IntlProvider locale="en">
-      <BrowserRouter onUpdate={onUpdate}>
-        <App />
-      </BrowserRouter>
-    </IntlProvider>
-  </CookiesProvider>,
-  root
-);
+  const Router = await createInitialFarceRouter({
+    historyProtocol: new BrowserProtocol(),
+    historyMiddlewares,
+    routeConfig,
+    resolver,
+    render,
+  });
+
+  // ReactDOM.render(
+  //   <CookiesProvider>
+  //     <Router resolver={resolver} />
+  //   </CookiesProvider>,
+  //   document.getElementById('main')
+  // );
+})();
