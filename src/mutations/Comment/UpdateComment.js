@@ -1,5 +1,4 @@
 import { graphql, commitMutation } from 'react-relay';
-import { ConnectionHandler } from 'relay-runtime';
 import environment from 'relay/environment';
 import { newlineRegex } from 'utils/regex';
 

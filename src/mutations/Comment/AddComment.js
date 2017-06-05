@@ -46,7 +46,7 @@ const commit = (variables, onCompleted = null) => {
             url: `http://2.gravatar.com/avatar/${md5(variables.input.author_email)}?s=48&d=mm&r=g`,
           },
         ],
-        parent: variables.input.parent || 0,
+        parent: variables.input.parent || null,
       },
       status: 'new',
       cookies: '',

@@ -9,13 +9,15 @@ import styles from './Walker.scss';
 export default class CommentsWalker extends Component {
   static propTypes = {
     post: PropTypes.string.isRequired,
-    replyTo: PropTypes.string,
-    setReplyTo: PropTypes.func.isRequired,
     comments: CommentConnectionType.isRequired,
   };
 
-  static defaultProps = {
+  state = {
     replyTo: null,
+  };
+
+  setReplyTo = (id) => {
+    this.setState({ replyTo: id });
   };
 
   sorted = null;
@@ -27,15 +29,13 @@ export default class CommentsWalker extends Component {
       this.level += 1;
     }
 
-    const active = this.props.replyTo === id;
+    const active = this.state.replyTo === id;
 
     return (
       <li key={id} className={cn(styles.comment, styles[`level${this.level}`])}>
-        <Comment comment={comment} active={active} setReplyTo={this.props.setReplyTo} />
+        <Comment comment={comment} active={active} setReplyTo={this.setReplyTo} />
         {this.sorted[id] ? this.walk(this.sorted[id]) : null}
-        {active
-          ? <Form post={this.props.post} replyTo={id} setReplyTo={this.props.setReplyTo} />
-          : null}
+        {active ? <Form post={this.props.post} replyTo={id} setReplyTo={this.setReplyTo} /> : null}
       </li>
     );
   }
@@ -56,10 +56,11 @@ export default class CommentsWalker extends Component {
   render() {
     const { comments: { edges } } = this.props;
     this.sorted = sortHierarchy(edges);
+    this.level = 0;
     return (
       <section>
         {this.walk(this.sorted.top)}
-        {!this.props.replyTo && <Form post={this.props.post} setReplyTo={this.props.setReplyTo} />}
+        {!this.state.replyTo && <Form post={this.props.post} setReplyTo={this.setReplyTo} />}
       </section>
     );
   }
