@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import QueryRenderer from 'decorators/QueryRenderer';
 import FragmentContainer from 'decorators/FragmentContainer';
-import { Link } from 'react-router-dom';
+import { Link } from 'found';
 import Media from 'components/Media';
 import PageQuery from 'queries/Page';
 import styles from './Page.scss';

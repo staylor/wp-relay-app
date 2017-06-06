@@ -63,7 +63,7 @@ export default class Form extends Component {
       variables.input.parent = this.props.replyTo;
     }
 
-    AddCommentMutation.commit(variables, () => {
+    AddCommentMutation.commit(this.props.relay.environment, variables, () => {
       this.setState({
         comment: getDefaultState(this.props),
       });

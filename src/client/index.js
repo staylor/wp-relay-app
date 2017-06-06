@@ -19,10 +19,8 @@ import { createResolver, historyMiddlewares, render, routeConfig } from 'routes'
     render,
   });
 
-  // ReactDOM.render(
-  //   <CookiesProvider>
-  //     <Router resolver={resolver} />
-  //   </CookiesProvider>,
-  //   document.getElementById('main')
-  // );
+  ReactDOM.render(
+    <CookiesProvider><Router resolver={resolver} /></CookiesProvider>,
+    document.getElementById('main')
+  );
 })();

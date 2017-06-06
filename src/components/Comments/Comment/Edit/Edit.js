@@ -28,7 +28,7 @@ export default class Edit extends Component {
       },
     };
 
-    UpdateCommentMutation.commit(this.props.comment, variables);
+    UpdateCommentMutation.commit(this.props.comment, this.props.relay.environment, variables);
   };
 
   onChange = (e) => {

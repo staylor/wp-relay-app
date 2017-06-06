@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { getFarceResult } from 'found/lib/server';
 import { RecordSource } from 'relay-runtime';
 import { CookiesProvider } from 'react-cookie';
-import { IntlProvider } from 'react-intl';
+
 import template from 'server/template';
 
 import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
@@ -28,9 +28,7 @@ export default ({ jsBundle, cssBundle }) => async (req, res) => {
       }
 
       const root = renderToString(
-        <IntlProvider locale="en">
-          <CookiesProvider cookies={req.universalCookies}>{element}</CookiesProvider>
-        </IntlProvider>
+        <CookiesProvider cookies={req.universalCookies}>{element}</CookiesProvider>
       );
       const data = recordSource.toJSON();
 

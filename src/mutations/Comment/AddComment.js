@@ -1,7 +1,6 @@
 import { graphql, commitMutation } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import md5 from 'md5';
-import environment from 'relay/environment';
 import { newlineRegex } from 'utils/regex';
 
 const AddCommentMutation = graphql`
@@ -28,7 +27,7 @@ const AddCommentMutation = graphql`
   }
 `;
 
-const commit = (variables, onCompleted = null) => {
+const commit = (environment, variables, onCompleted = null) => {
   const getOptimisticResponse = () => ({
     addComment: {
       comment: {

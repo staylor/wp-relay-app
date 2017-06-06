@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import QueryRenderer from 'decorators/QueryRenderer';
-import SidebarQuery from 'queries/SidebarQuery';
+import { graphql } from 'react-relay';
+import FragmentContainer from 'decorators/FragmentContainer';
 import styles from './Sidebar.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
-@QueryRenderer(SidebarQuery)
+@FragmentContainer(graphql`
+  fragment Sidebar_sidebar on Sidebar {
+    widgets {
+      classname
+      content {
+        rendered
+      }
+    }
+  }
+`)
 export default class Sidebar extends Component {
   static transformStyles(classname, html) {
     if (classname === 'widget_go_to_this') {

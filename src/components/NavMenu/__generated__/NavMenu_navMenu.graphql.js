@@ -3,33 +3,32 @@
  *   relay-compiler
  *
  * @providesModule NavMenu_navMenu.graphql
- * @generated SignedSource<<c898db5aff728d4cab32cc9e43a0823e>>
+ * @generated SignedSource<<abca9e171626ad17908373598a405fdd>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type NavMenu_navMenu = {
-  id: string;
-  name?: ?string;
-  items?: ?Array<?NavMenu_navMenu_items>;
-};
-
-export type NavMenu_navMenu_items = {
-  id?: ?string;
-  title?: ?string;
-  url?: ?string;
-  parent?: ?string;
-  order?: ?number;
-  object?: ?string;
-  object_id?: ?string;
-};
+export type NavMenu_navMenu = {|
+  +id: string;
+  +name: ?string;
+  +items: ?$ReadOnlyArray<?{|
+    +id: ?string;
+    +title: ?string;
+    +url: ?string;
+    +parent: ?string;
+    +order: ?number;
+    +object: ?string;
+    +object_id: ?string;
+  |}>;
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

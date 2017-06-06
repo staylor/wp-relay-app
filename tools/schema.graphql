@@ -497,6 +497,7 @@ type Meta {
   value: String
 }
 
+# WordPress API mutations
 type Mutation {
   addComment(input: AddCommentInput!): AddCommentPayload
   updateComment(input: UpdateCommentInput!): UpdateCommentPayload
@@ -880,13 +881,14 @@ type PostTypeLink {
   post_type: String
 }
 
-# WordPress REST API read-only data
+# WordPress API queries
 type Query {
   # Fetches an object given its ID
   node(
     # The ID of an object
     id: ID!
   ): Node
+  viewer: Viewer
   posts(
     # Current page of the collection.
     page: Int
@@ -1682,6 +1684,28 @@ type Video implements MediaInterface {
 # The details for the media.
 type VideoDetails {
   title: String
+}
+
+type Viewer {
+  # The ID of an object
+  id: ID!
+  navMenu(
+    # Unique identifier for the object.
+    id: ID
+
+    # An alphanumeric identifier for the object unique to its type.
+    slug: String
+  ): NavMenu
+  sidebar(
+    # Unique identifier for the object.
+    id: ID
+
+    # An alphanumeric identifier for the object unique to its type.
+    slug: String
+  ): Sidebar
+
+  # A list of results
+  posts(search: String, author: String, slug: String, orderby: POST_ORDERBY, order: ORDER, categories: String, tags: String, after: String, first: Int, before: String, last: Int): PostConnection
 }
 
 # A widget.

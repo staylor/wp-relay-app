@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import base64 from 'base-64';
 import { graphql } from 'react-relay';
 import { withCookies, Cookies } from 'react-cookie';
 import { intlShape } from 'react-intl';
@@ -75,7 +76,7 @@ export default class Comment extends Component {
   };
 
   onDelete = () => {
-    DeleteCommentMutation.commit(this.props.comment);
+    DeleteCommentMutation.commit(this.props.comment, this.props.relay.environment);
   };
 
   viewerOwns() {
@@ -87,7 +88,7 @@ export default class Comment extends Component {
     if (!values) {
       return false;
     }
-    return btoa(values) === this.props.comment.author_hash;
+    return base64.encode(values) === this.props.comment.author_hash;
   }
 
   render() {

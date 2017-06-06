@@ -16,6 +16,7 @@ export default function createFetch(url) {
         }),
       });
     } catch (e) {
+      console.error(e);
       throw e;
     }
 

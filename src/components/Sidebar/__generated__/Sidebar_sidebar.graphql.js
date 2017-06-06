@@ -3,30 +3,27 @@
  *   relay-compiler
  *
  * @providesModule Sidebar_sidebar.graphql
- * @generated SignedSource<<15055806fd07f8a5df1bf8fae2eecdce>>
+ * @generated SignedSource<<f8510b9acef6c6657cea0f38b3be28c4>>
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Sidebar_sidebar = {
-  widgets?: ?Array<?Sidebar_sidebar_widgets>;
-};
-
-export type Sidebar_sidebar_widgets_content = {
-  rendered?: ?string;
-};
-
-export type Sidebar_sidebar_widgets = {
-  classname?: ?string;
-  content?: ?Sidebar_sidebar_widgets_content;
-};
+export type Sidebar_sidebar = {|
+  +widgets: ?$ReadOnlyArray<?{|
+    +classname: ?string;
+    +content: ?{|
+      +rendered: ?string;
+    |};
+  |}>;
+|};
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],

@@ -1,5 +1,4 @@
 import { graphql, commitMutation } from 'react-relay';
-import environment from 'relay/environment';
 import { newlineRegex } from 'utils/regex';
 
 const UpdateCommentMutation = graphql`
@@ -25,7 +24,7 @@ const UpdateCommentMutation = graphql`
   }
 `;
 
-const commit = (comment, variables, onCompleted) => {
+const commit = (comment, environment, variables, onCompleted) => {
   const content = {
     rendered: `<p>${variables.input.content.replace(newlineRegex, '<br />')}</p>`,
     raw: variables.input.content,

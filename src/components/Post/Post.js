@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-relay';
-import { Link } from 'react-router-dom';
+import { Link } from 'found';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from '../Media';
 import { convertPlaceholders } from '../../utils';

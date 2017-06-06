@@ -1,16 +1,30 @@
 import url from 'url';
 import cn from 'classnames';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import QueryRenderer from 'decorators/QueryRenderer';
-import NavMenuQuery from 'queries/NavMenuQuery';
+import { graphql } from 'react-relay';
+import { Link } from 'found';
+import FragmentContainer from 'decorators/FragmentContainer';
 import { sortOrderedHierarchy } from 'utils/walker';
 import styles from './NavMenu.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
-@QueryRenderer(NavMenuQuery)
+@FragmentContainer(graphql`
+  fragment NavMenu_navMenu on NavMenu {
+    id
+    name
+    items {
+      id
+      title
+      url
+      parent
+      order
+      object
+      object_id
+    }
+  }
+`)
 export default class NavMenu extends Component {
   sorted = null;
   level = 0;

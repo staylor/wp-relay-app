@@ -1,6 +1,5 @@
 import { graphql, commitMutation } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
-import environment from 'relay/environment';
 
 const DeleteCommentMutation = graphql`
   mutation DeleteComment_Mutation($input: DeleteCommentInput!) {
@@ -10,7 +9,7 @@ const DeleteCommentMutation = graphql`
   }
 `;
 
-const commit = (comment, onCompleted) => {
+const commit = (comment, environment, onCompleted) => {
   const getOptimisticResponse = () => ({
     deleteComment: {
       status: 'delete',

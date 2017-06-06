@@ -1,33 +1,63 @@
-import React from 'react';
-import Stickies from './Stickies';
-import Featured from './Featured';
-// import ReadThis from './ReadThis';
-// import WatchThis from './WatchThis';
-// import ListenToThis from './ListenToThis';
+import React, { Component } from 'react';
+import { graphql } from 'react-relay';
+import FragmentContainer from 'decorators/FragmentContainer';
+import Archive from 'components/Archive';
 import styles from './Home.scss';
 
 /* eslint-disable react/prop-types */
+/* eslint-disable react/prefer-stateless-function */
 
-const Home = () => (
-  <div className={styles.columns}>
-    <div className={styles.columnA}>
-      <Stickies total={3} />
-      <section className={styles.section}>
-        <h3>Read This</h3>
-        <Featured total={5} categories="Q2F0ZWdvcnk6Mw==" />
-      </section>
-    </div>
-    <div className={styles.columnB}>
-      <section className={styles.section}>
-        <h3>Watch This</h3>
-        <Featured total={5} categories="Q2F0ZWdvcnk6NA==" />
-      </section>
-      <section className={styles.section}>
-        <h3>Listen to This</h3>
-        <Featured total={5} categories="Q2F0ZWdvcnk6NQ==" />
-      </section>
-    </div>
-  </div>
-);
+@FragmentContainer(graphql`
+  fragment Home_viewer on Viewer {
+    readThis: posts(categories: $readThisID, last: 5) @connection(key: "Home_readThis") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
+    }
+    watchThis: posts(categories: $watchThisID, last: 5) @connection(key: "Home_watchThis") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
+    }
+    listenToThis: posts(categories: $listenToThisID, last: 5) @connection(key: "Home_listenToThis") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
+    }
+  }
+`)
+export default class Home extends Component {
+  render() {
+    const { readThis, watchThis, listenToThis } = this.props.viewer;
 
-export default Home;
+    return (
+      <div className={styles.columns}>
+        <div className={styles.columnA}>
+          <section className={styles.section}>
+            <h3>Read This</h3>
+            <Archive posts={readThis} />
+          </section>
+        </div>
+        <div className={styles.columnB}>
+          <section className={styles.section}>
+            <h3>Watch This</h3>
+            <Archive posts={watchThis} />
+          </section>
+          <section className={styles.section}>
+            <h3>Listen to This</h3>
+            <Archive posts={listenToThis} />
+          </section>
+        </div>
+      </div>
+    );
+  }
+}
