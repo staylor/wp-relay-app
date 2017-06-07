@@ -16,6 +16,7 @@ export default function createFetch(url) {
         }),
       });
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
       throw e;
     }

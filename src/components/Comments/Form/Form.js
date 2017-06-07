@@ -15,12 +15,12 @@ const fields = {
   author_url: { name: 'URL', cookie: AUTHOR_URL_COOKIE },
 };
 
-const getDefaultState = (props) => {
+const getDefaultState = props => {
   const state = {
     content: '',
   };
 
-  Object.keys(fields).forEach((field) => {
+  Object.keys(fields).forEach(field => {
     state[field] = props.cookies.get(fields[field].cookie) || '';
   });
 
@@ -48,7 +48,7 @@ export default class Form extends Component {
     };
   }
 
-  onClick = (e) => {
+  onClick = e => {
     e.preventDefault();
     e.currentTarget.blur();
 
@@ -70,7 +70,7 @@ export default class Form extends Component {
     });
   };
 
-  onChange = (e) => {
+  onChange = e => {
     this.setState({
       comment: {
         ...this.state.comment,
@@ -88,7 +88,7 @@ export default class Form extends Component {
 
     return (
       <form className={styles.form} onSubmit={e => e.preventDefault()}>
-        {Object.keys(fields).map((field) => {
+        {Object.keys(fields).map(field => {
           const cookieVal = cookies.get(fields[field].cookie);
           return (
             <p key={field}>

@@ -53,7 +53,11 @@ export default class App extends Component {
           </div>
           <footer className={styles.footerCredits}>
             © Scott Taylor ...&nbsp;
-            Brooklyn, NY ... <a href="https://twitter.com/wonderboymusic">@wonderboymusic</a>&nbsp;
+            Brooklyn, NY ...
+            {' '}
+            <a href="https://twitter.com/wonderboymusic">
+              @wonderboymusic
+            </a>&nbsp;
             ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis / SCSS
           </footer>
         </div>

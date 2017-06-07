@@ -43,7 +43,7 @@ import styles from './Single.scss';
 `)
 export default class Single extends Component {
   content = null;
-  bindRef = (node) => {
+  bindRef = node => {
     this.content = node;
   };
 
@@ -52,8 +52,8 @@ export default class Single extends Component {
     if (!nodes) {
       return;
     }
-    nodes.forEach((node) => {
-      node.onclick = (e) => {
+    nodes.forEach(node => {
+      node.onclick = e => {
         e.preventDefault();
 
         const elem = e.currentTarget;
@@ -94,7 +94,9 @@ export default class Single extends Component {
           </h1>
 
           <div className={styles.meta}>
-            Posted: <FormattedRelative value={Date.parse(date)} style="numeric" />
+            Posted:
+            {' '}
+            <FormattedRelative value={Date.parse(date)} style="numeric" />
           </div>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
@@ -106,7 +108,9 @@ export default class Single extends Component {
         />
         {tags &&
           <footer className={styles.footer}>
-            Tags: {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
+            Tags:
+            {' '}
+            {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
           </footer>}
         <Comments post={id} comments={comments} />
       </article>

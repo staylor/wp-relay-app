@@ -12,8 +12,6 @@ export default ({ jsBundle, cssBundle }) => async (req, res) => {
   const graphqlUrl = 'http://localhost:3000/graphql';
   const recordSource = new RecordSource();
 
-  console.log('BEFORE');
-
   getFarceResult({
     url: req.url,
     historyMiddlewares,
@@ -28,7 +26,9 @@ export default ({ jsBundle, cssBundle }) => async (req, res) => {
       }
 
       const root = renderToString(
-        <CookiesProvider cookies={req.universalCookies}>{element}</CookiesProvider>
+        <CookiesProvider cookies={req.universalCookies}>
+          {element}
+        </CookiesProvider>
       );
       const data = recordSource.toJSON();
 
@@ -42,7 +42,8 @@ export default ({ jsBundle, cssBundle }) => async (req, res) => {
         })
       );
     })
-    .catch((e) => {
+    .catch(e => {
+      // eslint-disable-next-line no-console
       console.error(e);
       res.send(JSON.stringify(e));
     });

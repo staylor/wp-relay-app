@@ -28,7 +28,7 @@ import styles from './Post.scss';
 `)
 export default class Post extends Component {
   content = null;
-  bindRef = (node) => {
+  bindRef = node => {
     this.content = node;
   };
 
@@ -37,8 +37,8 @@ export default class Post extends Component {
     if (!nodes) {
       return;
     }
-    nodes.forEach((node) => {
-      node.onclick = (e) => {
+    nodes.forEach(node => {
+      node.onclick = e => {
         e.preventDefault();
 
         // browserHistory.push(`/post/${this.props.post.id}`);

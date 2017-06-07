@@ -31,7 +31,7 @@ export default class Edit extends Component {
     UpdateCommentMutation.commit(this.props.comment, this.props.relay.environment, variables);
   };
 
-  onChange = (e) => {
+  onChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -47,7 +47,9 @@ export default class Edit extends Component {
           value={this.state.content}
           onChange={this.onChange}
         />
-        <button type="submit" className={styles.button} onClick={this.onEdit}>Submit</button>
+        <button type="submit" className={styles.button} onClick={this.onEdit}>
+          Submit
+        </button>
         <button type="reset" className={styles.cancel} onClick={this.props.onEditSubmit}>
           Cancel
         </button>

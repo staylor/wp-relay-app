@@ -16,7 +16,7 @@ export default class CommentsWalker extends Component {
     replyTo: null,
   };
 
-  setReplyTo = (id) => {
+  setReplyTo = id => {
     this.setState({ replyTo: id });
   };
 
@@ -43,7 +43,7 @@ export default class CommentsWalker extends Component {
   walk(node) {
     return (
       <ul className={this.level ? styles.nested : null}>
-        {node.map((child) => {
+        {node.map(child => {
           if (!child.parent) {
             this.level = 0;
           }

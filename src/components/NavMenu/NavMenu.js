@@ -56,7 +56,7 @@ export default class NavMenu extends Component {
   walk(node) {
     return (
       <ul>
-        {node.map((child) => {
+        {node.map(child => {
           if (!child.parent) {
             this.level = 0;
           }

@@ -16,6 +16,8 @@
     "compression": "^1.6.2",
     "create-react-class": "^15.5.3",
     "enzyme": "^2.8.2",
+    "eslint-config-prettier": "^2.1.1",
+    "eslint-plugin-prettier": "^2.1.1",
     "express": "^4.15.3",
     "farce": "^0.2.1",
     "found": "^0.3.0",
@@ -60,8 +62,8 @@
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-relay": "^1.0.1",
     "eslint-import-resolver-babel-module": "^3.0.0",
-    "prettier": "^1.4.1",
-    "prettier-eslint": "^6.2.3",
+    "prettier": "^1.4.2",
+    "prettier-eslint": "^6.3.0",
     "relay-compiler": "^1.0.0"
   }
 }

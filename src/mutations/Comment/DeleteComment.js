@@ -16,7 +16,7 @@ const commit = (comment, environment, onCompleted) => {
     },
   });
 
-  const updater = (store) => {
+  const updater = store => {
     const payload = store.getRootField('deleteComment');
     if (payload.getValue('status') !== 'delete') {
       return;
@@ -33,7 +33,7 @@ const commit = (comment, environment, onCompleted) => {
         id: comment.id,
       },
     },
-    onCompleted: (response) => {
+    onCompleted: response => {
       if (response.deleteComment && onCompleted) {
         onCompleted(response);
       }

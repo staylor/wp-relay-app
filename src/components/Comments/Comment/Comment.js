@@ -55,7 +55,7 @@ export default class Comment extends Component {
     editing: false,
   };
 
-  onClick = (id) => {
+  onClick = id => {
     if (this.props.active) {
       this.props.setReplyTo(null);
     } else {
@@ -131,8 +131,12 @@ export default class Comment extends Component {
         {this.viewerOwns() &&
           !this.state.editing &&
           <div className={styles.actions}>
-            <button className={styles.edit} onClick={this.onEditClick}>Edit</button>
-            <button className={styles.deletion} onClick={this.onDelete}>Delete</button>
+            <button className={styles.edit} onClick={this.onEditClick}>
+              Edit
+            </button>
+            <button className={styles.deletion} onClick={this.onDelete}>
+              Delete
+            </button>
           </div>}
       </div>
     );

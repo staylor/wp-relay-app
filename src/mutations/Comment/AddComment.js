@@ -52,7 +52,7 @@ const commit = (environment, variables, onCompleted = null) => {
     },
   });
 
-  const updateConnection = (store) => {
+  const updateConnection = store => {
     const payload = store.getRootField('addComment');
     const newComment = payload.getLinkedRecord('comment');
     if (!newComment) {
@@ -67,10 +67,10 @@ const commit = (environment, variables, onCompleted = null) => {
   commitMutation(environment, {
     mutation: AddCommentMutation,
     variables,
-    onCompleted: (response) => {
+    onCompleted: response => {
       if (response.addComment && response.addComment.cookies) {
         const values = response.addComment.cookies.split(',');
-        values.forEach((cookie) => {
+        values.forEach(cookie => {
           document.cookie = cookie;
         });
 

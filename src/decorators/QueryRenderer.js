@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { QueryRenderer } from 'react-relay';
-import { environment } from 'relay/environment';
 
 /* eslint-disable react/prop-types */
 
-export default query => (ComposedComponent) => {
+export default query => ComposedComponent => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name || 'Component';
 
   return class extends Component {

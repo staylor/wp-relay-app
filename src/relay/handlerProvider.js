@@ -1,7 +1,4 @@
-const {
-  ConnectionHandler,
-  ViewerHandler,
-} = require('relay-runtime');
+const { ConnectionHandler, ViewerHandler } = require('relay-runtime');
 
 export default function handlerProvider(handle) {
   switch (handle) {
@@ -13,7 +10,5 @@ export default function handlerProvider(handle) {
     default:
       break;
   }
-  throw new Error(
-    `handlerProvider: No handler provided for ${handle}`
-  );
+  throw new Error(`handlerProvider: No handler provided for ${handle}`);
 }

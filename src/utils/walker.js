@@ -14,7 +14,7 @@ export function sortHierarchy(list) {
     nested[node.parent].push(node);
   });
 
-  Object.keys(nested).forEach((key) => {
+  Object.keys(nested).forEach(key => {
     nested[key].reverse();
   });
 
@@ -25,7 +25,7 @@ export function sortOrderedHierarchy(items) {
   const nested = {
     top: [],
   };
-  items.forEach((item) => {
+  items.forEach(item => {
     const { parent, order } = item;
     if (!parent) {
       nested.top[order] = item;
@@ -38,7 +38,7 @@ export function sortOrderedHierarchy(items) {
     nested[parent][order] = item;
   });
 
-  Object.keys(nested).forEach((key) => {
+  Object.keys(nested).forEach(key => {
     nested[key].sort((a, b) => a.order - b.order);
     nested[key] = nested[key].filter(() => true);
   });

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
-import QueryRenderer from 'decorators/QueryRenderer';
 import FragmentContainer from 'decorators/FragmentContainer';
-import CategoryQuery from 'queries/Category';
 import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
 import CategoryArchive from './CategoryArchive';
 import styles from './Category.scss';
@@ -11,7 +9,6 @@ import styles from './Category.scss';
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
-@QueryRenderer(CategoryQuery)
 @FragmentContainer(graphql`
   fragment Category_category on Category {
     id

@@ -41,7 +41,7 @@ const commit = (comment, environment, variables, onCompleted) => {
     },
   });
 
-  const updater = (store) => {
+  const updater = store => {
     const payload = store.getRootField('updateComment');
     const updatedComment = payload.getLinkedRecord('comment');
     if (!updatedComment) {
@@ -54,7 +54,7 @@ const commit = (comment, environment, variables, onCompleted) => {
   commitMutation(environment, {
     mutation: UpdateCommentMutation,
     variables,
-    onCompleted: (response) => {
+    onCompleted: response => {
       if (response.updateComment && onCompleted) {
         onCompleted(response);
       }
