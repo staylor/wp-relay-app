@@ -38,8 +38,7 @@ app.use(
   })
 );
 
-app.get(
-  '*',
+app.use(
   router({
     manifestJSBundle: clientAssets['manifest.js'],
     mainJSBundle: clientAssets['main.js'],

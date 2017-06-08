@@ -29,6 +29,7 @@
     "lodash": "^4.17.4",
     "md5": "^2.2.1",
     "morgan": "^1.8.2",
+    "path-to-regexp": "^1.7.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
