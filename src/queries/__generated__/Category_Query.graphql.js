@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Category_Query.graphql
- * @generated SignedSource<<9e0ae7f0fee74fbf0047b33c01aeddca>>
- * @relayHash b12922f8d05361f7419ff3be07829bae
+ * @generated SignedSource<<8ed0b8977b766ebbdfd079763c1ae251>>
+ * @relayHash 833385824cf60e3f0b7b0de4c0e345d9
  * @flow
  * @nogrep
  */
@@ -23,18 +23,76 @@ import type {ConcreteBatch} from 'relay-runtime';
 query Category_Query(
   $id: ID!
 ) {
-  category(id: $id) {
-    ...Category_category
+  viewer {
+    ...Category_viewer
     id
   }
 }
 
-fragment Category_category on Category {
-  id
-  name
-  taxonomy {
-    slug
+fragment Category_viewer on Viewer {
+  category(id: $id) {
     id
+    name
+    taxonomy {
+      slug
+      id
+    }
+  }
+  posts(category: $id) {
+    ...Archive_posts
+  }
+}
+
+fragment Archive_posts on PostConnection {
+  edges {
+    node {
+      ...Post_post
+      id
+    }
+    cursor
+  }
+}
+
+fragment Post_post on Post {
+  id
+  title {
+    rendered
+  }
+  content {
+    rendered
+  }
+  excerpt {
+    rendered
+  }
+  featured_media {
+    __typename
+    ...Media_media
+    ... on Image {
+      id
+    }
+    ... on Audio {
+      id
+    }
+    ... on Video {
+      id
+    }
+  }
+}
+
+fragment Media_media on Media {
+  __typename
+  ...Image_image
+}
+
+fragment Image_image on Media {
+  ... on Image {
+    source_url
+    media_details {
+      sizes {
+        name
+        source_url
+      }
+    }
   }
 }
 */
@@ -55,22 +113,15 @@ const batch /*: ConcreteBatch*/ = {
     "selections": [
       {
         "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "id",
-            "type": "ID"
-          }
-        ],
-        "concreteType": "Category",
-        "name": "category",
+        "alias": "viewer",
+        "args": null,
+        "concreteType": "Viewer",
+        "name": "__viewer_viewer",
         "plural": false,
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "Category_category",
+            "name": "Category_viewer",
             "args": null
           }
         ],
@@ -99,63 +150,298 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LinkedField",
         "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "id",
-            "type": "ID"
-          }
-        ],
-        "concreteType": "Category",
-        "name": "category",
+        "args": null,
+        "concreteType": "Viewer",
+        "name": "viewer",
         "plural": false,
         "selections": [
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "name",
-            "storageKey": null
-          },
-          {
             "kind": "LinkedField",
             "alias": null,
-            "args": null,
-            "concreteType": "Taxonomy",
-            "name": "taxonomy",
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "id",
+                "variableName": "id",
+                "type": "ID"
+              }
+            ],
+            "concreteType": "Category",
+            "name": "category",
             "plural": false,
             "selections": [
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "slug",
+                "name": "id",
                 "storageKey": null
               },
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "id",
+                "name": "name",
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "Taxonomy",
+                "name": "taxonomy",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "slug",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "id",
+                    "storageKey": null
+                  }
+                ],
                 "storageKey": null
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "category",
+                "variableName": "id",
+                "type": "ID"
+              }
+            ],
+            "concreteType": "PostConnection",
+            "name": "posts",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PostEdge",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Post",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Title",
+                        "name": "title",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "rendered",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Content",
+                        "name": "content",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "rendered",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Excerpt",
+                        "name": "excerpt",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "rendered",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "name": "featured_media",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "__typename",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "type": "Video",
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "type": "Audio",
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "type": "Image",
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "source_url",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "ImageDetails",
+                                "name": "media_details",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "LinkedField",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "MediaSize",
+                                    "name": "sizes",
+                                    "plural": true,
+                                    "selections": [
+                                      {
+                                        "kind": "ScalarField",
+                                        "alias": null,
+                                        "args": null,
+                                        "name": "name",
+                                        "storageKey": null
+                                      },
+                                      {
+                                        "kind": "ScalarField",
+                                        "alias": null,
+                                        "args": null,
+                                        "name": "source_url",
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ]
+                          }
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "cursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "args": null,
+            "name": "id",
+            "storageKey": null
           }
         ],
         "storageKey": null
+      },
+      {
+        "kind": "LinkedHandle",
+        "alias": null,
+        "args": null,
+        "handle": "viewer",
+        "name": "viewer",
+        "key": "",
+        "filters": null
       }
     ]
   },
-  "text": "query Category_Query(\n  $id: ID!\n) {\n  category(id: $id) {\n    ...Category_category\n    id\n  }\n}\n\nfragment Category_category on Category {\n  id\n  name\n  taxonomy {\n    slug\n    id\n  }\n}\n"
+  "text": "query Category_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Category_viewer\n    id\n  }\n}\n\nfragment Category_viewer on Viewer {\n  category(id: $id) {\n    id\n    name\n    taxonomy {\n      slug\n      id\n    }\n  }\n  posts(category: $id) {\n    ...Archive_posts\n  }\n}\n\nfragment Archive_posts on PostConnection {\n  edges {\n    node {\n      ...Post_post\n      id\n    }\n    cursor\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

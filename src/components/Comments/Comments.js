@@ -15,5 +15,9 @@ export default function Comments({ post, comments }) {
 
 Comments.propTypes = {
   post: PropTypes.string.isRequired,
-  comments: CommentConnectionType.isRequired,
+  comments: CommentConnectionType,
+};
+
+Comments.defaultProps = {
+  comments: null,
 };

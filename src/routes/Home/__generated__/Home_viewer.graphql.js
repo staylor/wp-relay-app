@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Home_viewer.graphql
- * @generated SignedSource<<863fdacb065d13b5e0b0cde9d392ca38>>
+ * @generated SignedSource<<930f8caf592fecf3e291a53c6cf1def9>>
  * @flow
  * @nogrep
  */
@@ -15,24 +15,9 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type Home_viewer = {|
-  +readThis: ?{|
-    +edges: ?$ReadOnlyArray<?{|
-      +node: ?{| |};
-      +cursor: string;
-    |}>;
-  |};
-  +watchThis: ?{|
-    +edges: ?$ReadOnlyArray<?{|
-      +node: ?{| |};
-      +cursor: string;
-    |}>;
-  |};
-  +listenToThis: ?{|
-    +edges: ?$ReadOnlyArray<?{|
-      +node: ?{| |};
-      +cursor: string;
-    |}>;
-  |};
+  +readThis: ?{| |};
+  +watchThis: ?{| |};
+  +listenToThis: ?{| |};
 |};
 */
 
@@ -56,34 +41,7 @@ const fragment /*: ConcreteFragment*/ = {
     }
   ],
   "kind": "Fragment",
-  "metadata": {
-    "connection": [
-      {
-        "count": null,
-        "cursor": null,
-        "direction": "backward",
-        "path": [
-          "readThis"
-        ]
-      },
-      {
-        "count": null,
-        "cursor": null,
-        "direction": "backward",
-        "path": [
-          "watchThis"
-        ]
-      },
-      {
-        "count": null,
-        "cursor": null,
-        "direction": "backward",
-        "path": [
-          "listenToThis"
-        ]
-      }
-    ]
-  },
+  "metadata": null,
   "name": "Home_viewer",
   "selections": [
     {
@@ -95,45 +53,22 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "categories",
           "variableName": "readThisID",
           "type": "String"
+        },
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 5,
+          "type": "Int"
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_readThis_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
-          "kind": "LinkedField",
-          "alias": null,
-          "args": null,
-          "concreteType": "PostEdge",
-          "name": "edges",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "Post",
-              "name": "node",
-              "plural": false,
-              "selections": [
-                {
-                  "kind": "FragmentSpread",
-                  "name": "Post_post",
-                  "args": null
-                }
-              ],
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "cursor",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "Archive_posts",
+          "args": null
         }
       ],
       "storageKey": null
@@ -147,45 +82,22 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "categories",
           "variableName": "watchThisID",
           "type": "String"
+        },
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 5,
+          "type": "Int"
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_watchThis_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
-          "kind": "LinkedField",
-          "alias": null,
-          "args": null,
-          "concreteType": "PostEdge",
-          "name": "edges",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "Post",
-              "name": "node",
-              "plural": false,
-              "selections": [
-                {
-                  "kind": "FragmentSpread",
-                  "name": "Post_post",
-                  "args": null
-                }
-              ],
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "cursor",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "Archive_posts",
+          "args": null
         }
       ],
       "storageKey": null
@@ -199,45 +111,22 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "categories",
           "variableName": "listenToThisID",
           "type": "String"
+        },
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 5,
+          "type": "Int"
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_listenToThis_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
-          "kind": "LinkedField",
-          "alias": null,
-          "args": null,
-          "concreteType": "PostEdge",
-          "name": "edges",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "Post",
-              "name": "node",
-              "plural": false,
-              "selections": [
-                {
-                  "kind": "FragmentSpread",
-                  "name": "Post_post",
-                  "args": null
-                }
-              ],
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "cursor",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "Archive_posts",
+          "args": null
         }
       ],
       "storageKey": null

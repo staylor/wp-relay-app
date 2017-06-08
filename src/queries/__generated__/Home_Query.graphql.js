@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Home_Query.graphql
- * @generated SignedSource<<bc1de5044a9355007e97be55a7996c85>>
- * @relayHash a4b5fb5f98ff071ba535af3fd41804c1
+ * @generated SignedSource<<4b097014c82665d94e1d55a84a96e821>>
+ * @relayHash 381d6eca04ebfde77dade256cf937628
  * @flow
  * @nogrep
  */
@@ -33,52 +33,23 @@ query Home_Query(
 
 fragment Home_viewer on Viewer {
   readThis: posts(categories: $readThisID, last: 5) {
-    edges {
-      node {
-        ...Post_post
-        id
-        __typename
-      }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+    ...Archive_posts
   }
   watchThis: posts(categories: $watchThisID, last: 5) {
-    edges {
-      node {
-        ...Post_post
-        id
-        __typename
-      }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+    ...Archive_posts
   }
   listenToThis: posts(categories: $listenToThisID, last: 5) {
-    edges {
-      node {
-        ...Post_post
-        id
-        __typename
-      }
-      cursor
+    ...Archive_posts
+  }
+}
+
+fragment Archive_posts on PostConnection {
+  edges {
+    node {
+      ...Post_post
+      id
     }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+    cursor
   }
 }
 
@@ -405,13 +376,6 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "__typename",
-                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -425,72 +389,9 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "args": null,
-                "concreteType": "PageInfo",
-                "name": "pageInfo",
-                "plural": false,
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "endCursor",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasNextPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasPreviousPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "startCursor",
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
               }
             ],
             "storageKey": null
-          },
-          {
-            "kind": "LinkedHandle",
-            "alias": "readThis",
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "readThisID",
-                "type": "String"
-              },
-              {
-                "kind": "Literal",
-                "name": "last",
-                "value": 5,
-                "type": "Int"
-              }
-            ],
-            "handle": "connection",
-            "name": "posts",
-            "key": "Home_readThis",
-            "filters": [
-              "categories"
-            ]
           },
           {
             "kind": "LinkedField",
@@ -689,13 +590,6 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "__typename",
-                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -709,72 +603,9 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "args": null,
-                "concreteType": "PageInfo",
-                "name": "pageInfo",
-                "plural": false,
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "endCursor",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasNextPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasPreviousPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "startCursor",
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
               }
             ],
             "storageKey": null
-          },
-          {
-            "kind": "LinkedHandle",
-            "alias": "watchThis",
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "watchThisID",
-                "type": "String"
-              },
-              {
-                "kind": "Literal",
-                "name": "last",
-                "value": 5,
-                "type": "Int"
-              }
-            ],
-            "handle": "connection",
-            "name": "posts",
-            "key": "Home_watchThis",
-            "filters": [
-              "categories"
-            ]
           },
           {
             "kind": "LinkedField",
@@ -973,13 +804,6 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "__typename",
-                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -993,72 +817,9 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "args": null,
-                "concreteType": "PageInfo",
-                "name": "pageInfo",
-                "plural": false,
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "endCursor",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasNextPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasPreviousPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "startCursor",
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
               }
             ],
             "storageKey": null
-          },
-          {
-            "kind": "LinkedHandle",
-            "alias": "listenToThis",
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "listenToThisID",
-                "type": "String"
-              },
-              {
-                "kind": "Literal",
-                "name": "last",
-                "value": 5,
-                "type": "Int"
-              }
-            ],
-            "handle": "connection",
-            "name": "posts",
-            "key": "Home_listenToThis",
-            "filters": [
-              "categories"
-            ]
           },
           {
             "kind": "ScalarField",
@@ -1081,7 +842,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $watchThisID: String!\n  $readThisID: String!\n  $listenToThisID: String!\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  readThis: posts(categories: $readThisID, last: 5) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(categories: $watchThisID, last: 5) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(categories: $listenToThisID, last: 5) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $watchThisID: String!\n  $readThisID: String!\n  $listenToThisID: String!\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  readThis: posts(categories: $readThisID, last: 5) {\n    ...Archive_posts\n  }\n  watchThis: posts(categories: $watchThisID, last: 5) {\n    ...Archive_posts\n  }\n  listenToThis: posts(categories: $listenToThisID, last: 5) {\n    ...Archive_posts\n  }\n}\n\nfragment Archive_posts on PostConnection {\n  edges {\n    node {\n      ...Post_post\n      id\n    }\n    cursor\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

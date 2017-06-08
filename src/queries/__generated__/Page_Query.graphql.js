@@ -3,11 +3,13 @@
  *   relay-compiler
  *
  * @providesModule Page_Query.graphql
- * @generated SignedSource<<da2d7d50f200d748119f5a7ec5caee73>>
- * @relayHash 80a339ef2c789bfa8daff37709e8a815
+ * @generated SignedSource<<7c8dca66308b7fbc1607d62f3f05a7bf>>
+ * @relayHash 1dd501ec169de564f1ef49fef0d58bd1
  * @flow
  * @nogrep
  */
+
+/* eslint-disable */
 
 'use strict';
 
@@ -16,14 +18,16 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 */
 
-/* eslint-disable comma-dangle, quotes */
 
 /*
 query Page_Query(
   $slug: String!
 ) {
-  page(slug: $slug) {
-    ...Page_page
+  viewer {
+    page(slug: $slug) {
+      ...Page_page
+      id
+    }
     id
   }
 }
@@ -86,23 +90,34 @@ const batch /*: ConcreteBatch*/ = {
     "selections": [
       {
         "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "slug",
-            "variableName": "slug",
-            "type": "String"
-          }
-        ],
-        "concreteType": "Page",
-        "name": "page",
+        "alias": "viewer",
+        "args": null,
+        "concreteType": "Viewer",
+        "name": "__viewer_viewer",
         "plural": false,
         "selections": [
           {
-            "kind": "FragmentSpread",
-            "name": "Page_page",
-            "args": null
+            "kind": "LinkedField",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "slug",
+                "variableName": "slug",
+                "type": "String"
+              }
+            ],
+            "concreteType": "Page",
+            "name": "page",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "FragmentSpread",
+                "name": "Page_page",
+                "args": null
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -130,174 +145,201 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LinkedField",
         "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "slug",
-            "variableName": "slug",
-            "type": "String"
-          }
-        ],
-        "concreteType": "Page",
-        "name": "page",
+        "args": null,
+        "concreteType": "Viewer",
+        "name": "viewer",
         "plural": false,
         "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "slug",
+                "variableName": "slug",
+                "type": "String"
+              }
+            ],
+            "concreteType": "Page",
+            "name": "page",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "slug",
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "Title",
+                "name": "title",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "rendered",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "Content",
+                "name": "content",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "rendered",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": null,
+                "name": "featured_media",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "__typename",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Video",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Audio",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Image",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "source_url",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ImageDetails",
+                        "name": "media_details",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "MediaSize",
+                            "name": "sizes",
+                            "plural": true,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "name",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "source_url",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
             "name": "id",
             "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "slug",
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "Title",
-            "name": "title",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "rendered",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "Content",
-            "name": "content",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "rendered",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": null,
-            "name": "featured_media",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "__typename",
-                "storageKey": null
-              },
-              {
-                "kind": "InlineFragment",
-                "type": "Video",
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ]
-              },
-              {
-                "kind": "InlineFragment",
-                "type": "Audio",
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ]
-              },
-              {
-                "kind": "InlineFragment",
-                "type": "Image",
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "source_url",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "ImageDetails",
-                    "name": "media_details",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "MediaSize",
-                        "name": "sizes",
-                        "plural": true,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "name",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "source_url",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ]
-              }
-            ],
-            "storageKey": null
           }
         ],
         "storageKey": null
+      },
+      {
+        "kind": "LinkedHandle",
+        "alias": null,
+        "args": null,
+        "handle": "viewer",
+        "name": "viewer",
+        "key": "",
+        "filters": null
       }
     ]
   },
-  "text": "query Page_Query(\n  $slug: String!\n) {\n  page(slug: $slug) {\n    ...Page_page\n    id\n  }\n}\n\nfragment Page_page on Page {\n  id\n  slug\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    page(slug: $slug) {\n      ...Page_page\n      id\n    }\n    id\n  }\n}\n\nfragment Page_page on Page {\n  id\n  slug\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

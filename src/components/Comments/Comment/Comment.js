@@ -18,6 +18,7 @@ import EditComment from './Edit/Edit';
 import styles from './Comment.scss';
 
 /* eslint-disable react/no-danger */
+/* eslint-disable react/forbid-prop-types */
 
 @FragmentContainer(graphql`
   fragment Comment_comment on Comment {
@@ -35,9 +36,7 @@ import styles from './Comment.scss';
       url
     }
     parent
-    post {
-      id
-    }
+    post
   }
 `)
 @withIntl
@@ -49,6 +48,7 @@ export default class Comment extends Component {
     setReplyTo: PropTypes.func.isRequired,
     comment: CommentType.isRequired,
     intl: intlShape.isRequired,
+    relay: PropTypes.object.isRequired,
   };
 
   state = {

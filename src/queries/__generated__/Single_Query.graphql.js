@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Single_Query.graphql
- * @generated SignedSource<<c7fbdca3fe0ee93d18d83d9a6b8fa32d>>
- * @relayHash c4fe3db90a1bb40057355955f1c45cc1
+ * @generated SignedSource<<961e7b7aecd472f0e14dc4f2b1c45f2e>>
+ * @relayHash 5645c6d96fc5eef5cca9c05910e76660
  * @flow
  * @nogrep
  */
@@ -23,53 +23,55 @@ import type {ConcreteBatch} from 'relay-runtime';
 query Single_Query(
   $id: ID!
 ) {
-  post(id: $id) {
-    ...Single_post
+  viewer {
+    ...Single_viewer
     id
   }
 }
 
-fragment Single_post on Post {
-  id
-  date
-  title {
-    rendered
-  }
-  content {
-    rendered
-  }
-  featured_media {
-    __typename
-    ...Media_media
-    ... on Image {
-      id
-    }
-    ... on Audio {
-      id
-    }
-    ... on Video {
-      id
-    }
-  }
-  tags {
+fragment Single_viewer on Viewer {
+  post(id: $id) {
     id
-    name
-  }
-  comments(first: 100) {
-    edges {
-      node {
-        id
-        parent
-        ...Comment_comment
-        __typename
-      }
-      cursor
+    date
+    title {
+      rendered
     }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
+    content {
+      rendered
+    }
+    featured_media {
+      __typename
+      ...Media_media
+      ... on Image {
+        id
+      }
+      ... on Audio {
+        id
+      }
+      ... on Video {
+        id
+      }
+    }
+    tags {
+      id
+      name
+    }
+    comments(first: 100) {
+      edges {
+        node {
+          id
+          parent
+          ...Comment_comment
+          __typename
+        }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
     }
   }
 }
@@ -94,9 +96,7 @@ fragment Comment_comment on Comment {
     url
   }
   parent
-  post {
-    id
-  }
+  post
 }
 
 fragment Image_image on Media {
@@ -128,22 +128,15 @@ const batch /*: ConcreteBatch*/ = {
     "selections": [
       {
         "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "id",
-            "type": "ID"
-          }
-        ],
-        "concreteType": "Post",
-        "name": "post",
+        "alias": "viewer",
+        "args": null,
+        "concreteType": "Viewer",
+        "name": "__viewer_viewer",
         "plural": false,
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "Single_post",
+            "name": "Single_viewer",
             "args": null
           }
         ],
@@ -172,175 +165,25 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LinkedField",
         "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "id",
-            "type": "ID"
-          }
-        ],
-        "concreteType": "Post",
-        "name": "post",
+        "args": null,
+        "concreteType": "Viewer",
+        "name": "viewer",
         "plural": false,
         "selections": [
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "date",
-            "storageKey": null
-          },
-          {
             "kind": "LinkedField",
             "alias": null,
-            "args": null,
-            "concreteType": "Title",
-            "name": "title",
-            "plural": false,
-            "selections": [
+            "args": [
               {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "rendered",
-                "storageKey": null
+                "kind": "Variable",
+                "name": "id",
+                "variableName": "id",
+                "type": "ID"
               }
             ],
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "Content",
-            "name": "content",
+            "concreteType": "Post",
+            "name": "post",
             "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "rendered",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": null,
-            "name": "featured_media",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "__typename",
-                "storageKey": null
-              },
-              {
-                "kind": "InlineFragment",
-                "type": "Video",
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ]
-              },
-              {
-                "kind": "InlineFragment",
-                "type": "Audio",
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ]
-              },
-              {
-                "kind": "InlineFragment",
-                "type": "Image",
-                "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "source_url",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "ImageDetails",
-                    "name": "media_details",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "MediaSize",
-                        "name": "sizes",
-                        "plural": true,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "name",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "source_url",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ]
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "Tag",
-            "name": "tags",
-            "plural": true,
             "selections": [
               {
                 "kind": "ScalarField",
@@ -353,168 +196,22 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "name",
+                "name": "date",
                 "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": [
-              {
-                "kind": "Literal",
-                "name": "first",
-                "value": 100,
-                "type": "Int"
-              }
-            ],
-            "concreteType": "CommentConnection",
-            "name": "comments",
-            "plural": false,
-            "selections": [
+              },
               {
                 "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "concreteType": "CommentEdge",
-                "name": "edges",
-                "plural": true,
+                "concreteType": "Title",
+                "name": "title",
+                "plural": false,
                 "selections": [
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Comment",
-                    "name": "node",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "parent",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "author_name",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "author_url",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "author_hash",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "date",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Content",
-                        "name": "content",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "rendered",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "raw",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Avatar",
-                        "name": "author_avatar_urls",
-                        "plural": true,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "size",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "url",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Post",
-                        "name": "post",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "id",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "__typename",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
                   {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
-                    "name": "cursor",
+                    "name": "rendered",
                     "storageKey": null
                   }
                 ],
@@ -524,66 +221,378 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "concreteType": "PageInfo",
-                "name": "pageInfo",
+                "concreteType": "Content",
+                "name": "content",
                 "plural": false,
                 "selections": [
                   {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
-                    "name": "endCursor",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasNextPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "hasPreviousPage",
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "startCursor",
+                    "name": "rendered",
                     "storageKey": null
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": null,
+                "name": "featured_media",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "__typename",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Video",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Audio",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Image",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "source_url",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ImageDetails",
+                        "name": "media_details",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "MediaSize",
+                            "name": "sizes",
+                            "plural": true,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "name",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "source_url",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "Tag",
+                "name": "tags",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "id",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "name",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "first",
+                    "value": 100,
+                    "type": "Int"
+                  }
+                ],
+                "concreteType": "CommentConnection",
+                "name": "comments",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "CommentEdge",
+                    "name": "edges",
+                    "plural": true,
+                    "selections": [
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Comment",
+                        "name": "node",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "id",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "parent",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "author_name",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "author_url",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "author_hash",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "date",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Content",
+                            "name": "content",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "rendered",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "raw",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Avatar",
+                            "name": "author_avatar_urls",
+                            "plural": true,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "size",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "url",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "post",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "__typename",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "cursor",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "name": "pageInfo",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "endCursor",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "hasNextPage",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "hasPreviousPage",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "startCursor",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": "comments{\"first\":100}"
+              },
+              {
+                "kind": "LinkedHandle",
+                "alias": null,
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "first",
+                    "value": 100,
+                    "type": "Int"
+                  }
+                ],
+                "handle": "connection",
+                "name": "comments",
+                "key": "Single_comments",
+                "filters": null
               }
             ],
-            "storageKey": "comments{\"first\":100}"
+            "storageKey": null
           },
           {
-            "kind": "LinkedHandle",
+            "kind": "ScalarField",
             "alias": null,
-            "args": [
-              {
-                "kind": "Literal",
-                "name": "first",
-                "value": 100,
-                "type": "Int"
-              }
-            ],
-            "handle": "connection",
-            "name": "comments",
-            "key": "Single_comments",
-            "filters": null
+            "args": null,
+            "name": "id",
+            "storageKey": null
           }
         ],
         "storageKey": null
+      },
+      {
+        "kind": "LinkedHandle",
+        "alias": null,
+        "args": null,
+        "handle": "viewer",
+        "name": "viewer",
+        "key": "",
+        "filters": null
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  post(id: $id) {\n    ...Single_post\n    id\n  }\n}\n\nfragment Single_post on Post {\n  id\n  date\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  tags {\n    id\n    name\n  }\n  comments(first: 100) {\n    edges {\n      node {\n        id\n        parent\n        ...Comment_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post {\n    id\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featured_media {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n    }\n    comments(first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

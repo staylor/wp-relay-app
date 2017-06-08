@@ -14,28 +14,30 @@ import styles from './Single.scss';
 /* eslint-disable react/style-prop-object */
 
 @FragmentContainer(graphql`
-  fragment Single_post on Post {
-    id
-    date
-    title {
-      rendered
-    }
-    content {
-      rendered
-    }
-    featured_media {
-      ...Media_media
-    }
-    tags {
+  fragment Single_viewer on Viewer {
+    post(id: $id) {
       id
-      name
-    }
-    comments(first: 100) @connection(key: "Single_comments") {
-      edges {
-        node {
-          id
-          parent
-          ...Comment_comment
+      date
+      title {
+        rendered
+      }
+      content {
+        rendered
+      }
+      featured_media {
+        ...Media_media
+      }
+      tags {
+        id
+        name
+      }
+      comments(first: 100) @connection(key: "Single_comments") {
+        edges {
+          node {
+            id
+            parent
+            ...Comment_comment
+          }
         }
       }
     }
@@ -80,7 +82,7 @@ export default class Single extends Component {
         tags,
         comments,
       },
-    } = this.props;
+    } = this.props.viewer;
 
     return (
       <article className={styles.content}>

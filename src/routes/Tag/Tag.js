@@ -3,38 +3,43 @@ import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
 import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
-import TagArchive from './TagArchive';
+import Archive from 'components/Archive';
 import styles from './Tag.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
 @FragmentContainer(graphql`
-  fragment Tag_term on TermInterface {
-    id
-    name
-    taxonomy {
-      slug
+  fragment Tag_viewer on Viewer {
+    tag(id: $id) {
+      id
+      name
+      taxonomy {
+        slug
+      }
+    }
+    posts(tag: $id) {
+      ...Archive_posts
     }
   }
 `)
 export default class Tag extends Component {
   render() {
-    const { term } = this.props;
-    const label = getTaxonomyDisplay(term.taxonomy);
-    const title = `${label}: ${term.name}`;
-    const rewriteSlug = getTaxonomyRewriteSlug(term.taxonomy);
+    const { tag, posts } = this.props.viewer;
+    const label = getTaxonomyDisplay(tag.taxonomy);
+    const title = `${label}: ${tag.name}`;
+    const rewriteSlug = getTaxonomyRewriteSlug(tag.taxonomy);
 
     return (
       <div className={styles.sections}>
         <Helmet>
           <title>{title}</title>
-          <link rel="canonical" href={`https://highforthis.com/${rewriteSlug}/${term.id}`} />
+          <link rel="canonical" href={`https://highforthis.com/${rewriteSlug}/${tag.id}`} />
         </Helmet>
-        {term &&
+        {tag &&
           <section>
             <h3 className={styles.label}>{title}</h3>
-            <TagArchive id={term.id} />
+            <Archive posts={posts} />
           </section>}
       </div>
     );

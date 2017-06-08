@@ -3,24 +3,29 @@ import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
 import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
-import CategoryArchive from './CategoryArchive';
+import Archive from 'components/Archive';
 import styles from './Category.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
 @FragmentContainer(graphql`
-  fragment Category_category on Category {
-    id
-    name
-    taxonomy {
-      slug
+  fragment Category_viewer on Viewer {
+    category(id: $id) {
+      id
+      name
+      taxonomy {
+        slug
+      }
+    }
+    posts(category: $id) {
+      ...Archive_posts
     }
   }
 `)
 export default class Category extends Component {
   render() {
-    const { category } = this.props;
+    const { category, posts } = this.props.viewer;
     const label = getTaxonomyDisplay(category.taxonomy);
     const title = `${label}: ${category.name}`;
     const rewriteSlug = getTaxonomyRewriteSlug(category.taxonomy);
@@ -34,7 +39,7 @@ export default class Category extends Component {
         {category &&
           <section>
             <h3 className={styles.label}>{title}</h3>
-            <CategoryArchive id={category.id} count={10} />
+            <Archive posts={posts} />
           </section>}
       </div>
     );

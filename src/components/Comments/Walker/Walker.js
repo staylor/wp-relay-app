@@ -9,7 +9,11 @@ import styles from './Walker.scss';
 export default class CommentsWalker extends Component {
   static propTypes = {
     post: PropTypes.string.isRequired,
-    comments: CommentConnectionType.isRequired,
+    comments: CommentConnectionType,
+  };
+
+  static defaultProps = {
+    comments: null,
   };
 
   state = {
@@ -54,6 +58,14 @@ export default class CommentsWalker extends Component {
   }
 
   render() {
+    if (!this.props.comments) {
+      return (
+        <section>
+          {<Form post={this.props.post} setReplyTo={this.setReplyTo} />}
+        </section>
+      );
+    }
+
     const { comments: { edges } } = this.props;
     this.sorted = sortHierarchy(edges);
     this.level = 0;

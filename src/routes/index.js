@@ -9,6 +9,10 @@ import 'isomorphic-fetch';
 import App from 'components/App';
 import Single from 'routes/Single';
 import SingleQuery from 'queries/Single';
+import Category from 'routes/Category';
+import CategoryQuery from 'queries/Category';
+import Tag from 'routes/Tag';
+import TagQuery from 'queries/Tag';
 import Home from 'routes/Home';
 import HomeQuery from 'queries/Home';
 import AppQuery from 'queries/App';
@@ -60,6 +64,8 @@ export const routeConfig = makeRouteConfig(
       sidebarID: 'U2lkZWJhcjpzaWRlYmFyLTE=',
     })}
   >
+    <Route path="category/:id" Component={Category} query={CategoryQuery} />
+    <Route path="tag/:id" Component={Tag} query={TagQuery} />
     <Route path="post/:id" Component={Single} query={SingleQuery} />
     <Route
       path="/"
