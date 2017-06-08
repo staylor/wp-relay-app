@@ -58,7 +58,8 @@ export default class App extends Component {
             <a href="https://twitter.com/wonderboymusic">
               @wonderboymusic
             </a>&nbsp;
-            ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis / SCSS
+            ... Powered by GraphQL / React / Relay / WordPress / nginx / Redis /
+            SCSS
           </footer>
         </div>
       </IntlProvider>

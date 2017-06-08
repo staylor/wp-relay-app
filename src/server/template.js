@@ -1,7 +1,7 @@
 import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 
-export default ({ root, data, cssBundle, jsBundle }) => {
+export default ({ root, data, mainCSSBundle, manifestJSBundle, vendorJSBundle, mainJSBundle }) => {
   const helmet = Helmet.rewind();
 
   return `<!DOCTYPE html>
@@ -15,14 +15,16 @@ ${helmet.title.toString()}
 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 <link id="favicon" rel="shortcut icon" href="/kyt-favicon.png" sizes="16x16 32x32" type="image/png" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
-${cssBundle ? `<link rel="stylesheet" type="text/css" href="${cssBundle}" />` : ''}
+${mainCSSBundle ? `<link rel="stylesheet" type="text/css" href="${mainCSSBundle}" />` : ''}
 <link rel="stylesheet" type="text/css" href="/css/gigpress.css" />
 ${helmet.meta.toString()}${helmet.link.toString()}${helmet.script.toString()}
 </head>
 <body>
 <script>window.__RELAY_STORE__ = ${serialize(data, { isJSON: true })};</script>
 <main id="main">${root}</main>
-<script src="${jsBundle}"></script>
+${manifestJSBundle ? `<script defer src="${manifestJSBundle}"></script>` : ''}
+${vendorJSBundle ? `<script defer src="${vendorJSBundle}"></script>` : ''}
+${mainJSBundle ? `<script defer src="${mainJSBundle}"></script>` : ''}
 </body>
 </html>`;
 };

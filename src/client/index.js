@@ -11,16 +11,19 @@ import { createResolver, historyMiddlewares, render, routeConfig } from 'routes'
   const recordSource = new RecordSource(window.__RELAY_STORE__);
   const resolver = createResolver('/graphql', recordSource);
 
-  const Router = await createInitialFarceRouter({
-    historyProtocol: new BrowserProtocol(),
-    historyMiddlewares,
-    routeConfig,
-    resolver,
-    render,
-  });
-
-  // ReactDOM.render(
-  //   <CookiesProvider><Router resolver={resolver} /></CookiesProvider>,
-  //   document.getElementById('main')
-  // );
+  try {
+    const Router = await createInitialFarceRouter({
+      historyProtocol: new BrowserProtocol(),
+      historyMiddlewares,
+      routeConfig,
+      resolver,
+      render,
+    });
+    ReactDOM.render(
+      <CookiesProvider><Router resolver={resolver} /></CookiesProvider>,
+      document.getElementById('main')
+    );
+  } catch (e) {
+    throw e;
+  }
 })();

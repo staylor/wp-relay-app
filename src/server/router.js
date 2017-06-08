@@ -8,7 +8,10 @@ import template from 'server/template';
 
 import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
 
-export default ({ jsBundle, cssBundle }) => async (req, res) => {
+export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle, mainCSSBundle }) => async (
+  req,
+  res
+) => {
   const graphqlUrl = 'http://localhost:3000/graphql';
   const recordSource = new RecordSource();
 
@@ -30,21 +33,22 @@ export default ({ jsBundle, cssBundle }) => async (req, res) => {
           {element}
         </CookiesProvider>
       );
-      const data = recordSource.toJSON();
 
       res.status(200);
       res.send(
         template({
           root,
-          data,
-          jsBundle,
-          cssBundle,
+          data: recordSource,
+          manifestJSBundle,
+          mainJSBundle,
+          vendorJSBundle,
+          mainCSSBundle,
         })
       );
     })
     .catch(e => {
       // eslint-disable-next-line no-console
       console.error(e);
-      res.send(JSON.stringify(e));
+      res.send(e.message);
     });
 };

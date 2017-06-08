@@ -41,8 +41,10 @@ app.use(
 app.get(
   '*',
   router({
-    jsBundle: clientAssets.main.js,
-    cssBundle: clientAssets.main.css,
+    manifestJSBundle: clientAssets['manifest.js'],
+    mainJSBundle: clientAssets['main.js'],
+    vendorJSBundle: clientAssets['vendor.js'],
+    mainCSSBundle: clientAssets['main.css'],
   })
 );
 

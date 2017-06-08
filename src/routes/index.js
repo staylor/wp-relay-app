@@ -68,7 +68,6 @@ export const routeConfig = makeRouteConfig(
     <Route path="tag/:id" Component={Tag} query={TagQuery} />
     <Route path="post/:id" Component={Single} query={SingleQuery} />
     <Route
-      path="/"
       Component={Home}
       query={HomeQuery}
       prepareVariables={params => ({
