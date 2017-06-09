@@ -19,7 +19,7 @@ export default function createFetch(url) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: operation.text,
+        query: `id:${queryID}`,
         variables,
       }),
     })
