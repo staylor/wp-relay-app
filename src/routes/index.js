@@ -45,7 +45,7 @@ export const routeConfig = makeRouteConfig(
     <Route path="category/:id" Component={Category} query={CategoryQuery} />
     <Route path="tag/:id" Component={Tag} query={TagQuery} />
     <Route path="post/:id" Component={Single} query={SingleQuery} />
-    <Route path=":id" Component={Page} query={PageQuery} />
+    <Route path=":slug" Component={Page} query={PageQuery} />
     <Route
       Component={Home}
       query={HomeQuery}

@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Page_Query.graphql
- * @generated SignedSource<<7c8dca66308b7fbc1607d62f3f05a7bf>>
- * @relayHash 1dd501ec169de564f1ef49fef0d58bd1
+ * @generated SignedSource<<99dc789df292f922b33d89b8b066e1df>>
+ * @relayHash 9122f6b2dbf660f7a449fbda6763c174
  * @flow
  * @nogrep
  */
@@ -24,34 +24,33 @@ query Page_Query(
   $slug: String!
 ) {
   viewer {
-    page(slug: $slug) {
-      ...Page_page
-      id
-    }
+    ...Page_viewer
     id
   }
 }
 
-fragment Page_page on Page {
-  id
-  slug
-  title {
-    rendered
-  }
-  content {
-    rendered
-  }
-  featured_media {
-    __typename
-    ...Media_media
-    ... on Image {
-      id
+fragment Page_viewer on Viewer {
+  page(slug: $slug) {
+    id
+    slug
+    title {
+      rendered
     }
-    ... on Audio {
-      id
+    content {
+      rendered
     }
-    ... on Video {
-      id
+    featured_media {
+      __typename
+      ...Media_media
+      ... on Image {
+        id
+      }
+      ... on Audio {
+        id
+      }
+      ... on Video {
+        id
+      }
     }
   }
 }
@@ -97,27 +96,9 @@ const batch /*: ConcreteBatch*/ = {
         "plural": false,
         "selections": [
           {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "slug",
-                "variableName": "slug",
-                "type": "String"
-              }
-            ],
-            "concreteType": "Page",
-            "name": "page",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "FragmentSpread",
-                "name": "Page_page",
-                "args": null
-              }
-            ],
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "Page_viewer",
+            "args": null
           }
         ],
         "storageKey": null
@@ -339,7 +320,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    page(slug: $slug) {\n      ...Page_page\n      id\n    }\n    id\n  }\n}\n\nfragment Page_page on Page {\n  id\n  slug\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    id\n    slug\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featured_media {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
