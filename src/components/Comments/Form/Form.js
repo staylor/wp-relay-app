@@ -29,6 +29,10 @@ const getDefaultState = props => {
 
 @withCookies
 export default class Form extends Component {
+  static contextTypes = {
+    relay: PropTypes.object.isRequired,
+  };
+
   static propTypes = {
     cookies: PropTypes.instanceOf(Cookies).isRequired,
     post: PropTypes.string.isRequired,
@@ -63,7 +67,7 @@ export default class Form extends Component {
       variables.input.parent = this.props.replyTo;
     }
 
-    AddCommentMutation.commit(this.props.relay.environment, variables, () => {
+    AddCommentMutation.commit(this.context.relay.environment, variables, () => {
       this.setState({
         comment: getDefaultState(this.props),
       });

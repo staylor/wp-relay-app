@@ -31,7 +31,7 @@ import styles from './Single.scss';
         id
         name
       }
-      comments(first: 100) @connection(key: "Single_comments") {
+      comments(post: $id, first: 100) @connection(key: "Single_post_comments") {
         edges {
           node {
             id

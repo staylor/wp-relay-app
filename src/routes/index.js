@@ -15,6 +15,8 @@ import Tag from 'routes/Tag';
 import TagQuery from 'queries/Tag';
 import Home from 'routes/Home';
 import HomeQuery from 'queries/Home';
+import Page from 'routes/Page';
+import PageQuery from 'queries/Page';
 import AppQuery from 'queries/App';
 import createFetch from 'relay/fetchQuery';
 
@@ -43,6 +45,7 @@ export const routeConfig = makeRouteConfig(
     <Route path="category/:id" Component={Category} query={CategoryQuery} />
     <Route path="tag/:id" Component={Tag} query={TagQuery} />
     <Route path="post/:id" Component={Single} query={SingleQuery} />
+    <Route path=":id" Component={Page} query={PageQuery} />
     <Route
       Component={Home}
       query={HomeQuery}

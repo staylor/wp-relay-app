@@ -58,10 +58,12 @@ const commit = (environment, variables, onCompleted = null) => {
     if (!newComment) {
       return;
     }
-    const storeRoot = store.get(variables.input.post);
-    const connection = ConnectionHandler.getConnection(storeRoot, 'Single_comments');
+    const post = store.get(variables.input.post);
+    const connection = ConnectionHandler.getConnection(post, 'Single_post_comments', {
+      post: variables.input.post,
+    });
     const newEdge = ConnectionHandler.createEdge(store, connection, newComment, 'CommentEdge');
-    ConnectionHandler.insertEdgeBefore(connection, newEdge);
+    ConnectionHandler.insertEdgeAfter(connection, newEdge);
   };
 
   commitMutation(environment, {

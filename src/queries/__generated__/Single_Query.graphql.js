@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Single_Query.graphql
- * @generated SignedSource<<961e7b7aecd472f0e14dc4f2b1c45f2e>>
- * @relayHash 5645c6d96fc5eef5cca9c05910e76660
+ * @generated SignedSource<<2e15a53d7e578383a0e142c0c63b1954>>
+ * @relayHash f9c0044e6f2e4402173b61749c6679a6
  * @flow
  * @nogrep
  */
@@ -56,7 +56,7 @@ fragment Single_viewer on Viewer {
       id
       name
     }
-    comments(first: 100) {
+    comments(post: $id, first: 100) {
       edges {
         node {
           id
@@ -369,6 +369,12 @@ const batch /*: ConcreteBatch*/ = {
                     "name": "first",
                     "value": 100,
                     "type": "Int"
+                  },
+                  {
+                    "kind": "Variable",
+                    "name": "post",
+                    "variableName": "id",
+                    "type": "ID"
                   }
                 ],
                 "concreteType": "CommentConnection",
@@ -550,7 +556,7 @@ const batch /*: ConcreteBatch*/ = {
                     "storageKey": null
                   }
                 ],
-                "storageKey": "comments{\"first\":100}"
+                "storageKey": null
               },
               {
                 "kind": "LinkedHandle",
@@ -561,12 +567,20 @@ const batch /*: ConcreteBatch*/ = {
                     "name": "first",
                     "value": 100,
                     "type": "Int"
+                  },
+                  {
+                    "kind": "Variable",
+                    "name": "post",
+                    "variableName": "id",
+                    "type": "ID"
                   }
                 ],
                 "handle": "connection",
                 "name": "comments",
-                "key": "Single_comments",
-                "filters": null
+                "key": "Single_post_comments",
+                "filters": [
+                  "post"
+                ]
               }
             ],
             "storageKey": null
@@ -592,7 +606,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featured_media {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n    }\n    comments(first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featured_media {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n    }\n    comments(post: $id, first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

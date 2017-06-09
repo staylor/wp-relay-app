@@ -28,7 +28,5 @@ export const CommentType = PropTypes.shape({
     })
   ),
   parent: PropTypes.string,
-  post: PropTypes.shape({
-    id: PropTypes.string,
-  }),
+  post: PropTypes.string,
 });

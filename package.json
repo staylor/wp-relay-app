@@ -57,7 +57,8 @@
     "proto": "kyt proto",
     "kyt:help": "kyt --help",
     "relay": "relay-compiler --src ./src --schema ./tools/schema.graphql && npm run persist-queries",
-    "persist-queries": "babel-node ./tools/persistedQueries"
+    "persist-queries": "babel-node ./tools/persistedQueries",
+    "clear-cache": "redis-cli FLUSHALL && npm run persist-queries"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

@@ -21,8 +21,10 @@ const commit = (comment, environment, onCompleted) => {
     if (payload.getValue('status') !== 'delete') {
       return;
     }
-    const storeRoot = store.get(comment.post.id);
-    const connection = ConnectionHandler.getConnection(storeRoot, 'Single_comments');
+    const post = store.get(comment.post);
+    const connection = ConnectionHandler.getConnection(post, 'Single_post_comments', {
+      post: comment.post,
+    });
     ConnectionHandler.deleteNode(connection, comment.id);
   };
 

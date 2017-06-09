@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Single_viewer.graphql
- * @generated SignedSource<<37d7c778fb1e2e2127ca36c475a9d329>>
+ * @generated SignedSource<<ebe620accc98fc89ae5a88ed629cc742>>
  * @flow
  * @nogrep
  */
@@ -175,9 +175,16 @@ const fragment /*: ConcreteFragment*/ = {
         {
           "kind": "LinkedField",
           "alias": "comments",
-          "args": null,
+          "args": [
+            {
+              "kind": "Variable",
+              "name": "post",
+              "variableName": "id",
+              "type": "ID"
+            }
+          ],
           "concreteType": "CommentConnection",
-          "name": "__Single_comments_connection",
+          "name": "__Single_post_comments_connection",
           "plural": false,
           "selections": [
             {

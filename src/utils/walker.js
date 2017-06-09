@@ -14,10 +14,6 @@ export function sortHierarchy(list) {
     nested[node.parent].push(node);
   });
 
-  Object.keys(nested).forEach(key => {
-    nested[key].reverse();
-  });
-
   return nested;
 }
 
