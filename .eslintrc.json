@@ -1,6 +1,7 @@
 {
   "extends": [
-    "./node_modules/kyt/config/.eslintrc.base.json"
+    "./node_modules/kyt/config/.eslintrc.base.json",
+    "prettier"
   ],
 
   "parser": "babel-eslint",
@@ -15,8 +16,15 @@
   },
 
   "plugins": [
+    "prettier"
   ],
 
   "rules": {
+    "prettier/prettier": ["error", {
+      "trailingComma": "es5",
+      "semi": true,
+      "singleQuote": true,
+      "printWidth": 100
+    }]
   }
 }

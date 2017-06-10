@@ -14,3 +14,64 @@
     visibility: hidden;
   }
 }
+
+@mixin form-field() {
+  border: 1px solid $detail;
+  margin: 0;
+  padding: 6px;
+  width: 100%;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: 0 0 0 1000px $white inset;
+    color: $dark;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@mixin button() {
+  border: 1px solid $dark;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $futura;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@mixin submit-button() {
+  @include button();
+  background: $dark;
+  color: $white;
+}
+
+@mixin reset-button() {
+  @include button();
+  background: $white;
+  color: $dark;
+}
+
+@mixin load-more() {
+  @include size-height(16, 16);
+  appearance: none;
+  background: $white;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: pointer;
+  height: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 400ms;
+  width: 80px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border: 1px solid $black;
+    color: $black;
+    outline: 0 none;
+  }
+}

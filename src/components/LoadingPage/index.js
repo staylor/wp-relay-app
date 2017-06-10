@@ -1,11 +1,3 @@
-import React from 'react';
-import Loading from '../Loading';
-import styles from './LoadingPage.scss';
+import LoadingPage from './LoadingPage';
 
-export default function LoadingPage() {
-  return (
-    <div className={styles.loadingPage}>
-      <Loading />
-    </div>
-  );
-}
+export default LoadingPage;

@@ -1,54 +1,29 @@
 import React from 'react';
-import { render } from 'react-dom';
-import Relay from 'react-relay';
-import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
-import { IntlProvider } from 'react-intl';
-import IsomorphicRelay from 'relay/Isomorphic';
-import IsomorphicRouter from 'relay/Isomorphic/Router';
-import { AppContainer } from 'react-hot-loader';
-import Router from 'react-router/lib/Router';
-import browserHistory from 'react-router/lib/browserHistory';
-import match from 'react-router/lib/match';
-import AppRoutes from 'routes';
+import ReactDOM from 'react-dom';
+import BrowserProtocol from 'farce/lib/BrowserProtocol';
+import createInitialFarceRouter from 'found/lib/createInitialFarceRouter';
+import { CookiesProvider } from 'react-cookie';
+import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
+import { ClientFetcher } from 'relay/fetcher';
 
-const data = JSON.parse(document.getElementById('preloadedData').textContent);
+(async () => {
+  // eslint-disable-next-line no-underscore-dangle
+  const fetcher = new ClientFetcher('/graphql', window.__RELAY_PAYLOADS__);
+  const resolver = createResolver(fetcher);
 
-const environment = new Relay.Environment();
-const networkLayer = new RelayNetworkLayer([
-  urlMiddleware({
-    url: '/graphql',
-    batchUrl: '/graphql/batch',
-  }),
-], { disableBatchQuery: false });
-
-environment.injectNetworkLayer(networkLayer);
-
-IsomorphicRelay.injectPreparedData(environment, data);
-
-const root = document.querySelector('#main');
-
-const mount = (routes = AppRoutes) => {
-  match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
-    IsomorphicRouter.prepareInitialRender(environment, renderProps).then((props) => {
-      render(
-        <AppContainer>
-          <IntlProvider locale="en">
-            <Router {...props} onUpdate={() => { window.scrollTo(0, 0); }} />
-          </IntlProvider>
-        </AppContainer>,
-        root
-      );
+  try {
+    const Router = await createInitialFarceRouter({
+      historyProtocol: new BrowserProtocol(),
+      historyMiddlewares,
+      routeConfig,
+      resolver,
+      render,
     });
-  });
-};
-
-mount();
-
-if (module.hot) {
-  // Rerender after any changes to the following.
-  module.hot.accept('../routes', () => {
-    const newRoutes = require('../routes').default; // eslint-disable-line global-require
-
-    mount(newRoutes);
-  });
-}
+    ReactDOM.render(
+      <CookiesProvider><Router resolver={resolver} /></CookiesProvider>,
+      document.getElementById('main')
+    );
+  } catch (e) {
+    throw e;
+  }
+})();

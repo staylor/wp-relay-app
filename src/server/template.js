@@ -1,34 +1,32 @@
 import Helmet from 'react-helmet';
+import serialize from 'serialize-javascript';
 
-export default ({
-  root,
-  data,
-  cssBundle,
-  jsBundle,
-}) => {
-  const head = Helmet.rewind();
+export default ({ root, data, mainCSSBundle, manifestJSBundle, vendorJSBundle, mainJSBundle }) => {
+  const helmet = Helmet.rewind();
 
   return `<!DOCTYPE html>
-<html ${head.htmlAttributes.toString()}>
+<html ${helmet.htmlAttributes.toString()}>
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charSet="utf-8" />
+${helmet.title.toString()}
 <script src="//use.typekit.net/tts4dcv.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
-<link id="favicon" rel="shortcut icon" href="/kyt-favicon.png" sizes="16x16 32x32" type="image/png"  />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+<link id="favicon" rel="shortcut icon" href="/kyt-favicon.png" sizes="16x16 32x32" type="image/png" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
-${head.meta.toString()}
-${head.title.toString()}
-${head.script.toString()}
-${head.link.toString()}
-${cssBundle ? `<link rel="stylesheet" type="text/css" href="${cssBundle}" />` : ''}
+${mainCSSBundle ? `<link rel="stylesheet" type="text/css" href="${mainCSSBundle}" />` : ''}
 <link rel="stylesheet" type="text/css" href="/css/gigpress.css" />
+${helmet.meta.toString()}${helmet.link.toString()}${helmet.script.toString()}
 </head>
 <body>
+<script>window.__RELAY_PAYLOADS__ = ${serialize(data, {
+    isJSON: true,
+  })};</script>
 <main id="main">${root}</main>
-<script id="preloadedData" type="application/json">${JSON.stringify(data).replace(/\//g, '\\/')}</script>
-<script src="${jsBundle}"></script>
+${manifestJSBundle ? `<script defer src="${manifestJSBundle}"></script>` : ''}
+${vendorJSBundle ? `<script defer src="${vendorJSBundle}"></script>` : ''}
+${mainJSBundle ? `<script defer src="${mainJSBundle}"></script>` : ''}
 </body>
 </html>`;
 };

@@ -1,20 +1,21 @@
 {
   "presets": [
     "babel-preset-kyt-react",
-    "es2015",
     "stage-0"
   ],
   "plugins": [
-    "./tools/babelRelayPlugin.js",
+    "relay",
     "babel-plugin-transform-decorators-legacy",
     "babel-plugin-transform-class-properties",
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "components": "./components",
-        "routes": "./routes",
-        "utils": "./utils",
-        "relay": "./relay"
+        "routes": "./src/routes",
+        "components": "./src/components",
+        "utils": "./src/utils",
+        "queries": "./src/queries",
+        "relay": "./src/relay",
+        "server": "./src/server"
       }
     }]
   ]

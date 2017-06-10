@@ -1,80 +1,52 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { RelayNetworkLayer, urlMiddleware } from 'react-relay-network-layer';
-import IsomorphicRouter from 'relay/Isomorphic/Router';
-import match from 'react-router/lib/match';
-import { IntlProvider } from 'react-intl';
-import template from './template';
-import routes from '../routes';
+import { getFarceResult } from 'found/lib/server';
+import { CookiesProvider } from 'react-cookie';
+import template from 'server/template';
+import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
+import { ServerFetcher } from 'relay/fetcher';
 
-const errorHandler = (error) => {
-  // `fetchWithRetries` errors includes the response body
-  // https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/fetch/fetchWithRetries.js#L93
-  const isfetchWithRetriesError =
-    !!error.response &&
-    error.response.constructor.name === 'Body';
+export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle, mainCSSBundle }) => async (
+  req,
+  res
+) => {
+  const graphqlUrl = 'http://localhost:3000/graphql';
+  const fetcher = new ServerFetcher(graphqlUrl);
 
-  // Include GQL's error response in addition
-  // to the generic `fetchWithRetries` message
-  if (isfetchWithRetriesError) {
-    return error.response.text().then((payload) => {
-      throw new Error(
-        `${error.message} \n` +
-        `Status Code: ${error.response.status} ${error.response.statusText} \n` +
-        `Request URL: ${error.response.url} \n` +
-        `Request Payload: \n` +
-        `${payload} \n`
-      );
-    });
-  }
-
-  // Rethrow any errors that are not caused by `fetchWithRetries`
-  throw error;
-};
-
-export default ({
-  gqlUrl,
-  gqlBatchUrl,
-  jsBundle,
-  cssBundle,
-}) => {
-  const networkLayer = new RelayNetworkLayer([
-    urlMiddleware({
-      url: gqlUrl,
-      batchUrl: gqlBatchUrl,
-    }),
-  ], { disableBatchQuery: false });
-
-  return (req, res, next) => {
-    match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-      if (err) {
-        return res.status(500).send(err.message);
-      } else if (redirectLocation) {
-        return res.redirect(302, `${redirectLocation.pathname}${redirectLocation.search}`);
-      } else if (!renderProps) {
-        return res.status(404).send('Not Found');
+  getFarceResult({
+    url: req.url,
+    historyMiddlewares,
+    routeConfig,
+    resolver: createResolver(fetcher),
+    render,
+  })
+    .then(({ redirect, element }) => {
+      if (redirect) {
+        res.redirect(302, redirect.url);
+        return;
       }
 
-      IsomorphicRouter
-        .prepareData(renderProps, networkLayer)
-        .then(({ data, props }) => {
-          const root = renderToString((
-            <IntlProvider locale="en">
-              {IsomorphicRouter.render(props)}
-            </IntlProvider>
-          ));
+      const root = renderToString(
+        <CookiesProvider cookies={req.universalCookies}>
+          {element}
+        </CookiesProvider>
+      );
 
-          res.status(200);
-          res.send(template({
-            root,
-            jsBundle,
-            cssBundle,
-            data,
-          }));
+      res.status(200);
+      res.send(
+        template({
+          root,
+          data: fetcher,
+          manifestJSBundle,
+          mainJSBundle,
+          vendorJSBundle,
+          mainCSSBundle,
         })
-        .catch(errorHandler)
-        .catch(next);
-      return null;
+      );
+    })
+    .catch(e => {
+      // eslint-disable-next-line no-console
+      console.error(e);
+      res.send(e.message);
     });
-  };
 };

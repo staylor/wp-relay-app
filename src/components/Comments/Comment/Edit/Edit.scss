@@ -1,0 +1,19 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.form {
+  margin: 0 0 20px;
+}
+
+.content {
+  @include form-field();
+}
+
+.button {
+  @include submit-button();
+}
+
+.cancel {
+  @include reset-button();
+  margin: 0 5px;
+}
