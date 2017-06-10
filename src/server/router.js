@@ -1,25 +1,23 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { getFarceResult } from 'found/lib/server';
-import { RecordSource } from 'relay-runtime';
 import { CookiesProvider } from 'react-cookie';
-
 import template from 'server/template';
-
 import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
+import { ServerFetcher } from 'relay/fetcher';
 
 export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle, mainCSSBundle }) => async (
   req,
   res
 ) => {
   const graphqlUrl = 'http://localhost:3000/graphql';
-  const recordSource = new RecordSource();
+  const fetcher = new ServerFetcher(graphqlUrl);
 
   getFarceResult({
     url: req.url,
     historyMiddlewares,
     routeConfig,
-    resolver: createResolver(graphqlUrl, recordSource),
+    resolver: createResolver(fetcher),
     render,
   })
     .then(({ redirect, element }) => {
@@ -38,7 +36,7 @@ export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle, mainCSSBundle 
       res.send(
         template({
           root,
-          data: recordSource,
+          data: fetcher,
           manifestJSBundle,
           mainJSBundle,
           vendorJSBundle,

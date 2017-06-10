@@ -20,7 +20,9 @@ ${mainCSSBundle ? `<link rel="stylesheet" type="text/css" href="${mainCSSBundle}
 ${helmet.meta.toString()}${helmet.link.toString()}${helmet.script.toString()}
 </head>
 <body>
-<script>window.__RELAY_STORE__ = ${serialize(data, { isJSON: true })};</script>
+<script>window.__RELAY_PAYLOADS__ = ${serialize(data, {
+    isJSON: true,
+  })};</script>
 <main id="main">${root}</main>
 ${manifestJSBundle ? `<script defer src="${manifestJSBundle}"></script>` : ''}
 ${vendorJSBundle ? `<script defer src="${vendorJSBundle}"></script>` : ''}

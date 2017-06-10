@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BrowserProtocol from 'farce/lib/BrowserProtocol';
 import createInitialFarceRouter from 'found/lib/createInitialFarceRouter';
-import { RecordSource } from 'relay-runtime';
 import { CookiesProvider } from 'react-cookie';
 import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
+import { ClientFetcher } from 'relay/fetcher';
 
 (async () => {
   // eslint-disable-next-line no-underscore-dangle
-  const recordSource = new RecordSource(window.__RELAY_STORE__);
-  const resolver = createResolver('/graphql', recordSource);
+  const fetcher = new ClientFetcher('/graphql', window.__RELAY_PAYLOADS__);
+  const resolver = createResolver(fetcher);
 
   try {
     const Router = await createInitialFarceRouter({

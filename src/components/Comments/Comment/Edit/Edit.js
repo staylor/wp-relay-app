@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UpdateCommentMutation from 'mutations/Comment/UpdateComment';
+import UpdateCommentMutation from 'mutations/UpdateComment';
 import { CommentType } from 'components/Comments/types';
 import styles from './Edit.scss';
 
 export default class Edit extends Component {
+  static contextTypes = {
+    relay: PropTypes.object.isRequired,
+  };
+
   static propTypes = {
     comment: CommentType.isRequired,
     onEditSubmit: PropTypes.func.isRequired,
@@ -28,7 +32,7 @@ export default class Edit extends Component {
       },
     };
 
-    UpdateCommentMutation.commit(this.props.comment, this.props.relay.environment, variables);
+    UpdateCommentMutation.commit(this.props.comment, this.context.relay.environment, variables);
   };
 
   onChange = e => {

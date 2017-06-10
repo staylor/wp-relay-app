@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Category_Query.graphql
- * @generated SignedSource<<8ed0b8977b766ebbdfd079763c1ae251>>
- * @relayHash 833385824cf60e3f0b7b0de4c0e345d9
+ * @generated SignedSource<<f3b29eff351b9a9329746bce558028f3>>
+ * @relayHash f7c9ca193b23df98c0979d3e457e8cf9
  * @flow
  * @nogrep
  */
@@ -22,6 +22,8 @@ import type {ConcreteBatch} from 'relay-runtime';
 /*
 query Category_Query(
   $id: ID!
+  $cursor: String
+  $count: Int = 10
 ) {
   viewer {
     ...Category_viewer
@@ -38,18 +40,21 @@ fragment Category_viewer on Viewer {
       id
     }
   }
-  posts(category: $id) {
-    ...Archive_posts
-  }
-}
-
-fragment Archive_posts on PostConnection {
-  edges {
-    node {
-      ...Post_post
-      id
+  posts(category: $id, after: $cursor, first: $count) {
+    edges {
+      node {
+        ...Post_post
+        id
+        __typename
+      }
+      cursor
     }
-    cursor
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
   }
 }
 
@@ -105,6 +110,18 @@ const batch /*: ConcreteBatch*/ = {
         "name": "id",
         "type": "ID!",
         "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "cursor",
+        "type": "String",
+        "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "count",
+        "type": "Int",
+        "defaultValue": 10
       }
     ],
     "kind": "Fragment",
@@ -141,6 +158,18 @@ const batch /*: ConcreteBatch*/ = {
         "name": "id",
         "type": "ID!",
         "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "cursor",
+        "type": "String",
+        "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "count",
+        "type": "Int",
+        "defaultValue": 10
       }
     ],
     "kind": "Root",
@@ -218,9 +247,21 @@ const batch /*: ConcreteBatch*/ = {
             "args": [
               {
                 "kind": "Variable",
+                "name": "after",
+                "variableName": "cursor",
+                "type": "String"
+              },
+              {
+                "kind": "Variable",
                 "name": "category",
                 "variableName": "id",
                 "type": "ID"
+              },
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "count",
+                "type": "Int"
               }
             ],
             "concreteType": "PostConnection",
@@ -403,6 +444,13 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "__typename",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -416,9 +464,78 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "startCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "after",
+                "variableName": "cursor",
+                "type": "String"
+              },
+              {
+                "kind": "Variable",
+                "name": "category",
+                "variableName": "id",
+                "type": "ID"
+              },
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "count",
+                "type": "Int"
+              }
+            ],
+            "handle": "connection",
+            "name": "posts",
+            "key": "Category_posts",
+            "filters": [
+              "category"
+            ]
           },
           {
             "kind": "ScalarField",
@@ -441,7 +558,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Category_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Category_viewer\n    id\n  }\n}\n\nfragment Category_viewer on Viewer {\n  category(id: $id) {\n    id\n    name\n    taxonomy {\n      slug\n      id\n    }\n  }\n  posts(category: $id) {\n    ...Archive_posts\n  }\n}\n\nfragment Archive_posts on PostConnection {\n  edges {\n    node {\n      ...Post_post\n      id\n    }\n    cursor\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Category_Query(\n  $id: ID!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Category_viewer\n    id\n  }\n}\n\nfragment Category_viewer on Viewer {\n  category(id: $id) {\n    id\n    name\n    taxonomy {\n      slug\n      id\n    }\n  }\n  posts(category: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

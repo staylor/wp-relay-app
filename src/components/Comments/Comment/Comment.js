@@ -13,7 +13,7 @@ import {
   AUTHOR_URL_COOKIE,
 } from 'components/Comments/constants';
 import { CommentType } from 'components/Comments/types';
-import DeleteCommentMutation from 'mutations/Comment/DeleteComment';
+import DeleteCommentMutation from 'mutations/DeleteComment';
 import EditComment from './Edit/Edit';
 import styles from './Comment.scss';
 

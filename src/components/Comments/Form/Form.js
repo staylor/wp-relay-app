@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
-import AddCommentMutation from 'mutations/Comment/AddComment';
+import AddCommentMutation from 'mutations/AddComment';
 import {
   AUTHOR_NAME_COOKIE,
   AUTHOR_EMAIL_COOKIE,

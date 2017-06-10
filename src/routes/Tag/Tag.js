@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { graphql } from 'react-relay';
-import FragmentContainer from 'decorators/FragmentContainer';
+import PaginationContainer from 'decorators/PaginationContainer';
+import TagQuery from 'queries/Tag';
+import TagPaginationFragment from 'queries/fragment/Tag';
 import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
 import Archive from 'components/Archive';
 import styles from './Tag.scss';
@@ -9,23 +10,19 @@ import styles from './Tag.scss';
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 
-@FragmentContainer(graphql`
-  fragment Tag_viewer on Viewer {
-    tag(id: $id) {
-      id
-      name
-      taxonomy {
-        slug
-      }
-    }
-    posts(tag: $id) {
-      ...Archive_posts
-    }
-  }
-`)
+@PaginationContainer(TagPaginationFragment, {
+  getVariables(props, { count, cursor }) {
+    return {
+      id: props.viewer.tag.id,
+      count,
+      cursor,
+    };
+  },
+  query: TagQuery,
+})
 export default class Tag extends Component {
   render() {
-    const { tag, posts } = this.props.viewer;
+    const { viewer: { tag, posts }, relay } = this.props;
     const label = getTaxonomyDisplay(tag.taxonomy);
     const title = `${label}: ${tag.name}`;
     const rewriteSlug = getTaxonomyRewriteSlug(tag.taxonomy);
@@ -39,7 +36,7 @@ export default class Tag extends Component {
         {tag &&
           <section>
             <h3 className={styles.label}>{title}</h3>
-            <Archive posts={posts} />
+            <Archive {...{ posts, relay }} />
           </section>}
       </div>
     );

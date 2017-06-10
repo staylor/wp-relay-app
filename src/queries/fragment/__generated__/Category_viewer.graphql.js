@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Category_viewer.graphql
- * @generated SignedSource<<3477e30807925c99ab33ebc5344c433b>>
+ * @generated SignedSource<<8db50dc681b58926d6ec93b0cda992de>>
  * @flow
  * @nogrep
  */
@@ -62,7 +62,7 @@ const fragment /*: ConcreteFragment*/ = {
       {
         "count": "count",
         "cursor": "cursor",
-        "direction": "backward",
+        "direction": "forward",
         "path": [
           "posts"
         ]

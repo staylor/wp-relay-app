@@ -9,14 +9,29 @@ import styles from './Home.scss';
 
 @FragmentContainer(graphql`
   fragment Home_viewer on Viewer {
-    readThis: posts(categories: $readThisID, last: 5) {
-      ...Archive_posts
+    readThis: posts(categories: $readThisID, first: $readThisTotal) @connection(key: "Home_readThis") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
     }
-    watchThis: posts(categories: $watchThisID, last: 5) {
-      ...Archive_posts
+    watchThis: posts(categories: $watchThisID, first: $watchThisTotal) @connection(key: "Home_watchThis") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
     }
-    listenToThis: posts(categories: $listenToThisID, last: 5) {
-      ...Archive_posts
+    listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) @connection(key: "Home_listenToThis") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
     }
   }
 `)

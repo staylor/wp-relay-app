@@ -6,6 +6,8 @@ import compression from 'compression';
 import path from 'path';
 import router from 'server/router';
 
+process.env.TZ = 'America/New_York';
+
 const clientAssets = require(KYT.ASSETS_MANIFEST); // eslint-disable-line import/no-dynamic-require
 const app = express();
 

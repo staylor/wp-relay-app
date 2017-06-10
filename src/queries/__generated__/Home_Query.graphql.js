@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Home_Query.graphql
- * @generated SignedSource<<4b097014c82665d94e1d55a84a96e821>>
- * @relayHash 381d6eca04ebfde77dade256cf937628
+ * @generated SignedSource<<3f570bf27cfcc7a945095fef5b317192>>
+ * @relayHash 95c423add14f09bb04391e96e27c25ac
  * @flow
  * @nogrep
  */
@@ -22,8 +22,11 @@ import type {ConcreteBatch} from 'relay-runtime';
 /*
 query Home_Query(
   $watchThisID: String!
+  $watchThisTotal: Int = 5
   $readThisID: String!
+  $readThisTotal: Int = 5
   $listenToThisID: String!
+  $listenToThisTotal: Int = 5
 ) {
   viewer {
     ...Home_viewer
@@ -32,24 +35,53 @@ query Home_Query(
 }
 
 fragment Home_viewer on Viewer {
-  readThis: posts(categories: $readThisID, last: 5) {
-    ...Archive_posts
-  }
-  watchThis: posts(categories: $watchThisID, last: 5) {
-    ...Archive_posts
-  }
-  listenToThis: posts(categories: $listenToThisID, last: 5) {
-    ...Archive_posts
-  }
-}
-
-fragment Archive_posts on PostConnection {
-  edges {
-    node {
-      ...Post_post
-      id
+  readThis: posts(categories: $readThisID, first: $readThisTotal) {
+    edges {
+      node {
+        ...Post_post
+        id
+        __typename
+      }
+      cursor
     }
-    cursor
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+  watchThis: posts(categories: $watchThisID, first: $watchThisTotal) {
+    edges {
+      node {
+        ...Post_post
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+  listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) {
+    edges {
+      node {
+        ...Post_post
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
   }
 }
 
@@ -108,15 +140,33 @@ const batch /*: ConcreteBatch*/ = {
       },
       {
         "kind": "LocalArgument",
+        "name": "watchThisTotal",
+        "type": "Int",
+        "defaultValue": 5
+      },
+      {
+        "kind": "LocalArgument",
         "name": "readThisID",
         "type": "String!",
         "defaultValue": null
       },
       {
         "kind": "LocalArgument",
+        "name": "readThisTotal",
+        "type": "Int",
+        "defaultValue": 5
+      },
+      {
+        "kind": "LocalArgument",
         "name": "listenToThisID",
         "type": "String!",
         "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "listenToThisTotal",
+        "type": "Int",
+        "defaultValue": 5
       }
     ],
     "kind": "Fragment",
@@ -156,15 +206,33 @@ const batch /*: ConcreteBatch*/ = {
       },
       {
         "kind": "LocalArgument",
+        "name": "watchThisTotal",
+        "type": "Int",
+        "defaultValue": 5
+      },
+      {
+        "kind": "LocalArgument",
         "name": "readThisID",
         "type": "String!",
         "defaultValue": null
       },
       {
         "kind": "LocalArgument",
+        "name": "readThisTotal",
+        "type": "Int",
+        "defaultValue": 5
+      },
+      {
+        "kind": "LocalArgument",
         "name": "listenToThisID",
         "type": "String!",
         "defaultValue": null
+      },
+      {
+        "kind": "LocalArgument",
+        "name": "listenToThisTotal",
+        "type": "Int",
+        "defaultValue": 5
       }
     ],
     "kind": "Root",
@@ -190,9 +258,9 @@ const batch /*: ConcreteBatch*/ = {
                 "type": "String"
               },
               {
-                "kind": "Literal",
-                "name": "last",
-                "value": 5,
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "readThisTotal",
                 "type": "Int"
               }
             ],
@@ -376,6 +444,13 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "__typename",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -389,9 +464,72 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "startCursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": "readThis",
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "categories",
+                "variableName": "readThisID",
+                "type": "String"
+              },
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "readThisTotal",
+                "type": "Int"
+              }
+            ],
+            "handle": "connection",
+            "name": "posts",
+            "key": "Home_readThis",
+            "filters": [
+              "categories"
+            ]
           },
           {
             "kind": "LinkedField",
@@ -404,9 +542,9 @@ const batch /*: ConcreteBatch*/ = {
                 "type": "String"
               },
               {
-                "kind": "Literal",
-                "name": "last",
-                "value": 5,
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "watchThisTotal",
                 "type": "Int"
               }
             ],
@@ -590,6 +728,13 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "__typename",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -603,9 +748,72 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "startCursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": "watchThis",
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "categories",
+                "variableName": "watchThisID",
+                "type": "String"
+              },
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "watchThisTotal",
+                "type": "Int"
+              }
+            ],
+            "handle": "connection",
+            "name": "posts",
+            "key": "Home_watchThis",
+            "filters": [
+              "categories"
+            ]
           },
           {
             "kind": "LinkedField",
@@ -618,9 +826,9 @@ const batch /*: ConcreteBatch*/ = {
                 "type": "String"
               },
               {
-                "kind": "Literal",
-                "name": "last",
-                "value": 5,
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "listenToThisTotal",
                 "type": "Int"
               }
             ],
@@ -804,6 +1012,13 @@ const batch /*: ConcreteBatch*/ = {
                           }
                         ],
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "__typename",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -817,9 +1032,72 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "startCursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": "listenToThis",
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "categories",
+                "variableName": "listenToThisID",
+                "type": "String"
+              },
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "listenToThisTotal",
+                "type": "Int"
+              }
+            ],
+            "handle": "connection",
+            "name": "posts",
+            "key": "Home_listenToThis",
+            "filters": [
+              "categories"
+            ]
           },
           {
             "kind": "ScalarField",
@@ -842,7 +1120,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $watchThisID: String!\n  $readThisID: String!\n  $listenToThisID: String!\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  readThis: posts(categories: $readThisID, last: 5) {\n    ...Archive_posts\n  }\n  watchThis: posts(categories: $watchThisID, last: 5) {\n    ...Archive_posts\n  }\n  listenToThis: posts(categories: $listenToThisID, last: 5) {\n    ...Archive_posts\n  }\n}\n\nfragment Archive_posts on PostConnection {\n  edges {\n    node {\n      ...Post_post\n      id\n    }\n    cursor\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $watchThisID: String!\n  $watchThisTotal: Int = 5\n  $readThisID: String!\n  $readThisTotal: Int = 5\n  $listenToThisID: String!\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  readThis: posts(categories: $readThisID, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(categories: $watchThisID, first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

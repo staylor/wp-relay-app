@@ -2966,13 +2966,14 @@ forwarded@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
 
-found-relay@next:
-  version "0.3.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/found-relay/-/found-relay-0.3.0-alpha.1.tgz#5c5e83334fc816b2211b94c32e91490b7bab44cd"
+found-relay@0.3.0-alpha.2:
+  version "0.3.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/found-relay/-/found-relay-0.3.0-alpha.2.tgz#e6bcd4033f00713d4f5028c6e5b15fed62b51312"
   dependencies:
     babel-runtime "^6.23.0"
     invariant "^2.2.2"
     is-promise "^2.1.0"
+    lodash "^4.17.4"
     prop-types "^15.5.10"
     prop-types-extra "^1.0.1"
 
