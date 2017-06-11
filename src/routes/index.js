@@ -12,6 +12,7 @@ import TagQuery from 'queries/Tag';
 import HomeQuery from 'queries/Home';
 import PageQuery from 'queries/Page';
 import AppQuery from 'queries/App';
+import Loading from 'components/Loading';
 
 const getComponent = loader => (location, cb) =>
   loader().then(module => module.default).catch(error => {
@@ -31,6 +32,10 @@ export function createResolver(fetcher) {
   return new Resolver(environment);
 }
 
+// eslint-disable-next-line
+const renderProp = ({ Component, props }) =>
+  Component && props ? <Component {...props} /> : <Loading />;
+
 export const routeConfig = makeRouteConfig(
   <Route
     path="/"
@@ -46,21 +51,25 @@ export const routeConfig = makeRouteConfig(
       path="category/:id"
       getComponent={getComponent(() => /* webpackChunkName: "category" */ import('./Category'))}
       query={CategoryQuery}
+      render={renderProp}
     />
     <Route
       path="tag/:id"
       getComponent={getComponent(() => /* webpackChunkName: "tag" */ import('./Tag'))}
       query={TagQuery}
+      render={renderProp}
     />
     <Route
       path="post/:id"
       getComponent={getComponent(() => /* webpackChunkName: "single" */ import('./Single'))}
       query={SingleQuery}
+      render={renderProp}
     />
     <Route
       path=":slug"
       getComponent={getComponent(() => /* webpackChunkName: "page" */ import('./Page'))}
       query={PageQuery}
+      render={renderProp}
     />
     <Route
       getComponent={getComponent(() => /* webpackChunkName: "home" */ import('./Home'))}
@@ -75,6 +84,7 @@ export const routeConfig = makeRouteConfig(
         listenToThisID: 'Q2F0ZWdvcnk6NQ==',
         listenToThisTotal: 5,
       })}
+      render={renderProp}
     />
   </Route>
 );
