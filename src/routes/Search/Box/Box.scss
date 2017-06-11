@@ -1,0 +1,17 @@
+@import '../../../styles/mixins';
+
+.box {
+  margin-bottom: 40px;
+}
+
+.input {
+  @include size-height(16, 20);
+  border: 1px solid #eee;
+  display: block;
+  padding: 8px;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 20px;
+}

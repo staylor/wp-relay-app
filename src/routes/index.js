@@ -12,6 +12,7 @@ import TagQuery from 'queries/Tag';
 import HomeQuery from 'queries/Home';
 import PageQuery from 'queries/Page';
 import AppQuery from 'queries/App';
+import SearchQuery from 'queries/Search';
 import Loading from 'components/Loading';
 
 const getComponent = loader => (location, cb) =>
@@ -63,6 +64,12 @@ export const routeConfig = makeRouteConfig(
       path="post/:id"
       getComponent={getComponent(() => /* webpackChunkName: "single" */ import('./Single'))}
       query={SingleQuery}
+      render={renderProp}
+    />
+    <Route
+      path="search"
+      getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
+      query={SearchQuery}
       render={renderProp}
     />
     <Route

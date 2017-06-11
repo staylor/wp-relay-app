@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.sections {
+  max-width: 740px;
+}
+
+.button {
+  @include load-more;
+}
