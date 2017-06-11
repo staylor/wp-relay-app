@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
 import FragmentContainer from 'decorators/FragmentContainer';
-import Media from '../Media';
-import { convertPlaceholders } from '../../utils';
+import Media from 'components/Media';
+import { convertPlaceholders } from 'utils';
 import styles from './Post.scss';
 
 /* eslint-disable react/no-danger */
@@ -37,6 +37,11 @@ export default class Post extends Component {
     }).isRequired,
   };
 
+  static contextTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    router: PropTypes.object.isRequired,
+  };
+
   content = null;
   bindRef = node => {
     this.content = node;
@@ -50,6 +55,8 @@ export default class Post extends Component {
     nodes.forEach(node => {
       node.onclick = e => {
         e.preventDefault();
+
+        this.context.router.push(`/post/${this.props.post.id}`);
       };
     });
   }

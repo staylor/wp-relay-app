@@ -29,11 +29,23 @@ export default class App extends Component {
       sidebar: PropTypes.object,
     }).isRequired,
     children: PropTypes.node,
+    // eslint-disable-next-line react/forbid-prop-types
+    router: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     children: null,
   };
+
+  static childContextTypes = {
+    router: PropTypes.object,
+  };
+
+  getChildContext() {
+    return {
+      router: this.props.router,
+    };
+  }
 
   state = {
     locale: 'en',
