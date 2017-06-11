@@ -20,6 +20,7 @@
   ],
 
   "rules": {
+    "no-underscore-dangle": ["error", { "allow": ["__typename"] } ],
     "prettier/prettier": ["error", {
       "trailingComma": "es5",
       "semi": true,

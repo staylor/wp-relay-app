@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
@@ -6,8 +7,6 @@ import FragmentContainer from 'decorators/FragmentContainer';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import styles from './App.scss';
-
-/* eslint-disable react/prop-types */
 
 const siteName = 'High for This';
 const tagline = 'Music as it happens.';
@@ -24,6 +23,18 @@ const description = 'High for This aggregates the best music content on the web.
   }
 `)
 export default class App extends Component {
+  static propTypes = {
+    viewer: PropTypes.shape({
+      navMenu: PropTypes.object,
+      sidebar: PropTypes.object,
+    }).isRequired,
+    children: PropTypes.node,
+  };
+
+  static defaultProps = {
+    children: null,
+  };
+
   state = {
     locale: 'en',
   };

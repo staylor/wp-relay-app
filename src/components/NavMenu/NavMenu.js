@@ -1,14 +1,12 @@
 import url from 'url';
 import cn from 'classnames';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
 import FragmentContainer from 'decorators/FragmentContainer';
 import { sortOrderedHierarchy } from 'utils/walker';
 import styles from './NavMenu.scss';
-
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-danger */
 
 @FragmentContainer(graphql`
   fragment NavMenu_navMenu on NavMenu {
@@ -26,6 +24,16 @@ import styles from './NavMenu.scss';
   }
 `)
 export default class NavMenu extends Component {
+  static propTypes = {
+    navMenu: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      url: PropTypes.string,
+      object: PropTypes.String,
+      object_id: PropTypes.String,
+    }).isRequired,
+  };
+
   sorted = null;
   level = 0;
 

@@ -67,6 +67,7 @@ export const routeConfig = makeRouteConfig(
       query={HomeQuery}
       prepareVariables={params => ({
         ...params,
+        stickiesTotal: 2,
         readThisID: 'Q2F0ZWdvcnk6Mw==',
         readThisTotal: 5,
         watchThisID: 'Q2F0ZWdvcnk6NA==',

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
 import styles from './Image.scss';
-
-/* eslint-disable react/prop-types */
 
 @FragmentContainer(graphql`
   fragment Image_image on Media {
@@ -19,6 +18,14 @@ import styles from './Image.scss';
   }
 `)
 export default class Image extends Component {
+  static propTypes = {
+    crop: PropTypes.string,
+    image: PropTypes.shape({
+      source_url: PropTypes.String,
+      media_details: PropTypes.object,
+    }).isRequired,
+  };
+
   static defaultProps = {
     crop: 'large',
   };

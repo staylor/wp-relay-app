@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
@@ -9,9 +10,7 @@ import Comments from 'components/Comments';
 import { convertPlaceholders } from 'utils';
 import styles from './Single.scss';
 
-/* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
-/* eslint-disable react/style-prop-object */
 
 @FragmentContainer(graphql`
   fragment Single_viewer on Viewer {
@@ -44,6 +43,12 @@ import styles from './Single.scss';
   }
 `)
 export default class Single extends Component {
+  static propTypes = {
+    viewer: PropTypes.shape({
+      post: PropTypes.object,
+    }).isRequired,
+  };
+
   content = null;
   bindRef = node => {
     this.content = node;
@@ -98,7 +103,10 @@ export default class Single extends Component {
           <div className={styles.meta}>
             Posted:
             {' '}
-            <FormattedRelative value={Date.parse(date)} style="numeric" />
+            <FormattedRelative
+              value={Date.parse(date)}
+              style="numeric" // eslint-disable-line react/style-prop-object
+            />
           </div>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}

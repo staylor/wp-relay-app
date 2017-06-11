@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Home_viewer.graphql
- * @generated SignedSource<<e13a5e0fa3ed9549390cb2a908bafa8d>>
+ * @generated SignedSource<<d75a4447bc6ed7623dc44e84cc727635>>
  * @flow
  * @nogrep
  */
@@ -15,6 +15,12 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type Home_viewer = {|
+  +stickies: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{| |};
+      +cursor: string;
+    |}>;
+  |};
   +readThis: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{| |};
@@ -39,6 +45,11 @@ export type Home_viewer = {|
 
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [
+    {
+      "kind": "RootArgument",
+      "name": "stickiesTotal",
+      "type": "Int"
+    },
     {
       "kind": "RootArgument",
       "name": "readThisID",
@@ -74,6 +85,14 @@ const fragment /*: ConcreteFragment*/ = {
   "metadata": {
     "connection": [
       {
+        "count": "stickiesTotal",
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "stickies"
+        ]
+      },
+      {
         "count": "readThisTotal",
         "cursor": null,
         "direction": "forward",
@@ -103,6 +122,58 @@ const fragment /*: ConcreteFragment*/ = {
   "selections": [
     {
       "kind": "LinkedField",
+      "alias": "stickies",
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "sticky",
+          "value": true,
+          "type": "Boolean"
+        }
+      ],
+      "concreteType": "PostConnection",
+      "name": "__Home_stickies_connection",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "PostEdge",
+          "name": "edges",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "Post",
+              "name": "node",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "Post_post",
+                  "args": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "cursor",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        }
+      ],
+      "storageKey": "__Home_stickies_connection{\"sticky\":true}"
+    },
+    {
+      "kind": "LinkedField",
       "alias": "readThis",
       "args": [
         {
@@ -110,6 +181,12 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "categories",
           "variableName": "readThisID",
           "type": "String"
+        },
+        {
+          "kind": "Literal",
+          "name": "sticky",
+          "value": false,
+          "type": "Boolean"
         }
       ],
       "concreteType": "PostConnection",

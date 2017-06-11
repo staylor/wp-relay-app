@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
 import FragmentContainer from 'decorators/FragmentContainer';
@@ -6,7 +7,6 @@ import Media from '../Media';
 import { convertPlaceholders } from '../../utils';
 import styles from './Post.scss';
 
-/* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 
 @FragmentContainer(graphql`
@@ -27,6 +27,16 @@ import styles from './Post.scss';
   }
 `)
 export default class Post extends Component {
+  static propTypes = {
+    post: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.object,
+      content: PropTypes.object,
+      excerpt: PropTypes.object,
+      featured_media: PropTypes.object,
+    }).isRequired,
+  };
+
   content = null;
   bindRef = node => {
     this.content = node;
@@ -40,8 +50,6 @@ export default class Post extends Component {
     nodes.forEach(node => {
       node.onclick = e => {
         e.preventDefault();
-
-        // browserHistory.push(`/post/${this.props.post.id}`);
       };
     });
   }

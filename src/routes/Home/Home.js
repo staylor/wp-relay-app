@@ -1,15 +1,54 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Archive from 'components/Archive';
 import styles from './Home.scss';
 
-/* eslint-disable react/prop-types */
-/* eslint-disable react/prefer-stateless-function */
+const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
+  <div className={styles.columns}>
+    <div className={styles.columnA}>
+      <section className={styles.section}>
+        <h3>Latest</h3>
+        <Archive posts={stickies} />
+      </section>
+      <section className={styles.section}>
+        <h3>Read This</h3>
+        <Archive posts={readThis} />
+      </section>
+    </div>
+    <div className={styles.columnB}>
+      <section className={styles.section}>
+        <h3>Watch This</h3>
+        <Archive posts={watchThis} />
+      </section>
+      <section className={styles.section}>
+        <h3>Listen to This</h3>
+        <Archive posts={listenToThis} />
+      </section>
+    </div>
+  </div>;
 
-@FragmentContainer(graphql`
+Home.propTypes = {
+  viewer: PropTypes.shape({
+    readThis: PropTypes.object,
+    watchThis: PropTypes.object,
+    listenToThis: PropTypes.object,
+    stickies: PropTypes.object,
+  }).isRequired,
+};
+
+export default FragmentContainer(graphql`
   fragment Home_viewer on Viewer {
-    readThis: posts(categories: $readThisID, first: $readThisTotal) @connection(key: "Home_readThis") {
+    stickies: posts(sticky: true, first: $stickiesTotal) @connection(key: "Home_stickies") {
+      edges {
+        node {
+          ...Post_post
+        }
+        cursor
+      }
+    }
+    readThis: posts(categories: $readThisID, sticky: false, first: $readThisTotal) @connection(key: "Home_readThis") {
       edges {
         node {
           ...Post_post
@@ -34,30 +73,4 @@ import styles from './Home.scss';
       }
     }
   }
-`)
-export default class Home extends Component {
-  render() {
-    const { readThis, watchThis, listenToThis } = this.props.viewer;
-
-    return (
-      <div className={styles.columns}>
-        <div className={styles.columnA}>
-          <section className={styles.section}>
-            <h3>Read This</h3>
-            <Archive posts={readThis} />
-          </section>
-        </div>
-        <div className={styles.columnB}>
-          <section className={styles.section}>
-            <h3>Watch This</h3>
-            <Archive posts={watchThis} />
-          </section>
-          <section className={styles.section}>
-            <h3>Listen to This</h3>
-            <Archive posts={listenToThis} />
-          </section>
-        </div>
-      </div>
-    );
-  }
-}
+`)(Home);

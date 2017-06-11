@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Home_Query.graphql
- * @generated SignedSource<<3f570bf27cfcc7a945095fef5b317192>>
- * @relayHash 95c423add14f09bb04391e96e27c25ac
+ * @generated SignedSource<<68004e3fee9cf79ed37f6c3ff20c0b9b>>
+ * @relayHash 98bb7ebda025f6551165072ea21759d2
  * @flow
  * @nogrep
  */
@@ -21,6 +21,7 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 /*
 query Home_Query(
+  $stickiesTotal: Int = 2
   $watchThisID: String!
   $watchThisTotal: Int = 5
   $readThisID: String!
@@ -35,7 +36,23 @@ query Home_Query(
 }
 
 fragment Home_viewer on Viewer {
-  readThis: posts(categories: $readThisID, first: $readThisTotal) {
+  stickies: posts(sticky: true, first: $stickiesTotal) {
+    edges {
+      node {
+        ...Post_post
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+  readThis: posts(categories: $readThisID, sticky: false, first: $readThisTotal) {
     edges {
       node {
         ...Post_post
@@ -134,6 +151,12 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
+        "name": "stickiesTotal",
+        "type": "Int",
+        "defaultValue": 2
+      },
+      {
+        "kind": "LocalArgument",
         "name": "watchThisID",
         "type": "String!",
         "defaultValue": null
@@ -200,6 +223,12 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
+        "name": "stickiesTotal",
+        "type": "Int",
+        "defaultValue": 2
+      },
+      {
+        "kind": "LocalArgument",
         "name": "watchThisID",
         "type": "String!",
         "defaultValue": null
@@ -249,6 +278,290 @@ const batch /*: ConcreteBatch*/ = {
         "selections": [
           {
             "kind": "LinkedField",
+            "alias": "stickies",
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "stickiesTotal",
+                "type": "Int"
+              },
+              {
+                "kind": "Literal",
+                "name": "sticky",
+                "value": true,
+                "type": "Boolean"
+              }
+            ],
+            "concreteType": "PostConnection",
+            "name": "posts",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PostEdge",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Post",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Title",
+                        "name": "title",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "rendered",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Content",
+                        "name": "content",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "rendered",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Excerpt",
+                        "name": "excerpt",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "rendered",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "name": "featured_media",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "__typename",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "type": "Video",
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "type": "Audio",
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "type": "Image",
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "source_url",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "ImageDetails",
+                                "name": "media_details",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "LinkedField",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "MediaSize",
+                                    "name": "sizes",
+                                    "plural": true,
+                                    "selections": [
+                                      {
+                                        "kind": "ScalarField",
+                                        "alias": null,
+                                        "args": null,
+                                        "name": "name",
+                                        "storageKey": null
+                                      },
+                                      {
+                                        "kind": "ScalarField",
+                                        "alias": null,
+                                        "args": null,
+                                        "name": "source_url",
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ]
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "__typename",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "cursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "startCursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": "stickies",
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "first",
+                "variableName": "stickiesTotal",
+                "type": "Int"
+              },
+              {
+                "kind": "Literal",
+                "name": "sticky",
+                "value": true,
+                "type": "Boolean"
+              }
+            ],
+            "handle": "connection",
+            "name": "posts",
+            "key": "Home_stickies",
+            "filters": [
+              "sticky"
+            ]
+          },
+          {
+            "kind": "LinkedField",
             "alias": "readThis",
             "args": [
               {
@@ -262,6 +575,12 @@ const batch /*: ConcreteBatch*/ = {
                 "name": "first",
                 "variableName": "readThisTotal",
                 "type": "Int"
+              },
+              {
+                "kind": "Literal",
+                "name": "sticky",
+                "value": false,
+                "type": "Boolean"
               }
             ],
             "concreteType": "PostConnection",
@@ -522,13 +841,20 @@ const batch /*: ConcreteBatch*/ = {
                 "name": "first",
                 "variableName": "readThisTotal",
                 "type": "Int"
+              },
+              {
+                "kind": "Literal",
+                "name": "sticky",
+                "value": false,
+                "type": "Boolean"
               }
             ],
             "handle": "connection",
             "name": "posts",
             "key": "Home_readThis",
             "filters": [
-              "categories"
+              "categories",
+              "sticky"
             ]
           },
           {
@@ -1120,7 +1446,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $watchThisID: String!\n  $watchThisTotal: Int = 5\n  $readThisID: String!\n  $readThisTotal: Int = 5\n  $listenToThisID: String!\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  readThis: posts(categories: $readThisID, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(categories: $watchThisID, first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisID: String!\n  $watchThisTotal: Int = 5\n  $readThisID: String!\n  $readThisTotal: Int = 5\n  $listenToThisID: String!\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(categories: $readThisID, sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(categories: $watchThisID, first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

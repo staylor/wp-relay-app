@@ -1,38 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Post from '../Post';
 import styles from './Archive.scss';
 
-/* eslint-disable react/prop-types */
+const Archive = ({ posts: { edges }, relay }) =>
+  <section>
+    <ul>
+      {edges.map(({ cursor, node }) => <li key={cursor}><Post post={node} /></li>)}
+    </ul>
+    {relay &&
+      relay.hasMore() &&
+      <button
+        className={styles.button}
+        onClick={() => {
+          if (relay.isLoading()) {
+            return;
+          }
 
-export default class Archive extends Component {
-  render() {
-    const { posts: { edges }, relay } = this.props;
+          relay.loadMore(10, e => {
+            if (e) {
+              // eslint-disable-next-line no-console
+              console.log(e);
+            }
+          });
+        }}
+      >
+        MORE
+      </button>}
+  </section>;
 
-    return (
-      <section>
-        <ul>
-          {edges.map(({ cursor, node }) => <li key={cursor}><Post post={node} /></li>)}
-        </ul>
-        {relay &&
-          relay.hasMore() &&
-          <button
-            className={styles.button}
-            onClick={() => {
-              if (relay.isLoading()) {
-                return;
-              }
+Archive.propTypes = {
+  posts: PropTypes.shape({
+    edges: PropTypes.arrayOf(
+      PropTypes.shape({
+        node: PropTypes.object,
+        cursor: PropTypes.string,
+      })
+    ),
+  }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  relay: PropTypes.object,
+};
 
-              relay.loadMore(10, e => {
-                if (e) {
-                  // eslint-disable-next-line no-console
-                  console.log(e);
-                }
-              });
-            }}
-          >
-            MORE
-          </button>}
-      </section>
-    );
-  }
-}
+Archive.defaultProps = {
+  relay: null,
+};
+
+export default Archive;

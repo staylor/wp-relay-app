@@ -1,11 +1,10 @@
 import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import PropTypes from 'prop-types';
+import { graphql } from 'react-relay';
+import FragmentContainer from 'decorators/FragmentContainer';
 import Image from '../Image';
 
-/* eslint-disable react/prop-types */
-
 const Media = ({ media, crop = null }) => {
-  // eslint-disable-next-line no-underscore-dangle
   switch (media.__typename) {
     case 'Image':
       return <Image image={media} crop={crop} />;
@@ -14,17 +13,19 @@ const Media = ({ media, crop = null }) => {
   }
 };
 
-Media.defaultProps = {
-  crop: 'large',
-  media: null,
+Media.propTypes = {
+  crop: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  media: PropTypes.object.isRequired,
 };
 
-export default createFragmentContainer(
-  Media,
-  graphql`
+Media.defaultProps = {
+  crop: 'large',
+};
+
+export default FragmentContainer(graphql`
   fragment Media_media on Media {
     __typename
     ...Image_image
   }
-`
-);
+`)(Media);
