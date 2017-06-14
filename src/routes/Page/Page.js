@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
-import { Link } from 'found';
 import Media from 'components/Media';
 import Error from 'components/Error';
 import styles from './Page.scss';
@@ -16,7 +15,6 @@ const Page = ({ viewer: { page } }) => {
   }
 
   const {
-    id,
     slug,
     title: { rendered: title },
     content: { rendered: content },
@@ -29,9 +27,7 @@ const Page = ({ viewer: { page } }) => {
         <link rel="canonical" href={`https://highforthis.com/${slug}`} />
       </Helmet>
       <header>
-        <h1 className={styles.title}>
-          <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
-        </h1>
+        <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title }} />
       </header>
       {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
       <section dangerouslySetInnerHTML={{ __html: content }} />

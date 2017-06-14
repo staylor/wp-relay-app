@@ -97,9 +97,7 @@ export default class Single extends Component {
           <link rel="canonical" href={`https://highforthis.com/post/${id}`} />
         </Helmet>
         <header>
-          <h1 className={styles.title}>
-            <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
-          </h1>
+          <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title }} />
 
           <div className={styles.meta}>
             Posted:
