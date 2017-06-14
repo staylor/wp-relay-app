@@ -4,21 +4,21 @@ import Helmet from 'react-helmet';
 import PaginationContainer from 'decorators/PaginationContainer';
 import TagQuery from 'queries/Tag';
 import TagPaginationFragment from 'queries/fragment/Tag';
-import { getTaxonomyDisplay, getTaxonomyRewriteSlug } from 'utils/taxonomy';
 import Archive from 'components/Archive';
 import styles from './Tag.scss';
 
 const Tag = ({ viewer, relay }) => {
   const { tag, posts } = viewer;
-  const label = getTaxonomyDisplay(tag.taxonomy);
-  const title = `${label}: ${tag.name}`;
-  const rewriteSlug = getTaxonomyRewriteSlug(tag.taxonomy);
+  const title = `${tag.taxonomy.labels.singular}: ${tag.name}`;
 
   return (
     <div className={styles.sections}>
       <Helmet>
         <title>{title}</title>
-        <link rel="canonical" href={`https://highforthis.com/${rewriteSlug}/${tag.id}`} />
+        <link
+          rel="canonical"
+          href={`https://highforthis.com/${tag.taxonomy.rewrite.slug}/${tag.id}`}
+        />
       </Helmet>
       {tag &&
         <section>

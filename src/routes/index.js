@@ -49,7 +49,7 @@ export const routeConfig = makeRouteConfig(
     })}
   >
     <Route
-      path="category/:id"
+      path="music/:id"
       getComponent={getComponent(() => /* webpackChunkName: "category" */ import('./Category'))}
       query={CategoryQuery}
       render={renderProp}

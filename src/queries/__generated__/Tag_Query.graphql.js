@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Tag_Query.graphql
- * @generated SignedSource<<23e0f1262766bbae5cf61c8aa7a818f1>>
- * @relayHash 68c00f4bd5bc60df3e8c08b2e6e84a38
+ * @generated SignedSource<<0c02ea28dff9d8d9a1792ac7c56332fe>>
+ * @relayHash 043eb9708870651ce9e4b703b094380c
  * @flow
  * @nogrep
  */
@@ -36,7 +36,13 @@ fragment Tag_viewer on Viewer {
     id
     name
     taxonomy {
-      slug
+      rewrite {
+        slug
+      }
+      labels {
+        singular
+        plural
+      }
       id
     }
   }
@@ -222,10 +228,46 @@ const batch /*: ConcreteBatch*/ = {
                 "plural": false,
                 "selections": [
                   {
-                    "kind": "ScalarField",
+                    "kind": "LinkedField",
                     "alias": null,
                     "args": null,
-                    "name": "slug",
+                    "concreteType": "Rewrite",
+                    "name": "rewrite",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "slug",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Labels",
+                    "name": "labels",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "singular",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "plural",
+                        "storageKey": null
+                      }
+                    ],
                     "storageKey": null
                   },
                   {
@@ -558,7 +600,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Tag_Query(\n  $id: ID!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Tag_viewer\n    id\n  }\n}\n\nfragment Tag_viewer on Viewer {\n  tag(id: $id) {\n    id\n    name\n    taxonomy {\n      slug\n      id\n    }\n  }\n  posts(tag: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Tag_Query(\n  $id: ID!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Tag_viewer\n    id\n  }\n}\n\nfragment Tag_viewer on Viewer {\n  tag(id: $id) {\n    id\n    name\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(tag: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

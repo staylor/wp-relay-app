@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Category_viewer.graphql
- * @generated SignedSource<<8db50dc681b58926d6ec93b0cda992de>>
+ * @generated SignedSource<<a8b3809d5801c589c767243740f1d8a6>>
  * @flow
  * @nogrep
  */
@@ -19,7 +19,13 @@ export type Category_viewer = {|
     +id: string;
     +name: ?string;
     +taxonomy: ?{|
-      +slug: ?string;
+      +rewrite: ?{|
+        +slug: ?string;
+      |};
+      +labels: ?{|
+        +singular: ?string;
+        +plural: ?string;
+      |};
     |};
   |};
   +posts: ?{|
@@ -109,10 +115,46 @@ const fragment /*: ConcreteFragment*/ = {
           "plural": false,
           "selections": [
             {
-              "kind": "ScalarField",
+              "kind": "LinkedField",
               "alias": null,
               "args": null,
-              "name": "slug",
+              "concreteType": "Rewrite",
+              "name": "rewrite",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "slug",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "Labels",
+              "name": "labels",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "singular",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "plural",
+                  "storageKey": null
+                }
+              ],
               "storageKey": null
             }
           ],

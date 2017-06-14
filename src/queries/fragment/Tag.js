@@ -6,7 +6,13 @@ export default graphql`
       id
       name
       taxonomy {
-        slug
+        rewrite {
+          slug
+        }
+        labels {
+          singular
+          plural
+        }
       }
     }
     posts(tag: $id, after: $cursor, first: $count) @connection(key: "Tag_posts") {

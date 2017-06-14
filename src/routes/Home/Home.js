@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
+import { Link } from 'found';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Archive from 'components/Archive';
 import styles from './Home.scss';
@@ -15,16 +16,25 @@ const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
       <section className={styles.section}>
         <h3>Read This</h3>
         <Archive posts={readThis} />
+        <Link to={'/music/read-this'} className={styles.moreIn}>
+          More posts in <em>Read This</em> »
+        </Link>
       </section>
     </div>
     <div className={styles.columnB}>
       <section className={styles.section}>
         <h3>Watch This</h3>
         <Archive posts={watchThis} />
+        <Link to={'/music/watch-this'} className={styles.moreIn}>
+          More posts in <em>Watch This</em> »
+        </Link>
       </section>
       <section className={styles.section}>
         <h3>Listen to This</h3>
         <Archive posts={listenToThis} />
+        <Link to={'/music/listen-to-this'} className={styles.moreIn}>
+          More posts in <em>Listen To This</em> »
+        </Link>
       </section>
     </div>
   </div>;

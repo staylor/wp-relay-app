@@ -18,8 +18,11 @@ import styles from './NavMenu.scss';
       url
       parent
       order
-      object
-      object_id
+      type
+      typeName
+      typeSlug
+      dataSlug
+      dataID
     }
   }
 `)
@@ -37,10 +40,10 @@ export default class NavMenu extends Component {
   sorted = null;
   level = 0;
 
-  parseItem({ id, title, url: itemUrl, object, object_id: objectId }) {
+  parseItem({ id, title, url: itemUrl, typeSlug, /* , dataSlug */ dataID }) {
     let path;
-    if (object === 'category' || object === 'post') {
-      path = `/${object}/${objectId}`;
+    if (typeSlug && dataID) {
+      path = `/${typeSlug}/${dataID}`;
     } else {
       const urlObj = url.parse(itemUrl);
       if (urlObj.path === '/') {

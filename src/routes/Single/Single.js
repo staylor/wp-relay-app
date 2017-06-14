@@ -29,6 +29,7 @@ import styles from './Single.scss';
       tags {
         id
         name
+        slug
       }
       comments(post: $id, first: 100) @connection(key: "Single_post_comments") {
         edges {
@@ -120,7 +121,7 @@ export default class Single extends Component {
           <footer className={styles.footer}>
             Tags:
             {' '}
-            {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}
+            {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.slug}`}>{tag.name}</Link>)}
           </footer>}
         <Comments post={id} comments={comments} />
       </article>

@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule NavMenu_navMenu.graphql
- * @generated SignedSource<<abca9e171626ad17908373598a405fdd>>
+ * @generated SignedSource<<7daf1722f37e61f35d41f600ae100429>>
  * @flow
  * @nogrep
  */
@@ -23,8 +23,11 @@ export type NavMenu_navMenu = {|
     +url: ?string;
     +parent: ?string;
     +order: ?number;
-    +object: ?string;
-    +object_id: ?string;
+    +type: ?string;
+    +typeName: ?string;
+    +typeSlug: ?string;
+    +dataSlug: ?string;
+    +dataID: ?string;
   |}>;
 |};
 */
@@ -97,14 +100,35 @@ const fragment /*: ConcreteFragment*/ = {
           "kind": "ScalarField",
           "alias": null,
           "args": null,
-          "name": "object",
+          "name": "type",
           "storageKey": null
         },
         {
           "kind": "ScalarField",
           "alias": null,
           "args": null,
-          "name": "object_id",
+          "name": "typeName",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "typeSlug",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "dataSlug",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "dataID",
           "storageKey": null
         }
       ],

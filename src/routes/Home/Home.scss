@@ -20,3 +20,13 @@
   float: left;
   width: 60%;
 }
+
+.moreIn {
+  @include size-height(11);
+  color: $black;
+  display: block;
+  font-family: $futura;
+  font-weight: $font-bold;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}

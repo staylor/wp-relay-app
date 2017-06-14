@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Tag_viewer.graphql
- * @generated SignedSource<<28c2fab40909fcb97374a05747132f54>>
+ * @generated SignedSource<<38cb164e5ae4641182c806f15d28a80b>>
  * @flow
  * @nogrep
  */
@@ -19,7 +19,13 @@ export type Tag_viewer = {|
     +id: string;
     +name: ?string;
     +taxonomy: ?{|
-      +slug: ?string;
+      +rewrite: ?{|
+        +slug: ?string;
+      |};
+      +labels: ?{|
+        +singular: ?string;
+        +plural: ?string;
+      |};
     |};
   |};
   +posts: ?{|
@@ -109,10 +115,46 @@ const fragment /*: ConcreteFragment*/ = {
           "plural": false,
           "selections": [
             {
-              "kind": "ScalarField",
+              "kind": "LinkedField",
               "alias": null,
               "args": null,
-              "name": "slug",
+              "concreteType": "Rewrite",
+              "name": "rewrite",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "slug",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "Labels",
+              "name": "labels",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "singular",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "plural",
+                  "storageKey": null
+                }
+              ],
               "storageKey": null
             }
           ],
