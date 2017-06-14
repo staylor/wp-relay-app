@@ -81,13 +81,6 @@ export const routeConfig = makeRouteConfig(
     <Route
       getComponent={getComponent(() => /* webpackChunkName: "home" */ import('./Home'))}
       query={HomeQuery}
-      prepareVariables={params => ({
-        ...params,
-        stickiesTotal: 2,
-        readThisTotal: 5,
-        watchThisTotal: 5,
-        listenToThisTotal: 5,
-      })}
       render={renderProp}
     />
   </Route>

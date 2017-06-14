@@ -39,6 +39,10 @@ export default class Search extends Component {
     relay: PropTypes.object.isRequired,
   };
 
+  state = {
+    fetching: false,
+  };
+
   term = null;
   count = 10;
 
@@ -49,17 +53,30 @@ export default class Search extends Component {
         search: this.term,
         count: this.count,
       },
-      null
+      null,
+      e => {
+        if (e) {
+          // eslint-disable-next-line no-console
+          console.log(e);
+        }
+      }
     );
   }
 
   onSetTerm(term) {
+    this.setState({ fetching: true });
     this.count = 10;
     this.term = term;
   }
 
+  onRefetch() {
+    this.setState({ fetching: false });
+  }
+
   render() {
     const { viewer: { posts = null }, relay } = this.props;
+    const showPosts = posts && !this.state.fetching;
+
     return (
       <div className={styles.sections}>
         <Helmet>
@@ -71,9 +88,10 @@ export default class Search extends Component {
             relay={relay}
             pageInfo={posts && posts.pageInfo}
             onSetTerm={term => this.onSetTerm(term)}
+            onRefetch={e => this.onRefetch(e)}
           />
-          {posts && <Archive posts={posts} />}
-          {posts &&
+          {showPosts && <Archive posts={posts} />}
+          {showPosts &&
             posts.pageInfo.hasNextPage &&
             <button className={styles.button} onClick={() => this.loadMore()}>
               MORE
