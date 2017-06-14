@@ -58,7 +58,7 @@ export default FragmentContainer(graphql`
         cursor
       }
     }
-    readThis: posts(categories: $readThisID, sticky: false, first: $readThisTotal) @connection(key: "Home_readThis") {
+    readThis: posts(category: "read-this", sticky: false, first: $readThisTotal) @connection(key: "Home_readThis") {
       edges {
         node {
           ...Post_post
@@ -66,7 +66,7 @@ export default FragmentContainer(graphql`
         cursor
       }
     }
-    watchThis: posts(categories: $watchThisID, first: $watchThisTotal) @connection(key: "Home_watchThis") {
+    watchThis: posts(category: "watch-this", first: $watchThisTotal) @connection(key: "Home_watchThis") {
       edges {
         node {
           ...Post_post
@@ -74,7 +74,7 @@ export default FragmentContainer(graphql`
         cursor
       }
     }
-    listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) @connection(key: "Home_listenToThis") {
+    listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal) @connection(key: "Home_listenToThis") {
       edges {
         node {
           ...Post_post

@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Home_Query.graphql
- * @generated SignedSource<<68004e3fee9cf79ed37f6c3ff20c0b9b>>
- * @relayHash 98bb7ebda025f6551165072ea21759d2
+ * @generated SignedSource<<9c21f4960c064c0069a41e15f5e9c9ef>>
+ * @relayHash 2a3b8c9f01c67b70e24467b65f08be97
  * @flow
  * @nogrep
  */
@@ -22,11 +22,8 @@ import type {ConcreteBatch} from 'relay-runtime';
 /*
 query Home_Query(
   $stickiesTotal: Int = 2
-  $watchThisID: String!
   $watchThisTotal: Int = 5
-  $readThisID: String!
   $readThisTotal: Int = 5
-  $listenToThisID: String!
   $listenToThisTotal: Int = 5
 ) {
   viewer {
@@ -52,7 +49,7 @@ fragment Home_viewer on Viewer {
       startCursor
     }
   }
-  readThis: posts(categories: $readThisID, sticky: false, first: $readThisTotal) {
+  readThis: posts(category: "read-this", sticky: false, first: $readThisTotal) {
     edges {
       node {
         ...Post_post
@@ -68,7 +65,7 @@ fragment Home_viewer on Viewer {
       startCursor
     }
   }
-  watchThis: posts(categories: $watchThisID, first: $watchThisTotal) {
+  watchThis: posts(category: "watch-this", first: $watchThisTotal) {
     edges {
       node {
         ...Post_post
@@ -84,7 +81,7 @@ fragment Home_viewer on Viewer {
       startCursor
     }
   }
-  listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) {
+  listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal) {
     edges {
       node {
         ...Post_post
@@ -157,33 +154,15 @@ const batch /*: ConcreteBatch*/ = {
       },
       {
         "kind": "LocalArgument",
-        "name": "watchThisID",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
         "name": "watchThisTotal",
         "type": "Int",
         "defaultValue": 5
       },
       {
         "kind": "LocalArgument",
-        "name": "readThisID",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
         "name": "readThisTotal",
         "type": "Int",
         "defaultValue": 5
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "listenToThisID",
-        "type": "String!",
-        "defaultValue": null
       },
       {
         "kind": "LocalArgument",
@@ -229,33 +208,15 @@ const batch /*: ConcreteBatch*/ = {
       },
       {
         "kind": "LocalArgument",
-        "name": "watchThisID",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
         "name": "watchThisTotal",
         "type": "Int",
         "defaultValue": 5
       },
       {
         "kind": "LocalArgument",
-        "name": "readThisID",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
         "name": "readThisTotal",
         "type": "Int",
         "defaultValue": 5
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "listenToThisID",
-        "type": "String!",
-        "defaultValue": null
       },
       {
         "kind": "LocalArgument",
@@ -565,9 +526,9 @@ const batch /*: ConcreteBatch*/ = {
             "alias": "readThis",
             "args": [
               {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "readThisID",
+                "kind": "Literal",
+                "name": "category",
+                "value": "read-this",
                 "type": "String"
               },
               {
@@ -831,9 +792,9 @@ const batch /*: ConcreteBatch*/ = {
             "alias": "readThis",
             "args": [
               {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "readThisID",
+                "kind": "Literal",
+                "name": "category",
+                "value": "read-this",
                 "type": "String"
               },
               {
@@ -853,7 +814,7 @@ const batch /*: ConcreteBatch*/ = {
             "name": "posts",
             "key": "Home_readThis",
             "filters": [
-              "categories",
+              "category",
               "sticky"
             ]
           },
@@ -862,9 +823,9 @@ const batch /*: ConcreteBatch*/ = {
             "alias": "watchThis",
             "args": [
               {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "watchThisID",
+                "kind": "Literal",
+                "name": "category",
+                "value": "watch-this",
                 "type": "String"
               },
               {
@@ -1122,9 +1083,9 @@ const batch /*: ConcreteBatch*/ = {
             "alias": "watchThis",
             "args": [
               {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "watchThisID",
+                "kind": "Literal",
+                "name": "category",
+                "value": "watch-this",
                 "type": "String"
               },
               {
@@ -1138,7 +1099,7 @@ const batch /*: ConcreteBatch*/ = {
             "name": "posts",
             "key": "Home_watchThis",
             "filters": [
-              "categories"
+              "category"
             ]
           },
           {
@@ -1146,9 +1107,9 @@ const batch /*: ConcreteBatch*/ = {
             "alias": "listenToThis",
             "args": [
               {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "listenToThisID",
+                "kind": "Literal",
+                "name": "category",
+                "value": "listen-to-this",
                 "type": "String"
               },
               {
@@ -1406,9 +1367,9 @@ const batch /*: ConcreteBatch*/ = {
             "alias": "listenToThis",
             "args": [
               {
-                "kind": "Variable",
-                "name": "categories",
-                "variableName": "listenToThisID",
+                "kind": "Literal",
+                "name": "category",
+                "value": "listen-to-this",
                 "type": "String"
               },
               {
@@ -1422,7 +1383,7 @@ const batch /*: ConcreteBatch*/ = {
             "name": "posts",
             "key": "Home_listenToThis",
             "filters": [
-              "categories"
+              "category"
             ]
           },
           {
@@ -1446,7 +1407,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisID: String!\n  $watchThisTotal: Int = 5\n  $readThisID: String!\n  $readThisTotal: Int = 5\n  $listenToThisID: String!\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(categories: $readThisID, sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(categories: $watchThisID, first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(categories: $listenToThisID, first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

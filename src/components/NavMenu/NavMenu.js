@@ -40,10 +40,10 @@ export default class NavMenu extends Component {
   sorted = null;
   level = 0;
 
-  parseItem({ id, title, url: itemUrl, typeSlug, /* , dataSlug */ dataID }) {
+  parseItem({ id, title, url: itemUrl, typeSlug, dataSlug }) {
     let path;
-    if (typeSlug && dataID) {
-      path = `/${typeSlug}/${dataID}`;
+    if (typeSlug && dataSlug) {
+      path = `/${typeSlug}/${dataSlug}`;
     } else {
       const urlObj = url.parse(itemUrl);
       if (urlObj.path === '/') {

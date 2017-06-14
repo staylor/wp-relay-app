@@ -49,13 +49,13 @@ export const routeConfig = makeRouteConfig(
     })}
   >
     <Route
-      path="music/:id"
+      path="music/:slug"
       getComponent={getComponent(() => /* webpackChunkName: "category" */ import('./Category'))}
       query={CategoryQuery}
       render={renderProp}
     />
     <Route
-      path="tag/:id"
+      path="tag/:slug"
       getComponent={getComponent(() => /* webpackChunkName: "tag" */ import('./Tag'))}
       query={TagQuery}
       render={renderProp}
@@ -84,11 +84,8 @@ export const routeConfig = makeRouteConfig(
       prepareVariables={params => ({
         ...params,
         stickiesTotal: 2,
-        readThisID: 'Q2F0ZWdvcnk6Mw==',
         readThisTotal: 5,
-        watchThisID: 'Q2F0ZWdvcnk6NA==',
         watchThisTotal: 5,
-        listenToThisID: 'Q2F0ZWdvcnk6NQ==',
         listenToThisTotal: 5,
       })}
       render={renderProp}

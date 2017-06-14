@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Tag_Query.graphql
- * @generated SignedSource<<0c02ea28dff9d8d9a1792ac7c56332fe>>
- * @relayHash 043eb9708870651ce9e4b703b094380c
+ * @generated SignedSource<<216726543e13c5a8a10b3f7c2d877a5c>>
+ * @relayHash 19a68c8c89881aed825411f4dd921cfe
  * @flow
  * @nogrep
  */
@@ -21,7 +21,7 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 /*
 query Tag_Query(
-  $id: ID!
+  $slug: String!
   $cursor: String
   $count: Int = 10
 ) {
@@ -32,7 +32,7 @@ query Tag_Query(
 }
 
 fragment Tag_viewer on Viewer {
-  tag(id: $id) {
+  tag(slug: $slug) {
     id
     name
     taxonomy {
@@ -46,7 +46,7 @@ fragment Tag_viewer on Viewer {
       id
     }
   }
-  posts(tag: $id, after: $cursor, first: $count) {
+  posts(tag: $slug, after: $cursor, first: $count) {
     edges {
       node {
         ...Post_post
@@ -113,8 +113,8 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "id",
-        "type": "ID!",
+        "name": "slug",
+        "type": "String!",
         "defaultValue": null
       },
       {
@@ -161,8 +161,8 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "id",
-        "type": "ID!",
+        "name": "slug",
+        "type": "String!",
         "defaultValue": null
       },
       {
@@ -196,9 +196,9 @@ const batch /*: ConcreteBatch*/ = {
             "args": [
               {
                 "kind": "Variable",
-                "name": "id",
-                "variableName": "id",
-                "type": "ID"
+                "name": "slug",
+                "variableName": "slug",
+                "type": "String"
               }
             ],
             "concreteType": "Tag",
@@ -302,8 +302,8 @@ const batch /*: ConcreteBatch*/ = {
               {
                 "kind": "Variable",
                 "name": "tag",
-                "variableName": "id",
-                "type": "ID"
+                "variableName": "slug",
+                "type": "String"
               }
             ],
             "concreteType": "PostConnection",
@@ -568,8 +568,8 @@ const batch /*: ConcreteBatch*/ = {
               {
                 "kind": "Variable",
                 "name": "tag",
-                "variableName": "id",
-                "type": "ID"
+                "variableName": "slug",
+                "type": "String"
               }
             ],
             "handle": "connection",
@@ -600,7 +600,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Tag_Query(\n  $id: ID!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Tag_viewer\n    id\n  }\n}\n\nfragment Tag_viewer on Viewer {\n  tag(id: $id) {\n    id\n    name\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(tag: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Tag_Query(\n  $slug: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Tag_viewer\n    id\n  }\n}\n\nfragment Tag_viewer on Viewer {\n  tag(slug: $slug) {\n    id\n    name\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(tag: $slug, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

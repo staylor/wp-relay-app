@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Tag_viewer.graphql
- * @generated SignedSource<<38cb164e5ae4641182c806f15d28a80b>>
+ * @generated SignedSource<<f7323dbc9d1360cd91364e384bc6998e>>
  * @flow
  * @nogrep
  */
@@ -48,8 +48,8 @@ const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [
     {
       "kind": "RootArgument",
-      "name": "id",
-      "type": "ID"
+      "name": "slug",
+      "type": "String"
     },
     {
       "kind": "RootArgument",
@@ -83,9 +83,9 @@ const fragment /*: ConcreteFragment*/ = {
       "args": [
         {
           "kind": "Variable",
-          "name": "id",
-          "variableName": "id",
-          "type": "ID"
+          "name": "slug",
+          "variableName": "slug",
+          "type": "String"
         }
       ],
       "concreteType": "Tag",
@@ -170,8 +170,8 @@ const fragment /*: ConcreteFragment*/ = {
         {
           "kind": "Variable",
           "name": "tag",
-          "variableName": "id",
-          "type": "ID"
+          "variableName": "slug",
+          "type": "String"
         }
       ],
       "concreteType": "PostConnection",

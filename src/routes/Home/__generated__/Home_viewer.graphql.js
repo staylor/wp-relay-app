@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Home_viewer.graphql
- * @generated SignedSource<<d75a4447bc6ed7623dc44e84cc727635>>
+ * @generated SignedSource<<4f797b1b6d1f7bc0a67f38b80953e338>>
  * @flow
  * @nogrep
  */
@@ -52,28 +52,13 @@ const fragment /*: ConcreteFragment*/ = {
     },
     {
       "kind": "RootArgument",
-      "name": "readThisID",
-      "type": "String"
-    },
-    {
-      "kind": "RootArgument",
       "name": "readThisTotal",
       "type": "Int"
     },
     {
       "kind": "RootArgument",
-      "name": "watchThisID",
-      "type": "String"
-    },
-    {
-      "kind": "RootArgument",
       "name": "watchThisTotal",
       "type": "Int"
-    },
-    {
-      "kind": "RootArgument",
-      "name": "listenToThisID",
-      "type": "String"
     },
     {
       "kind": "RootArgument",
@@ -177,9 +162,9 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": "readThis",
       "args": [
         {
-          "kind": "Variable",
-          "name": "categories",
-          "variableName": "readThisID",
+          "kind": "Literal",
+          "name": "category",
+          "value": "read-this",
           "type": "String"
         },
         {
@@ -228,16 +213,16 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": null
+      "storageKey": "__Home_readThis_connection{\"category\":\"read-this\",\"sticky\":false}"
     },
     {
       "kind": "LinkedField",
       "alias": "watchThis",
       "args": [
         {
-          "kind": "Variable",
-          "name": "categories",
-          "variableName": "watchThisID",
+          "kind": "Literal",
+          "name": "category",
+          "value": "watch-this",
           "type": "String"
         }
       ],
@@ -280,16 +265,16 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": null
+      "storageKey": "__Home_watchThis_connection{\"category\":\"watch-this\"}"
     },
     {
       "kind": "LinkedField",
       "alias": "listenToThis",
       "args": [
         {
-          "kind": "Variable",
-          "name": "categories",
-          "variableName": "listenToThisID",
+          "kind": "Literal",
+          "name": "category",
+          "value": "listen-to-this",
           "type": "String"
         }
       ],
@@ -332,7 +317,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": null
+      "storageKey": "__Home_listenToThis_connection{\"category\":\"listen-to-this\"}"
     }
   ],
   "type": "Viewer"

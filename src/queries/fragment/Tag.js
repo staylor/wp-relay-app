@@ -2,7 +2,7 @@ import { graphql } from 'react-relay';
 
 export default graphql`
   fragment Tag_viewer on Viewer {
-    tag(id: $id) {
+    tag(slug: $slug) {
       id
       name
       taxonomy {
@@ -15,7 +15,7 @@ export default graphql`
         }
       }
     }
-    posts(tag: $id, after: $cursor, first: $count) @connection(key: "Tag_posts") {
+    posts(tag: $slug, after: $cursor, first: $count) @connection(key: "Tag_posts") {
       edges {
         node {
           ...Post_post

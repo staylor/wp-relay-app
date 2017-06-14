@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Category_viewer.graphql
- * @generated SignedSource<<a8b3809d5801c589c767243740f1d8a6>>
+ * @generated SignedSource<<ba53f2314a61776c35604a5ae734d2b7>>
  * @flow
  * @nogrep
  */
@@ -48,8 +48,8 @@ const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [
     {
       "kind": "RootArgument",
-      "name": "id",
-      "type": "ID"
+      "name": "slug",
+      "type": "String"
     },
     {
       "kind": "RootArgument",
@@ -83,9 +83,9 @@ const fragment /*: ConcreteFragment*/ = {
       "args": [
         {
           "kind": "Variable",
-          "name": "id",
-          "variableName": "id",
-          "type": "ID"
+          "name": "slug",
+          "variableName": "slug",
+          "type": "String"
         }
       ],
       "concreteType": "Category",
@@ -170,8 +170,8 @@ const fragment /*: ConcreteFragment*/ = {
         {
           "kind": "Variable",
           "name": "category",
-          "variableName": "id",
-          "type": "ID"
+          "variableName": "slug",
+          "type": "String"
         }
       ],
       "concreteType": "PostConnection",
