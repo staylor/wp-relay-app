@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Tag_viewer.graphql
- * @generated SignedSource<<f7323dbc9d1360cd91364e384bc6998e>>
+ * @generated SignedSource<<14f0dd631c92897d2a527f0ae3a80a7d>>
  * @flow
  * @nogrep
  */
@@ -18,6 +18,7 @@ export type Tag_viewer = {|
   +tag: ?{|
     +id: string;
     +name: ?string;
+    +slug: ?string;
     +taxonomy: ?{|
       +rewrite: ?{|
         +slug: ?string;
@@ -104,6 +105,13 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "name": "name",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "slug",
           "storageKey": null
         },
         {

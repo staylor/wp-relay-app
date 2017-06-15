@@ -5,6 +5,7 @@ export default graphql`
     tag(slug: $slug) {
       id
       name
+      slug
       taxonomy {
         rewrite {
           slug

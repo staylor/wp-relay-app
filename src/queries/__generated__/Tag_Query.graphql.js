@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Tag_Query.graphql
- * @generated SignedSource<<216726543e13c5a8a10b3f7c2d877a5c>>
- * @relayHash 19a68c8c89881aed825411f4dd921cfe
+ * @generated SignedSource<<bd5fa051146d10e7bf8646c8af9b7d1d>>
+ * @relayHash 3bcc89fc106ab73ea4735d60af113c91
  * @flow
  * @nogrep
  */
@@ -35,6 +35,7 @@ fragment Tag_viewer on Viewer {
   tag(slug: $slug) {
     id
     name
+    slug
     taxonomy {
       rewrite {
         slug
@@ -217,6 +218,13 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "name": "name",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "slug",
                 "storageKey": null
               },
               {
@@ -600,7 +608,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Tag_Query(\n  $slug: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Tag_viewer\n    id\n  }\n}\n\nfragment Tag_viewer on Viewer {\n  tag(slug: $slug) {\n    id\n    name\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(tag: $slug, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Tag_Query(\n  $slug: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Tag_viewer\n    id\n  }\n}\n\nfragment Tag_viewer on Viewer {\n  tag(slug: $slug) {\n    id\n    name\n    slug\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(tag: $slug, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

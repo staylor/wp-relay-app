@@ -8,6 +8,7 @@ import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import Comments from 'components/Comments';
 import { convertPlaceholders } from 'utils';
+import { dateRegex } from 'utils/regex';
 import styles from './Single.scss';
 
 /* eslint-disable react/no-danger */
@@ -90,6 +91,8 @@ export default class Single extends Component {
       },
     } = this.props.viewer;
 
+    const [, year, month] = dateRegex.exec(date);
+
     return (
       <article className={styles.content}>
         <Helmet>
@@ -102,10 +105,12 @@ export default class Single extends Component {
           <div className={styles.meta}>
             Posted:
             {' '}
-            <FormattedRelative
-              value={Date.parse(date)}
-              style="numeric" // eslint-disable-line react/style-prop-object
-            />
+            <Link to={`/${year}/${month}`}>
+              <FormattedRelative
+                value={Date.parse(date)}
+                style="numeric" // eslint-disable-line react/style-prop-object
+              />
+            </Link>
           </div>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}

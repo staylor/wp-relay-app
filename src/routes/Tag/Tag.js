@@ -39,12 +39,5 @@ Tag.propTypes = {
 };
 
 export default PaginationContainer(TagPaginationFragment, {
-  getVariables(props, { count, cursor }) {
-    return {
-      id: props.viewer.tag.id,
-      count,
-      cursor,
-    };
-  },
   query: TagQuery,
 })(Tag);

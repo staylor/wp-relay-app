@@ -5,6 +5,7 @@ export default graphql`
     category(slug: $slug) {
       id
       name
+      slug
       taxonomy {
         rewrite {
           slug

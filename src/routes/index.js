@@ -13,6 +13,7 @@ import HomeQuery from 'queries/Home';
 import PageQuery from 'queries/Page';
 import AppQuery from 'queries/App';
 import SearchQuery from 'queries/Search';
+import DateQuery from 'queries/Date';
 import Loading from 'components/Loading';
 
 const getComponent = loader => (location, cb) =>
@@ -71,6 +72,20 @@ export const routeConfig = makeRouteConfig(
       getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
       query={SearchQuery}
       render={renderProp}
+    />
+    <Route
+      path=":year(\d+)/:month(\d+)?/:day(\d+)?"
+      getComponent={getComponent(() => /* webpackChunkName: "date" */ import('./Date'))}
+      query={DateQuery}
+      prepareVariables={params => {
+        const vars = Object.assign({}, params);
+        return ['year', 'month', 'day'].reduce((memo, value) => {
+          if (vars[value]) {
+            memo[value] = parseInt(vars[value], 10);
+          }
+          return memo;
+        }, {});
+      }}
     />
     <Route
       path=":slug"

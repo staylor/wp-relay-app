@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import PaginationContainer from 'decorators/PaginationContainer';
-import CategoryQuery from 'queries/Category';
-import CategoryPaginationFragment from 'queries/fragment/Category';
+import DateQuery from 'queries/Date';
+import DatePaginationFragment from 'queries/fragment/Date';
 import Archive from 'components/Archive';
-import styles from './Category.scss';
+import styles from './Date.scss';
 
-const Category = ({ viewer: { category, posts }, relay }) => {
-  const title = `${category.taxonomy.labels.singular}: ${category.name}`;
+const DateRoute = ({ params, viewer: { posts }, relay }) => {
+  const values = [params.month, params.day, params.year].filter(value => value);
+  const path = values.join('/');
+  const title = `Archives: ${path}`;
+
   return (
     <div className={styles.sections}>
       <Helmet>
         <title>{title}</title>
-        <link
-          rel="canonical"
-          href={`https://highforthis.com/${category.taxonomy.rewrite.slug}/${category.id}`}
-        />
+        <link rel="canonical" href={`https://highforthis.com/${path}`} />
       </Helmet>
       <section>
         <h3 className={styles.label}>{title}</h3>
@@ -26,15 +26,16 @@ const Category = ({ viewer: { category, posts }, relay }) => {
   );
 };
 
-Category.propTypes = {
+DateRoute.propTypes = {
   viewer: PropTypes.shape({
-    category: PropTypes.object,
     posts: PropTypes.object,
   }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   relay: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  params: PropTypes.object.isRequired,
 };
 
-export default PaginationContainer(CategoryPaginationFragment, {
-  query: CategoryQuery,
-})(Category);
+export default PaginationContainer(DatePaginationFragment, {
+  query: DateQuery,
+})(DateRoute);
