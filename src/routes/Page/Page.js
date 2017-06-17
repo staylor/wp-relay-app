@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { graphql } from 'react-relay';
-import FragmentContainer from 'decorators/FragmentContainer';
+import { graphql, createFragmentContainer } from 'react-relay';
 import Media from 'components/Media';
 import Error from 'components/Error';
 import { SITE_URL } from 'utils/constants';
@@ -46,23 +45,26 @@ Page.propTypes = {
   }).isRequired,
 };
 
-export default FragmentContainer(graphql`
-  fragment Page_viewer on Viewer {
-    page(slug: $slug) {
-      id
-      slug
-      title {
-        rendered
-      }
-      content {
-        rendered
-      }
-      featuredMedia {
-        ... on Image {
-          source_url
+export default createFragmentContainer(
+  Page,
+  graphql`
+    fragment Page_viewer on Viewer {
+      page(slug: $slug) {
+        id
+        slug
+        title {
+          rendered
         }
-        ...Media_media
+        content {
+          rendered
+        }
+        featuredMedia {
+          ... on Image {
+            source_url
+          }
+          ...Media_media
+        }
       }
     }
-  }
-`)(Page);
+  `
+);

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-relay';
-import PaginationContainer from 'decorators/PaginationContainer';
+import { graphql, createPaginationContainer } from 'react-relay';
 import AuthorQuery from 'queries/Author';
 import Archive from 'components/Archive';
 import styles from './Author.scss';
@@ -23,7 +22,8 @@ Author.propTypes = {
   relay: PropTypes.object.isRequired,
 };
 
-export default PaginationContainer(
+export default createPaginationContainer(
+  Author,
   graphql`
     fragment Author_viewer on Viewer {
       author(id: $id) {
@@ -47,6 +47,23 @@ export default PaginationContainer(
     }
   `,
   {
+    direction: 'forward',
+    getConnectionFromProps(props) {
+      return props.viewer && props.viewer.posts;
+    },
+    getVariables(props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+      };
+    },
+    getFragmentVariables(vars, totalCount) {
+      return {
+        ...vars,
+        count: totalCount,
+      };
+    },
     query: AuthorQuery,
   }
-)(Author);
+);

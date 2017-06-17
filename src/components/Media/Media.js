@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-relay';
-import FragmentContainer from 'decorators/FragmentContainer';
+import { graphql, createFragmentContainer } from 'react-relay';
 import Image from '../Image';
 
 const Media = ({ media, crop = null }) => {
@@ -23,9 +22,12 @@ Media.defaultProps = {
   crop: 'large',
 };
 
-export default FragmentContainer(graphql`
-  fragment Media_media on Media {
-    __typename
-    ...Image_image
-  }
-`)(Media);
+export default createFragmentContainer(
+  Media,
+  graphql`
+    fragment Media_media on Media {
+      __typename
+      ...Image_image
+    }
+  `
+);

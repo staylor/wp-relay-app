@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-relay';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Link } from 'found';
-import FragmentContainer from 'decorators/FragmentContainer';
 import Archive from 'components/Archive';
 import styles from './Home.scss';
 
@@ -48,39 +47,42 @@ Home.propTypes = {
   }).isRequired,
 };
 
-export default FragmentContainer(graphql`
-  fragment Home_viewer on Viewer {
-    stickies: posts(sticky: true, first: $stickiesTotal) @connection(key: "Home_stickies") {
-      edges {
-        node {
-          ...Post_post
+export default createFragmentContainer(
+  Home,
+  graphql`
+    fragment Home_viewer on Viewer {
+      stickies: posts(sticky: true, first: $stickiesTotal) @connection(key: "Home_stickies") {
+        edges {
+          node {
+            ...Post_post
+          }
+          cursor
         }
-        cursor
+      }
+      readThis: posts(category: "read-this", sticky: false, first: $readThisTotal) @connection(key: "Home_readThis") {
+        edges {
+          node {
+            ...Post_post
+          }
+          cursor
+        }
+      }
+      watchThis: posts(category: "watch-this", first: $watchThisTotal) @connection(key: "Home_watchThis") {
+        edges {
+          node {
+            ...Post_post
+          }
+          cursor
+        }
+      }
+      listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal) @connection(key: "Home_listenToThis") {
+        edges {
+          node {
+            ...Post_post
+          }
+          cursor
+        }
       }
     }
-    readThis: posts(category: "read-this", sticky: false, first: $readThisTotal) @connection(key: "Home_readThis") {
-      edges {
-        node {
-          ...Post_post
-        }
-        cursor
-      }
-    }
-    watchThis: posts(category: "watch-this", first: $watchThisTotal) @connection(key: "Home_watchThis") {
-      edges {
-        node {
-          ...Post_post
-        }
-        cursor
-      }
-    }
-    listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal) @connection(key: "Home_listenToThis") {
-      edges {
-        node {
-          ...Post_post
-        }
-        cursor
-      }
-    }
-  }
-`)(Home);
+  `
+);

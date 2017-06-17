@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-relay';
-import FragmentContainer from 'decorators/FragmentContainer';
+import { graphql, createFragmentContainer } from 'react-relay';
 import styles from './Sidebar.scss';
 
 /* eslint-disable react/no-danger */
@@ -42,13 +41,16 @@ Sidebar.propTypes = {
   }).isRequired,
 };
 
-export default FragmentContainer(graphql`
-  fragment Sidebar_sidebar on Sidebar {
-    widgets {
-      classname
-      content {
-        rendered
+export default createFragmentContainer(
+  Sidebar,
+  graphql`
+    fragment Sidebar_sidebar on Sidebar {
+      widgets {
+        classname
+        content {
+          rendered
+        }
       }
     }
-  }
-`)(Sidebar);
+  `
+);

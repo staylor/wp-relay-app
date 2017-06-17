@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-relay';
+import { graphql, createPaginationContainer } from 'react-relay';
 import Helmet from 'react-helmet';
-import PaginationContainer from 'decorators/PaginationContainer';
 import TermQuery from 'queries/Term';
 import Archive from 'components/Archive';
 import Error from 'components/Error';
@@ -43,7 +42,8 @@ Term.propTypes = {
   relay: PropTypes.object.isRequired,
 };
 
-export default PaginationContainer(
+export default createPaginationContainer(
+  Term,
   graphql`
     fragment Term_viewer on Viewer {
       term(slug: $slug, taxonomy: $taxonomy) {
@@ -77,6 +77,23 @@ export default PaginationContainer(
     }
   `,
   {
+    direction: 'forward',
+    getConnectionFromProps(props) {
+      return props.viewer && props.viewer.posts;
+    },
+    getVariables(props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+      };
+    },
+    getFragmentVariables(vars, totalCount) {
+      return {
+        ...vars,
+        count: totalCount,
+      };
+    },
     query: TermQuery,
   }
-)(Term);
+);
