@@ -7,8 +7,7 @@ import { Resolver } from 'found-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import 'isomorphic-fetch';
 import SingleQuery from 'queries/Single';
-import CategoryQuery from 'queries/Category';
-import TagQuery from 'queries/Tag';
+import TermQuery from 'queries/Term';
 import HomeQuery from 'queries/Home';
 import PageQuery from 'queries/Page';
 import AppQuery from 'queries/App';
@@ -51,15 +50,23 @@ export const routeConfig = makeRouteConfig(
   >
     <Route
       path="music/:slug"
-      getComponent={getComponent(() => /* webpackChunkName: "category" */ import('./Category'))}
-      query={CategoryQuery}
+      getComponent={getComponent(() => /* webpackChunkName: "term" */ import('./Term'))}
+      query={TermQuery}
       render={renderProp}
+      prepareVariables={params => ({
+        ...params,
+        taxonomy: 'category',
+      })}
     />
     <Route
       path="tag/:slug"
-      getComponent={getComponent(() => /* webpackChunkName: "tag" */ import('./Tag'))}
-      query={TagQuery}
+      getComponent={getComponent(() => /* webpackChunkName: "term" */ import('./Term'))}
+      query={TermQuery}
       render={renderProp}
+      prepareVariables={params => ({
+        ...params,
+        taxonomy: 'tag',
+      })}
     />
     <Route
       path="post/:id"

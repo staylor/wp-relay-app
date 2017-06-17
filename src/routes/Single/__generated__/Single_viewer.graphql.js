@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Single_viewer.graphql
- * @generated SignedSource<<359e534dbf34fcf6127d4070b20b1eb2>>
+ * @generated SignedSource<<5307f19e68d271969b2a4ef77ab9ddf0>>
  * @flow
  * @nogrep
  */
@@ -23,6 +23,9 @@ export type Single_viewer = {|
     |};
     +content: ?{|
       +rendered: ?string;
+    |};
+    +excerpt: ?{|
+      +raw: ?string;
     |};
     +featuredMedia: ?{|
       +source_url?: ?string;
@@ -129,6 +132,24 @@ const fragment /*: ConcreteFragment*/ = {
               "alias": null,
               "args": null,
               "name": "rendered",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "Excerpt",
+          "name": "excerpt",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "raw",
               "storageKey": null
             }
           ],

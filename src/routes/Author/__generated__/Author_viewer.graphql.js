@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Author_viewer.graphql
- * @generated SignedSource<<edfb82ebe6c59e2dec8a11a288cbd9e5>>
+ * @generated SignedSource<<a0c4107af31bc7832d3f587ce92a39c3>>
  * @flow
  * @nogrep
  */
@@ -19,7 +19,18 @@ export type Author_viewer = {|
     +id: string;
     +name: ?string;
   |};
-  +posts: ?{| |};
+  +posts: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{| |};
+      +cursor: string;
+    |}>;
+    +pageInfo: {|
+      +startCursor: ?string;
+      +endCursor: ?string;
+      +hasNextPage: boolean;
+      +hasPreviousPage: boolean;
+    |};
+  |};
 |};
 */
 
@@ -30,10 +41,31 @@ const fragment /*: ConcreteFragment*/ = {
       "kind": "RootArgument",
       "name": "id",
       "type": "ID"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "cursor",
+      "type": "String"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "count",
+      "type": "Int"
     }
   ],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": "count",
+        "cursor": "cursor",
+        "direction": "forward",
+        "path": [
+          "posts"
+        ]
+      }
+    ]
+  },
   "name": "Author_viewer",
   "selections": [
     {
@@ -70,7 +102,7 @@ const fragment /*: ConcreteFragment*/ = {
     },
     {
       "kind": "LinkedField",
-      "alias": null,
+      "alias": "posts",
       "args": [
         {
           "kind": "Variable",
@@ -80,13 +112,81 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "concreteType": "PostConnection",
-      "name": "posts",
+      "name": "__Author_posts_connection",
       "plural": false,
       "selections": [
         {
-          "kind": "FragmentSpread",
-          "name": "Archive_posts",
-          "args": null
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "PostEdge",
+          "name": "edges",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "Post",
+              "name": "node",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "Post_post",
+                  "args": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "cursor",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "PageInfo",
+          "name": "pageInfo",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "startCursor",
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "endCursor",
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "hasNextPage",
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "hasPreviousPage",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
         }
       ],
       "storageKey": null

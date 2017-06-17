@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Page_Query.graphql
- * @generated SignedSource<<20235711403959542643c5985fc97bac>>
- * @relayHash 9c1327c261c73de3050f54ec301e096f
+ * @generated SignedSource<<50167fa021b1df38879900d60638df68>>
+ * @relayHash fea55c70130b67a5c657baf55b8ef363
  * @flow
  * @nogrep
  */
@@ -41,10 +41,11 @@ fragment Page_viewer on Viewer {
     }
     featuredMedia {
       __typename
-      ...Media_media
       ... on Image {
+        source_url
         id
       }
+      ...Media_media
       ... on Audio {
         id
       }
@@ -320,7 +321,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    id\n    slug\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featuredMedia {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    id\n    slug\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featuredMedia {\n      __typename\n      ... on Image {\n        source_url\n        id\n      }\n      ...Media_media\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

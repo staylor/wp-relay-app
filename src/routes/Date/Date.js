@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'react-relay';
 import Helmet from 'react-helmet';
 import PaginationContainer from 'decorators/PaginationContainer';
 import DateQuery from 'queries/Date';
-import DatePaginationFragment from 'queries/fragment/Date';
 import Archive from 'components/Archive';
 import { SITE_URL } from 'utils/constants';
 import styles from './Date.scss';
@@ -37,6 +37,26 @@ DateRoute.propTypes = {
   params: PropTypes.object.isRequired,
 };
 
-export default PaginationContainer(DatePaginationFragment, {
-  query: DateQuery,
-})(DateRoute);
+export default PaginationContainer(
+  graphql`
+    fragment Date_viewer on Viewer {
+      posts(year: $year, month: $month, day: $day, after: $cursor, first: $count) @connection(key: "Date_posts") {
+        edges {
+          node {
+            ...Post_post
+          }
+          cursor
+        }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
+      }
+    }
+  `,
+  {
+    query: DateQuery,
+  }
+)(DateRoute);

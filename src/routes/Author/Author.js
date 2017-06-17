@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'react-relay';
 import PaginationContainer from 'decorators/PaginationContainer';
 import AuthorQuery from 'queries/Author';
-import AuthorPaginationFragment from 'queries/fragment/Author';
 import Archive from 'components/Archive';
 import styles from './Author.scss';
 
@@ -23,13 +23,30 @@ Author.propTypes = {
   relay: PropTypes.object.isRequired,
 };
 
-export default PaginationContainer(AuthorPaginationFragment, {
-  getVariables(props, { count, cursor }) {
-    return {
-      id: props.viewer.author.id,
-      count,
-      cursor,
-    };
-  },
-  query: AuthorQuery,
-})(Author);
+export default PaginationContainer(
+  graphql`
+    fragment Author_viewer on Viewer {
+      author(id: $id) {
+        id
+        name
+      }
+      posts(author: $id, after: $cursor, first: $count) @connection(key: "Author_posts") {
+        edges {
+          node {
+            ...Post_post
+          }
+          cursor
+        }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
+      }
+    }
+  `,
+  {
+    query: AuthorQuery,
+  }
+)(Author);

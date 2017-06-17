@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Page_viewer.graphql
- * @generated SignedSource<<e4afb7a8b993757137eb44c3dce1952b>>
+ * @generated SignedSource<<275838bdc935e2f72a75c9aa9dc08922>>
  * @flow
  * @nogrep
  */
@@ -24,7 +24,9 @@ export type Page_viewer = {|
     +content: ?{|
       +rendered: ?string;
     |};
-    +featuredMedia: ?{| |};
+    +featuredMedia: ?{|
+      +source_url?: ?string;
+    |};
   |};
 |};
 */
@@ -119,6 +121,19 @@ const fragment /*: ConcreteFragment*/ = {
               "kind": "FragmentSpread",
               "name": "Media_media",
               "args": null
+            },
+            {
+              "kind": "InlineFragment",
+              "type": "Image",
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "source_url",
+                  "storageKey": null
+                }
+              ]
             }
           ],
           "storageKey": null
