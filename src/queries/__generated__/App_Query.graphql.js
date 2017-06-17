@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule App_Query.graphql
- * @generated SignedSource<<26cd0600941a6957ea7e1e82fe6e8151>>
- * @relayHash 2c32c812883c90c2255cd4f94feeef2b
+ * @generated SignedSource<<e2fd20c76757cca44c0f4a43f26cbcc0>>
+ * @relayHash b1e7269ba9f0fd512154cc585ae187d7
  * @flow
  * @nogrep
  */
@@ -31,6 +31,10 @@ query App_Query(
 }
 
 fragment App_viewer on Viewer {
+  settings {
+    title
+    description
+  }
   navMenu(id: $menuID) {
     ...NavMenu_navMenu
     id
@@ -138,6 +142,31 @@ const batch /*: ConcreteBatch*/ = {
         "name": "viewer",
         "plural": false,
         "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": null,
+            "concreteType": "Settings",
+            "name": "settings",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "title",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "description",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
           {
             "kind": "LinkedField",
             "alias": null,
@@ -333,7 +362,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query App_Query(\n  $menuID: ID!\n  $sidebarID: ID!\n) {\n  viewer {\n    ...App_viewer\n    id\n  }\n}\n\nfragment App_viewer on Viewer {\n  navMenu(id: $menuID) {\n    ...NavMenu_navMenu\n    id\n  }\n  sidebar(id: $sidebarID) {\n    ...Sidebar_sidebar\n    id\n  }\n}\n\nfragment NavMenu_navMenu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    type\n    typeName\n    typeSlug\n    dataSlug\n    dataID\n  }\n}\n\nfragment Sidebar_sidebar on Sidebar {\n  widgets {\n    classname\n    content {\n      rendered\n    }\n  }\n}\n"
+  "text": "query App_Query(\n  $menuID: ID!\n  $sidebarID: ID!\n) {\n  viewer {\n    ...App_viewer\n    id\n  }\n}\n\nfragment App_viewer on Viewer {\n  settings {\n    title\n    description\n  }\n  navMenu(id: $menuID) {\n    ...NavMenu_navMenu\n    id\n  }\n  sidebar(id: $sidebarID) {\n    ...Sidebar_sidebar\n    id\n  }\n}\n\nfragment NavMenu_navMenu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    type\n    typeName\n    typeSlug\n    dataSlug\n    dataID\n  }\n}\n\nfragment Sidebar_sidebar on Sidebar {\n  widgets {\n    classname\n    content {\n      rendered\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

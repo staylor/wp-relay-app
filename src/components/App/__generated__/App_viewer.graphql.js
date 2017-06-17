@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule App_viewer.graphql
- * @generated SignedSource<<2670d8350f773017d3fa0a6fe37c236d>>
+ * @generated SignedSource<<6d83764360012411025121f39c13c4eb>>
  * @flow
  * @nogrep
  */
@@ -15,6 +15,10 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type App_viewer = {|
+  +settings: ?{|
+    +title: ?string;
+    +description: ?string;
+  |};
   +navMenu: ?{| |};
   +sidebar: ?{| |};
 |};
@@ -38,6 +42,31 @@ const fragment /*: ConcreteFragment*/ = {
   "metadata": null,
   "name": "App_viewer",
   "selections": [
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "args": null,
+      "concreteType": "Settings",
+      "name": "settings",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "title",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "description",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    },
     {
       "kind": "LinkedField",
       "alias": null,

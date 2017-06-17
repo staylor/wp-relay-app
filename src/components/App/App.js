@@ -8,12 +8,14 @@ import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import styles from './App.scss';
 
-const siteName = 'High for This';
-const tagline = 'Music as it happens.';
 const description = 'High for This aggregates the best music content on the web.';
 
 @FragmentContainer(graphql`
   fragment App_viewer on Viewer {
+    settings {
+      title
+      description
+    }
     navMenu(id: $menuID) {
       ...NavMenu_navMenu
     }
@@ -25,6 +27,7 @@ const description = 'High for This aggregates the best music content on the web.
 export default class App extends Component {
   static propTypes = {
     viewer: PropTypes.shape({
+      settings: PropTypes.object,
       navMenu: PropTypes.object,
       sidebar: PropTypes.object,
     }).isRequired,
@@ -52,20 +55,20 @@ export default class App extends Component {
   };
 
   render() {
-    const { viewer: { navMenu, sidebar }, children } = this.props;
+    const { viewer: { settings, navMenu, sidebar }, children } = this.props;
 
     return (
       <IntlProvider locale={this.state.locale}>
         <div className={styles.page}>
-          <Helmet titleTemplate={`%s - ${siteName}`} defaultTitle={siteName}>
+          <Helmet titleTemplate={`%s - ${settings.title}`} defaultTitle={settings.title}>
             <html lang={this.state.locale} prefix="og: http://ogp.me/ns#" />
-            <title>{tagline}</title>
+            <title>{settings.description}</title>
             <meta httpEquiv="Content-Language" content={this.state.locale} />
-            <meta property="og:site_name" content={siteName} />
+            <meta property="og:site_name" content={settings.title} />
             <meta property="og:description" content={description} />
             <meta property="og:type" content="website" />
           </Helmet>
-          <Header navMenu={navMenu} />
+          <Header {...{ settings, navMenu }} />
           <div className={styles.content}>
             <section className={styles.primary}>
               {children}
