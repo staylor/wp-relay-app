@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
+import { routerShape } from 'found/lib/PropTypes';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import { convertPlaceholders } from 'utils';
@@ -44,8 +45,7 @@ export default class Post extends Component {
   };
 
   static contextTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    router: PropTypes.object.isRequired,
+    router: routerShape.isRequired,
   };
 
   content = null;

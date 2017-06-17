@@ -15,6 +15,7 @@ import { ClientFetcher } from 'relay/fetcher';
     const Router = await createInitialFarceRouter({
       historyProtocol: new BrowserProtocol(),
       historyMiddlewares,
+      historyOptions: { useBeforeUnload: true },
       routeConfig,
       resolver,
       render,

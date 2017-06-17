@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
+import { routerShape } from 'found/lib/PropTypes';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
@@ -32,8 +33,7 @@ export default class App extends Component {
       sidebar: PropTypes.object,
     }).isRequired,
     children: PropTypes.node,
-    // eslint-disable-next-line react/forbid-prop-types
-    router: PropTypes.object.isRequired,
+    router: routerShape.isRequired,
   };
 
   static defaultProps = {
@@ -41,7 +41,23 @@ export default class App extends Component {
   };
 
   static childContextTypes = {
-    router: PropTypes.object,
+    router: routerShape.isRequired,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.removeTransitionHook = props.router.addTransitionHook(this.onTransition);
+  }
+
+  componentWillUnmount() {
+    this.removeTransitionHook();
+  }
+
+  onTransition = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
   };
 
   getChildContext() {
