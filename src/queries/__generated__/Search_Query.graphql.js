@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Search_Query.graphql
- * @generated SignedSource<<68668740cb99ec364e92fdd1ee1b69ea>>
- * @relayHash 20ce661c974337222f8ceda983d559ab
+ * @generated SignedSource<<dcc130b8a77f7f590605130361814457>>
+ * @relayHash c9669cadb897b2f8086ffa8e1afacbf8
  * @flow
  * @nogrep
  */
@@ -51,6 +51,8 @@ fragment Search_viewer on Viewer {
 
 fragment Post_post on Post {
   id
+  slug
+  date
   title {
     rendered
   }
@@ -73,11 +75,20 @@ fragment Post_post on Post {
       id
     }
   }
+  ...PostLink_post
 }
 
 fragment Media_media on Media {
   __typename
   ...Image_image
+}
+
+fragment PostLink_post on Post {
+  slug
+  date
+  title {
+    rendered
+  }
 }
 
 fragment Image_image on Media {
@@ -205,6 +216,20 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "slug",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "date",
                         "storageKey": null
                       },
                       {
@@ -468,7 +493,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Search_Query(\n  $search: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Search_viewer\n    id\n  }\n}\n\nfragment Search_viewer on Viewer {\n  posts(search: $search, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasPreviousPage\n      hasNextPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Search_Query(\n  $search: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Search_viewer\n    id\n  }\n}\n\nfragment Search_viewer on Viewer {\n  posts(search: $search, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasPreviousPage\n      hasNextPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  slug\n  date\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  slug\n  date\n  title {\n    rendered\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

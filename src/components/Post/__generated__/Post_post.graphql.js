@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Post_post.graphql
- * @generated SignedSource<<cdbbd9acb953d59d35e42e9d8342f108>>
+ * @generated SignedSource<<863ea5fd2796d433c1b54cd022ce3687>>
  * @flow
  * @nogrep
  */
@@ -16,6 +16,8 @@
 import type {ConcreteFragment} from 'relay-runtime';
 export type Post_post = {|
   +id: string;
+  +slug: ?string;
+  +date: ?string;
   +title: ?{|
     +rendered: ?string;
   |};
@@ -41,6 +43,20 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "name": "id",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "slug",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "date",
       "storageKey": null
     },
     {
@@ -112,6 +128,11 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "PostLink_post",
+      "args": null
     }
   ],
   "type": "Post"

@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Single_Query.graphql
- * @generated SignedSource<<ea3cbb5f9dd8cdfd34aaa004ffb0eef2>>
- * @relayHash f1370a72bec709df17a4de4bd5a07560
+ * @generated SignedSource<<dc7a6b55eab5d8a3cae4487f7fb19ef4>>
+ * @relayHash 3aefc853f550a3699c94a675b82f7150
  * @flow
  * @nogrep
  */
@@ -21,7 +21,7 @@ import type {ConcreteBatch} from 'relay-runtime';
 
 /*
 query Single_Query(
-  $id: ID!
+  $slug: String!
 ) {
   viewer {
     ...Single_viewer
@@ -30,7 +30,7 @@ query Single_Query(
 }
 
 fragment Single_viewer on Viewer {
-  post(id: $id) {
+  post(slug: $slug) {
     id
     date
     title {
@@ -61,7 +61,7 @@ fragment Single_viewer on Viewer {
       name
       slug
     }
-    comments(post: $id, first: 100) {
+    comments(slug: $slug, first: 100) {
       edges {
         node {
           id
@@ -122,8 +122,8 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "id",
-        "type": "ID!",
+        "name": "slug",
+        "type": "String!",
         "defaultValue": null
       }
     ],
@@ -158,8 +158,8 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "id",
-        "type": "ID!",
+        "name": "slug",
+        "type": "String!",
         "defaultValue": null
       }
     ],
@@ -181,9 +181,9 @@ const batch /*: ConcreteBatch*/ = {
             "args": [
               {
                 "kind": "Variable",
-                "name": "id",
-                "variableName": "id",
-                "type": "ID"
+                "name": "slug",
+                "variableName": "slug",
+                "type": "String"
               }
             ],
             "concreteType": "Post",
@@ -402,9 +402,9 @@ const batch /*: ConcreteBatch*/ = {
                   },
                   {
                     "kind": "Variable",
-                    "name": "post",
-                    "variableName": "id",
-                    "type": "ID"
+                    "name": "slug",
+                    "variableName": "slug",
+                    "type": "String"
                   }
                 ],
                 "concreteType": "CommentConnection",
@@ -600,16 +600,16 @@ const batch /*: ConcreteBatch*/ = {
                   },
                   {
                     "kind": "Variable",
-                    "name": "post",
-                    "variableName": "id",
-                    "type": "ID"
+                    "name": "slug",
+                    "variableName": "slug",
+                    "type": "String"
                   }
                 ],
                 "handle": "connection",
                 "name": "comments",
                 "key": "Single_post_comments",
                 "filters": [
-                  "post"
+                  "slug"
                 ]
               }
             ],
@@ -636,7 +636,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    excerpt {\n      raw\n    }\n    featuredMedia {\n      __typename\n      ...Media_media\n      ... on Image {\n        source_url\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n      slug\n    }\n    comments(post: $id, first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(slug: $slug) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    excerpt {\n      raw\n    }\n    featuredMedia {\n      __typename\n      ...Media_media\n      ... on Image {\n        source_url\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n      slug\n    }\n    comments(slug: $slug, first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

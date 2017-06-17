@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Single_viewer.graphql
- * @generated SignedSource<<5307f19e68d271969b2a4ef77ab9ddf0>>
+ * @generated SignedSource<<ec9caac3507642c9e373bd2e6cf3efc4>>
  * @flow
  * @nogrep
  */
@@ -52,8 +52,8 @@ const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [
     {
       "kind": "RootArgument",
-      "name": "id",
-      "type": "ID"
+      "name": "slug",
+      "type": "String"
     }
   ],
   "kind": "Fragment",
@@ -78,9 +78,9 @@ const fragment /*: ConcreteFragment*/ = {
       "args": [
         {
           "kind": "Variable",
-          "name": "id",
-          "variableName": "id",
-          "type": "ID"
+          "name": "slug",
+          "variableName": "slug",
+          "type": "String"
         }
       ],
       "concreteType": "Post",
@@ -222,9 +222,9 @@ const fragment /*: ConcreteFragment*/ = {
           "args": [
             {
               "kind": "Variable",
-              "name": "post",
-              "variableName": "id",
-              "type": "ID"
+              "name": "slug",
+              "variableName": "slug",
+              "type": "String"
             }
           ],
           "concreteType": "CommentConnection",

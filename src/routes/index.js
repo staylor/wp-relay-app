@@ -69,15 +69,9 @@ export const routeConfig = makeRouteConfig(
       })}
     />
     <Route
-      path="post/:id"
+      path=":year(\d+)/:month(\d+)/:day(\d+)/:slug"
       getComponent={getComponent(() => /* webpackChunkName: "single" */ import('./Single'))}
       query={SingleQuery}
-      render={renderProp}
-    />
-    <Route
-      path="search"
-      getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
-      query={SearchQuery}
       render={renderProp}
     />
     <Route
@@ -93,6 +87,12 @@ export const routeConfig = makeRouteConfig(
           return memo;
         }, {});
       }}
+    />
+    <Route
+      path="search"
+      getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
+      query={SearchQuery}
+      render={renderProp}
     />
     <Route
       path=":slug"

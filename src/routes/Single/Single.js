@@ -17,7 +17,7 @@ import styles from './Single.scss';
 
 @FragmentContainer(graphql`
   fragment Single_viewer on Viewer {
-    post(id: $id) {
+    post(slug: $slug) {
       id
       date
       title {
@@ -40,7 +40,7 @@ import styles from './Single.scss';
         name
         slug
       }
-      comments(post: $id, first: 100) @connection(key: "Single_post_comments") {
+      comments(slug: $slug, first: 100) @connection(key: "Single_post_comments") {
         edges {
           node {
             id
@@ -94,6 +94,7 @@ export default class Single extends Component {
     const {
       post: {
         id,
+        slug,
         date,
         title: { rendered: title },
         content: { rendered: content },
@@ -104,8 +105,8 @@ export default class Single extends Component {
       },
     } = this.props.viewer;
 
-    const [, year, month] = dateRegex.exec(date);
-    const url = `${SITE_URL}/post/${id}`;
+    const [, year, month, day] = dateRegex.exec(date);
+    const url = `${SITE_URL}/${year}/${month}/${day}/${slug}`;
     const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
 
     return (

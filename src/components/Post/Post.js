@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
-import { Link } from 'found';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import { convertPlaceholders } from 'utils';
+import { dateRegex } from 'utils/regex';
+import PostLink from './PostLink';
 import styles from './Post.scss';
 
 /* eslint-disable react/no-danger */
@@ -12,6 +13,8 @@ import styles from './Post.scss';
 @FragmentContainer(graphql`
   fragment Post_post on Post {
     id
+    slug
+    date
     title {
       rendered
     }
@@ -24,12 +27,15 @@ import styles from './Post.scss';
     featuredMedia {
       ...Media_media
     }
+    ...PostLink_post
   }
 `)
 export default class Post extends Component {
   static propTypes = {
     post: PropTypes.shape({
       id: PropTypes.string,
+      slug: PropTypes.string,
+      date: PropTypes.string,
       title: PropTypes.object,
       content: PropTypes.object,
       excerpt: PropTypes.object,
@@ -56,15 +62,17 @@ export default class Post extends Component {
       node.onclick = e => {
         e.preventDefault();
 
-        this.context.router.push(`/post/${this.props.post.id}`);
+        const { slug, date } = this.props.post;
+        const [, year, month, day] = dateRegex.exec(date);
+        const url = `/${year}/${month}/${day}/${slug}`;
+
+        this.context.router.push(url);
       };
     });
   }
 
   render() {
     const {
-      id,
-      title: { rendered: title },
       content: { rendered: content },
       excerpt: { rendered: excerpt },
       featuredMedia,
@@ -74,13 +82,13 @@ export default class Post extends Component {
       <article>
         <header>
           <h1 className={styles.title}>
-            <Link to={`/post/${id}`} dangerouslySetInnerHTML={{ __html: title }} />
+            <PostLink post={this.props.post} />
           </h1>
         </header>
         {featuredMedia &&
-          <Link to={`/post/${id}`}>
+          <PostLink post={this.props.post}>
             <Media media={featuredMedia} />
-          </Link>}
+          </PostLink>}
         <section
           ref={this.bindRef}
           className={styles.content}
