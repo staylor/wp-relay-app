@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Search_Query.graphql
- * @generated SignedSource<<4f2056b098c5cacf778978b1d6bd2a9a>>
- * @relayHash 0070a3f99b523a2df5629c0f80c82bde
+ * @generated SignedSource<<68668740cb99ec364e92fdd1ee1b69ea>>
+ * @relayHash 20ce661c974337222f8ceda983d559ab
  * @flow
  * @nogrep
  */
@@ -60,7 +60,7 @@ fragment Post_post on Post {
   excerpt {
     rendered
   }
-  featured_media {
+  featuredMedia {
     __typename
     ...Media_media
     ... on Image {
@@ -266,7 +266,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -468,7 +468,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Search_Query(\n  $search: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Search_viewer\n    id\n  }\n}\n\nfragment Search_viewer on Viewer {\n  posts(search: $search, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasPreviousPage\n      hasNextPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Search_Query(\n  $search: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Search_viewer\n    id\n  }\n}\n\nfragment Search_viewer on Viewer {\n  posts(search: $search, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasPreviousPage\n      hasNextPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

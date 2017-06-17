@@ -5,6 +5,7 @@ import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import Error from 'components/Error';
+import { SITE_URL } from 'utils/constants';
 import styles from './Page.scss';
 
 /* eslint-disable react/no-danger */
@@ -14,17 +15,21 @@ const Page = ({ viewer: { page } }) => {
     return <Error />;
   }
 
-  const {
-    slug,
-    title: { rendered: title },
-    content: { rendered: content },
-    featured_media: featuredMedia,
-  } = page;
+  const { slug, title: { rendered: title }, content: { rendered: content }, featuredMedia } = page;
+  const url = `${SITE_URL}/${slug}`;
+  const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
+
   return (
     <article className={styles.content}>
       <Helmet>
         <title>{title}</title>
-        <link rel="canonical" href={`https://highforthis.com/${slug}`} />
+        <link rel="canonical" href={url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={url} />
+        {featuredImage && <meta property="og:image" content={featuredImage} />}
+        <meta name="twitter:title" content={title} />
+        {featuredImage && <meta name="twitter:image" content={featuredImage} />}
       </Helmet>
       <header>
         <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title }} />
@@ -52,7 +57,10 @@ export default FragmentContainer(graphql`
       content {
         rendered
       }
-      featured_media {
+      featuredMedia {
+        ... on Image {
+          source_url
+        }
         ...Media_media
       }
     }

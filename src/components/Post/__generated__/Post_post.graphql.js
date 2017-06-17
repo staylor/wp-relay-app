@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Post_post.graphql
- * @generated SignedSource<<d64302de3a44c735276784b32bb2c4ce>>
+ * @generated SignedSource<<cdbbd9acb953d59d35e42e9d8342f108>>
  * @flow
  * @nogrep
  */
@@ -25,7 +25,7 @@ export type Post_post = {|
   +excerpt: ?{|
     +rendered: ?string;
   |};
-  +featured_media: ?{| |};
+  +featuredMedia: ?{| |};
 |};
 */
 
@@ -102,7 +102,7 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "concreteType": null,
-      "name": "featured_media",
+      "name": "featuredMedia",
       "plural": false,
       "selections": [
         {

@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Page_Query.graphql
- * @generated SignedSource<<99dc789df292f922b33d89b8b066e1df>>
- * @relayHash 9122f6b2dbf660f7a449fbda6763c174
+ * @generated SignedSource<<20235711403959542643c5985fc97bac>>
+ * @relayHash 9c1327c261c73de3050f54ec301e096f
  * @flow
  * @nogrep
  */
@@ -39,7 +39,7 @@ fragment Page_viewer on Viewer {
     content {
       rendered
     }
-    featured_media {
+    featuredMedia {
       __typename
       ...Media_media
       ... on Image {
@@ -201,7 +201,7 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "concreteType": null,
-                "name": "featured_media",
+                "name": "featuredMedia",
                 "plural": false,
                 "selections": [
                   {
@@ -320,7 +320,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    id\n    slug\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featured_media {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    id\n    slug\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featuredMedia {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

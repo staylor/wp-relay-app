@@ -7,8 +7,10 @@ import { FormattedRelative } from 'react-intl';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import Comments from 'components/Comments';
+import Error from 'components/Error';
 import { convertPlaceholders } from 'utils';
 import { dateRegex } from 'utils/regex';
+import { SITE_URL } from 'utils/constants';
 import styles from './Single.scss';
 
 /* eslint-disable react/no-danger */
@@ -24,8 +26,14 @@ import styles from './Single.scss';
       content {
         rendered
       }
-      featured_media {
+      excerpt {
+        raw
+      }
+      featuredMedia {
         ...Media_media
+        ... on Image {
+          source_url
+        }
       }
       tags {
         id
@@ -79,25 +87,40 @@ export default class Single extends Component {
   }
 
   render() {
+    if (!this.props.viewer.post) {
+      return <Error />;
+    }
+
     const {
       post: {
         id,
         date,
         title: { rendered: title },
         content: { rendered: content },
-        featured_media: featuredMedia,
+        excerpt: { raw: excerpt },
+        featuredMedia,
         tags,
         comments,
       },
     } = this.props.viewer;
 
     const [, year, month] = dateRegex.exec(date);
+    const url = `${SITE_URL}/post/${id}`;
+    const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
 
     return (
       <article className={styles.content}>
         <Helmet>
           <title>{title}</title>
-          <link rel="canonical" href={`https://highforthis.com/post/${id}`} />
+          <link rel="canonical" href={url} />
+          <meta property="og:type" content="article" />
+          <meta property="og:title" content={title} />
+          <meta property="og:url" content={url} />
+          <meta property="og:description" content={excerpt} />
+          {featuredImage && <meta property="og:image" content={featuredImage} />}
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={excerpt} />
+          {featuredImage && <meta name="twitter:image" content={featuredImage} />}
         </Helmet>
         <header>
           <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title }} />

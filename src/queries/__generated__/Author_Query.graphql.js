@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Author_Query.graphql
- * @generated SignedSource<<8cd3d0725c9ba650277c14b4e98c52a8>>
- * @relayHash d91812b5208b8b610e1768d196f10313
+ * @generated SignedSource<<f5f984b9d8619a99162d768eaeb6f0c3>>
+ * @relayHash 0384e753930e9b50c20c42e71122cabb
  * @flow
  * @nogrep
  */
@@ -63,7 +63,7 @@ fragment Post_post on Post {
   excerpt {
     rendered
   }
-  featured_media {
+  featuredMedia {
     __typename
     ...Media_media
     ... on Image {
@@ -295,7 +295,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -503,7 +503,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Author_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Author_viewer\n    id\n  }\n}\n\nfragment Author_viewer on Viewer {\n  author(id: $id) {\n    id\n    name\n  }\n  posts(author: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Author_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Author_viewer\n    id\n  }\n}\n\nfragment Author_viewer on Viewer {\n  author(id: $id) {\n    id\n    name\n  }\n  posts(author: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

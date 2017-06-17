@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule App_viewer.graphql
- * @generated SignedSource<<6d83764360012411025121f39c13c4eb>>
+ * @generated SignedSource<<835c9b8f2d868d72dc655f35fac2d040>>
  * @flow
  * @nogrep
  */
@@ -18,6 +18,7 @@ export type App_viewer = {|
   +settings: ?{|
     +title: ?string;
     +description: ?string;
+    +language: ?string;
   |};
   +navMenu: ?{| |};
   +sidebar: ?{| |};
@@ -62,6 +63,13 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "name": "description",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "language",
           "storageKey": null
         }
       ],

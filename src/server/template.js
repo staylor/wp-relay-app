@@ -13,7 +13,11 @@ ${helmet.title.toString()}
 <script>try{Typekit.load();}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-<link id="favicon" rel="shortcut icon" href="/kyt-favicon.png" sizes="16x16 32x32" type="image/png" />
+<link rel="shortcut icon" href="/icons/favicon.ico" />
+<link rel="apple-touch-icon" href="/icons/60x60.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/icons/76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/icons/120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/icons/152x152.png" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
 ${mainCSSBundle ? `<link rel="stylesheet" type="text/css" href="${mainCSSBundle}" />` : ''}
 <link rel="stylesheet" type="text/css" href="/css/gigpress.css" />

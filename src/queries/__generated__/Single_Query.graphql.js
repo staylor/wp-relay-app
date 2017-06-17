@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Single_Query.graphql
- * @generated SignedSource<<9917c2c396013ecd59e286f25100a72d>>
- * @relayHash 87ea1dc42739e11c3005ec3a4a030a37
+ * @generated SignedSource<<17888efb5acf0f7c37f016ba892dcc21>>
+ * @relayHash 609d1659dae623e445e88b6b07f42685
  * @flow
  * @nogrep
  */
@@ -39,10 +39,11 @@ fragment Single_viewer on Viewer {
     content {
       rendered
     }
-    featured_media {
+    featuredMedia {
       __typename
       ...Media_media
       ... on Image {
+        source_url
         id
       }
       ... on Audio {
@@ -241,7 +242,7 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "concreteType": null,
-                "name": "featured_media",
+                "name": "featuredMedia",
                 "plural": false,
                 "selections": [
                   {
@@ -614,7 +615,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featured_media {\n      __typename\n      ...Media_media\n      ... on Image {\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n      slug\n    }\n    comments(post: $id, first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      rendered\n    }\n    content {\n      rendered\n    }\n    featuredMedia {\n      __typename\n      ...Media_media\n      ... on Image {\n        source_url\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n      slug\n    }\n    comments(post: $id, first: 100) {\n      edges {\n        node {\n          id\n          parent\n          ...Comment_comment\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Comment_comment on Comment {\n  id\n  author_name\n  author_url\n  author_hash\n  date\n  content {\n    rendered\n    raw\n  }\n  author_avatar_urls {\n    size\n    url\n  }\n  parent\n  post\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

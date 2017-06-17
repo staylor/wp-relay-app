@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Page_viewer.graphql
- * @generated SignedSource<<ef38d01bb3ae6b38dc882c2f358359c4>>
+ * @generated SignedSource<<e4afb7a8b993757137eb44c3dce1952b>>
  * @flow
  * @nogrep
  */
@@ -24,7 +24,7 @@ export type Page_viewer = {|
     +content: ?{|
       +rendered: ?string;
     |};
-    +featured_media: ?{| |};
+    +featuredMedia: ?{| |};
   |};
 |};
 */
@@ -112,7 +112,7 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "concreteType": null,
-          "name": "featured_media",
+          "name": "featuredMedia",
           "plural": false,
           "selections": [
             {

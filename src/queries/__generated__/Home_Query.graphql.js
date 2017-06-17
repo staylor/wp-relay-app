@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Home_Query.graphql
- * @generated SignedSource<<9c21f4960c064c0069a41e15f5e9c9ef>>
- * @relayHash 2a3b8c9f01c67b70e24467b65f08be97
+ * @generated SignedSource<<dc35683b23b38db01fab1f45daa21da1>>
+ * @relayHash 1bb5dee24bae9ced45634534f6b0d74f
  * @flow
  * @nogrep
  */
@@ -110,7 +110,7 @@ fragment Post_post on Post {
   excerpt {
     rendered
   }
-  featured_media {
+  featuredMedia {
     __typename
     ...Media_media
     ... on Image {
@@ -340,7 +340,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -630,7 +630,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -921,7 +921,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -1205,7 +1205,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -1407,7 +1407,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

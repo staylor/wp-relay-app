@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Date_Query.graphql
- * @generated SignedSource<<f967775f1adbbe0b196cde731231c393>>
- * @relayHash d9b6a35ca26dfb1b876347eb4216042e
+ * @generated SignedSource<<923888dbad66fdbb79df8e44ab7884dd>>
+ * @relayHash a8839e0f309884fb230dd5240c072887
  * @flow
  * @nogrep
  */
@@ -63,7 +63,7 @@ fragment Post_post on Post {
   excerpt {
     rendered
   }
-  featured_media {
+  featuredMedia {
     __typename
     ...Media_media
     ... on Image {
@@ -323,7 +323,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -545,7 +545,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Date_Query(\n  $year: Int!\n  $month: Int\n  $day: Int\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Date_viewer\n    id\n  }\n}\n\nfragment Date_viewer on Viewer {\n  posts(year: $year, month: $month, day: $day, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Date_Query(\n  $year: Int!\n  $month: Int\n  $day: Int\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Date_viewer\n    id\n  }\n}\n\nfragment Date_viewer on Viewer {\n  posts(year: $year, month: $month, day: $day, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

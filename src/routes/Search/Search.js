@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import RefetchContainer from 'decorators/RefetchContainer';
 import SearchQuery from 'queries/Search';
 import Archive from 'components/Archive';
+import { SITE_URL } from 'utils/constants';
 import SearchBox from './Box';
 import styles from './Search.scss';
 
@@ -81,7 +82,7 @@ export default class Search extends Component {
       <div className={styles.sections}>
         <Helmet>
           <title>Search Results</title>
-          <link rel="canonical" href={`https://highforthis.com/search`} />
+          <link rel="canonical" href={`${SITE_URL}/search`} />
         </Helmet>
         <section>
           <SearchBox

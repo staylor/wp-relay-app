@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule Category_Query.graphql
- * @generated SignedSource<<881a0141e59820bbc1bf442cd0e8c501>>
- * @relayHash 2260239f72ae7c8db8202d5a85032a5f
+ * @generated SignedSource<<e62833a7ad4c7ecea1beb360325604be>>
+ * @relayHash b6dd07d9714ac79986e0e478e0b85563
  * @flow
  * @nogrep
  */
@@ -76,7 +76,7 @@ fragment Post_post on Post {
   excerpt {
     rendered
   }
-  featured_media {
+  featuredMedia {
     __typename
     ...Media_media
     ... on Image {
@@ -400,7 +400,7 @@ const batch /*: ConcreteBatch*/ = {
                         "alias": null,
                         "args": null,
                         "concreteType": null,
-                        "name": "featured_media",
+                        "name": "featuredMedia",
                         "plural": false,
                         "selections": [
                           {
@@ -608,7 +608,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Category_Query(\n  $slug: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Category_viewer\n    id\n  }\n}\n\nfragment Category_viewer on Viewer {\n  category(slug: $slug) {\n    id\n    name\n    slug\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(category: $slug, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featured_media {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Category_Query(\n  $slug: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Category_viewer\n    id\n  }\n}\n\nfragment Category_viewer on Viewer {\n  category(slug: $slug) {\n    id\n    name\n    slug\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(category: $slug, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title {\n    rendered\n  }\n  content {\n    rendered\n  }\n  excerpt {\n    rendered\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

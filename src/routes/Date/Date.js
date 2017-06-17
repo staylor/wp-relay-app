@@ -5,6 +5,7 @@ import PaginationContainer from 'decorators/PaginationContainer';
 import DateQuery from 'queries/Date';
 import DatePaginationFragment from 'queries/fragment/Date';
 import Archive from 'components/Archive';
+import { SITE_URL } from 'utils/constants';
 import styles from './Date.scss';
 
 const DateRoute = ({ params, viewer: { posts }, relay }) => {
@@ -16,7 +17,7 @@ const DateRoute = ({ params, viewer: { posts }, relay }) => {
     <div className={styles.sections}>
       <Helmet>
         <title>{title}</title>
-        <link rel="canonical" href={`https://highforthis.com/${path}`} />
+        <link rel="canonical" href={`${SITE_URL}/${path}`} />
       </Helmet>
       <section>
         <h3 className={styles.label}>{title}</h3>

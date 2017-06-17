@@ -6,15 +6,15 @@ import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
+import { SITE_URL, SITE_DESCRIPTION, TWITTER_USERNAME, TWITTER_CREATOR } from 'utils/constants';
 import styles from './App.scss';
-
-const description = 'High for This aggregates the best music content on the web.';
 
 @FragmentContainer(graphql`
   fragment App_viewer on Viewer {
     settings {
       title
       description
+      language
     }
     navMenu(id: $menuID) {
       ...NavMenu_navMenu
@@ -65,8 +65,14 @@ export default class App extends Component {
             <title>{settings.description}</title>
             <meta httpEquiv="Content-Language" content={this.state.locale} />
             <meta property="og:site_name" content={settings.title} />
-            <meta property="og:description" content={description} />
+            <meta property="og:description" content={SITE_DESCRIPTION} />
             <meta property="og:type" content="website" />
+            <meta property="og:locale" content={settings.language} />
+            <meta property="og:url" content={SITE_URL} />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content={TWITTER_USERNAME} />
+            <meta name="twitter:creator" content={TWITTER_CREATOR} />
+            <meta name="twitter:description" content={SITE_DESCRIPTION} />
           </Helmet>
           <Header {...{ settings, navMenu }} />
           <div className={styles.content}>

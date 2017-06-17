@@ -21,7 +21,7 @@ import styles from './Post.scss';
     excerpt {
       rendered
     }
-    featured_media {
+    featuredMedia {
       ...Media_media
     }
   }
@@ -33,7 +33,7 @@ export default class Post extends Component {
       title: PropTypes.object,
       content: PropTypes.object,
       excerpt: PropTypes.object,
-      featured_media: PropTypes.object,
+      featuredMedia: PropTypes.object,
     }).isRequired,
   };
 
@@ -67,7 +67,7 @@ export default class Post extends Component {
       title: { rendered: title },
       content: { rendered: content },
       excerpt: { rendered: excerpt },
-      featured_media: featuredMedia,
+      featuredMedia,
     } = this.props.post;
 
     return (

@@ -5,20 +5,25 @@ import PaginationContainer from 'decorators/PaginationContainer';
 import TagQuery from 'queries/Tag';
 import TagPaginationFragment from 'queries/fragment/Tag';
 import Archive from 'components/Archive';
+import Error from 'components/Error';
+import { SITE_URL } from 'utils/constants';
 import styles from './Tag.scss';
 
-const Tag = ({ viewer, relay }) => {
-  const { tag, posts } = viewer;
+const Tag = ({ viewer: { tag, posts }, relay }) => {
+  if (!tag) {
+    return <Error />;
+  }
+
   const title = `${tag.taxonomy.labels.singular}: ${tag.name}`;
+  const url = `${SITE_URL}/${tag.taxonomy.rewrite.slug}/${tag.slug}`;
 
   return (
     <div className={styles.sections}>
       <Helmet>
         <title>{title}</title>
-        <link
-          rel="canonical"
-          href={`https://highforthis.com/${tag.taxonomy.rewrite.slug}/${tag.id}`}
-        />
+        <link rel="canonical" href={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={url} />
       </Helmet>
       {tag &&
         <section>
