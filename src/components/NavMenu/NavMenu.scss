@@ -17,18 +17,18 @@
     ul {
       display: none;
       float: left;
+      left: 14px;
       margin: 0;
       position: absolute;
       top: 28px;
-      left: 14px;
       width: 188px;
       z-index: 99999;
 
       a {
+        @include size-height(13, 20);
         background: #f9f9f9;
         border-bottom: 1px dotted #ddd;
         color: #444;
-        @include size-height(13, 20);
         font-weight: normal;
         height: auto;
         padding: 10px 10px;

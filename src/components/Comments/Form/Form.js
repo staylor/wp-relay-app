@@ -96,10 +96,11 @@ export default class Form extends Component {
           const cookieVal = cookies.get(fields[field].cookie);
           return (
             <p key={field}>
-              <label htmlFor={field}>{fields[field].name}:</label>
+              <label htmlFor={`field-${field}`}>{fields[field].name}:</label>
               {cookieVal ||
                 <input
                   type="text"
+                  id={`field-${field}`}
                   name={field}
                   value={this.state.comment[field]}
                   onChange={this.onChange}
@@ -108,9 +109,10 @@ export default class Form extends Component {
           );
         })}
         <p>
-          <label htmlFor="content">Comment:</label>
+          <label htmlFor="field-content">Comment:</label>
           <textarea
             rows="6"
+            id="field-content"
             name="content"
             value={this.state.comment.content}
             onChange={this.onChange}

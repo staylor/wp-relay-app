@@ -16,6 +16,7 @@
 }
 
 .siteTitle {
+  @include h1;
   @include size-height(48, 72);
   color: $black;
   float: left;
@@ -29,6 +30,7 @@
 }
 
 .siteDescription {
+  @include subhead;
   @include size-height(24, 24);
   bottom: 40%;
   color: #7a7a7a;

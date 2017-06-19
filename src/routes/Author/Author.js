@@ -8,7 +8,7 @@ import styles from './Author.scss';
 const Author = ({ viewer: { author, posts }, relay }) =>
   <div className={styles.sections}>
     <section>
-      <h3>{author.name}</h3>
+      <h2 className={styles.header}>{author.name}</h2>
       <Archive {...{ posts, relay }} />
     </section>
   </div>;

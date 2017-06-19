@@ -7,7 +7,7 @@ import styles from './Comments.scss';
 export default function Comments({ post, comments }) {
   return (
     <aside className={styles.comments}>
-      <h3>Comments</h3>
+      <h2 className={styles.header}>Comments</h2>
       <Walker post={post} comments={comments} />
     </aside>
   );

@@ -30,23 +30,6 @@ strong {
   font-weight: 700;
 }
 
-h1 {
-  @include size-height(32, 40);
-  font-family: $futura;
-}
-
-h2 {
-  @include size-height(24, 32);
-  font-family: $futura;
-}
-
-h3 {
-  @include size-height(18, 24);
-  font-family: $futura;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
-
 .page {
   background: $white;
   margin: 0 auto;

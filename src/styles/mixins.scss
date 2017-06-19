@@ -59,7 +59,7 @@
   background: $white;
   border: 1px solid #eee;
   box-sizing: border-box;
-  color: #ccc;
+  color: #767676;
   cursor: pointer;
   height: 32px;
   text-align: center;
@@ -74,4 +74,23 @@
     color: $black;
     outline: 0 none;
   }
+}
+
+@mixin h1 {
+  @include size-height(32, 40);
+  font-family: $futura;
+}
+
+// h2
+@mixin subhead {
+  @include size-height(24, 32);
+  font-family: $futura;
+}
+
+// h3
+@mixin upper-header {
+  @include size-height(18, 24);
+  font-family: $futura;
+  letter-spacing: .5px;
+  text-transform: uppercase;
 }

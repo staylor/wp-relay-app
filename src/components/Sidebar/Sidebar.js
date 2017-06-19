@@ -5,14 +5,8 @@ import styles from './Sidebar.scss';
 
 /* eslint-disable react/no-danger */
 
-const transformStyles = (classname, html) => {
-  if (classname === 'widget_go_to_this') {
-    return html
-      .replace(/widget-title/g, styles.title)
-      .replace(/widget_go_to_this/g, styles.goToThis);
-  }
-  return html;
-};
+const transformStyles = (classname, html) =>
+  html.replace(/widget-title/g, styles.title).replace(/widget_go_to_this/g, styles.goToThis);
 
 const Sidebar = ({ sidebar }) => {
   let i = 0;

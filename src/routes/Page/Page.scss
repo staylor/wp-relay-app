@@ -3,12 +3,13 @@
 
 .meta {
   @include size-height(12, 18);
-  color: #666;
   clear: both;
+  color: #666;
   margin-bottom: 10px;
 }
 
 .title {
+  @include h1;
   @include size-height(36, 42);
   clear: both;
   font-weight: bold;

@@ -9,11 +9,11 @@ const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
   <div className={styles.columns}>
     <div className={styles.columnA}>
       <section className={styles.section}>
-        <h3>Latest</h3>
+        <h2 className={styles.header}>Latest</h2>
         <Archive posts={stickies} />
       </section>
       <section className={styles.section}>
-        <h3>Read This</h3>
+        <h2 className={styles.header}>Read This</h2>
         <Archive posts={readThis} />
         <Link to={'/music/read-this'} className={styles.moreIn}>
           More posts in <em>Read This</em> »
@@ -22,14 +22,14 @@ const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
     </div>
     <div className={styles.columnB}>
       <section className={styles.section}>
-        <h3>Watch This</h3>
+        <h2 className={styles.header}>Watch This</h2>
         <Archive posts={watchThis} />
         <Link to={'/music/watch-this'} className={styles.moreIn}>
           More posts in <em>Watch This</em> »
         </Link>
       </section>
       <section className={styles.section}>
-        <h3>Listen to This</h3>
+        <h2 className={styles.header}>Listen to This</h2>
         <Archive posts={listenToThis} />
         <Link to={'/music/listen-to-this'} className={styles.moreIn}>
           More posts in <em>Listen To This</em> »

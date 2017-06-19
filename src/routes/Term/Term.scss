@@ -1,7 +1,11 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
 .sections {
   max-width: 740px;
 }
 
 .label {
+  @include upper-header;
   margin-bottom: 40px;
 }

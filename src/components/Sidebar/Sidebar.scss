@@ -1,3 +1,10 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.title {
+	@include upper-header;
+}
+
 .goToThis {
 	.title {
 		line-height: 1.6em;

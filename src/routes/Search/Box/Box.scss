@@ -1,3 +1,4 @@
+@import '../../../styles/variables';
 @import '../../../styles/mixins';
 
 .box {
@@ -13,5 +14,10 @@
 }
 
 .label {
+  @include upper-header;
   margin-bottom: 20px;
+}
+
+.a11y {
+  display: none;
 }

@@ -2,6 +2,7 @@
 @import '../../styles/mixins';
 
 .title {
+  @include h1;
   @include size-height(36, 42);
   clear: both;
   font-weight: bold;
