@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule App_Query.graphql
- * @generated SignedSource<<c0bfd398757592fc24d2ee205c6bd3de>>
- * @relayHash 57a87078bd5d23765d684e5d05fabd27
+ * @generated SignedSource<<5f9d9f7b4db5556b0742cf24f08caa89>>
+ * @relayHash b4a8701fb1f866245844175cb77fa976
  * @flow
  * @nogrep
  */
@@ -65,6 +65,7 @@ fragment NavMenu_navMenu on NavMenu {
 
 fragment Sidebar_sidebar on Sidebar {
   widgets {
+    id
     classname
     content {
       rendered
@@ -315,6 +316,13 @@ const batch /*: ConcreteBatch*/ = {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
+                    "name": "id",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
                     "name": "classname",
                     "storageKey": null
                   },
@@ -370,7 +378,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query App_Query(\n  $menuID: ID!\n  $sidebarID: ID!\n) {\n  viewer {\n    ...App_viewer\n    id\n  }\n}\n\nfragment App_viewer on Viewer {\n  settings {\n    title\n    description\n    language\n  }\n  navMenu(id: $menuID) {\n    ...NavMenu_navMenu\n    id\n  }\n  sidebar(id: $sidebarID) {\n    ...Sidebar_sidebar\n    id\n  }\n}\n\nfragment NavMenu_navMenu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    type\n    typeName\n    typeSlug\n    dataSlug\n    dataID\n  }\n}\n\nfragment Sidebar_sidebar on Sidebar {\n  widgets {\n    classname\n    content {\n      rendered\n    }\n  }\n}\n"
+  "text": "query App_Query(\n  $menuID: ID!\n  $sidebarID: ID!\n) {\n  viewer {\n    ...App_viewer\n    id\n  }\n}\n\nfragment App_viewer on Viewer {\n  settings {\n    title\n    description\n    language\n  }\n  navMenu(id: $menuID) {\n    ...NavMenu_navMenu\n    id\n  }\n  sidebar(id: $sidebarID) {\n    ...Sidebar_sidebar\n    id\n  }\n}\n\nfragment NavMenu_navMenu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    type\n    typeName\n    typeSlug\n    dataSlug\n    dataID\n  }\n}\n\nfragment Sidebar_sidebar on Sidebar {\n  widgets {\n    id\n    classname\n    content {\n      rendered\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

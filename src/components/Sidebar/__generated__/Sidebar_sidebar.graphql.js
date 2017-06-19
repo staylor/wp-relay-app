@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Sidebar_sidebar.graphql
- * @generated SignedSource<<f8510b9acef6c6657cea0f38b3be28c4>>
+ * @generated SignedSource<<aa7bfa1fad1e454aa2cf197532bd6f21>>
  * @flow
  * @nogrep
  */
@@ -16,6 +16,7 @@
 import type {ConcreteFragment} from 'relay-runtime';
 export type Sidebar_sidebar = {|
   +widgets: ?$ReadOnlyArray<?{|
+    +id: ?string;
     +classname: ?string;
     +content: ?{|
       +rendered: ?string;
@@ -39,6 +40,13 @@ const fragment /*: ConcreteFragment*/ = {
       "name": "widgets",
       "plural": true,
       "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "id",
+          "storageKey": null
+        },
         {
           "kind": "ScalarField",
           "alias": null,

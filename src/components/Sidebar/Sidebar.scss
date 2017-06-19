@@ -1,8 +1,13 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
+.widget {
+	margin: 0 0 24px;
+}
+
 .title {
 	@include upper-header;
+	margin: 0 0 16px;
 }
 
 .goToThis {
@@ -16,7 +21,7 @@
   }
 
 	ol {
-		margin: 16px 0 20px;
+		margin: 16px 0;
 	}
 
 	li {

@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import proxy from 'http-proxy-middleware';
 import cookiesMiddleware from 'universal-cookie-express';
@@ -27,9 +28,9 @@ app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 app.use(cookiesMiddleware());
 
 // use a local GQL server by default
-const gqlHost = 'http://localhost:8080';
+const gqlHost = process.env.GQL_HOST || 'http://localhost:8080';
 
-const gqlPath = '/graphql';
+const gqlPath = process.env.GQL_PATH || '/graphql';
 
 // proxy to the graphql server
 app.use(
