@@ -13,6 +13,7 @@ import PageQuery from 'queries/Page';
 import AppQuery from 'queries/App';
 import SearchQuery from 'queries/Search';
 import DateQuery from 'queries/Date';
+import ChartQuery from 'queries/Chart';
 import Loading from 'components/Loading';
 
 const getComponent = loader => (location, cb) =>
@@ -92,6 +93,12 @@ export const routeConfig = makeRouteConfig(
       path="search"
       getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
       query={SearchQuery}
+      render={renderProp}
+    />
+    <Route
+      path="charts"
+      getComponent={getComponent(() => /* webpackChunkName: "chart" */ import('./Chart'))}
+      query={ChartQuery}
       render={renderProp}
     />
     <Route
