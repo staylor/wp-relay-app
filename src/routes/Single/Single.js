@@ -79,13 +79,15 @@ export default class Single extends Component {
         let width = data.width;
         let height = data.height;
         let html = data.html;
-        if (html.indexOf('<iframe') === 0 && width < maxWidth) {
-          height = Math.ceil(height * maxWidth / width);
-          width = maxWidth;
-          html = html
-            .replace(/<iframe /, `<iframe class="${styles.iframe}" `)
-            .replace(/width="[0-9]+"/, `width="${width}"`)
-            .replace(/height="[0-9]+"/, `height="${height}"`);
+        if (html.indexOf('<iframe') === 0) {
+          html = html.replace(/<iframe /, `<iframe class="${styles.iframe}" `);
+          if (width < maxWidth) {
+            height = Math.ceil(height * maxWidth / width);
+            width = maxWidth;
+            html = html
+              .replace(/width="[0-9]+"/, `width="${width}"`)
+              .replace(/height="[0-9]+"/, `height="${height}"`);
+          }
         }
 
         e.currentTarget.outerHTML = html;
