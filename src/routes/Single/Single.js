@@ -69,27 +69,26 @@ export default class Single extends Component {
     if (!nodes) {
       return;
     }
+
+    const maxWidth = 740;
     nodes.forEach(node => {
       node.onclick = e => {
         e.preventDefault();
 
-        const payload = node.querySelector('script[type="application/json"]').innerHTML;
-        const data = JSON.parse(payload);
-        const elem = e.currentTarget;
-        const txt = document.createElement('textarea');
-        txt.innerHTML = data.html;
+        const data = JSON.parse(node.querySelector('script[type="application/json"]').innerHTML);
         let width = data.width;
         let height = data.height;
-        let html = txt.value;
-        if (width < 740) {
-          height = height * 740 / width;
-          width = 740;
+        let html = data.html;
+        if (html.indexOf('<iframe') === 0 && width < maxWidth) {
+          height = Math.ceil(height * maxWidth / width);
+          width = maxWidth;
           html = html
+            .replace(/<iframe /, `<iframe class="${styles.iframe}" `)
             .replace(/width="[0-9]+"/, `width="${width}"`)
             .replace(/height="[0-9]+"/, `height="${height}"`);
         }
 
-        elem.outerHTML = html;
+        e.currentTarget.outerHTML = html;
       };
     });
   }

@@ -54,7 +54,7 @@ export default class Post extends Component {
   };
 
   componentDidMount() {
-    const nodes = this.content.querySelectorAll('.hft-yt-placeholder');
+    const nodes = this.content.querySelectorAll(`figure.${styles.embed}`);
     if (!nodes) {
       return;
     }
@@ -78,6 +78,9 @@ export default class Post extends Component {
       featuredMedia,
     } = this.props.post;
 
+    const isEmbed = content.indexOf('<figure') === 0;
+    const postContent = isEmbed ? convertPlaceholders(content, styles) : excerpt;
+
     return (
       <article>
         <header>
@@ -92,9 +95,7 @@ export default class Post extends Component {
         <section
           ref={this.bindRef}
           className={styles.content}
-          dangerouslySetInnerHTML={{
-            __html: excerpt || convertPlaceholders(content, styles),
-          }}
+          dangerouslySetInnerHTML={{ __html: postContent }}
         />
       </article>
     );

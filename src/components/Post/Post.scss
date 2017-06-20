@@ -35,46 +35,6 @@
   }
 }
 
-.placeholder {
-  display: block;
-  height: auto !important;
-  max-width: 100%;
-  position: relative;
-
-  img {
-    height: auto;
-    max-width: 100%;
-    position: relative;
-    z-index: 1;
-  }
-
-  span {
-    background: $pink;
-    border-radius: 10px;
-    height: 52px;
-    left: 50%;
-    margin: -21px 0 0 -48px;
-    opacity: .8;
-    position: absolute;
-    top: 50%;
-    transition: 600ms;
-    transition-property: background;
-    width: 76px;
-    z-index: 2;
-
-    .arrow {
-      border-bottom: 10px solid transparent;
-      border-left: 20px solid $white;
-      border-top: 10px solid transparent;
-      height: 0;
-      left: 31px;
-      position: absolute;
-      top: 16px;
-      width: 0;
-    }
-  }
-
-  &:hover span {
-    background: $black;
-  }
+.embed {
+  @include embed();
 }
