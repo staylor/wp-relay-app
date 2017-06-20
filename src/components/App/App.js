@@ -8,7 +8,6 @@ import FragmentContainer from 'decorators/FragmentContainer';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import { SITE_URL, SITE_DESCRIPTION, TWITTER_USERNAME, TWITTER_CREATOR } from 'utils/constants';
-import enMessages from 'langs/en';
 import styles from './App.scss';
 
 const langCache = {};

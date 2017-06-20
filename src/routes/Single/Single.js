@@ -65,7 +65,7 @@ export default class Single extends Component {
   };
 
   componentDidMount() {
-    const nodes = this.content.querySelectorAll('.hft-yt-placeholder');
+    const nodes = this.content.querySelectorAll(`figure.${styles.embed}`);
     if (!nodes) {
       return;
     }
@@ -73,15 +73,23 @@ export default class Single extends Component {
       node.onclick = e => {
         e.preventDefault();
 
+        const payload = node.querySelector('script[type="application/json"]').innerHTML;
+        const data = JSON.parse(payload);
         const elem = e.currentTarget;
-        const iframe = `<iframe
-          width="${elem.getAttribute('data-yt-w')}"
-          height="${elem.getAttribute('data-yt-h')}"
-          src="http://www.youtube.com/embed/${elem.getAttribute('data-yt-id')}?autoplay=1"
-          frameborder="0"
-          webkitAllowFullScreen mozallowfullscreen allowFullScreen><iframe>`;
+        const txt = document.createElement('textarea');
+        txt.innerHTML = data.html;
+        let width = data.width;
+        let height = data.height;
+        let html = txt.value;
+        if (width < 740) {
+          height = height * 740 / width;
+          width = 740;
+          html = html
+            .replace(/width="[0-9]+"/, `width="${width}"`)
+            .replace(/height="[0-9]+"/, `height="${height}"`);
+        }
 
-        elem.outerHTML = iframe;
+        elem.outerHTML = html;
       };
     });
   }

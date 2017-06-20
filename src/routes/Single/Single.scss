@@ -49,11 +49,16 @@
   }
 }
 
-.placeholder {
-  display: block;
+.embed {
+  cursor: pointer;
+  display: inline-block;
   height: auto !important;
   max-width: 100%;
   position: relative;
+
+  figcaption {
+    display: none;
+  }
 
   img {
     height: auto;
@@ -62,9 +67,10 @@
     z-index: 1;
   }
 
-  span {
+  &::before {
     background: $pink;
     border-radius: 10px;
+    content: ' ';
     height: 52px;
     left: 50%;
     margin: -21px 0 0 -48px;
@@ -73,20 +79,26 @@
     top: 50%;
     width: 76px;
     z-index: 2;
-
-    .arrow {
-      border-bottom: 10px solid transparent;
-      border-left: 20px solid $white;
-      border-top: 10px solid transparent;
-      height: 0;
-      left: 31px;
-      position: absolute;
-      top: 16px;
-      width: 0;
-    }
   }
 
-  &:hover span {
-    background: $black;
+  &::after {
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid $white;
+    border-top: 10px solid transparent;
+    content: ' ';
+    height: 0;
+    left: calc(50% + 31px);
+    margin: -21px 0 0 -48px;
+    position: absolute;
+    // top: 16px;
+    top: calc(50% + 16px);
+    width: 0;
+    z-index: 3;
+  }
+
+  &:hover {
+    &::before {
+      background: $black;
+    }
   }
 }
