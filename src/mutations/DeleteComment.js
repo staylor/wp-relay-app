@@ -9,7 +9,7 @@ const DeleteCommentMutation = graphql`
   }
 `;
 
-const commit = (environment, comment, postProp, onCompleted) => {
+const commit = (comment, environment, onCompleted) => {
   const getOptimisticResponse = () => ({
     deleteComment: {
       status: 'delete',
@@ -23,7 +23,7 @@ const commit = (environment, comment, postProp, onCompleted) => {
     }
     const post = store.get(comment.post);
     const connection = ConnectionHandler.getConnection(post, 'Single_post_comments', {
-      slug: postProp.slug,
+      post: comment.post,
     });
     ConnectionHandler.deleteNode(connection, comment.id);
   };

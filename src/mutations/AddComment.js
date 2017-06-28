@@ -27,7 +27,7 @@ const AddCommentMutation = graphql`
   }
 `;
 
-const commit = (environment, variables, postProp, onCompleted = null) => {
+const commit = (environment, variables, onCompleted = null) => {
   const getOptimisticResponse = () => ({
     addComment: {
       comment: {
@@ -60,7 +60,7 @@ const commit = (environment, variables, postProp, onCompleted = null) => {
     }
     const post = store.get(variables.input.post);
     const connection = ConnectionHandler.getConnection(post, 'Single_post_comments', {
-      slug: postProp.slug,
+      post: variables.input.post,
     });
     const newEdge = ConnectionHandler.createEdge(store, connection, newComment, 'CommentEdge');
     ConnectionHandler.insertEdgeAfter(connection, newEdge);
@@ -85,7 +85,7 @@ const commit = (environment, variables, postProp, onCompleted = null) => {
     onError: err => console.error(err),
     updater: updateConnection,
     optimisticUpdater: updateConnection,
-    optimisticResponse: getOptimisticResponse(),
+    optimisticResponse: getOptimisticResponse,
   });
 };
 

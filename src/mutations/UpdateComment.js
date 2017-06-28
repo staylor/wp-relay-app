@@ -24,7 +24,7 @@ const UpdateCommentMutation = graphql`
   }
 `;
 
-const commit = (environment, variables, comment, onCompleted) => {
+const commit = (comment, environment, variables, onCompleted) => {
   const content = {
     rendered: `<p>${variables.input.content.replace(newlineRegex, '<br />')}</p>`,
     raw: variables.input.content,

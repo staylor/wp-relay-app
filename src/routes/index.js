@@ -26,15 +26,10 @@ const getComponent = loader => (location, cb) =>
 export const historyMiddlewares = [queryMiddleware];
 
 export function createResolver(fetcher) {
-  const recordSource = new RecordSource();
   const environment = new Environment({
     network: Network.create((...args) => fetcher.fetch(...args)),
-    store: new Store(recordSource),
+    store: new Store(new RecordSource()),
   });
-
-  if (typeof window !== 'undefined') {
-    window.__RELAY_STORE__ = recordSource;
-  }
 
   return new Resolver(environment);
 }

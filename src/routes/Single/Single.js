@@ -19,7 +19,6 @@ import styles from './Single.scss';
   fragment Single_viewer on Viewer {
     post(slug: $slug) {
       id
-      slug
       date
       title {
         rendered
@@ -160,7 +159,7 @@ export default class Single extends Component {
             {' '}
             {tags.map(tag => <Link key={tag.id} to={`/tag/${tag.slug}`}>{tag.name}</Link>)}
           </footer>}
-        <Comments post={{ id, slug }} comments={comments} />
+        <Comments post={id} comments={comments} />
       </article>
     );
   }
