@@ -47,6 +47,10 @@ export default class Comment extends Component {
     active: PropTypes.bool.isRequired,
     setReplyTo: PropTypes.func.isRequired,
     comment: CommentType.isRequired,
+    post: PropTypes.shape({
+      id: PropTypes.string,
+      slug: PropTypes.string,
+    }).isRequired,
     intl: intlShape.isRequired,
     relay: PropTypes.object.isRequired,
   };
@@ -76,7 +80,7 @@ export default class Comment extends Component {
   };
 
   onDelete = () => {
-    DeleteCommentMutation.commit(this.props.comment, this.props.relay.environment);
+    DeleteCommentMutation.commit(this.props.relay.environment.this.props.comment, this.props.post);
   };
 
   viewerOwns() {
@@ -104,6 +108,15 @@ export default class Comment extends Component {
     } = this.props;
     const avatar = avatarUrls && avatarUrls.find(data => data.size === 48);
 
+    let commentContent = (
+      <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+    );
+    if (this.state.editing) {
+      commentContent = (
+        <EditComment comment={this.props.comment} onEditSubmit={this.onEditSubmit} />
+      );
+    }
+
     return (
       <div className={styles.comment}>
         <div className={styles.meta}>
@@ -117,9 +130,7 @@ export default class Comment extends Component {
             {this.props.intl.formatRelative(date)}
           </span>
         </div>
-        {this.state.editing
-          ? <EditComment comment={this.props.comment} onEditSubmit={this.onEditSubmit} />
-          : <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />}
+        {commentContent}
         <button
           className={cn(styles.reply, {
             [styles.active]: this.props.active,

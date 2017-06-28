@@ -35,7 +35,10 @@ export default class Form extends Component {
 
   static propTypes = {
     cookies: PropTypes.instanceOf(Cookies).isRequired,
-    post: PropTypes.string.isRequired,
+    post: PropTypes.shape({
+      id: PropTypes.string,
+      slug: PropTypes.string,
+    }).isRequired,
     replyTo: PropTypes.string,
     setReplyTo: PropTypes.func.isRequired,
   };
@@ -59,7 +62,7 @@ export default class Form extends Component {
     const variables = {
       input: {
         ...this.state.comment,
-        post: this.props.post,
+        post: this.props.post.id,
       },
     };
 
@@ -67,7 +70,7 @@ export default class Form extends Component {
       variables.input.parent = this.props.replyTo;
     }
 
-    AddCommentMutation.commit(this.context.relay.environment, variables, () => {
+    AddCommentMutation.commit(this.context.relay.environment, variables, this.props.post, () => {
       this.setState({
         comment: getDefaultState(this.props),
       });

@@ -14,7 +14,10 @@ export default function Comments({ post, comments }) {
 }
 
 Comments.propTypes = {
-  post: PropTypes.string.isRequired,
+  post: PropTypes.shape({
+    id: PropTypes.string,
+    slug: PropTypes.string,
+  }).isRequired,
   comments: CommentConnectionType,
 };
 
