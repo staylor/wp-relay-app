@@ -11,6 +11,7 @@ export default class Edit extends Component {
 
   static propTypes = {
     comment: CommentType.isRequired,
+    token: PropTypes.string.isRequired,
     onEditSubmit: PropTypes.func.isRequired,
   };
 
@@ -22,13 +23,16 @@ export default class Edit extends Component {
     };
   }
 
-  onEdit = () => {
+  onEdit = e => {
+    e.preventDefault();
+
     this.props.onEditSubmit();
 
     const variables = {
       input: {
         id: this.props.comment.id,
         content: this.state.content,
+        token: this.props.token,
       },
     };
 

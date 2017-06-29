@@ -9,7 +9,7 @@ const DeleteCommentMutation = graphql`
   }
 `;
 
-const commit = (environment, comment, onCompleted) => {
+const commit = (environment, { comment, token }, onCompleted) => {
   const optimisticResponse = {
     deleteComment: {
       status: 'pending',
@@ -33,6 +33,8 @@ const commit = (environment, comment, onCompleted) => {
     variables: {
       input: {
         id: comment.id,
+        post: comment.post,
+        token,
       },
     },
     onCompleted: response => {

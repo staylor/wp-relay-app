@@ -47,6 +47,8 @@ export default class Comment extends Component {
     relay: PropTypes.object.isRequired,
   };
 
+  editToken = null;
+
   state = {
     editing: false,
   };
@@ -72,7 +74,10 @@ export default class Comment extends Component {
   };
 
   onDelete = () => {
-    DeleteCommentMutation.commit(this.props.relay.environment, this.props.comment);
+    DeleteCommentMutation.commit(this.props.relay.environment, {
+      comment: this.props.comment,
+      token: this.editToken,
+    });
   };
 
   viewerOwns() {
@@ -82,10 +87,8 @@ export default class Comment extends Component {
       return false;
     }
     const tokenKey = encodeURIComponent(`token_${comment.id}`);
-    const editToken = cookies.get(tokenKey);
-    console.log(tokenKey);
-    console.log(editToken);
-    if (!editToken) {
+    this.editToken = cookies.get(tokenKey);
+    if (!this.editToken) {
       return false;
     }
     const values = md5(`${comment.id}${authorEmail}`);
@@ -113,6 +116,21 @@ export default class Comment extends Component {
       );
     }
 
+    let commentContent = null;
+    if (this.state.editing) {
+      commentContent = (
+        <EditComment
+          token={this.editToken}
+          comment={this.props.comment}
+          onEditSubmit={this.onEditSubmit}
+        />
+      );
+    } else {
+      commentContent = (
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+      );
+    }
+
     return (
       <div className={styles.comment}>
         <div className={styles.meta}>
@@ -126,9 +144,7 @@ export default class Comment extends Component {
             {this.props.intl.formatRelative(date)}
           </span>
         </div>
-        {this.state.editing
-          ? <EditComment comment={this.props.comment} onEditSubmit={this.onEditSubmit} />
-          : <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />}
+        {commentContent}
         <button
           className={cn(styles.reply, {
             [styles.active]: this.props.active,
