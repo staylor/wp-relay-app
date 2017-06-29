@@ -70,7 +70,7 @@ export const routeConfig = makeRouteConfig(
       })}
     />
     <Route
-      path=":year(\d+)/:month(\d+)/:day(\d+)/:slug"
+      path=":year(\d+)/:month(\d+)/:day(\d+)/:id"
       getComponent={getComponent(() => /* webpackChunkName: "single" */ import('./Single'))}
       query={SingleQuery}
       render={renderProp}

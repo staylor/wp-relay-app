@@ -9,12 +9,12 @@ const DeleteCommentMutation = graphql`
   }
 `;
 
-const commit = (comment, environment, onCompleted) => {
-  const getOptimisticResponse = () => ({
+const commit = (environment, comment, onCompleted) => {
+  const optimisticResponse = {
     deleteComment: {
-      status: 'delete',
+      status: 'pending',
     },
-  });
+  };
 
   const updater = store => {
     const payload = store.getRootField('deleteComment');
@@ -44,7 +44,7 @@ const commit = (comment, environment, onCompleted) => {
     onError: err => console.error(err),
     updater,
     optimisticUpdater: updater,
-    optimisticResponse: getOptimisticResponse,
+    optimisticResponse,
   });
 };
 

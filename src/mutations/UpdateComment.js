@@ -24,13 +24,13 @@ const UpdateCommentMutation = graphql`
   }
 `;
 
-const commit = (comment, environment, variables, onCompleted) => {
+const commit = (environment, variables, comment, onCompleted) => {
   const content = {
     rendered: `<p>${variables.input.content.replace(newlineRegex, '<br />')}</p>`,
     raw: variables.input.content,
   };
 
-  const getOptimisticResponse = () => ({
+  const optimisticResponse = {
     updateComment: {
       comment: {
         ...comment,
@@ -39,7 +39,7 @@ const commit = (comment, environment, variables, onCompleted) => {
       status: 'update',
       cookies: '',
     },
-  });
+  };
 
   const updater = store => {
     const payload = store.getRootField('updateComment');
@@ -59,11 +59,11 @@ const commit = (comment, environment, variables, onCompleted) => {
         onCompleted(response);
       }
     },
-    updater,
-    optimisticUpdater: updater,
     // eslint-disable-next-line no-console
     onError: err => console.error(err),
-    optimisticResponse: getOptimisticResponse,
+    updater,
+    optimisticUpdater: updater,
+    optimisticResponse,
   });
 };
 

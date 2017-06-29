@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import base64 from 'base-64';
+import md5 from 'md5';
 import { graphql } from 'react-relay';
 import { withCookies, Cookies } from 'react-cookie';
 import { intlShape } from 'react-intl';
 import FragmentContainer from 'decorators/FragmentContainer';
 import withIntl from 'decorators/withIntl';
-import {
-  AUTHOR_NAME_COOKIE,
-  AUTHOR_EMAIL_COOKIE,
-  AUTHOR_URL_COOKIE,
-} from 'components/Comments/constants';
+import { AUTHOR_EMAIL_COOKIE } from 'components/Comments/constants';
 import { CommentType } from 'components/Comments/types';
 import DeleteCommentMutation from 'mutations/DeleteComment';
 import EditComment from './Edit/Edit';
@@ -76,19 +72,24 @@ export default class Comment extends Component {
   };
 
   onDelete = () => {
-    DeleteCommentMutation.commit(this.props.comment, this.props.relay.environment);
+    DeleteCommentMutation.commit(this.props.relay.environment, this.props.comment);
   };
 
   viewerOwns() {
-    const { cookies } = this.props;
-    const authorName = cookies.get(AUTHOR_NAME_COOKIE);
+    const { comment, cookies } = this.props;
     const authorEmail = cookies.get(AUTHOR_EMAIL_COOKIE);
-    const authorURL = cookies.get(AUTHOR_URL_COOKIE);
-    const values = `${authorName}${authorEmail}${authorURL}`;
-    if (!values) {
+    if (!authorEmail) {
       return false;
     }
-    return base64.encode(values) === this.props.comment.author_hash;
+    const tokenKey = encodeURIComponent(`token_${comment.id}`);
+    const editToken = cookies.get(tokenKey);
+    console.log(tokenKey);
+    console.log(editToken);
+    if (!editToken) {
+      return false;
+    }
+    const values = md5(`${comment.id}${authorEmail}`);
+    return values === this.props.comment.author_hash;
   }
 
   render() {
@@ -103,6 +104,14 @@ export default class Comment extends Component {
       },
     } = this.props;
     const avatar = avatarUrls && avatarUrls.find(data => data.size === 48);
+    let authorDisplay = authorName;
+    if (authorUrl) {
+      authorDisplay = (
+        <a href={authorUrl}>
+          {authorName}
+        </a>
+      );
+    }
 
     return (
       <div className={styles.comment}>
@@ -111,7 +120,7 @@ export default class Comment extends Component {
             ? <img alt="" role="presentation" className={styles.image} src={avatar.url} />
             : null}
           <span className={styles.author}>
-            {authorUrl ? <a href={authorUrl}>{authorName}</a> : authorName}
+            {authorDisplay}
           </span>
           <span className={styles.time}>
             {this.props.intl.formatRelative(date)}

@@ -17,7 +17,7 @@ import styles from './Single.scss';
 
 @FragmentContainer(graphql`
   fragment Single_viewer on Viewer {
-    post(slug: $slug) {
+    post(id: $id) {
       id
       date
       title {
@@ -40,7 +40,7 @@ import styles from './Single.scss';
         name
         slug
       }
-      comments(slug: $slug, first: 100) @connection(key: "Single_post_comments") {
+      comments(post: $id, first: 100) @connection(key: "Single_post_comments") {
         edges {
           node {
             id

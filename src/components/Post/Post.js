@@ -62,9 +62,9 @@ export default class Post extends Component {
       node.onclick = e => {
         e.preventDefault();
 
-        const { slug, date } = this.props.post;
+        const { id, date } = this.props.post;
         const [, year, month, day] = dateRegex.exec(date);
-        const url = `/${year}/${month}/${day}/${slug}`;
+        const url = `/${year}/${month}/${day}/${id}`;
 
         this.context.router.push(url);
       };

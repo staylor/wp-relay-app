@@ -28,7 +28,7 @@ const AddCommentMutation = graphql`
 `;
 
 const commit = (environment, variables, onCompleted = null) => {
-  const getOptimisticResponse = () => ({
+  const optimisticResponse = {
     addComment: {
       comment: {
         id: null,
@@ -50,9 +50,9 @@ const commit = (environment, variables, onCompleted = null) => {
       status: 'new',
       cookies: '',
     },
-  });
+  };
 
-  const updateConnection = store => {
+  const updater = store => {
     const payload = store.getRootField('addComment');
     const newComment = payload.getLinkedRecord('comment');
     if (!newComment) {
@@ -83,9 +83,9 @@ const commit = (environment, variables, onCompleted = null) => {
     },
     // eslint-disable-next-line no-console
     onError: err => console.error(err),
-    updater: updateConnection,
-    optimisticUpdater: updateConnection,
-    optimisticResponse: getOptimisticResponse,
+    updater,
+    optimisticUpdater: updater,
+    optimisticResponse,
   });
 };
 

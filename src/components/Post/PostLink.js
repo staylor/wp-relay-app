@@ -4,9 +4,9 @@ import { Link } from 'found';
 import { dateRegex } from 'utils/regex';
 
 export default createFragmentContainer(
-  ({ children, post: { slug, date, title: { rendered: title } } }) => {
+  ({ children, post: { id, date, title: { rendered: title } } }) => {
     const [, year, month, day] = dateRegex.exec(date);
-    const url = `/${year}/${month}/${day}/${slug}`;
+    const url = `/${year}/${month}/${day}/${id}`;
     if (children) {
       return <Link to={url}>{children}</Link>;
     }
@@ -14,7 +14,7 @@ export default createFragmentContainer(
   },
   graphql`
     fragment PostLink_post on Post {
-      slug
+      id
       date
       title {
         rendered
