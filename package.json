@@ -49,6 +49,7 @@
     "clear-cache": "redis-cli FLUSHALL && npm run persist-queries"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-module-resolver": "^2.7.1",
