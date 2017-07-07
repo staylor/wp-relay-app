@@ -1,3 +1,4 @@
+import 'isomorphic-fetch';
 import React from 'react';
 import queryMiddleware from 'farce/lib/queryMiddleware';
 import createRender from 'found/lib/createRender';
@@ -5,15 +6,6 @@ import makeRouteConfig from 'found/lib/makeRouteConfig';
 import Route from 'found/lib/Route';
 import { Resolver } from 'found-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import 'isomorphic-fetch';
-import SingleQuery from 'queries/Single';
-import TermQuery from 'queries/Term';
-import HomeQuery from 'queries/Home';
-import PageQuery from 'queries/Page';
-import AppQuery from 'queries/App';
-import SearchQuery from 'queries/Search';
-import DateQuery from 'queries/Date';
-import ChartQuery from 'queries/Chart';
 import Loading from 'components/Loading';
 
 const getComponent = loader => (location, cb) =>
@@ -38,11 +30,13 @@ export function createResolver(fetcher) {
 const renderProp = ({ Component, props }) =>
   Component && props ? <Component {...props} /> : <Loading />;
 
+/* eslint-disable global-require */
+
 export const routeConfig = makeRouteConfig(
   <Route
     path="/"
     getComponent={getComponent(() => /* webpackChunkName: "app" */ import('../components/App'))}
-    query={AppQuery}
+    getQuery={() => require('../queries/App').default}
     prepareVariables={params => ({
       ...params,
       menuID: 'TmF2TWVudToy',
@@ -52,7 +46,7 @@ export const routeConfig = makeRouteConfig(
     <Route
       path="music/:slug"
       getComponent={getComponent(() => /* webpackChunkName: "term" */ import('./Term'))}
-      query={TermQuery}
+      getQuery={() => require('../queries/Term').default}
       render={renderProp}
       prepareVariables={params => ({
         ...params,
@@ -62,7 +56,7 @@ export const routeConfig = makeRouteConfig(
     <Route
       path="tag/:slug"
       getComponent={getComponent(() => /* webpackChunkName: "term" */ import('./Term'))}
-      query={TermQuery}
+      getQuery={() => require('../queries/Term').default}
       render={renderProp}
       prepareVariables={params => ({
         ...params,
@@ -72,13 +66,13 @@ export const routeConfig = makeRouteConfig(
     <Route
       path=":year(\d+)/:month(\d+)/:day(\d+)/:id"
       getComponent={getComponent(() => /* webpackChunkName: "single" */ import('./Single'))}
-      query={SingleQuery}
+      getQuery={() => require('../queries/Single').default}
       render={renderProp}
     />
     <Route
       path=":year(\d+)/:month(\d+)?/:day(\d+)?"
       getComponent={getComponent(() => /* webpackChunkName: "date" */ import('./Date'))}
-      query={DateQuery}
+      getQuery={() => require('../queries/Date').default}
       prepareVariables={params => {
         const vars = Object.assign({}, params);
         return ['year', 'month', 'day'].reduce((memo, value) => {
@@ -92,24 +86,24 @@ export const routeConfig = makeRouteConfig(
     <Route
       path="search"
       getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
-      query={SearchQuery}
+      getQuery={() => require('../queries/Search').default}
       render={renderProp}
     />
     <Route
       path="charts"
       getComponent={getComponent(() => /* webpackChunkName: "chart" */ import('./Chart'))}
-      query={ChartQuery}
+      getQuery={() => require('../queries/Chart').default}
       render={renderProp}
     />
     <Route
       path=":slug"
       getComponent={getComponent(() => /* webpackChunkName: "page" */ import('./Page'))}
-      query={PageQuery}
+      getQuery={() => require('../queries/Page').default}
       render={renderProp}
     />
     <Route
       getComponent={getComponent(() => /* webpackChunkName: "home" */ import('./Home'))}
-      query={HomeQuery}
+      getQuery={() => require('../queries/Home').default}
       render={renderProp}
     />
   </Route>
