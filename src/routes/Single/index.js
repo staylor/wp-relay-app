@@ -7,9 +7,9 @@ import { FormattedRelative } from 'react-intl';
 import { css } from 'glamor';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
+import Content from 'components/Content';
 import Comments from 'components/Comments';
 import Error from 'components/Error';
-import { convertPlaceholders } from 'utils';
 import { dateRegex } from 'utils/regex';
 import { SITE_URL } from 'utils/constants';
 import styles from './styles';
@@ -25,7 +25,9 @@ import styles from './styles';
         rendered
       }
       content {
-        rendered
+        data {
+          ...Content_content
+        }
       }
       excerpt {
         raw
@@ -60,42 +62,6 @@ export default class Single extends Component {
     }).isRequired,
   };
 
-  content = null;
-  bindRef = node => {
-    this.content = node;
-  };
-
-  componentDidMount() {
-    const nodes = this.content.querySelectorAll(`figure.${css(styles.embed)}`);
-    if (!nodes) {
-      return;
-    }
-
-    const maxWidth = 740;
-    nodes.forEach(node => {
-      node.onclick = e => {
-        e.preventDefault();
-
-        const data = JSON.parse(node.querySelector('script[type="application/json"]').innerHTML);
-        let width = data.width;
-        let height = data.height;
-        let html = data.html;
-        if (html.indexOf('<iframe') === 0) {
-          html = html.replace(/<iframe /, `<iframe class="${css(styles.iframe)}" `);
-          if (width < maxWidth) {
-            height = Math.ceil(height * maxWidth / width);
-            width = maxWidth;
-            html = html
-              .replace(/width="[0-9]+"/, `width="${width}"`)
-              .replace(/height="[0-9]+"/, `height="${height}"`);
-          }
-        }
-
-        e.currentTarget.outerHTML = html;
-      };
-    });
-  }
-
   render() {
     if (!this.props.viewer.post) {
       return <Error />;
@@ -107,7 +73,7 @@ export default class Single extends Component {
         slug,
         date,
         title: { rendered: title },
-        content: { rendered: content },
+        content: { data: content },
         excerpt: { raw: excerpt },
         featuredMedia,
         tags,
@@ -149,17 +115,12 @@ export default class Single extends Component {
           </div>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-        <section
-          ref={this.bindRef}
-          dangerouslySetInnerHTML={{
-            __html: convertPlaceholders(content, styles),
-          }}
-        />
+        <Content content={content} />
         {tags &&
           <footer className={css(styles.footer)}>
             Tags:{' '}
             {tags.map(tag =>
-              <Link key={tag.id} to={`/tag/${tag.slug}`}>
+              <Link className={css(styles.tag)} key={tag.id} to={`/tag/${tag.slug}`}>
                 {tag.name}
               </Link>
             )}
