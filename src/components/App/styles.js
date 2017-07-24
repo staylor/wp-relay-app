@@ -1,16 +1,16 @@
 import vars from 'styles/variables';
-import mixins, { sizeHeight } from 'styles/mixins';
+import { sizeHeight } from 'styles/mixins';
 import fonts from 'styles/fonts';
 import colors from 'styles/colors';
 
 export const globals = {
   body: {
     ...sizeHeight(13, 18),
-    background: '#e2e2e2',
+    background: colors.background,
     color: colors.dark,
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    padding: '0 2em',
+    fontFamily: fonts.body,
+    paddingRight: vars.padding,
+    paddingLeft: vars.padding,
     textRendering: 'optimizeLegibility',
   },
 
@@ -21,15 +21,16 @@ export const globals = {
   a: {
     color: colors.pink,
   },
+
   blockquote: {
-    marginTop: 0,
-    marginRight: 20,
-    marginBottom: 0,
-    marginLeft: 20,
+    marginRight: vars.padding,
+    marginLeft: vars.padding,
   },
+
   em: {
     textDecoration: 'underline',
   },
+
   strong: {
     fontWeight: fonts.weightBold,
   },
@@ -37,29 +38,41 @@ export const globals = {
 
 export default {
   page: {
-    background: colors.white,
-    margin: '0 auto',
+    backgroundColor: colors.white,
+    marginLeft: 'auto',
+    marginRight: 'auto',
     maxWidth: vars.contentWidth,
-    padding: '0 16px',
+    paddingRight: vars.padding,
+    paddingLeft: vars.padding,
   },
 
   content: {
-    '&::after': { ...mixins.clear },
-    padding: '16px 0',
+    paddingTop: vars.padding,
+    paddingBottom: vars.padding,
+    [vars.mediaDesktop]: {
+      display: 'flex',
+      marginRight: vars.padding,
+    },
   },
 
   primary: {
-    float: 'left',
-    width: '78%',
+    [vars.mediaDesktop]: {
+      flex: 4,
+    },
   },
 
   secondary: {
-    float: 'right',
-    width: '20%',
+    display: 'block',
+    minHeight: 212,
+    minWidth: 212,
+    [vars.mediaDesktop]: {
+      flex: 1,
+    },
   },
 
   footerCredits: {
-    padding: '16px 0',
+    paddingTop: vars.padding,
+    paddingBottom: vars.padding,
     textAlign: 'center',
   },
 };

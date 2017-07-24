@@ -1,40 +1,39 @@
 import colors from 'styles/colors';
-import mixins, { sizeHeight } from 'styles/mixins';
+import vars from 'styles/variables';
+import { sizeHeight } from 'styles/mixins';
+
+const submenuWidth = 168;
 
 export default {
   access: {
     display: 'block',
-    float: 'left',
-    margin: '0 auto 6px',
-    width: '100%',
+    marginBottom: vars.padding / 2,
+    marginTop: vars.padding / 2,
 
     '& ul': {
-      '&::after': { ...mixins.clear },
-
-      ...sizeHeight(14, 14),
       listStyle: 'none',
-      margin: '0 0 0 -1em',
-      paddingLeft: 0,
+      marginLeft: -1 * (vars.padding / 2),
 
       '& ul': {
         display: 'none',
-        float: 'left',
-        left: 14,
-        margin: 0,
+        left: vars.padding,
         position: 'absolute',
-        top: 28,
-        width: 188,
+        top: vars.padding * 1.5,
+        width: submenuWidth + vars.padding * 2,
         zIndex: 99999,
+        [vars.mediaDesktop]: {
+          top: vars.padding * 2,
+        },
 
         '& a': {
           ...sizeHeight(13, 20),
-          background: '#f9f9f9',
-          borderBottom: '1px dotted #ddd',
-          color: '#444',
-          fontWeight: 'normal',
-          height: 'auto',
-          padding: 10,
-          width: 168,
+          background: colors.subnavBackground,
+          borderBottom: `1px dotted ${colors.subnavDetail}`,
+          paddingTop: vars.padding / 2,
+          paddingBottom: vars.padding / 2,
+          paddingLeft: vars.padding,
+          paddingRight: vars.padding,
+          width: submenuWidth,
         },
 
         '& ul': {
@@ -45,29 +44,32 @@ export default {
     },
 
     '& li': {
-      float: 'left',
       position: 'relative',
     },
 
     '& a': {
+      ...sizeHeight(14, vars.padding * 1.5),
       color: colors.black,
       display: 'block',
-      lineHeight: '2em',
-      padding: '0 1.2125em',
+      paddingLeft: vars.padding * 0.75,
+      paddingRight: vars.padding * 0.75,
       textDecoration: 'none',
       textTransform: 'uppercase',
+      [vars.mediaDesktop]: {
+        ...sizeHeight(14, vars.padding * 2),
+        paddingLeft: vars.padding,
+        paddingRight: vars.padding,
+      },
     },
 
     '& li:hover > a': {
-      background: '#efefef',
-      color: '#373737',
+      background: colors.subnavHoverBackground,
     },
     '& ul ul :hover > a': {
-      background: '#efefef',
+      background: colors.subnavHoverBackground,
     },
     '& a:focus': {
-      background: '#efefef',
-      color: '#373737',
+      background: colors.subnavHoverBackground,
     },
 
     '& ul li:hover > ul': {

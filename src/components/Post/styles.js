@@ -1,20 +1,16 @@
+import colors from 'styles/colors';
 import mixins, { sizeHeight } from 'styles/mixins';
 
 export default {
   title: {
     ...mixins.h1,
     ...sizeHeight(18, 24),
-    clear: 'both',
-    margin: '0 0 10px',
+    marginBottom: 10,
 
     '& a': {
-      color: '#222',
+      color: colors.subheading,
       textDecoration: 'none',
     },
-  },
-
-  paragraph: {
-    margin: '0 0 20px',
   },
 
   image: {
@@ -24,14 +20,7 @@ export default {
 
   content: {
     '& p': {
-      margin: '0 0 20px',
-    },
-  },
-
-  footer: {
-    '& a': {
-      display: 'inline-block',
-      margin: '0 0 0 5px',
+      marginBottom: 20,
     },
   },
 

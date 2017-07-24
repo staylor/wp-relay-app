@@ -1,14 +1,16 @@
+import vars from 'styles/variables';
 import colors from 'styles/colors';
+import fonts from 'styles/fonts';
 import mixins from 'styles/mixins';
 
 export default {
   widget: {
-    margin: '0 0 24px',
+    marginBottom: vars.padding * 2,
   },
 
   title: {
     ...mixins.upperHeader,
-    margin: '0 0 16px',
+    marginBottom: vars.padding,
   },
 
   goToThis: {
@@ -17,16 +19,18 @@ export default {
     },
 
     '& a': {
-      fontWeight: 700,
+      fontWeight: fonts.weightBold,
       textDecoration: 'none',
     },
 
     '& ol': {
-      margin: '16px 0',
+      marginTop: vars.padding,
+      marginBottom: vars.padding,
     },
 
     '& li': {
-      padding: '8px 0',
+      marginTop: vars.padding / 2,
+      marginBottom: vars.padding / 2,
       borderTop: `3px solid ${colors.detail}`,
     },
   },

@@ -1,59 +1,47 @@
+import colors from 'styles/colors';
+import fonts from 'styles/fonts';
 import mixins, { sizeHeight } from 'styles/mixins';
+import vars from 'styles/variables';
 
 export default {
   meta: {
     ...sizeHeight(12, 18),
-    clear: 'both',
-    color: '#666',
-    marginBottom: 10,
+    color: colors.meta,
+    marginBottom: vars.padding,
   },
 
   title: {
     ...mixins.h1,
-    ...sizeHeight(36, 42),
-    clear: 'both',
+    ...sizeHeight(24, 30),
     fontWeight: 'bold',
-    margin: '0 0 10px',
+    marginBottom: vars.padding,
 
     '& a': {
-      color: '#222',
+      color: colors.dark,
       textDecoration: 'none',
     },
-  },
 
-  paragraph: {
-    margin: '0 0 20px',
-  },
-
-  image: {
-    display: 'block',
-    maxWidth: '100%',
+    [vars.mediaTablet]: {
+      ...sizeHeight(36, 42),
+    },
   },
 
   content: {
     maxWidth: 740,
 
     '& h2': {
-      margin: '0 0 5px',
+      ...mixins.subhead,
+      fontWeight: fonts.weightBold,
+      marginBottom: vars.padding / 2,
     },
 
     '& p': {
-      margin: '0 0 20px',
+      marginBottom: vars.padding,
     },
   },
 
-  footer: {
-    '& a': {
-      display: 'inline-block',
-      margin: '0 0 0 5px',
-    },
-  },
-
-  embed: {
-    ...mixins.embed,
-  },
-
-  iframe: {
-    margin: '0 0 20px',
+  tag: {
+    display: 'inline-block',
+    marginLeft: vars.padding / 4,
   },
 };

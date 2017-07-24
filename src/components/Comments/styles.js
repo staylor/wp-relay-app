@@ -1,3 +1,4 @@
+import vars from 'styles/variables';
 import mixins from 'styles/mixins';
 
 export default {
@@ -6,8 +7,10 @@ export default {
   },
 
   comments: {
-    margin: '55px 0 0',
+    marginTop: vars.padding * 3,
     maxWidth: '100%',
-    width: 450,
+    [vars.mediaTablet]: {
+      width: 450,
+    },
   },
 };

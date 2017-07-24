@@ -58,10 +58,7 @@ export default {
     cursor: 'pointer',
     display: 'inline-block',
     height: 'auto !important',
-    marginTop: 0,
-    marginRight: 0,
     marginBottom: 20,
-    marginLeft: 0,
     maxWidth: '100%',
     position: 'relative',
 
@@ -83,8 +80,6 @@ export default {
       height: 52,
       left: '50%',
       marginTop: -21,
-      marginRight: 0,
-      marginBottom: 0,
       marginLeft: -48,
       opacity: 0.8,
       position: 'absolute',
@@ -101,8 +96,6 @@ export default {
       height: 0,
       left: 'calc(50% + 31px)',
       marginTop: -21,
-      marginRight: 0,
-      marginBottom: 0,
       marginLeft: -48,
       position: 'absolute',
       // top: 16px;
