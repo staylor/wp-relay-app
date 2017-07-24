@@ -8,7 +8,11 @@ export default createFragmentContainer(
     const [, year, month, day] = dateRegex.exec(date);
     const url = `/${year}/${month}/${day}/${id}`;
     if (children) {
-      return <Link to={url}>{children}</Link>;
+      return (
+        <Link to={url}>
+          {children}
+        </Link>
+      );
     }
     return <Link to={url} dangerouslySetInnerHTML={{ __html: title }} />;
   },

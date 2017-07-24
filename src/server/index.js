@@ -46,7 +46,6 @@ app.use(
     manifestJSBundle: clientAssets['manifest.js'],
     mainJSBundle: clientAssets['main.js'],
     vendorJSBundle: clientAssets['vendor.js'],
-    mainCSSBundle: clientAssets['main.css'],
   })
 );
 

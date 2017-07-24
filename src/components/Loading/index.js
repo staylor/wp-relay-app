@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './Loading.scss';
+import { css } from 'glamor';
+import styles from './styles';
 
 export default function Loading() {
   return (
-    <div className={styles.loading}>
-      <div className={styles.activity} />
+    <div className={css(styles.loading)}>
+      <div className={css(styles.activity)} />
     </div>
   );
 }
