@@ -1,6 +1,13 @@
-import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import { Environment, Network, RecordSource, Store, QueryResponseCache } from 'relay-runtime';
+
+const cache = new QueryResponseCache({ size: 25, ttl: 1000 });
 
 function fetchQuery(operation, variables) {
+  const cached = cache.get(operation.text, variables);
+  if (cached) {
+    return cached.payload;
+  }
+
   return fetch('http://graphql.highforthis.com/graphql', {
     method: 'POST',
     headers: {
@@ -10,7 +17,12 @@ function fetchQuery(operation, variables) {
       query: operation.text,
       variables,
     }),
-  }).then(response => response.json());
+  })
+    .then(response => response.json())
+    .then(data => {
+      cache.set(operation.text, variables, data);
+      return data;
+    });
 }
 
 const source = new RecordSource();

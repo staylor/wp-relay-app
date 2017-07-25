@@ -10,7 +10,6 @@ import { sortOrderedHierarchy } from './utils/walker';
 const styles = StyleSheet.create({
   nav: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
   },
   navItem: {
     flex: 1,
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
   },
   link: {
     color: '#e50082',
-    fontSize: 24,
+    fontSize: 20,
   },
 });
 
@@ -53,7 +52,7 @@ class NavMenu extends Component {
           }
 
           return (
-            <Link key={id} to={path} style={styles.navItem}>
+            <Link key={id} to={path} style={styles.navItem} underlayColor="#eee">
               <Text style={styles.link}>
                 {title}
               </Text>

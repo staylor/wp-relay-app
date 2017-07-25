@@ -3,7 +3,7 @@
   "plugins": ["relay"],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"],
-    },
-  },
+      "plugins": ["transform-react-jsx-source"]
+    }
+  }
 }
