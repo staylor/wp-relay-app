@@ -75,7 +75,9 @@ export default class Single extends Component {
     );
     let width = data.width;
     let height = data.height;
-    let html = data.html;
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = data.html;
+    let html = textarea.value;
     if (html.indexOf('<iframe') === 0) {
       html = html.replace(/<iframe /, `<iframe class="${css(styles.iframe)}" `);
       if (width < maxWidth) {
