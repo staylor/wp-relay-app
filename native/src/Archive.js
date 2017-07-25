@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   },
 
   activity: {
+    flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
   },

@@ -23,6 +23,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: '#fff',
   },
+
+  appLoading: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
 });
 
 const renderProp = (RenderComponent, query, prepareVariables = null) => routeProps => {
@@ -38,7 +45,7 @@ const renderProp = (RenderComponent, query, prepareVariables = null) => routePro
 
         if (!props) {
           return (
-            <View style={styles.container}>
+            <View style={styles.appLoading}>
               <ActivityIndicator size="large" color="#000" />
             </View>
           );
@@ -65,7 +72,11 @@ export default () =>
       }
 
       if (!props) {
-        return <ActivityIndicator size="large" color="#000" />;
+        return (
+          <View style={styles.appLoading}>
+            <ActivityIndicator size="large" color="#000" />
+          </View>
+        );
       }
 
       const { settings, navMenu } = props.viewer;

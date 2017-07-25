@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Link } from 'react-router-native';
 import NavMenu from './NavMenu';
@@ -7,7 +7,6 @@ import NavMenu from './NavMenu';
 
 const styles = StyleSheet.create({
   header: {
-    flex: 1,
     padding: 10,
   },
   title: {
@@ -19,22 +18,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Header extends Component {
-  render() {
-    const { title, description } = this.props.settings;
-
-    return (
-      <View style={styles.header}>
-        <Link to="/" underlayColor="#fff">
-          <Text style={styles.title}>
-            {title}
-          </Text>
-        </Link>
-        <Text style={styles.description}>
-          {description}
-        </Text>
-        <NavMenu navMenu={this.props.navMenu} />
-      </View>
-    );
-  }
-}
+export default ({ navMenu, settings: { title, description } }) =>
+  <View style={styles.header}>
+    <Link to="/" underlayColor="#fff">
+      <Text style={styles.title}>
+        {title}
+      </Text>
+    </Link>
+    <Text style={styles.description}>
+      {description}
+    </Text>
+    <NavMenu navMenu={navMenu} />
+  </View>;

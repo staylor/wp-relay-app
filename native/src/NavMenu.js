@@ -8,18 +8,14 @@ import { sortOrderedHierarchy } from './utils/walker';
 /* eslint-disable react/prop-types */
 
 const styles = StyleSheet.create({
-  nav: {
-    flexDirection: 'column',
-  },
+  nav: {},
   navItem: {
-    flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   link: {
     color: '#e50082',
-    fontSize: 20,
+    fontSize: 18,
   },
 });
 

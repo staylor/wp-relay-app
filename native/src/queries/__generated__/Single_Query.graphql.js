@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d90cca9bc23c68a1b7b3861f91e161f1
+ * @relayHash d3d2239269b56a81cc08ee46f96d516b
  */
 
 /* eslint-disable */
@@ -32,29 +32,23 @@ fragment Single_viewer on Viewer {
     title {
       raw
     }
-    excerpt {
-      raw
+    featuredMedia {
+      __typename
+      ... on Image {
+        source_url
+        id
+      }
+      ... on Audio {
+        id
+      }
+      ... on Video {
+        id
+      }
     }
     tags {
       id
       name
       slug
-    }
-    comments(post: $id, first: 100) {
-      edges {
-        node {
-          id
-          parent
-          __typename
-        }
-        cursor
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-        startCursor
-      }
     }
   }
 }
@@ -169,16 +163,62 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "concreteType": "Excerpt",
-                "name": "excerpt",
+                "concreteType": null,
+                "name": "featuredMedia",
                 "plural": false,
                 "selections": [
                   {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
-                    "name": "raw",
+                    "name": "__typename",
                     "storageKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Video",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Audio",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Image",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "source_url",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      }
+                    ]
                   }
                 ],
                 "storageKey": null
@@ -214,143 +254,6 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "args": [
-                  {
-                    "kind": "Literal",
-                    "name": "first",
-                    "value": 100,
-                    "type": "Int"
-                  },
-                  {
-                    "kind": "Variable",
-                    "name": "post",
-                    "variableName": "id",
-                    "type": "ID"
-                  }
-                ],
-                "concreteType": "CommentConnection",
-                "name": "comments",
-                "plural": false,
-                "selections": [
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "CommentEdge",
-                    "name": "edges",
-                    "plural": true,
-                    "selections": [
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Comment",
-                        "name": "node",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "id",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "parent",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "__typename",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "cursor",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "PageInfo",
-                    "name": "pageInfo",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "endCursor",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "hasNextPage",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "hasPreviousPage",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "startCursor",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
-              },
-              {
-                "kind": "LinkedHandle",
-                "alias": null,
-                "args": [
-                  {
-                    "kind": "Literal",
-                    "name": "first",
-                    "value": 100,
-                    "type": "Int"
-                  },
-                  {
-                    "kind": "Variable",
-                    "name": "post",
-                    "variableName": "id",
-                    "type": "ID"
-                  }
-                ],
-                "handle": "connection",
-                "name": "comments",
-                "key": "Single_post_comments",
-                "filters": [
-                  "post"
-                ]
               }
             ],
             "storageKey": null
@@ -367,7 +270,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      raw\n    }\n    excerpt {\n      raw\n    }\n    tags {\n      id\n      name\n      slug\n    }\n    comments(post: $id, first: 100) {\n      edges {\n        node {\n          id\n          parent\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n"
+  "text": "query Single_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Single_viewer\n    id\n  }\n}\n\nfragment Single_viewer on Viewer {\n  post(id: $id) {\n    id\n    date\n    title {\n      raw\n    }\n    featuredMedia {\n      __typename\n      ... on Image {\n        source_url\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    tags {\n      id\n      name\n      slug\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

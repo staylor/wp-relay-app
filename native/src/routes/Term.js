@@ -1,25 +1,11 @@
 import React from 'react';
 import { graphql, createPaginationContainer } from 'react-relay';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import TermQuery from '../queries/Term';
 import Archive from '../Archive';
+import styles from '../styles/archive';
 
 /* eslint-disable react/prop-types */
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 10,
-  },
-
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-});
 
 export default createPaginationContainer(
   ({ viewer: { term, posts }, relay }) => {

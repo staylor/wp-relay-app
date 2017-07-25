@@ -15,22 +15,14 @@ export type Single_viewer = {|
     +title: ?{|
       +raw: ?string;
     |};
-    +excerpt: ?{|
-      +raw: ?string;
+    +featuredMedia: ?{|
+      +source_url?: ?string;
     |};
     +tags: ?$ReadOnlyArray<?{|
       +id: string;
       +name: ?string;
       +slug: ?string;
     |}>;
-    +comments: ?{|
-      +edges: ?$ReadOnlyArray<?{|
-        +node: ?{|
-          +id: string;
-          +parent: ?string;
-        |};
-      |}>;
-    |};
   |};
 |};
 */
@@ -45,19 +37,7 @@ const fragment /*: ConcreteFragment*/ = {
     }
   ],
   "kind": "Fragment",
-  "metadata": {
-    "connection": [
-      {
-        "count": null,
-        "cursor": null,
-        "direction": "forward",
-        "path": [
-          "post",
-          "comments"
-        ]
-      }
-    ]
-  },
+  "metadata": null,
   "name": "Single_viewer",
   "selections": [
     {
@@ -111,16 +91,22 @@ const fragment /*: ConcreteFragment*/ = {
           "kind": "LinkedField",
           "alias": null,
           "args": null,
-          "concreteType": "Excerpt",
-          "name": "excerpt",
+          "concreteType": null,
+          "name": "featuredMedia",
           "plural": false,
           "selections": [
             {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "raw",
-              "storageKey": null
+              "kind": "InlineFragment",
+              "type": "Image",
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "source_url",
+                  "storageKey": null
+                }
+              ]
             }
           ],
           "storageKey": null
@@ -152,60 +138,6 @@ const fragment /*: ConcreteFragment*/ = {
               "alias": null,
               "args": null,
               "name": "slug",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
-        },
-        {
-          "kind": "LinkedField",
-          "alias": "comments",
-          "args": [
-            {
-              "kind": "Variable",
-              "name": "post",
-              "variableName": "id",
-              "type": "ID"
-            }
-          ],
-          "concreteType": "CommentConnection",
-          "name": "__Single_post_comments_connection",
-          "plural": false,
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "CommentEdge",
-              "name": "edges",
-              "plural": true,
-              "selections": [
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Comment",
-                  "name": "node",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "id",
-                      "storageKey": null
-                    },
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "parent",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                }
-              ],
               "storageKey": null
             }
           ],
