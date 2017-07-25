@@ -9,6 +9,10 @@ import Home from './routes/Home';
 import HomeQuery from './queries/Home';
 import Single from './routes/Single';
 import SingleQuery from './queries/Single';
+import Date from './routes/Date';
+import DateQuery from './queries/Date';
+import Term from './routes/Term';
+import TermQuery from './queries/Term';
 import Error from './Error';
 
 const styles = StyleSheet.create({
@@ -70,10 +74,36 @@ export default () =>
           <Header {...{ settings, navMenu }} />
           <Route exact path="/" render={renderProp(Home, HomeQuery)} />
           <Route
+            path="/music/:slug"
+            render={renderProp(Term, TermQuery, ({ params }) => ({
+              ...params,
+              taxonomy: 'category',
+            }))}
+          />
+          <Route
+            path="/tag/:slug"
+            render={renderProp(Term, TermQuery, ({ params }) => ({
+              ...params,
+              taxonomy: 'tag',
+            }))}
+          />
+          <Route
             path="/:year(\d+)/:month(\d+)/:day(\d+)/:id"
             render={renderProp(Single, SingleQuery, ({ params: { id } }) => ({
               id,
             }))}
+          />
+          <Route
+            path=":year(\d+)/:month(\d+)?/:day(\d+)?"
+            render={renderProp(Date, DateQuery, params => {
+              const vars = Object.assign({}, params);
+              return ['year', 'month', 'day'].reduce((memo, value) => {
+                if (vars[value]) {
+                  memo[value] = parseInt(vars[value], 10);
+                }
+                return memo;
+              }, {});
+            })}
           />
         </View>
       );
