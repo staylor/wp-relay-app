@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { graphql, createPaginationContainer } from 'react-relay';
-import { StyleSheet, Text, ListView } from 'react-native';
-import { Link } from 'react-router-native';
+import { StyleSheet, Text, View } from 'react-native';
 import TermQuery from '../queries/Term';
+import Archive from '../Archive';
 
 /* eslint-disable react/prop-types */
 
@@ -12,41 +12,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
   },
+
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
 });
 
-class Term extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.node.id !== r2.node.id,
-    });
-    this.state = {
-      dataSource: ds.cloneWithRows(props.viewer.posts.edges),
-    };
-  }
-
-  render() {
-    const { term } = this.props.viewer;
-    const url = `/${term.taxonomy.rewrite.slug}/${term.slug}`;
-
-    return (
-      <ListView
-        style={styles.container}
-        dataSource={this.state.dataSource}
-        renderRow={({ node }) =>
-          <Link to={url} underlayColor="#eee">
-            <Text style={styles.item}>
-              {node.title.raw}
-            </Text>
-          </Link>}
-      />
-    );
-  }
-}
-
 export default createPaginationContainer(
-  Term,
+  ({ viewer: { term, posts }, relay }) => {
+    const title = `${term.taxonomy.labels.singular}: ${term.name}`;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          {title}
+        </Text>
+        <Archive {...{ posts, relay }} />
+      </View>
+    );
+  },
   graphql`
     fragment Term_viewer on Viewer {
       term(slug: $slug, taxonomy: $taxonomy) {
@@ -68,9 +54,7 @@ export default createPaginationContainer(
         edges {
           node {
             id
-            title {
-              raw
-            }
+            ...PostLink_post
           }
           cursor
         }

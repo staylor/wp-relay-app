@@ -13,10 +13,6 @@ export type Home_viewer = {|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string;
-        +date: ?string;
-        +title: ?{|
-          +raw: ?string;
-        |};
       |};
       +cursor: string;
     |}>;
@@ -25,10 +21,6 @@ export type Home_viewer = {|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string;
-        +date: ?string;
-        +title: ?{|
-          +raw: ?string;
-        |};
       |};
       +cursor: string;
     |}>;
@@ -37,10 +29,6 @@ export type Home_viewer = {|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string;
-        +date: ?string;
-        +title: ?{|
-          +raw: ?string;
-        |};
       |};
       +cursor: string;
     |}>;
@@ -49,10 +37,6 @@ export type Home_viewer = {|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string;
-        +date: ?string;
-        +title: ?{|
-          +raw: ?string;
-        |};
       |};
       +cursor: string;
     |}>;
@@ -162,29 +146,9 @@ const fragment /*: ConcreteFragment*/ = {
                   "storageKey": null
                 },
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "date",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Title",
-                  "name": "title",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "raw",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "PostLink_post",
+                  "args": null
                 }
               ],
               "storageKey": null
@@ -247,29 +211,9 @@ const fragment /*: ConcreteFragment*/ = {
                   "storageKey": null
                 },
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "date",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Title",
-                  "name": "title",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "raw",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "PostLink_post",
+                  "args": null
                 }
               ],
               "storageKey": null
@@ -326,29 +270,9 @@ const fragment /*: ConcreteFragment*/ = {
                   "storageKey": null
                 },
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "date",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Title",
-                  "name": "title",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "raw",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "PostLink_post",
+                  "args": null
                 }
               ],
               "storageKey": null
@@ -405,29 +329,9 @@ const fragment /*: ConcreteFragment*/ = {
                   "storageKey": null
                 },
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "date",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Title",
-                  "name": "title",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "raw",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "PostLink_post",
+                  "args": null
                 }
               ],
               "storageKey": null

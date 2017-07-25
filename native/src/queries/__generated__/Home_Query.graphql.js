@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c9a68a217c7b8c15ce3942c750d2cffd
+ * @relayHash f45d80ea2668dcafd3fd412c578c72ab
  */
 
 /* eslint-disable */
@@ -33,10 +33,7 @@ fragment Home_viewer on Viewer {
     edges {
       node {
         id
-        date
-        title {
-          raw
-        }
+        ...PostLink_post
         __typename
       }
       cursor
@@ -52,10 +49,7 @@ fragment Home_viewer on Viewer {
     edges {
       node {
         id
-        date
-        title {
-          raw
-        }
+        ...PostLink_post
         __typename
       }
       cursor
@@ -71,10 +65,7 @@ fragment Home_viewer on Viewer {
     edges {
       node {
         id
-        date
-        title {
-          raw
-        }
+        ...PostLink_post
         __typename
       }
       cursor
@@ -90,10 +81,7 @@ fragment Home_viewer on Viewer {
     edges {
       node {
         id
-        date
-        title {
-          raw
-        }
+        ...PostLink_post
         __typename
       }
       cursor
@@ -104,6 +92,14 @@ fragment Home_viewer on Viewer {
       hasPreviousPage
       startCursor
     }
+  }
+}
+
+fragment PostLink_post on Post {
+  id
+  date
+  title {
+    raw
   }
 }
 */
@@ -847,7 +843,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        id\n        date\n        title {\n          raw\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        id\n        date\n        title {\n          raw\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        id\n        date\n        title {\n          raw\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        id\n        date\n        title {\n          raw\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n"
 };
 
 module.exports = batch;

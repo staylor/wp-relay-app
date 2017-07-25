@@ -8,7 +8,11 @@
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Date_viewer = {|
+export type Author_viewer = {|
+  +author: ?{|
+    +id: string;
+    +name: ?string;
+  |};
   +posts: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
@@ -31,18 +35,8 @@ const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [
     {
       "kind": "RootArgument",
-      "name": "year",
-      "type": "Int"
-    },
-    {
-      "kind": "RootArgument",
-      "name": "month",
-      "type": "Int"
-    },
-    {
-      "kind": "RootArgument",
-      "name": "day",
-      "type": "Int"
+      "name": "id",
+      "type": "ID"
     },
     {
       "kind": "RootArgument",
@@ -68,33 +62,53 @@ const fragment /*: ConcreteFragment*/ = {
       }
     ]
   },
-  "name": "Date_viewer",
+  "name": "Author_viewer",
   "selections": [
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "id",
+          "variableName": "id",
+          "type": "ID"
+        }
+      ],
+      "concreteType": "User",
+      "name": "author",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "id",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "name",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    },
     {
       "kind": "LinkedField",
       "alias": "posts",
       "args": [
         {
           "kind": "Variable",
-          "name": "day",
-          "variableName": "day",
-          "type": "Int"
-        },
-        {
-          "kind": "Variable",
-          "name": "month",
-          "variableName": "month",
-          "type": "Int"
-        },
-        {
-          "kind": "Variable",
-          "name": "year",
-          "variableName": "year",
-          "type": "Int"
+          "name": "author",
+          "variableName": "id",
+          "type": "ID"
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Date_posts_connection",
+      "name": "__Author_posts_connection",
       "plural": false,
       "selections": [
         {

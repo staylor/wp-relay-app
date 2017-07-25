@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5d4b6d25d87220c0592f0a43f2bb84de
+ * @relayHash 83ae15b9c340e4730f69251bd9dc8ed7
  */
 
 /* eslint-disable */
@@ -34,9 +34,7 @@ fragment Date_viewer on Viewer {
     edges {
       node {
         id
-        title {
-          raw
-        }
+        ...PostLink_post
         __typename
       }
       cursor
@@ -47,6 +45,14 @@ fragment Date_viewer on Viewer {
       hasNextPage
       hasPreviousPage
     }
+  }
+}
+
+fragment PostLink_post on Post {
+  id
+  date
+  title {
+    raw
   }
 }
 */
@@ -220,6 +226,13 @@ const batch /*: ConcreteBatch*/ = {
                         "storageKey": null
                       },
                       {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "date",
+                        "storageKey": null
+                      },
+                      {
                         "kind": "LinkedField",
                         "alias": null,
                         "args": null,
@@ -355,7 +368,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Date_Query(\n  $year: Int!\n  $month: Int\n  $day: Int\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Date_viewer\n    id\n  }\n}\n\nfragment Date_viewer on Viewer {\n  posts(year: $year, month: $month, day: $day, after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        title {\n          raw\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
+  "text": "query Date_Query(\n  $year: Int!\n  $month: Int\n  $day: Int\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Date_viewer\n    id\n  }\n}\n\nfragment Date_viewer on Viewer {\n  posts(year: $year, month: $month, day: $day, after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n"
 };
 
 module.exports = batch;

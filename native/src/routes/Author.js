@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, createPaginationContainer } from 'react-relay';
 import { StyleSheet, Text, View } from 'react-native';
-import DateQuery from '../queries/Date';
+import AuthorQuery from '../queries/Author';
 import Archive from '../Archive';
 
 /* eslint-disable react/prop-types */
@@ -22,10 +22,8 @@ const styles = StyleSheet.create({
 });
 
 export default createPaginationContainer(
-  ({ params, viewer: { posts }, relay }) => {
-    const values = [params.month, params.day, params.year].filter(value => value);
-    const path = values.join('/');
-    const title = `Archives: ${path}`;
+  ({ viewer: { author, posts }, relay }) => {
+    const title = `Author Archive: ${author.name}`;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
@@ -36,9 +34,12 @@ export default createPaginationContainer(
     );
   },
   graphql`
-    fragment Date_viewer on Viewer {
-      posts(year: $year, month: $month, day: $day, after: $cursor, first: $count)
-        @connection(key: "Date_posts") {
+    fragment Author_viewer on Viewer {
+      author(id: $id) {
+        id
+        name
+      }
+      posts(author: $id, after: $cursor, first: $count) @connection(key: "Author_posts") {
         edges {
           node {
             id
@@ -73,6 +74,6 @@ export default createPaginationContainer(
         count: totalCount,
       };
     },
-    query: DateQuery,
+    query: AuthorQuery,
   }
 );

@@ -13,19 +13,20 @@ import Date from './routes/Date';
 import DateQuery from './queries/Date';
 import Term from './routes/Term';
 import TermQuery from './queries/Term';
+import Author from './routes/Author';
+import AuthorQuery from './queries/Author';
 import Error from './Error';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 10,
     backgroundColor: '#fff',
   },
 });
 
 const renderProp = (RenderComponent, query, prepareVariables = null) => routeProps => {
-  const variables = prepareVariables ? prepareVariables(routeProps.match) : {};
+  const variables = prepareVariables ? prepareVariables(routeProps.match) : routeProps.match.params;
   return (
     <QueryRenderer
       {...{ query, variables }}
@@ -87,11 +88,10 @@ export default () =>
               taxonomy: 'tag',
             }))}
           />
+          <Route path="/author/:id" render={renderProp(Author, AuthorQuery)} />
           <Route
             path="/:year(\d+)/:month(\d+)/:day(\d+)/:id"
-            render={renderProp(Single, SingleQuery, ({ params: { id } }) => ({
-              id,
-            }))}
+            render={renderProp(Single, SingleQuery)}
           />
           <Route
             path=":year(\d+)/:month(\d+)?/:day(\d+)?"

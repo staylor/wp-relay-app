@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 78c476ccc4b61852f6158c41caffe786
+ * @relayHash aa423d39bf93189efaa06e304b1fec3a
  */
 
 /* eslint-disable */
@@ -9,43 +9,28 @@
 
 /*::
 import type {ConcreteBatch} from 'relay-runtime';
-export type Term_QueryResponse = {|
+export type Author_QueryResponse = {|
   +viewer: ?{| |};
 |};
 */
 
 
 /*
-query Term_Query(
-  $slug: String!
-  $taxonomy: String!
-  $cursor: String
-  $count: Int = 10
+query Author_Query(
+  $id: ID!
 ) {
   viewer {
-    ...Term_viewer
+    ...Author_viewer
     id
   }
 }
 
-fragment Term_viewer on Viewer {
-  term(slug: $slug, taxonomy: $taxonomy) {
-    __typename
+fragment Author_viewer on Viewer {
+  author(id: $id) {
     id
     name
-    slug
-    taxonomy {
-      rewrite {
-        slug
-      }
-      labels {
-        singular
-        plural
-      }
-      id
-    }
   }
-  posts(term: $slug, taxonomy: $taxonomy, after: $cursor, first: $count) {
+  posts(author: $id, after: $cursor, first: $count) {
     edges {
       node {
         id
@@ -77,32 +62,14 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "slug",
-        "type": "String!",
+        "name": "id",
+        "type": "ID!",
         "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "taxonomy",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "cursor",
-        "type": "String",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "count",
-        "type": "Int",
-        "defaultValue": 10
       }
     ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "Term_Query",
+    "name": "Author_Query",
     "selections": [
       {
         "kind": "LinkedField",
@@ -114,7 +81,7 @@ const batch /*: ConcreteBatch*/ = {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "Term_viewer",
+            "name": "Author_viewer",
             "args": null
           }
         ],
@@ -126,36 +93,18 @@ const batch /*: ConcreteBatch*/ = {
   "id": null,
   "kind": "Batch",
   "metadata": {},
-  "name": "Term_Query",
+  "name": "Author_Query",
   "query": {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "slug",
-        "type": "String!",
+        "name": "id",
+        "type": "ID!",
         "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "taxonomy",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "cursor",
-        "type": "String",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "count",
-        "type": "Int",
-        "defaultValue": 10
       }
     ],
     "kind": "Root",
-    "name": "Term_Query",
+    "name": "Author_Query",
     "operation": "query",
     "selections": [
       {
@@ -172,28 +121,15 @@ const batch /*: ConcreteBatch*/ = {
             "args": [
               {
                 "kind": "Variable",
-                "name": "slug",
-                "variableName": "slug",
-                "type": "String!"
-              },
-              {
-                "kind": "Variable",
-                "name": "taxonomy",
-                "variableName": "taxonomy",
-                "type": "String!"
+                "name": "id",
+                "variableName": "id",
+                "type": "ID"
               }
             ],
-            "concreteType": null,
-            "name": "term",
+            "concreteType": "User",
+            "name": "author",
             "plural": false,
             "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "__typename",
-                "storageKey": null
-              },
               {
                 "kind": "ScalarField",
                 "alias": null,
@@ -206,74 +142,6 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "name": "name",
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "slug",
-                "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "args": null,
-                "concreteType": "Taxonomy",
-                "name": "taxonomy",
-                "plural": false,
-                "selections": [
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Rewrite",
-                    "name": "rewrite",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "slug",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Labels",
-                    "name": "labels",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "singular",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "args": null,
-                        "name": "plural",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "id",
-                    "storageKey": null
-                  }
-                ],
                 "storageKey": null
               }
             ],
@@ -291,21 +159,15 @@ const batch /*: ConcreteBatch*/ = {
               },
               {
                 "kind": "Variable",
+                "name": "author",
+                "variableName": "id",
+                "type": "ID"
+              },
+              {
+                "kind": "Variable",
                 "name": "first",
                 "variableName": "count",
                 "type": "Int"
-              },
-              {
-                "kind": "Variable",
-                "name": "taxonomy",
-                "variableName": "taxonomy",
-                "type": "String"
-              },
-              {
-                "kind": "Variable",
-                "name": "term",
-                "variableName": "slug",
-                "type": "String"
               }
             ],
             "concreteType": "PostConnection",
@@ -434,29 +296,22 @@ const batch /*: ConcreteBatch*/ = {
               },
               {
                 "kind": "Variable",
+                "name": "author",
+                "variableName": "id",
+                "type": "ID"
+              },
+              {
+                "kind": "Variable",
                 "name": "first",
                 "variableName": "count",
                 "type": "Int"
-              },
-              {
-                "kind": "Variable",
-                "name": "taxonomy",
-                "variableName": "taxonomy",
-                "type": "String"
-              },
-              {
-                "kind": "Variable",
-                "name": "term",
-                "variableName": "slug",
-                "type": "String"
               }
             ],
             "handle": "connection",
             "name": "posts",
-            "key": "Term_posts",
+            "key": "Author_posts",
             "filters": [
-              "term",
-              "taxonomy"
+              "author"
             ]
           },
           {
@@ -471,7 +326,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Term_Query(\n  $slug: String!\n  $taxonomy: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Term_viewer\n    id\n  }\n}\n\nfragment Term_viewer on Viewer {\n  term(slug: $slug, taxonomy: $taxonomy) {\n    __typename\n    id\n    name\n    slug\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(term: $slug, taxonomy: $taxonomy, after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n"
+  "text": "query Author_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Author_viewer\n    id\n  }\n}\n\nfragment Author_viewer on Viewer {\n  author(id: $id) {\n    id\n    name\n  }\n  posts(author: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        ...PostLink_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n"
 };
 
 module.exports = batch;
