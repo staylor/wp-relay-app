@@ -5,6 +5,8 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { css } from 'glamor';
 import Media from 'components/Media';
 import Error from 'components/Error';
+import Content from 'components/Content';
+import ContentNode from 'components/ContentNode';
 import { SITE_URL } from 'utils/constants';
 import styles from './styles';
 
@@ -15,7 +17,12 @@ const Page = ({ viewer: { page } }) => {
     return <Error />;
   }
 
-  const { slug, title: { rendered: title }, content: { rendered: content }, featuredMedia } = page;
+  const {
+    slug,
+    title: { rendered: title, data: titleData },
+    content: { data: content },
+    featuredMedia,
+  } = page;
   const url = `${SITE_URL}/${slug}`;
   const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
 
@@ -34,10 +41,10 @@ const Page = ({ viewer: { page } }) => {
         {featuredImage && <meta name="twitter:image" content={featuredImage} />}
       </Helmet>
       <header>
-        <h1 className={css(styles.title)} dangerouslySetInnerHTML={{ __html: title }} />
+        <ContentNode component={'h1'} className={css(styles.title)} content={titleData} />
       </header>
       {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-      <section dangerouslySetInnerHTML={{ __html: content }} />
+      <Content content={content} />
     </article>
   );
 };
@@ -57,9 +64,14 @@ export default createFragmentContainer(
         slug
         title {
           rendered
+          data {
+            ...ContentNode_content
+          }
         }
         content {
-          rendered
+          data {
+            ...Content_content
+          }
         }
         featuredMedia {
           ... on Image {

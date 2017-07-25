@@ -14,6 +14,7 @@ export type Single_viewer = {|
     +date: ?string;
     +title: ?{|
       +rendered: ?string;
+      +data: ?$ReadOnlyArray<?{| |}>;
     |};
     +content: ?{|
       +data: ?$ReadOnlyArray<?{| |}>;
@@ -108,6 +109,22 @@ const fragment /*: ConcreteFragment*/ = {
               "alias": null,
               "args": null,
               "name": "rendered",
+              "storageKey": null
+            },
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "ContentNode",
+              "name": "data",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "ContentNode_content",
+                  "args": null
+                }
+              ],
               "storageKey": null
             }
           ],

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import md5 from 'md5';
 import { graphql } from 'react-relay';
 import { withCookies, Cookies } from 'react-cookie';
@@ -145,9 +144,7 @@ export default class Comment extends Component {
         </div>
         {commentContent}
         <button
-          className={cn(css(styles.reply), {
-            [css(styles.active)]: this.props.active,
-          })}
+          className={css(styles.reply, this.props.active && styles.active)}
           onClick={() => this.onClick(id)}
         >
           ↵

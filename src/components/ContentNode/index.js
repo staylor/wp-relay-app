@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { css } from 'glamor';
 import FragmentContainer from 'decorators/FragmentContainer';
-import styles from './styles';
+
+/* eslint-disable react/prop-types, react/forbid-prop-types */
 
 @FragmentContainer(graphql`
-  fragment Content_content on ContentNode @relay(plural: true) {
+  fragment ContentNode_content on ContentNode @relay(plural: true) {
     tagName
     attributes {
       name
@@ -55,15 +56,10 @@ import styles from './styles';
     }
   }
 `)
-export default class Content extends Component {
+export default class ContentNode extends Component {
   static propTypes = {
-    // eslint-disable-next-line
     content: PropTypes.array.isRequired,
-    onEmbedClick: PropTypes.func,
-  };
-
-  static defaultProps = {
-    onEmbedClick: null,
+    component: PropTypes.any.isRequired,
   };
 
   i = 0;
@@ -74,11 +70,8 @@ export default class Content extends Component {
 
   parseElement(node) {
     const props = (node.attributes || []).reduce((memo, { name, value }) => {
-      if (name === 'class') {
-        if (value === 'embed' && this.props.onEmbedClick) {
-          memo.onClick = this.props.onEmbedClick;
-        }
-        memo.className = styles[value] ? css(styles[value]) : value;
+      if (name === 'class' && this.props.styles) {
+        memo.className = this.props.styles[value] ? css(this.props.styles[value]) : value;
       } else {
         memo[name] = value;
       }
@@ -90,24 +83,19 @@ export default class Content extends Component {
 
     let children = null;
     if (node.children) {
-      if (node.tagName === 'script' && props.type === 'application/json') {
-        const json = node.children.reduce((memo, textNode) => (memo += textNode.text), '');
-        props.dangerouslySetInnerHTML = { __html: json };
-      } else {
-        children = this.parseChildren(node.children);
-      }
+      children = this.parseChildren(node.children);
     }
 
     return React.createElement(node.tagName, props, children);
   }
 
   render() {
-    const data = this.props.content;
+    const { component: ContentComponent, content: data, styles, relay, ...rest } = this.props;
 
     return (
-      <section>
-        {data.map(node => node.text || (node.tagName && this.parseElement(node)))}
-      </section>
+      <ContentComponent {...rest}>
+        {data.map(node => node.text || this.parseElement(node))}
+      </ContentComponent>
     );
   }
 }

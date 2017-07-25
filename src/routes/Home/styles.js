@@ -7,7 +7,7 @@ export default {
   columns: {
     [vars.mediaTablet]: {
       display: 'flex',
-      marginRight: vars.padding,
+      marginRight: vars.padding * 1.5,
     },
   },
 
@@ -18,7 +18,7 @@ export default {
   columnA: {
     [vars.mediaTablet]: {
       flex: 1,
-      marginRight: vars.padding,
+      marginRight: vars.padding * 1.5,
     },
   },
 

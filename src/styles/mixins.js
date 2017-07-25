@@ -1,5 +1,6 @@
 import colors from 'styles/colors';
 import fonts from 'styles/fonts';
+import vars from 'styles/variables';
 
 export function sizeHeight(size = 16, height = 1) {
   return {
@@ -36,9 +37,10 @@ export default {
 
   // h3
   upperHeader: {
-    ...sizeHeight(18, 24),
+    ...sizeHeight(20, 26),
     fontFamily: fonts.futura,
     letterSpacing: 0.5,
+    marginBottom: vars.padding / 2,
     textTransform: 'uppercase',
   },
 
@@ -58,7 +60,6 @@ export default {
     cursor: 'pointer',
     display: 'inline-block',
     height: 'auto !important',
-    marginBottom: 20,
     maxWidth: '100%',
     position: 'relative',
 

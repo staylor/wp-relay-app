@@ -1,11 +1,16 @@
 import colors from 'styles/colors';
 import mixins, { sizeHeight } from 'styles/mixins';
+import vars from 'styles/variables';
 
 export default {
+  post: {
+    marginBottom: vars.padding,
+  },
+
   title: {
     ...mixins.h1,
     ...sizeHeight(18, 24),
-    marginBottom: 10,
+    marginBottom: vars.padding / 2,
 
     '& a': {
       color: colors.subheading,
@@ -20,7 +25,7 @@ export default {
 
   content: {
     '& p': {
-      marginBottom: 20,
+      marginBottom: vars.padding,
     },
   },
 

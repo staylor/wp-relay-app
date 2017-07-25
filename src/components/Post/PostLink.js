@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Link } from 'found';
+import ContentNode from 'components/ContentNode';
 import { dateRegex } from 'utils/regex';
 
 export default createFragmentContainer(
-  ({ children, post: { id, date, title: { rendered: title } } }) => {
+  ({ children, post: { id, date, title: { data: title } } }) => {
     const [, year, month, day] = dateRegex.exec(date);
     const url = `/${year}/${month}/${day}/${id}`;
     if (children) {
@@ -14,14 +15,16 @@ export default createFragmentContainer(
         </Link>
       );
     }
-    return <Link to={url} dangerouslySetInnerHTML={{ __html: title }} />;
+    return <ContentNode component={Link} to={url} content={title} />;
   },
   graphql`
     fragment PostLink_post on Post {
       id
       date
       title {
-        rendered
+        data {
+          ...ContentNode_content
+        }
       }
     }
   `

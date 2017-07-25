@@ -8,6 +8,7 @@ import { css } from 'glamor';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import Content from 'components/Content';
+import ContentNode from 'components/ContentNode';
 import Comments from 'components/Comments';
 import Error from 'components/Error';
 import { dateRegex } from 'utils/regex';
@@ -23,6 +24,9 @@ import styles from './styles';
       date
       title {
         rendered
+        data {
+          ...ContentNode_content
+        }
       }
       content {
         data {
@@ -62,6 +66,30 @@ export default class Single extends Component {
     }).isRequired,
   };
 
+  onClick = e => {
+    const maxWidth = 740;
+    e.preventDefault();
+
+    const data = JSON.parse(
+      e.currentTarget.querySelector('script[type="application/json"]').innerHTML
+    );
+    let width = data.width;
+    let height = data.height;
+    let html = data.html;
+    if (html.indexOf('<iframe') === 0) {
+      html = html.replace(/<iframe /, `<iframe class="${css(styles.iframe)}" `);
+      if (width < maxWidth) {
+        height = Math.ceil(height * maxWidth / width);
+        width = maxWidth;
+        html = html
+          .replace(/width="[0-9]+"/, `width="${width}"`)
+          .replace(/height="[0-9]+"/, `height="${height}"`);
+      }
+    }
+
+    e.currentTarget.outerHTML = html;
+  };
+
   render() {
     if (!this.props.viewer.post) {
       return <Error />;
@@ -72,7 +100,7 @@ export default class Single extends Component {
         id,
         slug,
         date,
-        title: { rendered: title },
+        title: { rendered: title, data: titleData },
         content: { data: content },
         excerpt: { raw: excerpt },
         featuredMedia,
@@ -102,7 +130,7 @@ export default class Single extends Component {
           {featuredImage && <meta name="twitter:image" content={featuredImage} />}
         </Helmet>
         <header>
-          <h1 className={css(styles.title)} dangerouslySetInnerHTML={{ __html: title }} />
+          <ContentNode component={'h1'} className={css(styles.title)} content={titleData} />
 
           <div className={css(styles.meta)}>
             Posted:{' '}
@@ -115,7 +143,7 @@ export default class Single extends Component {
           </div>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-        <Content content={content} />
+        <Content content={content} onEmbedClick={this.onClick} />
         {tags &&
           <footer className={css(styles.footer)}>
             Tags:{' '}

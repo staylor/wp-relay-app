@@ -1,4 +1,5 @@
 import mixins from 'styles/mixins';
+import vars from 'styles/variables';
 
 export default {
   sections: {
@@ -7,6 +8,6 @@ export default {
 
   label: {
     ...mixins.upperHeader,
-    marginBottom: 40,
+    marginBottom: vars.padding * 2,
   },
 };

@@ -14,9 +14,10 @@ export type Page_viewer = {|
     +slug: ?string;
     +title: ?{|
       +rendered: ?string;
+      +data: ?$ReadOnlyArray<?{| |}>;
     |};
     +content: ?{|
-      +rendered: ?string;
+      +data: ?$ReadOnlyArray<?{| |}>;
     |};
     +featuredMedia: ?{|
       +source_url?: ?string;
@@ -81,6 +82,22 @@ const fragment /*: ConcreteFragment*/ = {
               "args": null,
               "name": "rendered",
               "storageKey": null
+            },
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "ContentNode",
+              "name": "data",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "ContentNode_content",
+                  "args": null
+                }
+              ],
+              "storageKey": null
             }
           ],
           "storageKey": null
@@ -94,10 +111,19 @@ const fragment /*: ConcreteFragment*/ = {
           "plural": false,
           "selections": [
             {
-              "kind": "ScalarField",
+              "kind": "LinkedField",
               "alias": null,
               "args": null,
-              "name": "rendered",
+              "concreteType": "ContentNode",
+              "name": "data",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "Content_content",
+                  "args": null
+                }
+              ],
               "storageKey": null
             }
           ],

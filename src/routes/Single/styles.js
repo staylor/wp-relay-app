@@ -44,4 +44,8 @@ export default {
     display: 'inline-block',
     marginLeft: vars.padding / 4,
   },
+
+  iframe: {
+    marginBottom: vars.padding,
+  },
 };

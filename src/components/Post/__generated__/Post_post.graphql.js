@@ -10,16 +10,14 @@
 import type {ConcreteFragment} from 'relay-runtime';
 export type Post_post = {|
   +id: string;
-  +slug: ?string;
   +date: ?string;
-  +title: ?{|
-    +rendered: ?string;
-  |};
   +content: ?{|
     +rendered: ?string;
+    +data: ?$ReadOnlyArray<?{| |}>;
   |};
   +excerpt: ?{|
     +rendered: ?string;
+    +data: ?$ReadOnlyArray<?{| |}>;
   |};
   +featuredMedia: ?{| |};
 |};
@@ -43,32 +41,7 @@ const fragment /*: ConcreteFragment*/ = {
       "kind": "ScalarField",
       "alias": null,
       "args": null,
-      "name": "slug",
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "args": null,
       "name": "date",
-      "storageKey": null
-    },
-    {
-      "kind": "LinkedField",
-      "alias": null,
-      "args": null,
-      "concreteType": "Title",
-      "name": "title",
-      "plural": false,
-      "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "args": null,
-          "name": "rendered",
-          "storageKey": null
-        }
-      ],
       "storageKey": null
     },
     {
@@ -84,6 +57,22 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "name": "rendered",
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "ContentNode",
+          "name": "data",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "FragmentSpread",
+              "name": "Content_content",
+              "args": null
+            }
+          ],
           "storageKey": null
         }
       ],
@@ -102,6 +91,22 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "name": "rendered",
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "ContentNode",
+          "name": "data",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "FragmentSpread",
+              "name": "ContentNode_content",
+              "args": null
+            }
+          ],
           "storageKey": null
         }
       ],

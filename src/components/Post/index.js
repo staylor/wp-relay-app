@@ -5,7 +5,8 @@ import { routerShape } from 'found/lib/PropTypes';
 import { css } from 'glamor';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
-import { convertPlaceholders } from 'utils';
+import Content from 'components/Content';
+import ContentNode from 'components/ContentNode';
 import { dateRegex } from 'utils/regex';
 import PostLink from './PostLink';
 import styles from './styles';
@@ -15,16 +16,18 @@ import styles from './styles';
 @FragmentContainer(graphql`
   fragment Post_post on Post {
     id
-    slug
     date
-    title {
-      rendered
-    }
     content {
       rendered
+      data {
+        ...Content_content
+      }
     }
     excerpt {
       rendered
+      data {
+        ...ContentNode_content
+      }
     }
     featuredMedia {
       ...Media_media
@@ -36,9 +39,7 @@ export default class Post extends Component {
   static propTypes = {
     post: PropTypes.shape({
       id: PropTypes.string,
-      slug: PropTypes.string,
       date: PropTypes.string,
-      title: PropTypes.object,
       content: PropTypes.object,
       excerpt: PropTypes.object,
       featuredMedia: PropTypes.object,
@@ -49,41 +50,35 @@ export default class Post extends Component {
     router: routerShape.isRequired,
   };
 
-  content = null;
-  bindRef = node => {
-    this.content = node;
+  onClick = e => {
+    e.preventDefault();
+
+    const { id, date } = this.props.post;
+    const [, year, month, day] = dateRegex.exec(date);
+    const url = `/${year}/${month}/${day}/${id}`;
+
+    this.context.router.push(url);
   };
-
-  componentDidMount() {
-    const nodes = this.content.querySelectorAll(`figure.${css(styles.embed)}`);
-    if (!nodes) {
-      return;
-    }
-    nodes.forEach(node => {
-      node.onclick = e => {
-        e.preventDefault();
-
-        const { id, date } = this.props.post;
-        const [, year, month, day] = dateRegex.exec(date);
-        const url = `/${year}/${month}/${day}/${id}`;
-
-        this.context.router.push(url);
-      };
-    });
-  }
 
   render() {
     const {
-      content: { rendered: content },
-      excerpt: { rendered: excerpt },
+      content: { rendered: content, data: contentData },
+      excerpt: { data: excerpt },
       featuredMedia,
     } = this.props.post;
 
     const isEmbed = content.indexOf('<figure') === 0;
-    const postContent = isEmbed ? convertPlaceholders(content, styles) : excerpt;
+    const postContent = isEmbed
+      ? <Content content={contentData} onEmbedClick={this.onClick} />
+      : <ContentNode
+          component={'section'}
+          styles={styles}
+          className={css(styles.content)}
+          content={excerpt}
+        />;
 
     return (
-      <article>
+      <article className={css(styles.post)}>
         <header>
           <h1 className={css(styles.title)}>
             <PostLink post={this.props.post} />
@@ -93,11 +88,7 @@ export default class Post extends Component {
           <PostLink post={this.props.post}>
             <Media media={featuredMedia} />
           </PostLink>}
-        <section
-          ref={this.bindRef}
-          className={css(styles.content)}
-          dangerouslySetInnerHTML={{ __html: postContent }}
-        />
+        {postContent}
       </article>
     );
   }

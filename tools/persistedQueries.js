@@ -13,7 +13,7 @@ const HASH_KEY = 'queries';
 
 const client = redis.createClient({ prefix: REDIS_PREFIX });
 // use this to debug Redis operations
-client.monitor();
+// client.monitor();
 client.on('error', err => {
   // eslint-disable-next-line no-console
   console.log(`Error ${err}`);
