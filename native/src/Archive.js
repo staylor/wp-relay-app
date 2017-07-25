@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ListView, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import PostLink from './PostLink';
 
 /* eslint-disable react/prop-types */
@@ -37,30 +37,12 @@ const styles = StyleSheet.create({
 });
 
 export default class Archive extends Component {
-  dataSource = null;
-  state = {
-    showLoader: false,
-  };
-
   constructor(props, context) {
     super(props, context);
 
-    this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.node.id !== r2.node.id,
-    });
     this.state = {
-      dataSource: this.dataSource.cloneWithRows(props.posts.edges),
+      showLoader: false,
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.posts.edges.length === nextProps.posts.edges.length) {
-      return;
-    }
-
-    this.setState({
-      dataSource: this.dataSource.cloneWithRows(nextProps.posts.edges),
-    });
   }
 
   render() {
@@ -68,11 +50,12 @@ export default class Archive extends Component {
 
     return (
       <View style={styles.container}>
-        <ListView
+        <FlatList
           style={styles.list}
-          dataSource={this.state.dataSource}
-          renderRow={({ node }) => <PostLink post={node} style={styles.item} />}
-          renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+          data={this.props.posts.edges}
+          keyExtractor={({ node }) => node.id}
+          renderItem={({ item: { node } }) => <PostLink post={node} style={styles.item} />}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
           onEndReached={() => {
             if (!relay.hasMore()) {
               return;
