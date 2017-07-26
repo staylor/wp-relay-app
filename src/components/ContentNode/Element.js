@@ -2,13 +2,38 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { css } from 'glamor';
 
+const attrMap = {
+  allowfullscreen: 'allowFullScreen',
+  allowtransparency: 'allowTransparency',
+  autocomplete: 'autoComplete',
+  autofocus: 'autoFocus',
+  autoplay: 'autoPlay',
+  cellpadding: 'cellPadding',
+  cellspacing: 'cellSpacing',
+  contentrditable: 'contentEditable',
+  crossorigin: 'crossOrigin',
+  datetime: 'dateTime',
+  frameborder: 'frameBorder',
+  marginheight: 'marginHeight',
+  marginwidth: 'marginWidth',
+  readonly: 'readOnly',
+  maxlength: 'maxLength',
+  minlength: 'minLength',
+  srcdoc: 'srcDoc',
+  srclang: 'srcLang',
+  srcset: 'srcSet',
+  tabindex: 'tabIndex',
+};
+
+const camelize = name => attrMap[name] || name;
+
 export default createFragmentContainer(
   ({ node, children }) => {
     const props = (node.attributes || []).reduce((memo, { name, value }) => {
       if (name === 'class' && this.props.styles) {
         memo.className = this.props.styles[value] ? css(this.props.styles[value]) : value;
       } else {
-        memo[name] = value;
+        memo[camelize(name)] = value;
       }
       return memo;
     }, {});

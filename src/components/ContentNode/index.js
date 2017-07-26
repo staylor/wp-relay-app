@@ -106,11 +106,11 @@ export default class ContentNode extends Component {
     const props = { node, key };
     props.children = null;
     if (node.children) {
-      if (node.tagName === 'script' && props.type === 'application/json') {
-        const json = node.children.reduce((memo, textNode) => (memo += textNode.text), '');
-        props.dangerouslySetInnerHTML = { __html: json };
+      const children = this.parseNodes(node.children);
+      if (node.tagName === 'script' || node.tagName === 'style') {
+        props.dangerouslySetInnerHTML = { __html: children.join('') };
       } else {
-        props.children = this.parseNodes(node.children);
+        props.children = children;
       }
     }
 
