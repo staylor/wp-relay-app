@@ -87,7 +87,7 @@ const fragment /*: ConcreteFragment*/ = {
               "kind": "LinkedField",
               "alias": null,
               "args": null,
-              "concreteType": "ContentNode",
+              "concreteType": null,
               "name": "data",
               "plural": true,
               "selections": [
@@ -114,7 +114,7 @@ const fragment /*: ConcreteFragment*/ = {
               "kind": "LinkedField",
               "alias": null,
               "args": null,
-              "concreteType": "ContentNode",
+              "concreteType": null,
               "name": "data",
               "plural": true,
               "selections": [

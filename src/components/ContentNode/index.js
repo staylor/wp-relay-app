@@ -8,47 +8,59 @@ import FragmentContainer from 'decorators/FragmentContainer';
 
 @FragmentContainer(graphql`
   fragment ContentNode_content on ContentNode @relay(plural: true) {
-    tagName
-    attributes {
-      name
-      value
+    ... on Text {
+      text
     }
-    text
-    children {
+    ... on Element {
       tagName
       attributes {
         name
         value
       }
-      text
       children {
-        tagName
-        attributes {
-          name
-          value
+        ... on Text {
+          text
         }
-        text
-        children {
+        ... on Element {
           tagName
           attributes {
             name
             value
           }
-          text
           children {
-            tagName
-            attributes {
-              name
-              value
+            ... on Text {
+              text
             }
-            text
-            children {
+            ... on Element {
               tagName
               attributes {
                 name
                 value
               }
-              text
+              children {
+                ... on Text {
+                  text
+                }
+                ... on Element {
+                  tagName
+                  attributes {
+                    name
+                    value
+                  }
+                  children {
+                    ... on Text {
+                      text
+                    }
+                    ... on Element {
+                      tagName
+                      attributes {
+                        name
+                        value
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

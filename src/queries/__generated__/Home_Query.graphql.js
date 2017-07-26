@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9e4a6c1993a96b3b3b134bf28cfd550a
+ * @relayHash f81fe3e98e46f2ffd01bf55e9506f407
  */
 
 /* eslint-disable */
@@ -101,12 +101,14 @@ fragment Post_post on Post {
   content {
     rendered
     data {
+      __typename
       ...Content_content
     }
   }
   excerpt {
     rendered
     data {
+      __typename
       ...ContentNode_content
     }
   }
@@ -127,47 +129,63 @@ fragment Post_post on Post {
 }
 
 fragment Content_content on ContentNode {
-  tagName
-  attributes {
-    name
-    value
+  ... on Text {
+    text
   }
-  text
-  children {
+  ... on Element {
     tagName
     attributes {
       name
       value
     }
-    text
     children {
-      tagName
-      attributes {
-        name
-        value
+      __typename
+      ... on Text {
+        text
       }
-      text
-      children {
+      ... on Element {
         tagName
         attributes {
           name
           value
         }
-        text
         children {
-          tagName
-          attributes {
-            name
-            value
+          __typename
+          ... on Text {
+            text
           }
-          text
-          children {
+          ... on Element {
             tagName
             attributes {
               name
               value
             }
-            text
+            children {
+              __typename
+              ... on Text {
+                text
+              }
+              ... on Element {
+                tagName
+                attributes {
+                  name
+                  value
+                }
+                children {
+                  __typename
+                  ... on Text {
+                    text
+                  }
+                  ... on Element {
+                    tagName
+                    attributes {
+                      name
+                      value
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -176,47 +194,63 @@ fragment Content_content on ContentNode {
 }
 
 fragment ContentNode_content on ContentNode {
-  tagName
-  attributes {
-    name
-    value
+  ... on Text {
+    text
   }
-  text
-  children {
+  ... on Element {
     tagName
     attributes {
       name
       value
     }
-    text
     children {
-      tagName
-      attributes {
-        name
-        value
+      __typename
+      ... on Text {
+        text
       }
-      text
-      children {
+      ... on Element {
         tagName
         attributes {
           name
           value
         }
-        text
         children {
-          tagName
-          attributes {
-            name
-            value
+          __typename
+          ... on Text {
+            text
           }
-          text
-          children {
+          ... on Element {
             tagName
             attributes {
               name
               value
             }
-            text
+            children {
+              __typename
+              ... on Text {
+                text
+              }
+              ... on Element {
+                tagName
+                attributes {
+                  name
+                  value
+                }
+                children {
+                  __typename
+                  ... on Text {
+                    text
+                  }
+                  ... on Element {
+                    tagName
+                    attributes {
+                      name
+                      value
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -234,6 +268,7 @@ fragment PostLink_post on Post {
   date
   title {
     data {
+      __typename
       ...ContentNode_content
     }
   }
@@ -416,13 +451,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -457,17 +499,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -475,48 +510,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -551,17 +550,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -569,48 +561,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -645,17 +601,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -663,54 +612,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -740,13 +814,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -781,17 +862,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -799,48 +873,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -875,17 +913,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -893,48 +924,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -969,17 +964,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -987,54 +975,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -1157,13 +1270,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -1198,17 +1318,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -1216,48 +1329,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -1292,17 +1369,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -1310,48 +1380,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -1386,17 +1420,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -1404,54 +1431,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -1624,13 +1776,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -1665,17 +1824,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -1683,48 +1835,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -1759,17 +1875,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -1777,48 +1886,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -1853,17 +1926,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -1871,54 +1937,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -1948,13 +2139,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -1989,17 +2187,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -2007,48 +2198,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -2083,17 +2238,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -2101,48 +2249,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -2177,17 +2289,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -2195,54 +2300,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -2365,13 +2595,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -2406,17 +2643,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -2424,48 +2654,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -2500,17 +2694,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -2518,48 +2705,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -2594,17 +2745,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -2612,54 +2756,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -2833,13 +3102,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -2874,17 +3150,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -2892,48 +3161,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -2968,17 +3201,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -2986,48 +3212,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -3062,17 +3252,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -3080,54 +3263,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -3157,13 +3465,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -3198,17 +3513,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -3216,48 +3524,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -3292,17 +3564,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -3310,48 +3575,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -3386,17 +3615,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -3404,54 +3626,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -3574,13 +3921,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -3615,17 +3969,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -3633,48 +3980,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -3709,17 +4020,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -3727,48 +4031,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -3803,17 +4071,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -3821,54 +4082,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -4035,13 +4421,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -4076,17 +4469,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -4094,48 +4480,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -4170,17 +4520,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -4188,48 +4531,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -4264,17 +4571,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -4282,54 +4582,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -4359,13 +4784,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -4400,17 +4832,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -4418,48 +4843,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -4494,17 +4883,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -4512,48 +4894,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -4588,17 +4934,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -4606,54 +4945,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -4776,13 +5240,20 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "LinkedField",
                             "alias": null,
                             "args": null,
-                            "concreteType": "ContentNode",
+                            "concreteType": null,
                             "name": "data",
                             "plural": true,
                             "selections": [
                               {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "__typename",
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "InlineFragment",
-                                "type": "ContentNode",
+                                "type": "Element",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
@@ -4817,17 +5288,10 @@ const batch /*: ConcreteBatch*/ = {
                                     "storageKey": null
                                   },
                                   {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "text",
-                                    "storageKey": null
-                                  },
-                                  {
                                     "kind": "LinkedField",
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "ContentNode",
+                                    "concreteType": null,
                                     "name": "children",
                                     "plural": true,
                                     "selections": [
@@ -4835,48 +5299,12 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "tagName",
+                                        "name": "__typename",
                                         "storageKey": null
                                       },
                                       {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Meta",
-                                        "name": "attributes",
-                                        "plural": true,
-                                        "selections": [
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "name",
-                                            "storageKey": null
-                                          },
-                                          {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "value",
-                                            "storageKey": null
-                                          }
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "text",
-                                        "storageKey": null
-                                      },
-                                      {
-                                        "kind": "LinkedField",
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "ContentNode",
-                                        "name": "children",
-                                        "plural": true,
+                                        "kind": "InlineFragment",
+                                        "type": "Element",
                                         "selections": [
                                           {
                                             "kind": "ScalarField",
@@ -4911,17 +5339,10 @@ const batch /*: ConcreteBatch*/ = {
                                             "storageKey": null
                                           },
                                           {
-                                            "kind": "ScalarField",
-                                            "alias": null,
-                                            "args": null,
-                                            "name": "text",
-                                            "storageKey": null
-                                          },
-                                          {
                                             "kind": "LinkedField",
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "ContentNode",
+                                            "concreteType": null,
                                             "name": "children",
                                             "plural": true,
                                             "selections": [
@@ -4929,48 +5350,12 @@ const batch /*: ConcreteBatch*/ = {
                                                 "kind": "ScalarField",
                                                 "alias": null,
                                                 "args": null,
-                                                "name": "tagName",
+                                                "name": "__typename",
                                                 "storageKey": null
                                               },
                                               {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "Meta",
-                                                "name": "attributes",
-                                                "plural": true,
-                                                "selections": [
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "name",
-                                                    "storageKey": null
-                                                  },
-                                                  {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "value",
-                                                    "storageKey": null
-                                                  }
-                                                ],
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "ScalarField",
-                                                "alias": null,
-                                                "args": null,
-                                                "name": "text",
-                                                "storageKey": null
-                                              },
-                                              {
-                                                "kind": "LinkedField",
-                                                "alias": null,
-                                                "args": null,
-                                                "concreteType": "ContentNode",
-                                                "name": "children",
-                                                "plural": true,
+                                                "kind": "InlineFragment",
+                                                "type": "Element",
                                                 "selections": [
                                                   {
                                                     "kind": "ScalarField",
@@ -5005,17 +5390,10 @@ const batch /*: ConcreteBatch*/ = {
                                                     "storageKey": null
                                                   },
                                                   {
-                                                    "kind": "ScalarField",
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "name": "text",
-                                                    "storageKey": null
-                                                  },
-                                                  {
                                                     "kind": "LinkedField",
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "ContentNode",
+                                                    "concreteType": null,
                                                     "name": "children",
                                                     "plural": true,
                                                     "selections": [
@@ -5023,54 +5401,179 @@ const batch /*: ConcreteBatch*/ = {
                                                         "kind": "ScalarField",
                                                         "alias": null,
                                                         "args": null,
-                                                        "name": "tagName",
+                                                        "name": "__typename",
                                                         "storageKey": null
                                                       },
                                                       {
-                                                        "kind": "LinkedField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "concreteType": "Meta",
-                                                        "name": "attributes",
-                                                        "plural": true,
+                                                        "kind": "InlineFragment",
+                                                        "type": "Element",
                                                         "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "name",
+                                                            "name": "tagName",
                                                             "storageKey": null
                                                           },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "Meta",
+                                                            "name": "attributes",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "name",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "value",
+                                                                "storageKey": null
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "kind": "LinkedField",
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": null,
+                                                            "name": "children",
+                                                            "plural": true,
+                                                            "selections": [
+                                                              {
+                                                                "kind": "ScalarField",
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "name": "__typename",
+                                                                "storageKey": null
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Element",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "tagName",
+                                                                    "storageKey": null
+                                                                  },
+                                                                  {
+                                                                    "kind": "LinkedField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "concreteType": "Meta",
+                                                                    "name": "attributes",
+                                                                    "plural": true,
+                                                                    "selections": [
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "name",
+                                                                        "storageKey": null
+                                                                      },
+                                                                      {
+                                                                        "kind": "ScalarField",
+                                                                        "alias": null,
+                                                                        "args": null,
+                                                                        "name": "value",
+                                                                        "storageKey": null
+                                                                      }
+                                                                    ],
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "kind": "InlineFragment",
+                                                                "type": "Text",
+                                                                "selections": [
+                                                                  {
+                                                                    "kind": "ScalarField",
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "name": "text",
+                                                                    "storageKey": null
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "storageKey": null
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "kind": "InlineFragment",
+                                                        "type": "Text",
+                                                        "selections": [
                                                           {
                                                             "kind": "ScalarField",
                                                             "alias": null,
                                                             "args": null,
-                                                            "name": "value",
+                                                            "name": "text",
                                                             "storageKey": null
                                                           }
-                                                        ],
-                                                        "storageKey": null
-                                                      },
-                                                      {
-                                                        "kind": "ScalarField",
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "name": "text",
-                                                        "storageKey": null
+                                                        ]
                                                       }
                                                     ],
                                                     "storageKey": null
                                                   }
-                                                ],
-                                                "storageKey": null
+                                                ]
+                                              },
+                                              {
+                                                "kind": "InlineFragment",
+                                                "type": "Text",
+                                                "selections": [
+                                                  {
+                                                    "kind": "ScalarField",
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "name": "text",
+                                                    "storageKey": null
+                                                  }
+                                                ]
                                               }
                                             ],
                                             "storageKey": null
                                           }
-                                        ],
-                                        "storageKey": null
+                                        ]
+                                      },
+                                      {
+                                        "kind": "InlineFragment",
+                                        "type": "Text",
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "text",
+                                            "storageKey": null
+                                          }
+                                        ]
                                       }
                                     ],
+                                    "storageKey": null
+                                  }
+                                ]
+                              },
+                              {
+                                "kind": "InlineFragment",
+                                "type": "Text",
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "text",
                                     "storageKey": null
                                   }
                                 ]
@@ -5179,7 +5682,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    rendered\n    data {\n      ...Content_content\n    }\n  }\n  excerpt {\n    rendered\n    data {\n      ...ContentNode_content\n    }\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment Content_content on ContentNode {\n  tagName\n  attributes {\n    name\n    value\n  }\n  text\n  children {\n    tagName\n    attributes {\n      name\n      value\n    }\n    text\n    children {\n      tagName\n      attributes {\n        name\n        value\n      }\n      text\n      children {\n        tagName\n        attributes {\n          name\n          value\n        }\n        text\n        children {\n          tagName\n          attributes {\n            name\n            value\n          }\n          text\n          children {\n            tagName\n            attributes {\n              name\n              value\n            }\n            text\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment ContentNode_content on ContentNode {\n  tagName\n  attributes {\n    name\n    value\n  }\n  text\n  children {\n    tagName\n    attributes {\n      name\n      value\n    }\n    text\n    children {\n      tagName\n      attributes {\n        name\n        value\n      }\n      text\n      children {\n        tagName\n        attributes {\n          name\n          value\n        }\n        text\n        children {\n          tagName\n          attributes {\n            name\n            value\n          }\n          text\n          children {\n            tagName\n            attributes {\n              name\n              value\n            }\n            text\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    data {\n      ...ContentNode_content\n    }\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
+  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    rendered\n    data {\n      __typename\n      ...Content_content\n    }\n  }\n  excerpt {\n    rendered\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment Content_content on ContentNode {\n  ... on Text {\n    text\n  }\n  ... on Element {\n    tagName\n    attributes {\n      name\n      value\n    }\n    children {\n      __typename\n      ... on Text {\n        text\n      }\n      ... on Element {\n        tagName\n        attributes {\n          name\n          value\n        }\n        children {\n          __typename\n          ... on Text {\n            text\n          }\n          ... on Element {\n            tagName\n            attributes {\n              name\n              value\n            }\n            children {\n              __typename\n              ... on Text {\n                text\n              }\n              ... on Element {\n                tagName\n                attributes {\n                  name\n                  value\n                }\n                children {\n                  __typename\n                  ... on Text {\n                    text\n                  }\n                  ... on Element {\n                    tagName\n                    attributes {\n                      name\n                      value\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment ContentNode_content on ContentNode {\n  ... on Text {\n    text\n  }\n  ... on Element {\n    tagName\n    attributes {\n      name\n      value\n    }\n    children {\n      __typename\n      ... on Text {\n        text\n      }\n      ... on Element {\n        tagName\n        attributes {\n          name\n          value\n        }\n        children {\n          __typename\n          ... on Text {\n            text\n          }\n          ... on Element {\n            tagName\n            attributes {\n              name\n              value\n            }\n            children {\n              __typename\n              ... on Text {\n                text\n              }\n              ... on Element {\n                tagName\n                attributes {\n                  name\n                  value\n                }\n                children {\n                  __typename\n                  ... on Text {\n                    text\n                  }\n                  ... on Element {\n                    tagName\n                    attributes {\n                      name\n                      value\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
