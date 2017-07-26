@@ -16,12 +16,7 @@ const Page = ({ viewer: { page } }) => {
     return <Error />;
   }
 
-  const {
-    slug,
-    title: { rendered: title, data: titleData },
-    content: { data: content },
-    featuredMedia,
-  } = page;
+  const { slug, title, content, featuredMedia } = page;
   const url = `${SITE_URL}/${slug}`;
   const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
 
@@ -29,18 +24,20 @@ const Page = ({ viewer: { page } }) => {
     <article className={css(styles.content)}>
       <Helmet>
         <title>
-          {title}
+          {title.raw}
         </title>
         <link rel="canonical" href={url} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={title} />
+        <meta property="og:title" content={title.raw} />
         <meta property="og:url" content={url} />
         {featuredImage && <meta property="og:image" content={featuredImage} />}
-        <meta name="twitter:title" content={title} />
+        <meta name="twitter:title" content={title.raw} />
         {featuredImage && <meta name="twitter:image" content={featuredImage} />}
       </Helmet>
       <header>
-        <ContentNode component={'h1'} className={css(styles.title)} content={titleData} />
+        <h1 className={css(styles.title)}>
+          {title.raw}
+        </h1>
       </header>
       {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
       <ContentNode
@@ -67,15 +64,10 @@ export default createFragmentContainer(
         id
         slug
         title {
-          rendered
-          data {
-            ...ContentNode_content
-          }
+          raw
         }
         content {
-          data {
-            ...ContentNode_content
-          }
+          ...ContentNode_content
         }
         featuredMedia {
           ... on Image {

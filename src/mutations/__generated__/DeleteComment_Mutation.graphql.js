@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 920b9f53bb6570a68158b6d906dc1b03
+ * @relayHash 2c1a60c666c53e9f6201f66062492a79
  */
 
 /* eslint-disable */
@@ -12,6 +12,8 @@ import type {ConcreteBatch} from 'relay-runtime';
 export type DeleteComment_MutationVariables = {|
   input: {
     id: string;
+    token: string;
+    post: string;
     clientMutationId?: ?string;
   };
 |};

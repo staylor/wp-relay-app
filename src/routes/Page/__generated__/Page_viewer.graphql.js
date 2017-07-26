@@ -13,12 +13,9 @@ export type Page_viewer = {|
     +id: string;
     +slug: ?string;
     +title: ?{|
-      +rendered: ?string;
-      +data: ?$ReadOnlyArray<?{| |}>;
+      +raw: ?string;
     |};
-    +content: ?{|
-      +data: ?$ReadOnlyArray<?{| |}>;
-    |};
+    +content: ?{| |};
     +featuredMedia: ?{|
       +source_url?: ?string;
     |};
@@ -80,23 +77,7 @@ const fragment /*: ConcreteFragment*/ = {
               "kind": "ScalarField",
               "alias": null,
               "args": null,
-              "name": "rendered",
-              "storageKey": null
-            },
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": null,
-              "name": "data",
-              "plural": true,
-              "selections": [
-                {
-                  "kind": "FragmentSpread",
-                  "name": "ContentNode_content",
-                  "args": null
-                }
-              ],
+              "name": "raw",
               "storageKey": null
             }
           ],
@@ -111,20 +92,9 @@ const fragment /*: ConcreteFragment*/ = {
           "plural": false,
           "selections": [
             {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": null,
-              "name": "data",
-              "plural": true,
-              "selections": [
-                {
-                  "kind": "FragmentSpread",
-                  "name": "ContentNode_content",
-                  "args": null
-                }
-              ],
-              "storageKey": null
+              "kind": "FragmentSpread",
+              "name": "ContentNode_content",
+              "args": null
             }
           ],
           "storageKey": null

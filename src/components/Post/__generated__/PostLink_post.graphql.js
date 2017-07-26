@@ -12,7 +12,7 @@ export type PostLink_post = {|
   +id: string;
   +date: ?string;
   +title: ?{|
-    +data: ?$ReadOnlyArray<?{| |}>;
+    +raw: ?string;
   |};
 |};
 */
@@ -47,19 +47,10 @@ const fragment /*: ConcreteFragment*/ = {
       "plural": false,
       "selections": [
         {
-          "kind": "LinkedField",
+          "kind": "ScalarField",
           "alias": null,
           "args": null,
-          "concreteType": null,
-          "name": "data",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "FragmentSpread",
-              "name": "ContentNode_content",
-              "args": null
-            }
-          ],
+          "name": "raw",
           "storageKey": null
         }
       ],

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 34d7287a752f5710937c9a4a832215f4
+ * @relayHash 73f011edaedb44d8018b1df70a393953
  */
 
 /* eslint-disable */
@@ -13,6 +13,7 @@ export type UpdateComment_MutationVariables = {|
   input: {
     id: string;
     content: string;
+    token: string;
     clientMutationId?: ?string;
   };
 |};

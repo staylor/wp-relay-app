@@ -22,15 +22,10 @@ import styles from './styles';
       id
       date
       title {
-        rendered
-        data {
-          ...ContentNode_content
-        }
+        raw
       }
       content {
-        data {
-          ...ContentNode_content
-        }
+        ...ContentNode_content
       }
       excerpt {
         raw
@@ -92,17 +87,7 @@ export default class Single extends Component {
     }
 
     const {
-      post: {
-        id,
-        slug,
-        date,
-        title: { rendered: title, data: titleData },
-        content: { data: content },
-        excerpt: { raw: excerpt },
-        featuredMedia,
-        tags,
-        comments,
-      },
+      post: { id, slug, date, title, content, excerpt, featuredMedia, tags, comments },
     } = this.props.viewer;
 
     const [, year, month, day] = dateRegex.exec(date);
@@ -113,21 +98,22 @@ export default class Single extends Component {
       <article className={css(styles.content)}>
         <Helmet>
           <title>
-            {title}
+            {title.raw}
           </title>
           <link rel="canonical" href={url} />
           <meta property="og:type" content="article" />
-          <meta property="og:title" content={title} />
+          <meta property="og:title" content={title.raw} />
           <meta property="og:url" content={url} />
-          <meta property="og:description" content={excerpt} />
+          <meta property="og:description" content={excerpt.raw} />
           {featuredImage && <meta property="og:image" content={featuredImage} />}
-          <meta name="twitter:title" content={title} />
-          <meta name="twitter:description" content={excerpt} />
+          <meta name="twitter:title" content={title.raw} />
+          <meta name="twitter:description" content={excerpt.raw} />
           {featuredImage && <meta name="twitter:image" content={featuredImage} />}
         </Helmet>
         <header>
-          <ContentNode component={'h1'} className={css(styles.title)} content={titleData} />
-
+          <h1 className={css(styles.title)}>
+            {title.raw}
+          </h1>
           <div className={css(styles.meta)}>
             Posted:{' '}
             <Link to={`/${year}/${month}`}>

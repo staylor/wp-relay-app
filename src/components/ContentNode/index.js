@@ -7,8 +7,9 @@ import Embed from './Embed';
 
 /* eslint-disable react/prop-types, react/forbid-prop-types */
 
-@FragmentContainer(graphql`
-  fragment ContentNode_content on ContentNode @relay(plural: true) {
+// eslint-disable-next-line
+graphql`
+  fragment ContentNode_content_data on ContentNode {
     __typename
     ... on Embed {
       ...Embed_node
@@ -18,46 +19,31 @@ import Embed from './Embed';
     }
     ... on Element {
       ...Element_node
-      children {
-        __typename
-        ... on Embed {
-          ...Embed_node
-        }
-        ... on Text {
-          text
-        }
-        ... on Element {
-          ...Element_node
-          children {
-            __typename
-            ... on Embed {
-              ...Embed_node
-            }
-            ... on Text {
-              text
-            }
-            ... on Element {
-              ...Element_node
-              children {
-                __typename
-                ... on Embed {
-                  ...Embed_node
-                }
-                ... on Text {
-                  text
-                }
-                ... on Element {
-                  ...Element_node
-                  children {
-                    __typename
-                    ... on Embed {
-                      ...Embed_node
-                    }
-                    ... on Text {
-                      text
-                    }
-                    ... on Element {
-                      ...Element_node
+    }
+  }
+`;
+
+@FragmentContainer(graphql`
+  fragment ContentNode_content on Content {
+    data {
+      ...ContentNode_content_data @inline
+      ... on Element {
+        children {
+          ...ContentNode_content_data @inline
+          ... on Element {
+            children {
+              ...ContentNode_content_data @inline
+              ... on Element {
+                children {
+                  ...ContentNode_content_data @inline
+                  ... on Element {
+                    children {
+                      ...ContentNode_content_data @inline
+                      ... on Element {
+                        children {
+                          ...ContentNode_content_data @inline
+                        }
+                      }
                     }
                   }
                 }
@@ -71,7 +57,7 @@ import Embed from './Embed';
 `)
 export default class ContentNode extends Component {
   static propTypes = {
-    content: PropTypes.array.isRequired,
+    content: PropTypes.object.isRequired,
     component: PropTypes.any.isRequired,
     onEmbedClick: PropTypes.func,
   };
@@ -120,7 +106,7 @@ export default class ContentNode extends Component {
   render() {
     const {
       component: ContentComponent,
-      content: data,
+      content,
       onEmbedClick,
       styles,
       relay,
@@ -130,7 +116,7 @@ export default class ContentNode extends Component {
 
     return (
       <ContentComponent {...rest}>
-        {this.parseNodes(data)}
+        {this.parseNodes(content.data)}
       </ContentComponent>
     );
   }

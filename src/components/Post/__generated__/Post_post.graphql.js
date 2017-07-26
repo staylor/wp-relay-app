@@ -17,9 +17,7 @@ export type Post_post = {|
     |}>;
   |};
   +excerpt: ?{|
-    +data: ?$ReadOnlyArray<?{|
-      +__typename: string;
-    |}>;
+    +raw: ?string;
   |};
   +featuredMedia: ?{| |};
 |};
@@ -68,14 +66,14 @@ const fragment /*: ConcreteFragment*/ = {
               "args": null,
               "name": "__typename",
               "storageKey": null
-            },
-            {
-              "kind": "FragmentSpread",
-              "name": "ContentNode_content",
-              "args": null
             }
           ],
           "storageKey": null
+        },
+        {
+          "kind": "FragmentSpread",
+          "name": "ContentNode_content",
+          "args": null
         }
       ],
       "storageKey": null
@@ -89,26 +87,10 @@ const fragment /*: ConcreteFragment*/ = {
       "plural": false,
       "selections": [
         {
-          "kind": "LinkedField",
+          "kind": "ScalarField",
           "alias": null,
           "args": null,
-          "concreteType": null,
-          "name": "data",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "__typename",
-              "storageKey": null
-            },
-            {
-              "kind": "FragmentSpread",
-              "name": "ContentNode_content",
-              "args": null
-            }
-          ],
+          "name": "raw",
           "storageKey": null
         }
       ],

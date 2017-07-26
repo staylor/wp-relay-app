@@ -19,14 +19,11 @@ import styles from './styles';
     content {
       data {
         __typename
-        ...ContentNode_content
       }
+      ...ContentNode_content
     }
     excerpt {
-      data {
-        __typename
-        ...ContentNode_content
-      }
+      raw
     }
     featuredMedia {
       ...Media_media
@@ -60,13 +57,9 @@ export default class Post extends Component {
   };
 
   render() {
-    const {
-      content: { data: content },
-      excerpt: { data: excerpt },
-      featuredMedia,
-    } = this.props.post;
+    const { content, excerpt, featuredMedia } = this.props.post;
 
-    const isEmbed = content[0].__typename === 'Embed';
+    const isEmbed = content.data[0].__typename === 'Embed';
 
     return (
       <article className={css(styles.post)}>
@@ -79,13 +72,17 @@ export default class Post extends Component {
           <PostLink post={this.props.post}>
             <Media media={featuredMedia} />
           </PostLink>}
-        <ContentNode
-          component={'section'}
-          styles={styles}
-          className={css(styles.content)}
-          content={isEmbed ? content : excerpt}
-          onEmbedClick={this.onEmbedClick}
-        />
+        {isEmbed
+          ? <ContentNode
+              component={'section'}
+              styles={styles}
+              className={css(styles.content)}
+              content={content}
+              onEmbedClick={this.onEmbedClick}
+            />
+          : <section className={css(styles.content)}>
+              {excerpt.raw}
+            </section>}
       </article>
     );
   }

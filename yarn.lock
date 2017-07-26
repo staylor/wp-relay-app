@@ -3072,11 +3072,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-glamor@^2.20.34:
-  version "2.20.34"
-  resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.34.tgz#ece81017dd5d4b19ac42efa81f3af12b5a9adf32"
+glamor@^2.20.37:
+  version "2.20.37"
+  resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.37.tgz#3cd576deb760eaaf475dcc1f9b77bf6a7d2f8b26"
   dependencies:
-    babel-runtime "^6.23.0"
     fbjs "^0.8.12"
     inline-style-prefixer "^3.0.6"
     object-assign "^4.1.1"
@@ -3208,6 +3207,12 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6:
 graphql@^0.10.1:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.3.tgz#c313afd5518e673351bee18fb63e2a0e487407ab"
+  dependencies:
+    iterall "^1.1.0"
+
+graphql@^0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.5.tgz#c9be17ca2bdfdbd134077ffd9bbaa48b8becd298"
   dependencies:
     iterall "^1.1.0"
 
@@ -5962,15 +5967,15 @@ react-redux@^5.0.5:
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
-react-relay@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.1.0.tgz#56cd76885a886d93dd052efebbc0af5b6ceea998"
+react-relay@next:
+  version "1.2.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.2.0-rc.1.tgz#e60112be68f19586310dbe950f7f34db275664df"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "^0.8.1"
     prop-types "^15.5.8"
     react-static-container "^1.0.1"
-    relay-runtime "1.1.0"
+    relay-runtime "1.2.0-rc.1"
 
 react-side-effect@^1.1.0:
   version "1.1.0"
@@ -6211,9 +6216,9 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-relay-compiler@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-1.1.0.tgz#39435607ff9d145a6bbfd5fe09aa2a44d1cf5aa3"
+relay-compiler@next:
+  version "1.2.0-rc.1"
+  resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-1.2.0-rc.1.tgz#d4c072cce621d07fb80a0709c03dea5082a697af"
   dependencies:
     babel-generator "6.25.0"
     babel-polyfill "^6.23.0"
@@ -6221,17 +6226,18 @@ relay-compiler@^1.1.0:
     babel-traverse "6.25.0"
     babel-types "6.25.0"
     babylon "6.17.3"
+    chalk "^1.1.3"
     fb-watchman "^2.0.0"
     fbjs "^0.8.1"
-    graphql "^0.10.1"
+    graphql "^0.10.5"
     immutable "^3.8.1"
-    relay-runtime "1.1.0"
+    relay-runtime "1.2.0-rc.1"
     signedsource "^1.0.0"
     yargs "^7.0.2"
 
-relay-runtime@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.1.0.tgz#2441a97c18e3c9035960cad48414a95844623b69"
+relay-runtime@1.2.0-rc.1:
+  version "1.2.0-rc.1"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.2.0-rc.1.tgz#4ca7432efc2176a11d87af7015cf105705b8144f"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "^0.8.1"

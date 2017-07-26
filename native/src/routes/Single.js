@@ -1,6 +1,8 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { Link } from 'react-router-native';
+import { css } from 'glamor';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +29,11 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
   },
+
+  tag: {
+    color: '#e50082',
+    fontSize: 18,
+  },
 });
 
 export default createFragmentContainer(
@@ -43,6 +50,17 @@ export default createFragmentContainer(
             source={{ uri: post.featuredMedia.source_url }}
             resizeMode="contain"
           />
+        </View>}
+      {post.tags &&
+        <View>
+          Tags:{' '}
+          {post.tags.map(tag =>
+            <Link key={tag.id} to={`/tag/${tag.slug}`}>
+              <Text style={css(styles.tag)}>
+                {tag.name}
+              </Text>
+            </Link>
+          )}
         </View>}
     </View>,
   graphql`
