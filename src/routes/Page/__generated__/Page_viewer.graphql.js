@@ -120,7 +120,7 @@ const fragment /*: ConcreteFragment*/ = {
               "selections": [
                 {
                   "kind": "FragmentSpread",
-                  "name": "Content_content",
+                  "name": "ContentNode_content",
                   "args": null
                 }
               ],

@@ -5,7 +5,6 @@ import { routerShape } from 'found/lib/PropTypes';
 import { css } from 'glamor';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
-import Content from 'components/Content';
 import ContentNode from 'components/ContentNode';
 import { dateRegex } from 'utils/regex';
 import PostLink from './PostLink';
@@ -18,14 +17,14 @@ import styles from './styles';
     id
     date
     content {
-      rendered
       data {
-        ...Content_content
+        __typename
+        ...ContentNode_content
       }
     }
     excerpt {
-      rendered
       data {
+        __typename
         ...ContentNode_content
       }
     }
@@ -50,7 +49,7 @@ export default class Post extends Component {
     router: routerShape.isRequired,
   };
 
-  onClick = e => {
+  onEmbedClick = () => e => {
     e.preventDefault();
 
     const { id, date } = this.props.post;
@@ -62,20 +61,12 @@ export default class Post extends Component {
 
   render() {
     const {
-      content: { rendered: content, data: contentData },
+      content: { data: content },
       excerpt: { data: excerpt },
       featuredMedia,
     } = this.props.post;
 
-    const isEmbed = content.indexOf('<figure') === 0;
-    const postContent = isEmbed
-      ? <Content content={contentData} onEmbedClick={this.onClick} />
-      : <ContentNode
-          component={'section'}
-          styles={styles}
-          className={css(styles.content)}
-          content={excerpt}
-        />;
+    const isEmbed = content[0].__typename === 'Embed';
 
     return (
       <article className={css(styles.post)}>
@@ -88,7 +79,13 @@ export default class Post extends Component {
           <PostLink post={this.props.post}>
             <Media media={featuredMedia} />
           </PostLink>}
-        {postContent}
+        <ContentNode
+          component={'section'}
+          styles={styles}
+          className={css(styles.content)}
+          content={isEmbed ? content : excerpt}
+          onEmbedClick={this.onEmbedClick}
+        />
       </article>
     );
   }

@@ -48,4 +48,8 @@ export default {
   iframe: {
     marginBottom: vars.padding,
   },
+
+  embed: {
+    ...mixins.embed,
+  },
 };

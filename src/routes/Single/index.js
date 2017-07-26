@@ -7,7 +7,6 @@ import { FormattedRelative } from 'react-intl';
 import { css } from 'glamor';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
-import Content from 'components/Content';
 import ContentNode from 'components/ContentNode';
 import Comments from 'components/Comments';
 import Error from 'components/Error';
@@ -30,7 +29,7 @@ import styles from './styles';
       }
       content {
         data {
-          ...Content_content
+          ...ContentNode_content
         }
       }
       excerpt {
@@ -66,18 +65,13 @@ export default class Single extends Component {
     }).isRequired,
   };
 
-  onClick = e => {
+  onEmbedClick = data => e => {
     const maxWidth = 740;
     e.preventDefault();
 
-    const data = JSON.parse(
-      e.currentTarget.querySelector('script[type="application/json"]').innerHTML
-    );
     let width = data.width;
     let height = data.height;
-    const textarea = document.createElement('textarea');
-    textarea.innerHTML = data.html;
-    let html = textarea.value;
+    let html = data.html;
     if (html.indexOf('<iframe') === 0) {
       html = html.replace(/<iframe /, `<iframe class="${css(styles.iframe)}" `);
       if (width < maxWidth) {
@@ -145,7 +139,13 @@ export default class Single extends Component {
           </div>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-        <Content content={content} onEmbedClick={this.onClick} />
+        <ContentNode
+          component={'section'}
+          styles={styles}
+          className={css(styles.content)}
+          content={content}
+          onEmbedClick={this.onEmbedClick}
+        />
         {tags &&
           <footer className={css(styles.footer)}>
             Tags:{' '}

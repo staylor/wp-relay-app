@@ -12,12 +12,14 @@ export type Post_post = {|
   +id: string;
   +date: ?string;
   +content: ?{|
-    +rendered: ?string;
-    +data: ?$ReadOnlyArray<?{| |}>;
+    +data: ?$ReadOnlyArray<?{|
+      +__typename: string;
+    |}>;
   |};
   +excerpt: ?{|
-    +rendered: ?string;
-    +data: ?$ReadOnlyArray<?{| |}>;
+    +data: ?$ReadOnlyArray<?{|
+      +__typename: string;
+    |}>;
   |};
   +featuredMedia: ?{| |};
 |};
@@ -53,13 +55,6 @@ const fragment /*: ConcreteFragment*/ = {
       "plural": false,
       "selections": [
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "args": null,
-          "name": "rendered",
-          "storageKey": null
-        },
-        {
           "kind": "LinkedField",
           "alias": null,
           "args": null,
@@ -68,8 +63,15 @@ const fragment /*: ConcreteFragment*/ = {
           "plural": true,
           "selections": [
             {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "__typename",
+              "storageKey": null
+            },
+            {
               "kind": "FragmentSpread",
-              "name": "Content_content",
+              "name": "ContentNode_content",
               "args": null
             }
           ],
@@ -87,13 +89,6 @@ const fragment /*: ConcreteFragment*/ = {
       "plural": false,
       "selections": [
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "args": null,
-          "name": "rendered",
-          "storageKey": null
-        },
-        {
           "kind": "LinkedField",
           "alias": null,
           "args": null,
@@ -101,6 +96,13 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "data",
           "plural": true,
           "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "__typename",
+              "storageKey": null
+            },
             {
               "kind": "FragmentSpread",
               "name": "ContentNode_content",

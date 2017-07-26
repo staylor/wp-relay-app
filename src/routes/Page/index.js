@@ -5,7 +5,6 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { css } from 'glamor';
 import Media from 'components/Media';
 import Error from 'components/Error';
-import Content from 'components/Content';
 import ContentNode from 'components/ContentNode';
 import { SITE_URL } from 'utils/constants';
 import styles from './styles';
@@ -44,7 +43,12 @@ const Page = ({ viewer: { page } }) => {
         <ContentNode component={'h1'} className={css(styles.title)} content={titleData} />
       </header>
       {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-      <Content content={content} />
+      <ContentNode
+        component={'section'}
+        styles={styles}
+        className={css(styles.content)}
+        content={content}
+      />
     </article>
   );
 };
@@ -70,7 +74,7 @@ export default createFragmentContainer(
         }
         content {
           data {
-            ...Content_content
+            ...ContentNode_content
           }
         }
         featuredMedia {

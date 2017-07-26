@@ -9,44 +9,52 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type ContentNode_content = $ReadOnlyArray<{|
-  +text?: ?string;
-  +tagName?: ?string;
-  +attributes?: ?$ReadOnlyArray<?{|
-    +name: ?string;
-    +value: ?string;
-  |}>;
-  +children?: ?$ReadOnlyArray<?{|
-    +text?: ?string;
-    +tagName?: ?string;
-    +attributes?: ?$ReadOnlyArray<?{|
-      +name: ?string;
-      +value: ?string;
-    |}>;
-    +children?: ?$ReadOnlyArray<?{|
-      +text?: ?string;
-      +tagName?: ?string;
-      +attributes?: ?$ReadOnlyArray<?{|
-        +name: ?string;
-        +value: ?string;
-      |}>;
-      +children?: ?$ReadOnlyArray<?{|
-        +text?: ?string;
-        +tagName?: ?string;
-        +attributes?: ?$ReadOnlyArray<?{|
-          +name: ?string;
-          +value: ?string;
+  +__typename: "Text";
+  +text: ?string;
+|} | {|
+  +__typename: "Element";
+  +children: ?$ReadOnlyArray<?{|
+    +__typename: "Text";
+    +text: ?string;
+  |} | {|
+    +__typename: "Element";
+    +children: ?$ReadOnlyArray<?{|
+      +__typename: "Text";
+      +text: ?string;
+    |} | {|
+      +__typename: "Element";
+      +children: ?$ReadOnlyArray<?{|
+        +__typename: "Text";
+        +text: ?string;
+      |} | {|
+        +__typename: "Element";
+        +children: ?$ReadOnlyArray<?{|
+          +__typename: "Text";
+          +text: ?string;
+        |} | {|
+          // This will never be '%other', but we need some
+          // value in case none of the concrete values match.
+          +__typename: "%other";
         |}>;
-        +children?: ?$ReadOnlyArray<?{|
-          +text?: ?string;
-          +tagName?: ?string;
-          +attributes?: ?$ReadOnlyArray<?{|
-            +name: ?string;
-            +value: ?string;
-          |}>;
-        |}>;
+      |} | {|
+        // This will never be '%other', but we need some
+        // value in case none of the concrete values match.
+        +__typename: "%other";
       |}>;
+    |} | {|
+      // This will never be '%other', but we need some
+      // value in case none of the concrete values match.
+      +__typename: "%other";
     |}>;
+  |} | {|
+    // This will never be '%other', but we need some
+    // value in case none of the concrete values match.
+    +__typename: "%other";
   |}>;
+|} | {|
+  // This will never be '%other', but we need some
+  // value in case none of the concrete values match.
+  +__typename: "%other";
 |}>;
 */
 
@@ -60,40 +68,20 @@ const fragment /*: ConcreteFragment*/ = {
   "name": "ContentNode_content",
   "selections": [
     {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "__typename",
+      "storageKey": null
+    },
+    {
       "kind": "InlineFragment",
       "type": "Element",
       "selections": [
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "args": null,
-          "name": "tagName",
-          "storageKey": null
-        },
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "args": null,
-          "concreteType": "Meta",
-          "name": "attributes",
-          "plural": true,
-          "selections": [
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "name",
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "value",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "Element_node",
+          "args": null
         },
         {
           "kind": "LinkedField",
@@ -104,40 +92,20 @@ const fragment /*: ConcreteFragment*/ = {
           "plural": true,
           "selections": [
             {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "__typename",
+              "storageKey": null
+            },
+            {
               "kind": "InlineFragment",
               "type": "Element",
               "selections": [
                 {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "tagName",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Meta",
-                  "name": "attributes",
-                  "plural": true,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "name",
-                      "storageKey": null
-                    },
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "value",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "Element_node",
+                  "args": null
                 },
                 {
                   "kind": "LinkedField",
@@ -148,40 +116,20 @@ const fragment /*: ConcreteFragment*/ = {
                   "plural": true,
                   "selections": [
                     {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "__typename",
+                      "storageKey": null
+                    },
+                    {
                       "kind": "InlineFragment",
                       "type": "Element",
                       "selections": [
                         {
-                          "kind": "ScalarField",
-                          "alias": null,
-                          "args": null,
-                          "name": "tagName",
-                          "storageKey": null
-                        },
-                        {
-                          "kind": "LinkedField",
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "Meta",
-                          "name": "attributes",
-                          "plural": true,
-                          "selections": [
-                            {
-                              "kind": "ScalarField",
-                              "alias": null,
-                              "args": null,
-                              "name": "name",
-                              "storageKey": null
-                            },
-                            {
-                              "kind": "ScalarField",
-                              "alias": null,
-                              "args": null,
-                              "name": "value",
-                              "storageKey": null
-                            }
-                          ],
-                          "storageKey": null
+                          "kind": "FragmentSpread",
+                          "name": "Element_node",
+                          "args": null
                         },
                         {
                           "kind": "LinkedField",
@@ -192,40 +140,20 @@ const fragment /*: ConcreteFragment*/ = {
                           "plural": true,
                           "selections": [
                             {
+                              "kind": "ScalarField",
+                              "alias": null,
+                              "args": null,
+                              "name": "__typename",
+                              "storageKey": null
+                            },
+                            {
                               "kind": "InlineFragment",
                               "type": "Element",
                               "selections": [
                                 {
-                                  "kind": "ScalarField",
-                                  "alias": null,
-                                  "args": null,
-                                  "name": "tagName",
-                                  "storageKey": null
-                                },
-                                {
-                                  "kind": "LinkedField",
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "Meta",
-                                  "name": "attributes",
-                                  "plural": true,
-                                  "selections": [
-                                    {
-                                      "kind": "ScalarField",
-                                      "alias": null,
-                                      "args": null,
-                                      "name": "name",
-                                      "storageKey": null
-                                    },
-                                    {
-                                      "kind": "ScalarField",
-                                      "alias": null,
-                                      "args": null,
-                                      "name": "value",
-                                      "storageKey": null
-                                    }
-                                  ],
-                                  "storageKey": null
+                                  "kind": "FragmentSpread",
+                                  "name": "Element_node",
+                                  "args": null
                                 },
                                 {
                                   "kind": "LinkedField",
@@ -236,40 +164,20 @@ const fragment /*: ConcreteFragment*/ = {
                                   "plural": true,
                                   "selections": [
                                     {
+                                      "kind": "ScalarField",
+                                      "alias": null,
+                                      "args": null,
+                                      "name": "__typename",
+                                      "storageKey": null
+                                    },
+                                    {
                                       "kind": "InlineFragment",
                                       "type": "Element",
                                       "selections": [
                                         {
-                                          "kind": "ScalarField",
-                                          "alias": null,
-                                          "args": null,
-                                          "name": "tagName",
-                                          "storageKey": null
-                                        },
-                                        {
-                                          "kind": "LinkedField",
-                                          "alias": null,
-                                          "args": null,
-                                          "concreteType": "Meta",
-                                          "name": "attributes",
-                                          "plural": true,
-                                          "selections": [
-                                            {
-                                              "kind": "ScalarField",
-                                              "alias": null,
-                                              "args": null,
-                                              "name": "name",
-                                              "storageKey": null
-                                            },
-                                            {
-                                              "kind": "ScalarField",
-                                              "alias": null,
-                                              "args": null,
-                                              "name": "value",
-                                              "storageKey": null
-                                            }
-                                          ],
-                                          "storageKey": null
+                                          "kind": "FragmentSpread",
+                                          "name": "Element_node",
+                                          "args": null
                                         }
                                       ]
                                     },
@@ -283,6 +191,17 @@ const fragment /*: ConcreteFragment*/ = {
                                           "args": null,
                                           "name": "text",
                                           "storageKey": null
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "kind": "InlineFragment",
+                                      "type": "Embed",
+                                      "selections": [
+                                        {
+                                          "kind": "FragmentSpread",
+                                          "name": "Embed_node",
+                                          "args": null
                                         }
                                       ]
                                     }
@@ -303,6 +222,17 @@ const fragment /*: ConcreteFragment*/ = {
                                   "storageKey": null
                                 }
                               ]
+                            },
+                            {
+                              "kind": "InlineFragment",
+                              "type": "Embed",
+                              "selections": [
+                                {
+                                  "kind": "FragmentSpread",
+                                  "name": "Embed_node",
+                                  "args": null
+                                }
+                              ]
                             }
                           ],
                           "storageKey": null
@@ -319,6 +249,17 @@ const fragment /*: ConcreteFragment*/ = {
                           "args": null,
                           "name": "text",
                           "storageKey": null
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "InlineFragment",
+                      "type": "Embed",
+                      "selections": [
+                        {
+                          "kind": "FragmentSpread",
+                          "name": "Embed_node",
+                          "args": null
                         }
                       ]
                     }
@@ -339,6 +280,17 @@ const fragment /*: ConcreteFragment*/ = {
                   "storageKey": null
                 }
               ]
+            },
+            {
+              "kind": "InlineFragment",
+              "type": "Embed",
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "Embed_node",
+                  "args": null
+                }
+              ]
             }
           ],
           "storageKey": null
@@ -355,6 +307,17 @@ const fragment /*: ConcreteFragment*/ = {
           "args": null,
           "name": "text",
           "storageKey": null
+        }
+      ]
+    },
+    {
+      "kind": "InlineFragment",
+      "type": "Embed",
+      "selections": [
+        {
+          "kind": "FragmentSpread",
+          "name": "Embed_node",
+          "args": null
         }
       ]
     }
