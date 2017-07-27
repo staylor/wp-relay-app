@@ -7,8 +7,7 @@ import Embed from './Embed';
 
 /* eslint-disable react/prop-types, react/forbid-prop-types */
 
-// eslint-disable-next-line
-graphql`
+export const dataFragment = graphql`
   fragment ContentNode_content_data on ContentNode {
     __typename
     ... on Embed {
@@ -24,25 +23,23 @@ graphql`
 `;
 
 @FragmentContainer(graphql`
-  fragment ContentNode_content on Content {
-    data {
-      ...ContentNode_content_data @inline
-      ... on Element {
-        children {
-          ...ContentNode_content_data @inline
-          ... on Element {
-            children {
-              ...ContentNode_content_data @inline
-              ... on Element {
-                children {
-                  ...ContentNode_content_data @inline
-                  ... on Element {
-                    children {
-                      ...ContentNode_content_data @inline
-                      ... on Element {
-                        children {
-                          ...ContentNode_content_data @inline
-                        }
+  fragment ContentNode_content on ContentNode @relay(plural: true) {
+    ...ContentNode_content_data @inline
+    ... on Element {
+      children {
+        ...ContentNode_content_data @inline
+        ... on Element {
+          children {
+            ...ContentNode_content_data @inline
+            ... on Element {
+              children {
+                ...ContentNode_content_data @inline
+                ... on Element {
+                  children {
+                    ...ContentNode_content_data @inline
+                    ... on Element {
+                      children {
+                        ...ContentNode_content_data @inline
                       }
                     }
                   }
@@ -57,7 +54,7 @@ graphql`
 `)
 export default class ContentNode extends Component {
   static propTypes = {
-    content: PropTypes.object.isRequired,
+    content: PropTypes.array.isRequired,
     component: PropTypes.any.isRequired,
     onEmbedClick: PropTypes.func,
   };
@@ -116,7 +113,7 @@ export default class ContentNode extends Component {
 
     return (
       <ContentComponent {...rest}>
-        {this.parseNodes(content.data)}
+        {this.parseNodes(content)}
       </ContentComponent>
     );
   }

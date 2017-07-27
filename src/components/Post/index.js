@@ -19,8 +19,8 @@ import styles from './styles';
     content {
       data {
         __typename
+        ...ContentNode_content
       }
-      ...ContentNode_content
     }
     excerpt {
       raw
@@ -57,9 +57,8 @@ export default class Post extends Component {
   };
 
   render() {
-    const { content, excerpt, featuredMedia } = this.props.post;
-
-    const isEmbed = content.data[0].__typename === 'Embed';
+    const { content: { data: content }, excerpt, featuredMedia } = this.props.post;
+    const isEmbed = content && content.length && content[0].__typename === 'Embed';
 
     return (
       <article className={css(styles.post)}>

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f12681835963cf13af33109c9ea2919e
+ * @relayHash dff4a6168783a413a6382bc4c9a4429d
  */
 
 /* eslint-disable */
@@ -54,8 +54,8 @@ fragment Post_post on Post {
   content {
     data {
       __typename
+      ...ContentNode_content
     }
-    ...ContentNode_content
   }
   excerpt {
     raw
@@ -76,95 +76,88 @@ fragment Post_post on Post {
   ...PostLink_post
 }
 
-fragment ContentNode_content on Content {
-  data {
-    __typename
-    ... on ContentNode {
+fragment ContentNode_content on ContentNode {
+  __typename
+  ... on Embed {
+    ...Embed_node
+  }
+  ... on Text {
+    text
+  }
+  ... on Element {
+    ...Element_node
+    children {
       __typename
-      ... on Embed {
-        ...Embed_node
-      }
-      ... on Text {
-        text
-      }
-      ... on Element {
-        ...Element_node
-      }
-    }
-    ... on Element {
-      children {
+      ... on ContentNode {
         __typename
-        ... on ContentNode {
-          __typename
-          ... on Embed {
-            ...Embed_node
-          }
-          ... on Text {
-            text
-          }
-          ... on Element {
-            ...Element_node
-          }
+        ... on Embed {
+          ...Embed_node
+        }
+        ... on Text {
+          text
         }
         ... on Element {
-          children {
+          ...Element_node
+        }
+      }
+      ... on Element {
+        children {
+          __typename
+          ... on ContentNode {
             __typename
-            ... on ContentNode {
-              __typename
-              ... on Embed {
-                ...Embed_node
-              }
-              ... on Text {
-                text
-              }
-              ... on Element {
-                ...Element_node
-              }
+            ... on Embed {
+              ...Embed_node
+            }
+            ... on Text {
+              text
             }
             ... on Element {
-              children {
+              ...Element_node
+            }
+          }
+          ... on Element {
+            children {
+              __typename
+              ... on ContentNode {
                 __typename
-                ... on ContentNode {
-                  __typename
-                  ... on Embed {
-                    ...Embed_node
-                  }
-                  ... on Text {
-                    text
-                  }
-                  ... on Element {
-                    ...Element_node
-                  }
+                ... on Embed {
+                  ...Embed_node
+                }
+                ... on Text {
+                  text
                 }
                 ... on Element {
-                  children {
+                  ...Element_node
+                }
+              }
+              ... on Element {
+                children {
+                  __typename
+                  ... on ContentNode {
                     __typename
-                    ... on ContentNode {
-                      __typename
-                      ... on Embed {
-                        ...Embed_node
-                      }
-                      ... on Text {
-                        text
-                      }
-                      ... on Element {
-                        ...Element_node
-                      }
+                    ... on Embed {
+                      ...Embed_node
+                    }
+                    ... on Text {
+                      text
                     }
                     ... on Element {
-                      children {
+                      ...Element_node
+                    }
+                  }
+                  ... on Element {
+                    children {
+                      __typename
+                      ... on ContentNode {
                         __typename
-                        ... on ContentNode {
-                          __typename
-                          ... on Embed {
-                            ...Embed_node
-                          }
-                          ... on Text {
-                            text
-                          }
-                          ... on Element {
-                            ...Element_node
-                          }
+                        ... on Embed {
+                          ...Embed_node
+                        }
+                        ... on Text {
+                          text
+                        }
+                        ... on Element {
+                          ...Element_node
                         }
                       }
                     }
@@ -1279,7 +1272,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Author_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Author_viewer\n    id\n  }\n}\n\nfragment Author_viewer on Viewer {\n  author(id: $id) {\n    id\n    name\n  }\n  posts(author: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    data {\n      __typename\n    }\n    ...ContentNode_content\n  }\n  excerpt {\n    raw\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment ContentNode_content on Content {\n  data {\n    __typename\n    ... on ContentNode {\n      __typename\n      ... on Embed {\n        ...Embed_node\n      }\n      ... on Text {\n        text\n      }\n      ... on Element {\n        ...Element_node\n      }\n    }\n    ... on Element {\n      children {\n        __typename\n        ... on ContentNode {\n          __typename\n          ... on Embed {\n            ...Embed_node\n          }\n          ... on Text {\n            text\n          }\n          ... on Element {\n            ...Element_node\n          }\n        }\n        ... on Element {\n          children {\n            __typename\n            ... on ContentNode {\n              __typename\n              ... on Embed {\n                ...Embed_node\n              }\n              ... on Text {\n                text\n              }\n              ... on Element {\n                ...Element_node\n              }\n            }\n            ... on Element {\n              children {\n                __typename\n                ... on ContentNode {\n                  __typename\n                  ... on Embed {\n                    ...Embed_node\n                  }\n                  ... on Text {\n                    text\n                  }\n                  ... on Element {\n                    ...Element_node\n                  }\n                }\n                ... on Element {\n                  children {\n                    __typename\n                    ... on ContentNode {\n                      __typename\n                      ... on Embed {\n                        ...Embed_node\n                      }\n                      ... on Text {\n                        text\n                      }\n                      ... on Element {\n                        ...Element_node\n                      }\n                    }\n                    ... on Element {\n                      children {\n                        __typename\n                        ... on ContentNode {\n                          __typename\n                          ... on Embed {\n                            ...Embed_node\n                          }\n                          ... on Text {\n                            text\n                          }\n                          ... on Element {\n                            ...Element_node\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n\nfragment Embed_node on Embed {\n  title\n  thumbnailUrl\n  html\n  width\n  height\n}\n\nfragment Element_node on Element {\n  tagName\n  attributes {\n    name\n    value\n  }\n}\n"
+  "text": "query Author_Query(\n  $id: ID!\n) {\n  viewer {\n    ...Author_viewer\n    id\n  }\n}\n\nfragment Author_viewer on Viewer {\n  author(id: $id) {\n    id\n    name\n  }\n  posts(author: $id, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n  excerpt {\n    raw\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment ContentNode_content on ContentNode {\n  __typename\n  ... on Embed {\n    ...Embed_node\n  }\n  ... on Text {\n    text\n  }\n  ... on Element {\n    ...Element_node\n    children {\n      __typename\n      ... on ContentNode {\n        __typename\n        ... on Embed {\n          ...Embed_node\n        }\n        ... on Text {\n          text\n        }\n        ... on Element {\n          ...Element_node\n        }\n      }\n      ... on Element {\n        children {\n          __typename\n          ... on ContentNode {\n            __typename\n            ... on Embed {\n              ...Embed_node\n            }\n            ... on Text {\n              text\n            }\n            ... on Element {\n              ...Element_node\n            }\n          }\n          ... on Element {\n            children {\n              __typename\n              ... on ContentNode {\n                __typename\n                ... on Embed {\n                  ...Embed_node\n                }\n                ... on Text {\n                  text\n                }\n                ... on Element {\n                  ...Element_node\n                }\n              }\n              ... on Element {\n                children {\n                  __typename\n                  ... on ContentNode {\n                    __typename\n                    ... on Embed {\n                      ...Embed_node\n                    }\n                    ... on Text {\n                      text\n                    }\n                    ... on Element {\n                      ...Element_node\n                    }\n                  }\n                  ... on Element {\n                    children {\n                      __typename\n                      ... on ContentNode {\n                        __typename\n                        ... on Embed {\n                          ...Embed_node\n                        }\n                        ... on Text {\n                          text\n                        }\n                        ... on Element {\n                          ...Element_node\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n\nfragment Embed_node on Embed {\n  title\n  thumbnailUrl\n  html\n  width\n  height\n}\n\nfragment Element_node on Element {\n  tagName\n  attributes {\n    name\n    value\n  }\n}\n"
 };
 
 module.exports = batch;

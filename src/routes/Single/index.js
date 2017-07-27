@@ -25,7 +25,9 @@ import styles from './styles';
         raw
       }
       content {
-        ...ContentNode_content
+        data {
+          ...ContentNode_content
+        }
       }
       excerpt {
         raw
@@ -87,7 +89,17 @@ export default class Single extends Component {
     }
 
     const {
-      post: { id, slug, date, title, content, excerpt, featuredMedia, tags, comments },
+      post: {
+        id,
+        slug,
+        date,
+        title,
+        content: { data: content },
+        excerpt,
+        featuredMedia,
+        tags,
+        comments,
+      },
     } = this.props.viewer;
 
     const [, year, month, day] = dateRegex.exec(date);

@@ -44,7 +44,7 @@
     "lint-style": "kyt lint-style",
     "proto": "kyt proto",
     "kyt:help": "kyt --help",
-    "relay": "relay-compiler --src ./src --schema ./tools/schema.graphql && npm run persist-queries",
+    "relay": "relay-compiler --src ./src --schema ./tools/schema.graphql && npm run clear-cache",
     "persist-queries": "babel-node ./tools/persistedQueries",
     "clear-cache": "redis-cli FLUSHALL && npm run persist-queries"
   },

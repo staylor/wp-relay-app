@@ -16,7 +16,7 @@ const Page = ({ viewer: { page } }) => {
     return <Error />;
   }
 
-  const { slug, title, content, featuredMedia } = page;
+  const { slug, title, content: { data: content }, featuredMedia } = page;
   const url = `${SITE_URL}/${slug}`;
   const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
 
@@ -67,7 +67,9 @@ export default createFragmentContainer(
           raw
         }
         content {
-          ...ContentNode_content
+          data {
+            ...ContentNode_content
+          }
         }
         featuredMedia {
           ... on Image {

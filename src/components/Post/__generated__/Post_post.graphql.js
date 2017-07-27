@@ -66,14 +66,14 @@ const fragment /*: ConcreteFragment*/ = {
               "args": null,
               "name": "__typename",
               "storageKey": null
+            },
+            {
+              "kind": "FragmentSpread",
+              "name": "ContentNode_content",
+              "args": null
             }
           ],
           "storageKey": null
-        },
-        {
-          "kind": "FragmentSpread",
-          "name": "ContentNode_content",
-          "args": null
         }
       ],
       "storageKey": null
