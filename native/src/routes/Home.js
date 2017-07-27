@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { StyleSheet, Text, View, SectionList } from 'react-native';
-import PostLink from '../PostLink';
+import Post from '../Post';
 
 /* eslint-disable react/prop-types */
 
@@ -9,21 +9,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     backgroundColor: '#fff',
-    paddingLeft: 10,
-    paddingRight: 10,
   },
   sectionHeader: {
     fontSize: 24,
     fontWeight: 'bold',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  item: {
-    fontSize: 18,
-    marginTop: 5,
-    marginBottom: 5,
-    paddingTop: 5,
-    paddingBottom: 5,
+    padding: 10,
   },
 });
 
@@ -36,7 +26,7 @@ export default createFragmentContainer(
           <Text style={styles.sectionHeader}>
             {section.title}
           </Text>}
-        renderItem={({ item: { node } }) => <PostLink post={node} style={styles.item} />}
+        renderItem={({ item: { node } }) => <Post post={node} />}
         sections={[
           { data: viewer.stickies.edges, title: 'Latest' },
           {
@@ -56,41 +46,38 @@ export default createFragmentContainer(
     </View>,
   graphql`
     fragment Home_viewer on Viewer {
-      stickies: posts(sticky: true, first: $stickiesTotal) @connection(key: "Home_stickies") {
+      stickies: posts(sticky: true, first: $stickiesTotal) {
         edges {
           node {
             id
-            ...PostLink_post
+            ...Post_post
           }
           cursor
         }
       }
-      readThis: posts(category: "read-this", sticky: false, first: $readThisTotal)
-        @connection(key: "Home_readThis") {
+      readThis: posts(category: "read-this", sticky: false, first: $readThisTotal) {
         edges {
           node {
             id
-            ...PostLink_post
+            ...Post_post
           }
           cursor
         }
       }
-      watchThis: posts(category: "watch-this", first: $watchThisTotal)
-        @connection(key: "Home_watchThis") {
+      watchThis: posts(category: "watch-this", first: $watchThisTotal) {
         edges {
           node {
             id
-            ...PostLink_post
+            ...Post_post
           }
           cursor
         }
       }
-      listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal)
-        @connection(key: "Home_listenToThis") {
+      listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal) {
         edges {
           node {
             id
-            ...PostLink_post
+            ...Post_post
           }
           cursor
         }

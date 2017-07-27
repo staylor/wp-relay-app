@@ -224,7 +224,7 @@ const fragment /*: ConcreteFragment*/ = {
                 },
                 {
                   "kind": "FragmentSpread",
-                  "name": "PostLink_post",
+                  "name": "Post_post",
                   "args": null
                 }
               ],

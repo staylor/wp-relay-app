@@ -10,7 +10,6 @@
 import type {ConcreteFragment} from 'relay-runtime';
 export type Page_viewer = {|
   +page: ?{|
-    +id: string;
     +date: ?string;
     +title: ?{|
       +raw: ?string;
@@ -50,13 +49,6 @@ const fragment /*: ConcreteFragment*/ = {
       "name": "page",
       "plural": false,
       "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "args": null,
-          "name": "id",
-          "storageKey": null
-        },
         {
           "kind": "ScalarField",
           "alias": null,

@@ -69,48 +69,19 @@ const fragment /*: ConcreteFragment*/ = {
     }
   ],
   "kind": "Fragment",
-  "metadata": {
-    "connection": [
-      {
-        "count": "stickiesTotal",
-        "cursor": null,
-        "direction": "forward",
-        "path": [
-          "stickies"
-        ]
-      },
-      {
-        "count": "readThisTotal",
-        "cursor": null,
-        "direction": "forward",
-        "path": [
-          "readThis"
-        ]
-      },
-      {
-        "count": "watchThisTotal",
-        "cursor": null,
-        "direction": "forward",
-        "path": [
-          "watchThis"
-        ]
-      },
-      {
-        "count": "listenToThisTotal",
-        "cursor": null,
-        "direction": "forward",
-        "path": [
-          "listenToThis"
-        ]
-      }
-    ]
-  },
+  "metadata": null,
   "name": "Home_viewer",
   "selections": [
     {
       "kind": "LinkedField",
       "alias": "stickies",
       "args": [
+        {
+          "kind": "Variable",
+          "name": "first",
+          "variableName": "stickiesTotal",
+          "type": "Int"
+        },
         {
           "kind": "Literal",
           "name": "sticky",
@@ -119,7 +90,7 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_stickies_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
@@ -147,7 +118,7 @@ const fragment /*: ConcreteFragment*/ = {
                 },
                 {
                   "kind": "FragmentSpread",
-                  "name": "PostLink_post",
+                  "name": "Post_post",
                   "args": null
                 }
               ],
@@ -164,7 +135,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "__Home_stickies_connection{\"sticky\":true}"
+      "storageKey": null
     },
     {
       "kind": "LinkedField",
@@ -177,6 +148,12 @@ const fragment /*: ConcreteFragment*/ = {
           "type": "String"
         },
         {
+          "kind": "Variable",
+          "name": "first",
+          "variableName": "readThisTotal",
+          "type": "Int"
+        },
+        {
           "kind": "Literal",
           "name": "sticky",
           "value": false,
@@ -184,7 +161,7 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_readThis_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
@@ -212,7 +189,7 @@ const fragment /*: ConcreteFragment*/ = {
                 },
                 {
                   "kind": "FragmentSpread",
-                  "name": "PostLink_post",
+                  "name": "Post_post",
                   "args": null
                 }
               ],
@@ -229,7 +206,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "__Home_readThis_connection{\"category\":\"read-this\",\"sticky\":false}"
+      "storageKey": null
     },
     {
       "kind": "LinkedField",
@@ -240,10 +217,16 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "category",
           "value": "watch-this",
           "type": "String"
+        },
+        {
+          "kind": "Variable",
+          "name": "first",
+          "variableName": "watchThisTotal",
+          "type": "Int"
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_watchThis_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
@@ -271,7 +254,7 @@ const fragment /*: ConcreteFragment*/ = {
                 },
                 {
                   "kind": "FragmentSpread",
-                  "name": "PostLink_post",
+                  "name": "Post_post",
                   "args": null
                 }
               ],
@@ -288,7 +271,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "__Home_watchThis_connection{\"category\":\"watch-this\"}"
+      "storageKey": null
     },
     {
       "kind": "LinkedField",
@@ -299,10 +282,16 @@ const fragment /*: ConcreteFragment*/ = {
           "name": "category",
           "value": "listen-to-this",
           "type": "String"
+        },
+        {
+          "kind": "Variable",
+          "name": "first",
+          "variableName": "listenToThisTotal",
+          "type": "Int"
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__Home_listenToThis_connection",
+      "name": "posts",
       "plural": false,
       "selections": [
         {
@@ -330,7 +319,7 @@ const fragment /*: ConcreteFragment*/ = {
                 },
                 {
                   "kind": "FragmentSpread",
-                  "name": "PostLink_post",
+                  "name": "Post_post",
                   "args": null
                 }
               ],
@@ -347,7 +336,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "__Home_listenToThis_connection{\"category\":\"listen-to-this\"}"
+      "storageKey": null
     }
   ],
   "type": "Viewer"

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7d2f909f3a8f9bcf7fa551e383d2b215
+ * @relayHash 513d39cfcfbfe732abf602d40bf4ecd6
  */
 
 /* eslint-disable */
@@ -27,7 +27,6 @@ query Page_Query(
 
 fragment Page_viewer on Viewer {
   page(slug: $slug) {
-    id
     date
     title {
       raw
@@ -45,6 +44,7 @@ fragment Page_viewer on Viewer {
         id
       }
     }
+    id
   }
 }
 */
@@ -122,13 +122,6 @@ const batch /*: ConcreteBatch*/ = {
             "name": "page",
             "plural": false,
             "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              },
               {
                 "kind": "ScalarField",
                 "alias": null,
@@ -217,6 +210,13 @@ const batch /*: ConcreteBatch*/ = {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
               }
             ],
             "storageKey": null
@@ -233,7 +233,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    id\n    date\n    title {\n      raw\n    }\n    featuredMedia {\n      __typename\n      ... on Image {\n        source_url\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n  }\n}\n"
+  "text": "query Page_Query(\n  $slug: String!\n) {\n  viewer {\n    ...Page_viewer\n    id\n  }\n}\n\nfragment Page_viewer on Viewer {\n  page(slug: $slug) {\n    date\n    title {\n      raw\n    }\n    featuredMedia {\n      __typename\n      ... on Image {\n        source_url\n        id\n      }\n      ... on Audio {\n        id\n      }\n      ... on Video {\n        id\n      }\n    }\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

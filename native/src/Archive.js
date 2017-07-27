@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
-import PostLink from './PostLink';
+import Post from './Post';
 
 /* eslint-disable react/prop-types */
 
@@ -54,8 +54,7 @@ export default class Archive extends Component {
           style={styles.list}
           data={this.props.posts.edges}
           keyExtractor={({ node }) => node.id}
-          renderItem={({ item: { node } }) => <PostLink post={node} style={styles.item} />}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          renderItem={({ item: { node } }) => <Post post={node} />}
           onEndReached={() => {
             if (!relay.hasMore()) {
               return;

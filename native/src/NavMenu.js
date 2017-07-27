@@ -8,11 +8,6 @@ import { sortOrderedHierarchy } from './utils/walker';
 /* eslint-disable react/prop-types */
 
 const styles = StyleSheet.create({
-  nav: {},
-  navItem: {
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
   link: {
     color: '#e50082',
     fontSize: 18,
@@ -32,7 +27,7 @@ class NavMenu extends Component {
     this.sorted = sortOrderedHierarchy(navMenu.items);
 
     return (
-      <View style={styles.nav}>
+      <View>
         {this.sorted.top.map(item => {
           const { id, title, url: itemUrl, typeSlug, dataSlug } = item;
           let path;
@@ -48,7 +43,7 @@ class NavMenu extends Component {
           }
 
           return (
-            <Link key={id} to={path} style={styles.navItem} underlayColor="#eee">
+            <Link key={id} to={path} underlayColor="#eee">
               <Text style={styles.link}>
                 {title}
               </Text>

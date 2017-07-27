@@ -28,7 +28,7 @@ export default createPaginationContainer(
         edges {
           node {
             id
-            ...PostLink_post
+            ...Post_post
           }
           cursor
         }

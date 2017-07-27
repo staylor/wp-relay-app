@@ -16,7 +16,10 @@ export type Single_viewer = {|
       +raw: ?string;
     |};
     +featuredMedia: ?{|
-      +source_url?: ?string;
+      +imageUrl?: ?string;
+    |};
+    +content: ?{|
+      +data: ?$ReadOnlyArray<?{| |}>;
     |};
     +tags: ?$ReadOnlyArray<?{|
       +id: string;
@@ -101,12 +104,44 @@ const fragment /*: ConcreteFragment*/ = {
               "selections": [
                 {
                   "kind": "ScalarField",
-                  "alias": null,
+                  "alias": "imageUrl",
                   "args": null,
                   "name": "source_url",
                   "storageKey": null
+                },
+                {
+                  "kind": "FragmentSpread",
+                  "name": "ResponsiveImage_featuredMedia",
+                  "args": null
                 }
               ]
+            }
+          ],
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "Content",
+          "name": "content",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": null,
+              "name": "data",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "FragmentSpread",
+                  "name": "Content_content",
+                  "args": null
+                }
+              ],
+              "storageKey": null
             }
           ],
           "storageKey": null

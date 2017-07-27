@@ -1,36 +1,35 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Link } from 'react-router-native';
+import ResponsiveImage from '../ResponsiveImage';
+import Content from '../Content';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#fff',
-    paddingLeft: 10,
-    paddingRight: 10,
   },
 
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-
-  imageWrap: {
-    flex: 1,
-    flexDirection: 'row',
+    padding: 10,
   },
 
   image: {
-    flex: 1,
-    width: null,
-    height: null,
+    marginBottom: 20,
+  },
+
+  content: {
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 
   tags: {
+    flex: 1,
     flexDirection: 'row',
+    padding: 10,
   },
 
   tagLabel: {
@@ -51,27 +50,24 @@ export default createFragmentContainer(
       <Text style={styles.title}>
         {post.title.raw}
       </Text>
-      {post.featuredMedia &&
-        post.featuredMedia.source_url &&
-        <View style={styles.imageWrap}>
-          <Image
-            style={styles.image}
-            source={{ uri: post.featuredMedia.source_url }}
-            resizeMode="contain"
-          />
-        </View>}
-      {post.tags &&
-        <View style={styles.tags}>
-          <Text style={styles.tagLabel}>Tags: </Text>
-          {post.tags.map((tag, i) =>
-            <Link key={tag.id} to={`/tag/${tag.slug}`}>
-              <Text style={styles.tag}>
-                {tag.name}
-                {i + 1 === post.tags.length ? null : ', '}
-              </Text>
-            </Link>
-          )}
-        </View>}
+      <ScrollView style={styles.container}>
+        {post.featuredMedia &&
+          post.featuredMedia.imageUrl &&
+          <ResponsiveImage style={styles.image} featuredMedia={post.featuredMedia} />}
+        <Content style={styles.content} content={post.content.data} />
+        {post.tags &&
+          <View style={styles.tags}>
+            <Text style={styles.tagLabel}>Tags: </Text>
+            {post.tags.map((tag, i) =>
+              <Link key={tag.id} to={`/tag/${tag.slug}`}>
+                <Text style={styles.tag}>
+                  {tag.name}
+                  {i + 1 === post.tags.length ? null : ', '}
+                </Text>
+              </Link>
+            )}
+          </View>}
+      </ScrollView>
     </View>,
   graphql`
     fragment Single_viewer on Viewer {
@@ -83,7 +79,13 @@ export default createFragmentContainer(
         }
         featuredMedia {
           ... on Image {
-            source_url
+            imageUrl: source_url
+            ...ResponsiveImage_featuredMedia
+          }
+        }
+        content {
+          data {
+            ...Content_content
           }
         }
         tags {
