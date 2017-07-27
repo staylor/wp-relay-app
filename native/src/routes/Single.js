@@ -21,10 +21,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  content: {
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
+  content: {},
 
   tags: {
     flex: 1,

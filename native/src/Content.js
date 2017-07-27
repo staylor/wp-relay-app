@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import Element from './Element';
 import Embed from './Embed';
 
 /* eslint-disable react/prop-types, react/forbid-prop-types */
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+});
 
 export const dataFragment = graphql`
   fragment Content_content_data on ContentNode {
@@ -22,14 +30,14 @@ export const dataFragment = graphql`
 `;
 
 class Content extends Component {
-  parseNodes(nodes, topLevel = false) {
+  parseNodes(nodes, parent = null) {
     let iterator = 0;
     return nodes.map(node => {
       iterator += 1;
       const key = `key-${iterator}`;
       if (node.__typename === 'Text') {
         return (
-          <Text key={key} style={{ fontSize: 20 }}>
+          <Text key={key} style={parent ? null : styles.text}>
             {node.text}
           </Text>
         );
@@ -37,15 +45,15 @@ class Content extends Component {
       if (node.__typename === 'Embed') {
         return <Embed key={key} node={node} />;
       }
-      return this.parseElement(node, key, topLevel);
+      return this.parseElement(node, key, parent);
     });
   }
 
-  parseElement(node, key, topLevel = false) {
-    const props = { node, key, topLevel };
+  parseElement(node, key, parent = null) {
+    const props = { node, key, parent };
     props.children = null;
     if (node.children) {
-      const children = this.parseNodes(node.children);
+      const children = this.parseNodes(node.children, node);
       if (node.tagName === 'script' || node.tagName === 'style') {
         return null;
       }
@@ -64,7 +72,7 @@ class Content extends Component {
 
     return (
       <View {...rest}>
-        {this.parseNodes(content, true)}
+        {this.parseNodes(content)}
       </View>
     );
   }

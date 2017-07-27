@@ -1,14 +1,10 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Text, Image, Dimensions, Linking } from 'react-native';
-
-const textStyle = {
-  fontSize: 20,
-};
+import { Text, Image, WebView, Dimensions, Linking } from 'react-native';
 
 export default createFragmentContainer(
-  ({ node, children, topLevel = false }) => {
-    const props = {};
+  ({ node, children, parent = null }) => {
+    const props = { style: {} };
     const attrs = (node.attributes || []).reduce((memo, { name, value }) => {
       memo[name] = value;
       return memo;
@@ -17,18 +13,32 @@ export default createFragmentContainer(
     const elementChildren = children;
     let responsiveWidth = null;
     let responsiveHeight = null;
-    let imageWidth = null;
-    let imageHeight = null;
+    let elementWidth = null;
+    let elementHeight = null;
 
     let tag = Text;
     switch (node.tagName) {
+      case 'iframe':
+        tag = WebView;
+
+        responsiveWidth = Dimensions.get('window').width;
+        responsiveHeight = parseInt(attrs.height || 80, 10);
+        props.style = {
+          flex: -1,
+          width: responsiveWidth,
+          height: responsiveHeight,
+          marginBottom: 20,
+        };
+        props.source = { uri: attrs.src };
+        break;
+
       case 'img':
         tag = Image;
 
         responsiveWidth = Dimensions.get('window').width;
-        imageWidth = attrs.width || responsiveWidth;
-        imageHeight = attrs.height || responsiveWidth * 0.75;
-        responsiveHeight = responsiveWidth * imageHeight / imageWidth;
+        elementWidth = attrs.width || responsiveWidth;
+        elementHeight = attrs.height || responsiveWidth * 0.75;
+        responsiveHeight = responsiveWidth * elementHeight / elementWidth;
 
         props.style = {
           flex: -1,
@@ -53,8 +63,17 @@ export default createFragmentContainer(
         };
         break;
 
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+      case 'h6':
+        props.style.paddingLeft = 10;
+        props.style.paddingRight = 10;
+      // eslint-disable-next-line
       case 'strong':
-        props.style = { fontWeight: 'bold' };
+        props.style.fontWeight = 'bold';
         break;
 
       case 'a':
@@ -63,11 +82,14 @@ export default createFragmentContainer(
         break;
 
       case 'p':
-        if (topLevel) {
-          props.style = { ...textStyle, marginBottom: 20 };
-        } else {
-          props.style = { marginBottom: 20 };
+        if (parent && parent.tagName === 'blockquote') {
+          return elementChildren;
         }
+        props.style = {
+          marginBottom: 20,
+          paddingLeft: 10,
+          paddingRight: 10,
+        };
         break;
       default:
         break;
