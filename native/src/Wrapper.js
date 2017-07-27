@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { Route } from 'react-router-native';
+import { Route, Switch } from 'react-router-native';
 import { QueryRenderer } from 'react-relay';
 import environment from './relay/environment';
 import WrapperQuery from './queries/Wrapper';
@@ -86,39 +86,41 @@ export default () =>
       return (
         <View style={styles.container}>
           <Header {...{ settings, navMenu }} />
-          <Route exact path="/" render={renderProp(Home, HomeQuery)} />
-          <Route
-            path="/music/:slug"
-            render={renderProp(Term, TermQuery, ({ params }) => ({
-              ...params,
-              taxonomy: 'category',
-            }))}
-          />
-          <Route
-            path="/tag/:slug"
-            render={renderProp(Term, TermQuery, ({ params }) => ({
-              ...params,
-              taxonomy: 'tag',
-            }))}
-          />
-          <Route path="/author/:id" render={renderProp(Author, AuthorQuery)} />
-          <Route
-            path="/:year(\d+)/:month(\d+)/:day(\d+)/:id"
-            render={renderProp(Single, SingleQuery)}
-          />
-          <Route
-            path=":year(\d+)/:month(\d+)?/:day(\d+)?"
-            render={renderProp(Date, DateQuery, params => {
-              const vars = Object.assign({}, params);
-              return ['year', 'month', 'day'].reduce((memo, value) => {
-                if (vars[value]) {
-                  memo[value] = parseInt(vars[value], 10);
-                }
-                return memo;
-              }, {});
-            })}
-          />
-          <Route path="/:slug" render={renderProp(Page, PageQuery)} />
+          <Switch>
+            <Route exact path="/" render={renderProp(Home, HomeQuery)} />
+            <Route
+              path="/music/:slug"
+              render={renderProp(Term, TermQuery, ({ params }) => ({
+                ...params,
+                taxonomy: 'category',
+              }))}
+            />
+            <Route
+              path="/tag/:slug"
+              render={renderProp(Term, TermQuery, ({ params }) => ({
+                ...params,
+                taxonomy: 'tag',
+              }))}
+            />
+            <Route path="/author/:id" render={renderProp(Author, AuthorQuery)} />
+            <Route
+              path="/:year(\d+)/:month(\d+)/:day(\d+)/:id"
+              render={renderProp(Single, SingleQuery)}
+            />
+            <Route
+              path=":year(\d+)/:month(\d+)?/:day(\d+)?"
+              render={renderProp(Date, DateQuery, params => {
+                const vars = Object.assign({}, params);
+                return ['year', 'month', 'day'].reduce((memo, value) => {
+                  if (vars[value]) {
+                    memo[value] = parseInt(vars[value], 10);
+                  }
+                  return memo;
+                }, {});
+              })}
+            />
+            <Route path="/:slug" render={renderProp(Page, PageQuery)} />
+          </Switch>
         </View>
       );
     }}
