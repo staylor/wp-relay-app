@@ -15,6 +15,8 @@ import Term from './routes/Term';
 import TermQuery from './queries/Term';
 import Author from './routes/Author';
 import AuthorQuery from './queries/Author';
+import Page from './routes/Page';
+import PageQuery from './queries/Page';
 import Error from './Error';
 
 const styles = StyleSheet.create({
@@ -116,6 +118,7 @@ export default () =>
               }, {});
             })}
           />
+          <Route path="/:slug" render={renderProp(Page, PageQuery)} />
         </View>
       );
     }}

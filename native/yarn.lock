@@ -4111,15 +4111,15 @@ react-redux@^5.0.2:
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
-react-relay@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.1.0.tgz#56cd76885a886d93dd052efebbc0af5b6ceea998"
+react-relay@1.2.0-rc.1:
+  version "1.2.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.2.0-rc.1.tgz#e60112be68f19586310dbe950f7f34db275664df"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "^0.8.1"
     prop-types "^15.5.8"
     react-static-container "^1.0.1"
-    relay-runtime "1.1.0"
+    relay-runtime "1.2.0-rc.1"
 
 react-router-native@^4.1.1:
   version "4.1.1"
@@ -4162,11 +4162,10 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@16.0.0-alpha.12:
-  version "16.0.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-alpha.12.tgz#8c59485281485df319b6f77682d8dd0621c08194"
+react@next:
+  version "16.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-beta.1.tgz#c02171171e9638b0c506f5a26b90e918f76909ab"
   dependencies:
-    create-react-class "^15.5.2"
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
@@ -4299,6 +4298,13 @@ relay-compiler@^1.1.0:
 relay-runtime@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.1.0.tgz#2441a97c18e3c9035960cad48414a95844623b69"
+  dependencies:
+    babel-runtime "^6.23.0"
+    fbjs "^0.8.1"
+
+relay-runtime@1.2.0-rc.1:
+  version "1.2.0-rc.1"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.2.0-rc.1.tgz#4ca7432efc2176a11d87af7015cf105705b8144f"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "^0.8.1"
