@@ -21,12 +21,10 @@ const DateRoute = ({ params, viewer: { posts }, relay }) => {
         </title>
         <link rel="canonical" href={`${SITE_URL}/${path}`} />
       </Helmet>
-      <section>
-        <h2 className={css(styles.label)}>
-          {title}
-        </h2>
-        <Archive {...{ posts, relay }} />
-      </section>
+      <h2 className={css(styles.label)}>
+        {title}
+      </h2>
+      <Archive {...{ posts, relay }} />
     </div>
   );
 };

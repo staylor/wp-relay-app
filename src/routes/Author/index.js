@@ -8,12 +8,10 @@ import styles from './styles';
 
 const Author = ({ viewer: { author, posts }, relay }) =>
   <div className={css(styles.sections)}>
-    <section>
-      <h2 className={css(styles.header)}>
-        {author.name}
-      </h2>
-      <Archive {...{ posts, relay }} />
-    </section>
+    <h2 className={css(styles.header)}>
+      {author.name}
+    </h2>
+    <Archive {...{ posts, relay }} />
   </div>;
 
 Author.propTypes = {

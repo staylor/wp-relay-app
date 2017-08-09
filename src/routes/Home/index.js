@@ -52,7 +52,7 @@ export default createFragmentContainer(
   Home,
   graphql`
     fragment Home_viewer on Viewer {
-      stickies: posts(sticky: true, first: $stickiesTotal) @connection(key: "Home_stickies") {
+      stickies: posts(sticky: true, first: $stickiesTotal) {
         edges {
           node {
             ...Post_post
@@ -60,8 +60,7 @@ export default createFragmentContainer(
           cursor
         }
       }
-      readThis: posts(category: "read-this", sticky: false, first: $readThisTotal)
-        @connection(key: "Home_readThis") {
+      readThis: posts(category: "read-this", sticky: false, first: $readThisTotal) {
         edges {
           node {
             ...Post_post
@@ -69,8 +68,7 @@ export default createFragmentContainer(
           cursor
         }
       }
-      watchThis: posts(category: "watch-this", first: $watchThisTotal)
-        @connection(key: "Home_watchThis") {
+      watchThis: posts(category: "watch-this", first: $watchThisTotal) {
         edges {
           node {
             ...Post_post
@@ -78,8 +76,7 @@ export default createFragmentContainer(
           cursor
         }
       }
-      listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal)
-        @connection(key: "Home_listenToThis") {
+      listenToThis: posts(category: "listen-to-this", first: $listenToThisTotal) {
         edges {
           node {
             ...Post_post

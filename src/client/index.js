@@ -23,7 +23,7 @@ import { ClientFetcher } from 'relay/fetcher';
       resolver,
       render,
     });
-    ReactDOM.render(
+    ReactDOM.hydrate(
       <CookiesProvider>
         <Router resolver={resolver} />
       </CookiesProvider>,

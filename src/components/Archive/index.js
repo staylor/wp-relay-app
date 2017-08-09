@@ -4,35 +4,35 @@ import { css } from 'glamor';
 import Post from '../Post';
 import styles from './styles';
 
-const Archive = ({ posts: { edges }, relay }) =>
-  <section>
-    <ul>
-      {edges.map(({ cursor, node }) =>
-        <li key={cursor}>
-          <Post post={node} />
-        </li>
-      )}
-    </ul>
-    {relay &&
-      relay.hasMore() &&
-      <button
-        className={css(styles.button)}
-        onClick={() => {
-          if (relay.isLoading()) {
-            return;
-          }
+const Archive = ({ posts: { edges }, relay }) => [
+  <ul key={'ul'}>
+    {edges.map(({ cursor, node }) =>
+      <li key={cursor}>
+        <Post post={node} />
+      </li>
+    )}
+  </ul>,
+  relay &&
+    relay.hasMore() &&
+    <button
+      key={'button'}
+      className={css(styles.button)}
+      onClick={() => {
+        if (relay.isLoading()) {
+          return;
+        }
 
-          relay.loadMore(10, e => {
-            if (e) {
-              // eslint-disable-next-line no-console
-              console.log(e);
-            }
-          });
-        }}
-      >
-        MORE
-      </button>}
-  </section>;
+        relay.loadMore(10, e => {
+          if (e) {
+            // eslint-disable-next-line no-console
+            console.log(e);
+          }
+        });
+      }}
+    >
+      MORE
+    </button>,
+];
 
 Archive.propTypes = {
   posts: PropTypes.shape({

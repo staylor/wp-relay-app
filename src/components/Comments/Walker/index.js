@@ -47,7 +47,7 @@ export default class CommentsWalker extends Component {
 
   walk(node) {
     return (
-      <ul className={this.level ? css(styles.nested) : null}>
+      <ul key={`level-${this.level}`} className={this.level ? css(styles.nested) : null}>
         {node.map(child => {
           if (!child.parent) {
             this.level = 0;
@@ -60,21 +60,16 @@ export default class CommentsWalker extends Component {
 
   render() {
     if (!this.props.comments) {
-      return (
-        <section>
-          <Form post={this.props.post} setReplyTo={this.setReplyTo} />
-        </section>
-      );
+      return <Form post={this.props.post} setReplyTo={this.setReplyTo} />;
     }
 
     const { comments: { edges } } = this.props;
     this.sorted = sortHierarchy(edges);
     this.level = 0;
-    return (
-      <section>
-        {this.walk(this.sorted.top)}
-        {!this.state.replyTo && <Form post={this.props.post} setReplyTo={this.setReplyTo} />}
-      </section>
-    );
+    return [
+      this.walk(this.sorted.top),
+      !this.state.replyTo &&
+        <Form key="form" post={this.props.post} setReplyTo={this.setReplyTo} />,
+    ];
   }
 }

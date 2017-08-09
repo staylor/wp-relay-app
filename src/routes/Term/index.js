@@ -27,13 +27,10 @@ const Term = ({ viewer: { term, posts }, relay }) => {
         <meta property="og:title" content={title} />
         <meta property="og:url" content={url} />
       </Helmet>
-      {term &&
-        <section>
-          <h2 className={css(styles.label)}>
-            {title}
-          </h2>
-          <Archive {...{ posts, relay }} />
-        </section>}
+      <h2 className={css(styles.label)}>
+        {title}
+      </h2>
+      <Archive {...{ posts, relay }} />
     </div>
   );
 };

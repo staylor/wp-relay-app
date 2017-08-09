@@ -85,20 +85,19 @@ export default class Search extends Component {
           <title>Search Results</title>
           <link rel="canonical" href={`${SITE_URL}/search`} />
         </Helmet>
-        <section>
-          <SearchBox
-            relay={relay}
-            pageInfo={posts && posts.pageInfo}
-            onSetTerm={term => this.onSetTerm(term)}
-            onRefetch={e => this.onRefetch(e)}
-          />
-          {showPosts && <Archive posts={posts} />}
-          {showPosts &&
-            posts.pageInfo.hasNextPage &&
-            <button className={css(styles.button)} onClick={() => this.loadMore()}>
+        <SearchBox
+          relay={relay}
+          pageInfo={posts && posts.pageInfo}
+          onSetTerm={term => this.onSetTerm(term)}
+          onRefetch={e => this.onRefetch(e)}
+        />
+        {showPosts && [
+          <Archive key="archive" posts={posts} />,
+          posts.pageInfo.hasNextPage &&
+            <button key="button" className={css(styles.button)} onClick={() => this.loadMore()}>
               MORE
-            </button>}
-        </section>
+            </button>,
+        ]}
       </div>
     );
   }
