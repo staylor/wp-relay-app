@@ -5,7 +5,6 @@ import vars from 'styles/variables';
 export default {
   header: {
     background: colors.white,
-    borderTop: '2px solid #bbb',
     maxWidth: vars.contentWidth,
     paddingTop: vars.padding * 1.5,
     position: 'relative',

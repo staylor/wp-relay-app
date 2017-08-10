@@ -29,7 +29,8 @@ export default {
     },
 
     '& li': {
-      marginTop: vars.padding / 2,
+      paddingTop: vars.padding / 2,
+      paddingBottom: vars.padding / 2,
       marginBottom: vars.padding / 2,
       borderTop: `3px solid ${colors.detail}`,
     },

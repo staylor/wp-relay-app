@@ -3,7 +3,7 @@ import md5 from 'md5';
 import 'isomorphic-fetch';
 
 const isClient = typeof document !== 'undefined';
-const requestCache = {};
+let requestCache = {};
 
 export function getRequestCache() {
   return requestCache;
@@ -20,33 +20,37 @@ const getServerCache = id => {
   return payload;
 };
 
-export default async function fetchQuery(batch, variables) {
-  const vars = { variables };
-  if (batch.query.operation === 'mutation') {
-    vars.query = batch.text;
-  } else {
-    const queryID = md5(batch.text);
-    vars.id = queryID;
-    if (isClient) {
-      const cache = getServerCache(vars.id);
-      if (cache) {
-        return cache;
+export default function createFetch(url) {
+  requestCache = {};
+
+  return async function fetchQuery(batch, variables) {
+    const vars = { variables };
+    if (batch.query.operation === 'mutation') {
+      vars.query = batch.text;
+    } else {
+      const queryID = md5(batch.text);
+      vars.id = queryID;
+      if (isClient) {
+        const cache = getServerCache(vars.id);
+        if (cache) {
+          return cache;
+        }
       }
     }
-  }
-  const fetchResponse = await fetch('http://localhost:3000/graphql', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-App-Name': 'wp-relay-app',
-    },
-    body: JSON.stringify(vars),
-  }).then(response => response.json());
+    const fetchResponse = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-App-Name': 'wp-relay-app',
+      },
+      body: JSON.stringify(vars),
+    }).then(response => response.json());
 
-  if (!isClient && vars.id) {
-    requestCache[vars.id] = fetchResponse;
-  }
+    if (!isClient && vars.id) {
+      requestCache[vars.id] = fetchResponse;
+    }
 
-  return fetchResponse;
+    return fetchResponse;
+  };
 }

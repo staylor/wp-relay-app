@@ -39,6 +39,7 @@ export const globals = {
 export default {
   page: {
     backgroundColor: colors.white,
+    borderTop: '2px solid #bbb',
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: vars.contentWidth,

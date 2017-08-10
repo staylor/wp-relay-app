@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BrowserProtocol from 'farce/lib/BrowserProtocol';
 import createInitialFarceRouter from 'found/lib/createInitialFarceRouter';
+import { Resolver } from 'found-relay';
 import { CookiesProvider } from 'react-cookie';
 import { rehydrate } from 'glamor';
 import { historyMiddlewares, render, routeConfig } from 'routes';
-import { resolver } from 'relay/environment';
+import createEnviroment from 'relay/environment';
 
 (async () => {
   // eslint-disable-next-line no-underscore-dangle
   rehydrate(window._glam);
+
+  const environment = createEnviroment('/graphql');
+  const resolver = new Resolver(environment);
 
   try {
     const Router = await createInitialFarceRouter({

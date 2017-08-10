@@ -1,15 +1,16 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import fetchQuery from 'relay/fetcher';
-import { Resolver } from 'found-relay';
+import createFetch from 'relay/fetcher';
 
-export const recordSource = new RecordSource();
-export const store = new Store(recordSource);
+function createEnviroment(url) {
+  const recordSource = new RecordSource();
+  const store = new Store(recordSource);
 
-const environment = new Environment({
-  network: Network.create(fetchQuery),
-  store,
-});
+  const environment = new Environment({
+    network: Network.create(createFetch(url)),
+    store,
+  });
 
-export const resolver = new Resolver(environment);
+  return environment;
+}
 
-export default environment;
+export default createEnviroment;

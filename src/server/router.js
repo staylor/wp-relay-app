@@ -2,14 +2,18 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { renderStatic } from 'glamor/server';
 import { getFarceResult } from 'found/lib/server';
+import { Resolver } from 'found-relay';
 import { CookiesProvider } from 'react-cookie';
-import { resolver } from 'relay/environment';
+import createEnviroment from 'relay/environment';
 import { getRequestCache } from 'relay/fetcher';
 import template from 'server/template';
 import { historyMiddlewares, render, routeConfig } from 'routes';
 
 export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (req, res) => {
   try {
+    const environment = createEnviroment('http://localhost:8080/graphql');
+    const resolver = new Resolver(environment);
+
     const { redirect, element } = await getFarceResult({
       url: req.url,
       historyMiddlewares,
