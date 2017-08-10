@@ -3,20 +3,18 @@ import { renderToString } from 'react-dom/server';
 import { renderStatic } from 'glamor/server';
 import { getFarceResult } from 'found/lib/server';
 import { CookiesProvider } from 'react-cookie';
+import { resolver } from 'relay/environment';
+import { getRequestCache } from 'relay/fetcher';
 import template from 'server/template';
-import { createResolver, historyMiddlewares, render, routeConfig } from 'routes';
-import { ServerFetcher } from 'relay/fetcher';
+import { historyMiddlewares, render, routeConfig } from 'routes';
 
 export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (req, res) => {
-  const graphqlUrl = 'http://localhost:3000/graphql';
-  const fetcher = new ServerFetcher(graphqlUrl);
-
   try {
     const { redirect, element } = await getFarceResult({
       url: req.url,
       historyMiddlewares,
       routeConfig,
-      resolver: createResolver(fetcher),
+      resolver,
       render,
     });
 
@@ -37,7 +35,7 @@ export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (re
     res.send(
       template({
         root: html,
-        data: fetcher,
+        data: getRequestCache(),
         css,
         ids,
         manifestJSBundle,

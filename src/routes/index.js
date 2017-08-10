@@ -4,8 +4,6 @@ import queryMiddleware from 'farce/lib/queryMiddleware';
 import createRender from 'found/lib/createRender';
 import makeRouteConfig from 'found/lib/makeRouteConfig';
 import Route from 'found/lib/Route';
-import { Resolver } from 'found-relay';
-import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import Loading from 'components/Loading';
 import AppQuery from 'queries/App';
 import HomeQuery from 'queries/Home';
@@ -24,15 +22,6 @@ const getComponent = loader => (location, cb) =>
   });
 
 export const historyMiddlewares = [queryMiddleware];
-
-export function createResolver(fetcher) {
-  const environment = new Environment({
-    network: Network.create((...args) => fetcher.fetch(...args)),
-    store: new Store(new RecordSource()),
-  });
-
-  return new Resolver(environment);
-}
 
 // eslint-disable-next-line
 const renderProp = ({ Component, props }) =>
