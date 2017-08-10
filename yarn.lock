@@ -5894,10 +5894,6 @@ rc@^1.0.1, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-addons-test-utils@^15.6.0:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.0.tgz#062d36117fe8d18f3ba5e06eb33383b0b85ea5b9"
-
 react-cookie@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-2.0.8.tgz#2b551c8d80f8c1973ac9347aab61b152c6313398"
@@ -5987,6 +5983,13 @@ react-side-effect@^1.1.0:
 react-static-container@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-static-container/-/react-static-container-1.0.1.tgz#694c0dd68a896b879519afb548399cc1989c9ab0"
+
+react-test-renderer@next:
+  version "16.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.0.0-beta.5.tgz#6169e2ea96e8d21645662b369c23239974cd1f11"
+  dependencies:
+    fbjs "^0.8.9"
+    object-assign "^4.1.0"
 
 react@16.0.0-beta.5:
   version "16.0.0-beta.5"
@@ -6225,7 +6228,7 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-relay-compiler@next:
+relay-compiler@1.2.0-rc.1:
   version "1.2.0-rc.1"
   resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-1.2.0-rc.1.tgz#d4c072cce621d07fb80a0709c03dea5082a697af"
   dependencies:

@@ -61,7 +61,7 @@
     "bluebird": "^3.5.0",
     "enzyme": "^2.9.1",
     "eslint-import-resolver-babel-module": "^3.0.0",
-    "react-addons-test-utils": "^15.6.0",
-    "relay-compiler": "next"
+    "react-test-renderer": "16.0.0-beta.5",
+    "relay-compiler": "1.2.0-rc.1"
   }
 }
