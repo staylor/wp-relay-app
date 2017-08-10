@@ -19,7 +19,7 @@ export type Page_viewer = {|
       +data: ?$ReadOnlyArray<?{| |}>;
     |};
     +featuredMedia: ?{|
-      +source_url?: ?string;
+      +sourceUrl?: ?string;
     |};
   |};
 |};
@@ -133,7 +133,7 @@ const fragment /*: ConcreteFragment*/ = {
                   "kind": "ScalarField",
                   "alias": null,
                   "args": null,
-                  "name": "source_url",
+                  "name": "sourceUrl",
                   "storageKey": null
                 }
               ]

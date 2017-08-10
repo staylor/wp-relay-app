@@ -6,13 +6,13 @@ const UpdateCommentMutation = graphql`
     updateComment(input: $input) {
       comment {
         id
-        author_name
-        author_url
+        authorName
+        authorUrl
         date
         content {
           rendered
         }
-        author_avatar_urls {
+        authorAvatarUrls {
           size
           url
         }

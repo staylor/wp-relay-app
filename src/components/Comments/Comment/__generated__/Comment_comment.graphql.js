@@ -10,15 +10,15 @@
 import type {ConcreteFragment} from 'relay-runtime';
 export type Comment_comment = {|
   +id: string;
-  +author_name: ?string;
-  +author_url: ?string;
-  +author_hash: ?string;
+  +authorName: ?string;
+  +authorUrl: ?string;
+  +authorHash: ?string;
   +date: ?string;
   +content: ?{|
     +rendered: ?string;
     +raw: ?string;
   |};
-  +author_avatar_urls: ?$ReadOnlyArray<?{|
+  +authorAvatarUrls: ?$ReadOnlyArray<?{|
     +size: ?number;
     +url: ?string;
   |}>;
@@ -45,21 +45,21 @@ const fragment /*: ConcreteFragment*/ = {
       "kind": "ScalarField",
       "alias": null,
       "args": null,
-      "name": "author_name",
+      "name": "authorName",
       "storageKey": null
     },
     {
       "kind": "ScalarField",
       "alias": null,
       "args": null,
-      "name": "author_url",
+      "name": "authorUrl",
       "storageKey": null
     },
     {
       "kind": "ScalarField",
       "alias": null,
       "args": null,
-      "name": "author_hash",
+      "name": "authorHash",
       "storageKey": null
     },
     {
@@ -99,7 +99,7 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "concreteType": "Avatar",
-      "name": "author_avatar_urls",
+      "name": "authorAvatarUrls",
       "plural": true,
       "selections": [
         {

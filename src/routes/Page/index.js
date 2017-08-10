@@ -18,7 +18,7 @@ const Page = ({ viewer: { page } }) => {
 
   const { slug, title, content: { data: content }, featuredMedia } = page;
   const url = `${SITE_URL}/${slug}`;
-  const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
+  const featuredImage = (featuredMedia && featuredMedia.sourceUrl) || null;
 
   return (
     <article className={css(styles.content)}>
@@ -73,7 +73,7 @@ export default createFragmentContainer(
         }
         featuredMedia {
           ... on Image {
-            source_url
+            sourceUrl
           }
           ...Media_media
         }

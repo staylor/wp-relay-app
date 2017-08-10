@@ -13,15 +13,15 @@ export const CommentConnectionType = PropTypes.shape({
 
 export const CommentType = PropTypes.shape({
   id: PropTypes.string,
-  author_name: PropTypes.string,
-  author_url: PropTypes.string,
-  author_hash: PropTypes.string,
+  authorName: PropTypes.string,
+  authorUrl: PropTypes.string,
+  authorHash: PropTypes.string,
   date: PropTypes.string,
   content: PropTypes.shape({
     rendered: PropTypes.string,
     raw: PropTypes.string,
   }),
-  author_avatar_urls: PropTypes.arrayOf(
+  authorAvatarUrls: PropTypes.arrayOf(
     PropTypes.shape({
       size: PropTypes.number,
       url: PropTypes.string,

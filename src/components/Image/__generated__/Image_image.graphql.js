@@ -9,11 +9,11 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type Image_image = {|
-  +source_url?: ?string;
-  +media_details?: ?{|
+  +sourceUrl?: ?string;
+  +mediaDetails?: ?{|
     +sizes: ?$ReadOnlyArray<?{|
       +name: ?string;
-      +source_url: ?string;
+      +sourceUrl: ?string;
     |}>;
   |};
 |};
@@ -34,7 +34,7 @@ const fragment /*: ConcreteFragment*/ = {
           "kind": "ScalarField",
           "alias": null,
           "args": null,
-          "name": "source_url",
+          "name": "sourceUrl",
           "storageKey": null
         },
         {
@@ -42,7 +42,7 @@ const fragment /*: ConcreteFragment*/ = {
           "alias": null,
           "args": null,
           "concreteType": "ImageDetails",
-          "name": "media_details",
+          "name": "mediaDetails",
           "plural": false,
           "selections": [
             {
@@ -64,7 +64,7 @@ const fragment /*: ConcreteFragment*/ = {
                   "kind": "ScalarField",
                   "alias": null,
                   "args": null,
-                  "name": "source_url",
+                  "name": "sourceUrl",
                   "storageKey": null
                 }
               ],

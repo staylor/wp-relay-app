@@ -30,10 +30,21 @@ export default class NavMenu extends Component {
   static propTypes = {
     navMenu: PropTypes.shape({
       id: PropTypes.string,
-      title: PropTypes.string,
-      url: PropTypes.string,
-      object: PropTypes.String,
-      object_id: PropTypes.String,
+      name: PropTypes.string,
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          title: PropTypes.string,
+          url: PropTypes.string,
+          parent: PropTypes.string,
+          order: PropTypes.number,
+          type: PropTypes.string,
+          typeName: PropTypes.string,
+          typeSlug: PropTypes.string,
+          dataSlug: PropTypes.string,
+          dataID: PropTypes.string,
+        })
+      ),
     }).isRequired,
   };
 

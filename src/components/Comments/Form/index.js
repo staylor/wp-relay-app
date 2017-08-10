@@ -11,9 +11,9 @@ import {
 import styles from './styles';
 
 const fields = {
-  author_name: { name: 'Name', cookie: AUTHOR_NAME_COOKIE },
-  author_email: { name: 'Email', cookie: AUTHOR_EMAIL_COOKIE },
-  author_url: { name: 'URL', cookie: AUTHOR_URL_COOKIE },
+  authorName: { name: 'Name', cookie: AUTHOR_NAME_COOKIE },
+  authorEmail: { name: 'Email', cookie: AUTHOR_EMAIL_COOKIE },
+  authorUrl: { name: 'URL', cookie: AUTHOR_URL_COOKIE },
 };
 
 const getDefaultState = props => {

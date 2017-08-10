@@ -19,15 +19,15 @@ import styles from './styles';
 @FragmentContainer(graphql`
   fragment Comment_comment on Comment {
     id
-    author_name
-    author_url
-    author_hash
+    authorName
+    authorUrl
+    authorHash
     date
     content {
       rendered
       raw
     }
-    author_avatar_urls {
+    authorAvatarUrls {
       size
       url
     }
@@ -92,7 +92,7 @@ export default class Comment extends Component {
       return false;
     }
     const values = md5(`${comment.id}${authorEmail}`);
-    return values === this.props.comment.author_hash;
+    return values === this.props.comment.authorHash;
   }
 
   render() {
@@ -100,13 +100,13 @@ export default class Comment extends Component {
       comment: {
         id,
         date,
-        author_url: authorUrl,
-        author_name: authorName,
-        author_avatar_urls: avatarUrls,
+        authorUrl,
+        authorName,
+        authorAvatarUrls,
         content: { rendered: content },
       },
     } = this.props;
-    const avatar = avatarUrls && avatarUrls.find(data => data.size === 48);
+    const avatar = authorAvatarUrls && authorAvatarUrls.find(data => data.size === 48);
     let authorDisplay = authorName;
     if (authorUrl) {
       authorDisplay = (

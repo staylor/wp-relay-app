@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 73f011edaedb44d8018b1df70a393953
+ * @relayHash 4cf74f58ec8ca49ff770323f16aa6270
  */
 
 /* eslint-disable */
@@ -22,13 +22,13 @@ export type UpdateComment_MutationResponse = {|
   +updateComment: ?{|
     +comment: ?{|
       +id: string;
-      +author_name: ?string;
-      +author_url: ?string;
+      +authorName: ?string;
+      +authorUrl: ?string;
       +date: ?string;
       +content: ?{|
         +rendered: ?string;
       |};
-      +author_avatar_urls: ?$ReadOnlyArray<?{|
+      +authorAvatarUrls: ?$ReadOnlyArray<?{|
         +size: ?number;
         +url: ?string;
       |}>;
@@ -48,13 +48,13 @@ mutation UpdateComment_Mutation(
   updateComment(input: $input) {
     comment {
       id
-      author_name
-      author_url
+      authorName
+      authorUrl
       date
       content {
         rendered
       }
-      author_avatar_urls {
+      authorAvatarUrls {
         size
         url
       }
@@ -114,14 +114,14 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "author_name",
+                "name": "authorName",
                 "storageKey": null
               },
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "author_url",
+                "name": "authorUrl",
                 "storageKey": null
               },
               {
@@ -154,7 +154,7 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "concreteType": "Avatar",
-                "name": "author_avatar_urls",
+                "name": "authorAvatarUrls",
                 "plural": true,
                 "selections": [
                   {
@@ -255,14 +255,14 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "author_name",
+                "name": "authorName",
                 "storageKey": null
               },
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "author_url",
+                "name": "authorUrl",
                 "storageKey": null
               },
               {
@@ -295,7 +295,7 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "concreteType": "Avatar",
-                "name": "author_avatar_urls",
+                "name": "authorAvatarUrls",
                 "plural": true,
                 "selections": [
                   {
@@ -344,7 +344,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation UpdateComment_Mutation(\n  $input: UpdateCommentInput!\n) {\n  updateComment(input: $input) {\n    comment {\n      id\n      author_name\n      author_url\n      date\n      content {\n        rendered\n      }\n      author_avatar_urls {\n        size\n        url\n      }\n      parent\n    }\n    cookies\n    status\n  }\n}\n"
+  "text": "mutation UpdateComment_Mutation(\n  $input: UpdateCommentInput!\n) {\n  updateComment(input: $input) {\n    comment {\n      id\n      authorName\n      authorUrl\n      date\n      content {\n        rendered\n      }\n      authorAvatarUrls {\n        size\n        url\n      }\n      parent\n    }\n    cookies\n    status\n  }\n}\n"
 };
 
 module.exports = batch;

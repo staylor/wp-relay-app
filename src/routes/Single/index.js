@@ -35,7 +35,7 @@ import styles from './styles';
       featuredMedia {
         ...Media_media
         ... on Image {
-          source_url
+          sourceUrl
         }
       }
       tags {
@@ -104,7 +104,7 @@ export default class Single extends Component {
 
     const [, year, month, day] = dateRegex.exec(date);
     const url = `${SITE_URL}/${year}/${month}/${day}/${slug}`;
-    const featuredImage = (featuredMedia && featuredMedia.source_url) || null;
+    const featuredImage = (featuredMedia && featuredMedia.sourceUrl) || null;
 
     return (
       <article className={css(styles.content)}>

@@ -8,14 +8,14 @@ const AddCommentMutation = graphql`
     addComment(input: $input) {
       comment {
         id
-        author_name
-        author_url
+        authorName
+        authorUrl
         date
         content {
           rendered
           raw
         }
-        author_avatar_urls {
+        authorAvatarUrls {
           size
           url
         }
@@ -32,17 +32,17 @@ const commit = (environment, variables, onCompleted = null) => {
     addComment: {
       comment: {
         id: null,
-        author_name: variables.input.author_name,
-        author_email: variables.input.author_email,
-        author_url: variables.input.author_url,
+        authorName: variables.input.authorName,
+        authorEmail: variables.input.authorEmail,
+        authorUrl: variables.input.authorUrl,
         date: new Date().toISOString(),
         content: {
           rendered: `<p>${variables.input.content.replace(newlineRegex, '<br />')}</p>`,
         },
-        author_avatar_urls: [
+        authorAvatarUrls: [
           {
             size: 48,
-            url: `http://2.gravatar.com/avatar/${md5(variables.input.author_email)}?s=48&d=mm&r=g`,
+            url: `http://2.gravatar.com/avatar/${md5(variables.input.authorEmail)}?s=48&d=mm&r=g`,
           },
         ],
         parent: variables.input.parent || null,

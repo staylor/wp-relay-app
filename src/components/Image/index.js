@@ -8,11 +8,11 @@ import styles from './styles';
 @FragmentContainer(graphql`
   fragment Image_image on Media {
     ... on Image {
-      source_url
-      media_details {
+      sourceUrl
+      mediaDetails {
         sizes {
           name
-          source_url
+          sourceUrl
         }
       }
     }
@@ -22,8 +22,8 @@ export default class Image extends Component {
   static propTypes = {
     crop: PropTypes.string,
     image: PropTypes.shape({
-      source_url: PropTypes.String,
-      media_details: PropTypes.object,
+      sourceUrl: PropTypes.String,
+      mediaDetails: PropTypes.object,
     }).isRequired,
   };
 
@@ -46,20 +46,20 @@ export default class Image extends Component {
   }
 
   render() {
-    const { source_url: sourceUrl, media_details: { sizes } } = this.props.image;
+    const { sourceUrl, mediaDetails } = this.props.image;
 
     if (!sourceUrl) {
-      return '';
+      return null;
     }
 
-    const chosen = this.getCrop(sizes);
+    const chosen = this.getCrop(mediaDetails.sizes);
     if (!chosen) {
       return null;
     }
 
     return (
       <figure>
-        <img alt="" className={css(styles.image)} src={chosen.source_url} />
+        <img alt="" className={css(styles.image)} src={chosen.sourceUrl} />
       </figure>
     );
   }

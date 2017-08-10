@@ -22,7 +22,7 @@ export type Single_viewer = {|
       +raw: ?string;
     |};
     +featuredMedia: ?{|
-      +source_url?: ?string;
+      +sourceUrl?: ?string;
     |};
     +tags: ?$ReadOnlyArray<?{|
       +id: string;
@@ -179,7 +179,7 @@ const fragment /*: ConcreteFragment*/ = {
                   "kind": "ScalarField",
                   "alias": null,
                   "args": null,
-                  "name": "source_url",
+                  "name": "sourceUrl",
                   "storageKey": null
                 }
               ]

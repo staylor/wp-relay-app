@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1bf06381de5898481fca14deee41f749
+ * @relayHash 5a77adfff95807f22d25574a66e924e8
  */
 
 /* eslint-disable */
@@ -266,11 +266,11 @@ fragment PostLink_post on Post {
 
 fragment Image_image on Media {
   ... on Image {
-    source_url
-    media_details {
+    sourceUrl
+    mediaDetails {
       sizes {
         name
-        source_url
+        sourceUrl
       }
     }
   }
@@ -1506,7 +1506,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
-                                "name": "source_url",
+                                "name": "sourceUrl",
                                 "storageKey": null
                               },
                               {
@@ -1514,7 +1514,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": "ImageDetails",
-                                "name": "media_details",
+                                "name": "mediaDetails",
                                 "plural": false,
                                 "selections": [
                                   {
@@ -1536,7 +1536,7 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "source_url",
+                                        "name": "sourceUrl",
                                         "storageKey": null
                                       }
                                     ],
@@ -2716,7 +2716,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
-                                "name": "source_url",
+                                "name": "sourceUrl",
                                 "storageKey": null
                               },
                               {
@@ -2724,7 +2724,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": "ImageDetails",
-                                "name": "media_details",
+                                "name": "mediaDetails",
                                 "plural": false,
                                 "selections": [
                                   {
@@ -2746,7 +2746,7 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "source_url",
+                                        "name": "sourceUrl",
                                         "storageKey": null
                                       }
                                     ],
@@ -3920,7 +3920,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
-                                "name": "source_url",
+                                "name": "sourceUrl",
                                 "storageKey": null
                               },
                               {
@@ -3928,7 +3928,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": "ImageDetails",
-                                "name": "media_details",
+                                "name": "mediaDetails",
                                 "plural": false,
                                 "selections": [
                                   {
@@ -3950,7 +3950,7 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "source_url",
+                                        "name": "sourceUrl",
                                         "storageKey": null
                                       }
                                     ],
@@ -5124,7 +5124,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
-                                "name": "source_url",
+                                "name": "sourceUrl",
                                 "storageKey": null
                               },
                               {
@@ -5132,7 +5132,7 @@ const batch /*: ConcreteBatch*/ = {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": "ImageDetails",
-                                "name": "media_details",
+                                "name": "mediaDetails",
                                 "plural": false,
                                 "selections": [
                                   {
@@ -5154,7 +5154,7 @@ const batch /*: ConcreteBatch*/ = {
                                         "kind": "ScalarField",
                                         "alias": null,
                                         "args": null,
-                                        "name": "source_url",
+                                        "name": "sourceUrl",
                                         "storageKey": null
                                       }
                                     ],
@@ -5221,7 +5221,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n  excerpt {\n    raw\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment ContentNode_content on ContentNode {\n  __typename\n  ... on Embed {\n    ...Embed_node\n  }\n  ... on Text {\n    text\n  }\n  ... on Element {\n    tagName\n    ...Element_node\n    children {\n      __typename\n      ... on ContentNode {\n        __typename\n        ... on Embed {\n          ...Embed_node\n        }\n        ... on Text {\n          text\n        }\n        ... on Element {\n          tagName\n          ...Element_node\n        }\n      }\n      ... on Element {\n        children {\n          __typename\n          ... on ContentNode {\n            __typename\n            ... on Embed {\n              ...Embed_node\n            }\n            ... on Text {\n              text\n            }\n            ... on Element {\n              tagName\n              ...Element_node\n            }\n          }\n          ... on Element {\n            children {\n              __typename\n              ... on ContentNode {\n                __typename\n                ... on Embed {\n                  ...Embed_node\n                }\n                ... on Text {\n                  text\n                }\n                ... on Element {\n                  tagName\n                  ...Element_node\n                }\n              }\n              ... on Element {\n                children {\n                  __typename\n                  ... on ContentNode {\n                    __typename\n                    ... on Embed {\n                      ...Embed_node\n                    }\n                    ... on Text {\n                      text\n                    }\n                    ... on Element {\n                      tagName\n                      ...Element_node\n                    }\n                  }\n                  ... on Element {\n                    children {\n                      __typename\n                      ... on ContentNode {\n                        __typename\n                        ... on Embed {\n                          ...Embed_node\n                        }\n                        ... on Text {\n                          text\n                        }\n                        ... on Element {\n                          tagName\n                          ...Element_node\n                        }\n                      }\n                      ... on Element {\n                        children {\n                          __typename\n                          ... on ContentNode {\n                            __typename\n                            ... on Embed {\n                              ...Embed_node\n                            }\n                            ... on Text {\n                              text\n                            }\n                            ... on Element {\n                              tagName\n                              ...Element_node\n                            }\n                          }\n                          ... on Element {\n                            children {\n                              __typename\n                              ... on ContentNode {\n                                __typename\n                                ... on Embed {\n                                  ...Embed_node\n                                }\n                                ... on Text {\n                                  text\n                                }\n                                ... on Element {\n                                  tagName\n                                  ...Element_node\n                                }\n                              }\n                              ... on Element {\n                                children {\n                                  __typename\n                                  ... on ContentNode {\n                                    __typename\n                                    ... on Embed {\n                                      ...Embed_node\n                                    }\n                                    ... on Text {\n                                      text\n                                    }\n                                    ... on Element {\n                                      tagName\n                                      ...Element_node\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n\nfragment Embed_node on Embed {\n  title\n  thumbnailUrl\n  html\n  width\n  height\n}\n\nfragment Element_node on Element {\n  tagName\n  attributes {\n    name\n    value\n  }\n}\n"
+  "text": "query Home_Query(\n  $stickiesTotal: Int = 2\n  $watchThisTotal: Int = 5\n  $readThisTotal: Int = 5\n  $listenToThisTotal: Int = 5\n) {\n  viewer {\n    ...Home_viewer\n    id\n  }\n}\n\nfragment Home_viewer on Viewer {\n  stickies: posts(sticky: true, first: $stickiesTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n  readThis: posts(category: \"read-this\", sticky: false, first: $readThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n  watchThis: posts(category: \"watch-this\", first: $watchThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n  listenToThis: posts(category: \"listen-to-this\", first: $listenToThisTotal) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n      cursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n  excerpt {\n    raw\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment ContentNode_content on ContentNode {\n  __typename\n  ... on Embed {\n    ...Embed_node\n  }\n  ... on Text {\n    text\n  }\n  ... on Element {\n    tagName\n    ...Element_node\n    children {\n      __typename\n      ... on ContentNode {\n        __typename\n        ... on Embed {\n          ...Embed_node\n        }\n        ... on Text {\n          text\n        }\n        ... on Element {\n          tagName\n          ...Element_node\n        }\n      }\n      ... on Element {\n        children {\n          __typename\n          ... on ContentNode {\n            __typename\n            ... on Embed {\n              ...Embed_node\n            }\n            ... on Text {\n              text\n            }\n            ... on Element {\n              tagName\n              ...Element_node\n            }\n          }\n          ... on Element {\n            children {\n              __typename\n              ... on ContentNode {\n                __typename\n                ... on Embed {\n                  ...Embed_node\n                }\n                ... on Text {\n                  text\n                }\n                ... on Element {\n                  tagName\n                  ...Element_node\n                }\n              }\n              ... on Element {\n                children {\n                  __typename\n                  ... on ContentNode {\n                    __typename\n                    ... on Embed {\n                      ...Embed_node\n                    }\n                    ... on Text {\n                      text\n                    }\n                    ... on Element {\n                      tagName\n                      ...Element_node\n                    }\n                  }\n                  ... on Element {\n                    children {\n                      __typename\n                      ... on ContentNode {\n                        __typename\n                        ... on Embed {\n                          ...Embed_node\n                        }\n                        ... on Text {\n                          text\n                        }\n                        ... on Element {\n                          tagName\n                          ...Element_node\n                        }\n                      }\n                      ... on Element {\n                        children {\n                          __typename\n                          ... on ContentNode {\n                            __typename\n                            ... on Embed {\n                              ...Embed_node\n                            }\n                            ... on Text {\n                              text\n                            }\n                            ... on Element {\n                              tagName\n                              ...Element_node\n                            }\n                          }\n                          ... on Element {\n                            children {\n                              __typename\n                              ... on ContentNode {\n                                __typename\n                                ... on Embed {\n                                  ...Embed_node\n                                }\n                                ... on Text {\n                                  text\n                                }\n                                ... on Element {\n                                  tagName\n                                  ...Element_node\n                                }\n                              }\n                              ... on Element {\n                                children {\n                                  __typename\n                                  ... on ContentNode {\n                                    __typename\n                                    ... on Embed {\n                                      ...Embed_node\n                                    }\n                                    ... on Text {\n                                      text\n                                    }\n                                    ... on Element {\n                                      tagName\n                                      ...Element_node\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    sourceUrl\n    mediaDetails {\n      sizes {\n        name\n        sourceUrl\n      }\n    }\n  }\n}\n\nfragment Embed_node on Embed {\n  title\n  thumbnailUrl\n  html\n  width\n  height\n}\n\nfragment Element_node on Element {\n  tagName\n  attributes {\n    name\n    value\n  }\n}\n"
 };
 
 module.exports = batch;
