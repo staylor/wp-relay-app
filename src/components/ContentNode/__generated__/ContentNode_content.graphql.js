@@ -13,29 +13,70 @@ export type ContentNode_content = $ReadOnlyArray<{|
   +text: ?string;
 |} | {|
   +__typename: "Element";
+  +tagName: ?string;
   +children: ?$ReadOnlyArray<?{|
     +__typename?: "Text";
     +text?: ?string;
   |} | {|
     +__typename?: "Element";
+    +tagName?: ?string;
     +children: ?$ReadOnlyArray<?{|
       +__typename?: "Text";
       +text?: ?string;
     |} | {|
       +__typename?: "Element";
+      +tagName?: ?string;
       +children: ?$ReadOnlyArray<?{|
         +__typename?: "Text";
         +text?: ?string;
       |} | {|
         +__typename?: "Element";
+        +tagName?: ?string;
         +children: ?$ReadOnlyArray<?{|
           +__typename?: "Text";
           +text?: ?string;
         |} | {|
           +__typename?: "Element";
+          +tagName?: ?string;
           +children: ?$ReadOnlyArray<?{|
             +__typename?: "Text";
             +text?: ?string;
+          |} | {|
+            +__typename?: "Element";
+            +tagName?: ?string;
+            +children: ?$ReadOnlyArray<?{|
+              +__typename?: "Text";
+              +text?: ?string;
+            |} | {|
+              +__typename?: "Element";
+              +tagName?: ?string;
+              +children: ?$ReadOnlyArray<?{|
+                +__typename?: "Text";
+                +text?: ?string;
+              |} | {|
+                +__typename?: "Element";
+                +tagName?: ?string;
+                +children: ?$ReadOnlyArray<?{|
+                  +__typename?: "Text";
+                  +text?: ?string;
+                |} | {|
+                  +__typename?: "Element";
+                  +tagName?: ?string;
+                |} | {|
+                  // This will never be '%other', but we need some
+                  // value in case none of the concrete values match.
+                  +__typename: "%other";
+                |}>;
+              |} | {|
+                // This will never be '%other', but we need some
+                // value in case none of the concrete values match.
+                +__typename: "%other";
+              |}>;
+            |} | {|
+              // This will never be '%other', but we need some
+              // value in case none of the concrete values match.
+              +__typename: "%other";
+            |}>;
           |} | {|
             // This will never be '%other', but we need some
             // value in case none of the concrete values match.
@@ -89,6 +130,13 @@ const fragment /*: ConcreteFragment*/ = {
       "type": "Element",
       "selections": [
         {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "tagName",
+          "storageKey": null
+        },
+        {
           "kind": "FragmentSpread",
           "name": "Element_node",
           "args": null
@@ -112,6 +160,13 @@ const fragment /*: ConcreteFragment*/ = {
               "kind": "InlineFragment",
               "type": "Element",
               "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "tagName",
+                  "storageKey": null
+                },
                 {
                   "kind": "FragmentSpread",
                   "name": "Element_node",
@@ -137,6 +192,13 @@ const fragment /*: ConcreteFragment*/ = {
                       "type": "Element",
                       "selections": [
                         {
+                          "kind": "ScalarField",
+                          "alias": null,
+                          "args": null,
+                          "name": "tagName",
+                          "storageKey": null
+                        },
+                        {
                           "kind": "FragmentSpread",
                           "name": "Element_node",
                           "args": null
@@ -160,6 +222,13 @@ const fragment /*: ConcreteFragment*/ = {
                               "kind": "InlineFragment",
                               "type": "Element",
                               "selections": [
+                                {
+                                  "kind": "ScalarField",
+                                  "alias": null,
+                                  "args": null,
+                                  "name": "tagName",
+                                  "storageKey": null
+                                },
                                 {
                                   "kind": "FragmentSpread",
                                   "name": "Element_node",
@@ -185,6 +254,13 @@ const fragment /*: ConcreteFragment*/ = {
                                       "type": "Element",
                                       "selections": [
                                         {
+                                          "kind": "ScalarField",
+                                          "alias": null,
+                                          "args": null,
+                                          "name": "tagName",
+                                          "storageKey": null
+                                        },
+                                        {
                                           "kind": "FragmentSpread",
                                           "name": "Element_node",
                                           "args": null
@@ -209,9 +285,196 @@ const fragment /*: ConcreteFragment*/ = {
                                               "type": "Element",
                                               "selections": [
                                                 {
+                                                  "kind": "ScalarField",
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "name": "tagName",
+                                                  "storageKey": null
+                                                },
+                                                {
                                                   "kind": "FragmentSpread",
                                                   "name": "Element_node",
                                                   "args": null
+                                                },
+                                                {
+                                                  "kind": "LinkedField",
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "concreteType": null,
+                                                  "name": "children",
+                                                  "plural": true,
+                                                  "selections": [
+                                                    {
+                                                      "kind": "ScalarField",
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "name": "__typename",
+                                                      "storageKey": null
+                                                    },
+                                                    {
+                                                      "kind": "InlineFragment",
+                                                      "type": "Element",
+                                                      "selections": [
+                                                        {
+                                                          "kind": "ScalarField",
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "name": "tagName",
+                                                          "storageKey": null
+                                                        },
+                                                        {
+                                                          "kind": "FragmentSpread",
+                                                          "name": "Element_node",
+                                                          "args": null
+                                                        },
+                                                        {
+                                                          "kind": "LinkedField",
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "concreteType": null,
+                                                          "name": "children",
+                                                          "plural": true,
+                                                          "selections": [
+                                                            {
+                                                              "kind": "ScalarField",
+                                                              "alias": null,
+                                                              "args": null,
+                                                              "name": "__typename",
+                                                              "storageKey": null
+                                                            },
+                                                            {
+                                                              "kind": "InlineFragment",
+                                                              "type": "Element",
+                                                              "selections": [
+                                                                {
+                                                                  "kind": "ScalarField",
+                                                                  "alias": null,
+                                                                  "args": null,
+                                                                  "name": "tagName",
+                                                                  "storageKey": null
+                                                                },
+                                                                {
+                                                                  "kind": "FragmentSpread",
+                                                                  "name": "Element_node",
+                                                                  "args": null
+                                                                },
+                                                                {
+                                                                  "kind": "LinkedField",
+                                                                  "alias": null,
+                                                                  "args": null,
+                                                                  "concreteType": null,
+                                                                  "name": "children",
+                                                                  "plural": true,
+                                                                  "selections": [
+                                                                    {
+                                                                      "kind": "ScalarField",
+                                                                      "alias": null,
+                                                                      "args": null,
+                                                                      "name": "__typename",
+                                                                      "storageKey": null
+                                                                    },
+                                                                    {
+                                                                      "kind": "InlineFragment",
+                                                                      "type": "Element",
+                                                                      "selections": [
+                                                                        {
+                                                                          "kind": "ScalarField",
+                                                                          "alias": null,
+                                                                          "args": null,
+                                                                          "name": "tagName",
+                                                                          "storageKey": null
+                                                                        },
+                                                                        {
+                                                                          "kind": "FragmentSpread",
+                                                                          "name": "Element_node",
+                                                                          "args": null
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "kind": "InlineFragment",
+                                                                      "type": "Text",
+                                                                      "selections": [
+                                                                        {
+                                                                          "kind": "ScalarField",
+                                                                          "alias": null,
+                                                                          "args": null,
+                                                                          "name": "text",
+                                                                          "storageKey": null
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "kind": "InlineFragment",
+                                                                      "type": "Embed",
+                                                                      "selections": [
+                                                                        {
+                                                                          "kind": "FragmentSpread",
+                                                                          "name": "Embed_node",
+                                                                          "args": null
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "storageKey": null
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "kind": "InlineFragment",
+                                                              "type": "Text",
+                                                              "selections": [
+                                                                {
+                                                                  "kind": "ScalarField",
+                                                                  "alias": null,
+                                                                  "args": null,
+                                                                  "name": "text",
+                                                                  "storageKey": null
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "kind": "InlineFragment",
+                                                              "type": "Embed",
+                                                              "selections": [
+                                                                {
+                                                                  "kind": "FragmentSpread",
+                                                                  "name": "Embed_node",
+                                                                  "args": null
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "storageKey": null
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "kind": "InlineFragment",
+                                                      "type": "Text",
+                                                      "selections": [
+                                                        {
+                                                          "kind": "ScalarField",
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "name": "text",
+                                                          "storageKey": null
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "kind": "InlineFragment",
+                                                      "type": "Embed",
+                                                      "selections": [
+                                                        {
+                                                          "kind": "FragmentSpread",
+                                                          "name": "Embed_node",
+                                                          "args": null
+                                                        }
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "storageKey": null
                                                 }
                                               ]
                                             },

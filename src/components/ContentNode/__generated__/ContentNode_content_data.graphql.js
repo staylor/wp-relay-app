@@ -12,6 +12,9 @@ export type ContentNode_content_data = {|
   +__typename: "Text";
   +text: ?string;
 |} | {|
+  +__typename: "Element";
+  +tagName: ?string;
+|} | {|
   // This will never be '%other', but we need some
   // value in case none of the concrete values match.
   +__typename: "%other";
@@ -36,6 +39,13 @@ const fragment /*: ConcreteFragment*/ = {
       "kind": "InlineFragment",
       "type": "Element",
       "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "tagName",
+          "storageKey": null
+        },
         {
           "kind": "FragmentSpread",
           "name": "Element_node",

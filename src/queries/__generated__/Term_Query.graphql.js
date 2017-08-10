@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 759a3f6c76c182b47284daa6835af0d3
+ * @relayHash 96277851b9a032aa5e28e681a0cc9a66
  */
 
 /* eslint-disable */
@@ -100,6 +100,7 @@ fragment ContentNode_content on ContentNode {
     text
   }
   ... on Element {
+    tagName
     ...Element_node
     children {
       __typename
@@ -112,6 +113,7 @@ fragment ContentNode_content on ContentNode {
           text
         }
         ... on Element {
+          tagName
           ...Element_node
         }
       }
@@ -127,6 +129,7 @@ fragment ContentNode_content on ContentNode {
               text
             }
             ... on Element {
+              tagName
               ...Element_node
             }
           }
@@ -142,6 +145,7 @@ fragment ContentNode_content on ContentNode {
                   text
                 }
                 ... on Element {
+                  tagName
                   ...Element_node
                 }
               }
@@ -157,6 +161,7 @@ fragment ContentNode_content on ContentNode {
                       text
                     }
                     ... on Element {
+                      tagName
                       ...Element_node
                     }
                   }
@@ -172,7 +177,62 @@ fragment ContentNode_content on ContentNode {
                           text
                         }
                         ... on Element {
+                          tagName
                           ...Element_node
+                        }
+                      }
+                      ... on Element {
+                        children {
+                          __typename
+                          ... on ContentNode {
+                            __typename
+                            ... on Embed {
+                              ...Embed_node
+                            }
+                            ... on Text {
+                              text
+                            }
+                            ... on Element {
+                              tagName
+                              ...Element_node
+                            }
+                          }
+                          ... on Element {
+                            children {
+                              __typename
+                              ... on ContentNode {
+                                __typename
+                                ... on Embed {
+                                  ...Embed_node
+                                }
+                                ... on Text {
+                                  text
+                                }
+                                ... on Element {
+                                  tagName
+                                  ...Element_node
+                                }
+                              }
+                              ... on Element {
+                                children {
+                                  __typename
+                                  ... on ContentNode {
+                                    __typename
+                                    ... on Embed {
+                                      ...Embed_node
+                                    }
+                                    ... on Text {
+                                      text
+                                    }
+                                    ... on Element {
+                                      tagName
+                                      ...Element_node
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     }
@@ -812,6 +872,336 @@ const batch /*: ConcreteBatch*/ = {
                                                                               }
                                                                             ],
                                                                             "storageKey": null
+                                                                          },
+                                                                          {
+                                                                            "kind": "LinkedField",
+                                                                            "alias": null,
+                                                                            "args": null,
+                                                                            "concreteType": null,
+                                                                            "name": "children",
+                                                                            "plural": true,
+                                                                            "selections": [
+                                                                              {
+                                                                                "kind": "ScalarField",
+                                                                                "alias": null,
+                                                                                "args": null,
+                                                                                "name": "__typename",
+                                                                                "storageKey": null
+                                                                              },
+                                                                              {
+                                                                                "kind": "InlineFragment",
+                                                                                "type": "Element",
+                                                                                "selections": [
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "tagName",
+                                                                                    "storageKey": null
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "LinkedField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "concreteType": "Meta",
+                                                                                    "name": "attributes",
+                                                                                    "plural": true,
+                                                                                    "selections": [
+                                                                                      {
+                                                                                        "kind": "ScalarField",
+                                                                                        "alias": null,
+                                                                                        "args": null,
+                                                                                        "name": "name",
+                                                                                        "storageKey": null
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "ScalarField",
+                                                                                        "alias": null,
+                                                                                        "args": null,
+                                                                                        "name": "value",
+                                                                                        "storageKey": null
+                                                                                      }
+                                                                                    ],
+                                                                                    "storageKey": null
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "LinkedField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "concreteType": null,
+                                                                                    "name": "children",
+                                                                                    "plural": true,
+                                                                                    "selections": [
+                                                                                      {
+                                                                                        "kind": "ScalarField",
+                                                                                        "alias": null,
+                                                                                        "args": null,
+                                                                                        "name": "__typename",
+                                                                                        "storageKey": null
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "InlineFragment",
+                                                                                        "type": "Element",
+                                                                                        "selections": [
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "tagName",
+                                                                                            "storageKey": null
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "LinkedField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "concreteType": "Meta",
+                                                                                            "name": "attributes",
+                                                                                            "plural": true,
+                                                                                            "selections": [
+                                                                                              {
+                                                                                                "kind": "ScalarField",
+                                                                                                "alias": null,
+                                                                                                "args": null,
+                                                                                                "name": "name",
+                                                                                                "storageKey": null
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "ScalarField",
+                                                                                                "alias": null,
+                                                                                                "args": null,
+                                                                                                "name": "value",
+                                                                                                "storageKey": null
+                                                                                              }
+                                                                                            ],
+                                                                                            "storageKey": null
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "LinkedField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "concreteType": null,
+                                                                                            "name": "children",
+                                                                                            "plural": true,
+                                                                                            "selections": [
+                                                                                              {
+                                                                                                "kind": "ScalarField",
+                                                                                                "alias": null,
+                                                                                                "args": null,
+                                                                                                "name": "__typename",
+                                                                                                "storageKey": null
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "InlineFragment",
+                                                                                                "type": "Element",
+                                                                                                "selections": [
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "tagName",
+                                                                                                    "storageKey": null
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "LinkedField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "concreteType": "Meta",
+                                                                                                    "name": "attributes",
+                                                                                                    "plural": true,
+                                                                                                    "selections": [
+                                                                                                      {
+                                                                                                        "kind": "ScalarField",
+                                                                                                        "alias": null,
+                                                                                                        "args": null,
+                                                                                                        "name": "name",
+                                                                                                        "storageKey": null
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "ScalarField",
+                                                                                                        "alias": null,
+                                                                                                        "args": null,
+                                                                                                        "name": "value",
+                                                                                                        "storageKey": null
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "storageKey": null
+                                                                                                  }
+                                                                                                ]
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "InlineFragment",
+                                                                                                "type": "Text",
+                                                                                                "selections": [
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "text",
+                                                                                                    "storageKey": null
+                                                                                                  }
+                                                                                                ]
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "InlineFragment",
+                                                                                                "type": "Embed",
+                                                                                                "selections": [
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "title",
+                                                                                                    "storageKey": null
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "thumbnailUrl",
+                                                                                                    "storageKey": null
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "html",
+                                                                                                    "storageKey": null
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "width",
+                                                                                                    "storageKey": null
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "ScalarField",
+                                                                                                    "alias": null,
+                                                                                                    "args": null,
+                                                                                                    "name": "height",
+                                                                                                    "storageKey": null
+                                                                                                  }
+                                                                                                ]
+                                                                                              }
+                                                                                            ],
+                                                                                            "storageKey": null
+                                                                                          }
+                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "InlineFragment",
+                                                                                        "type": "Text",
+                                                                                        "selections": [
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "text",
+                                                                                            "storageKey": null
+                                                                                          }
+                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "InlineFragment",
+                                                                                        "type": "Embed",
+                                                                                        "selections": [
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "title",
+                                                                                            "storageKey": null
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "thumbnailUrl",
+                                                                                            "storageKey": null
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "html",
+                                                                                            "storageKey": null
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "width",
+                                                                                            "storageKey": null
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "ScalarField",
+                                                                                            "alias": null,
+                                                                                            "args": null,
+                                                                                            "name": "height",
+                                                                                            "storageKey": null
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    ],
+                                                                                    "storageKey": null
+                                                                                  }
+                                                                                ]
+                                                                              },
+                                                                              {
+                                                                                "kind": "InlineFragment",
+                                                                                "type": "Text",
+                                                                                "selections": [
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "text",
+                                                                                    "storageKey": null
+                                                                                  }
+                                                                                ]
+                                                                              },
+                                                                              {
+                                                                                "kind": "InlineFragment",
+                                                                                "type": "Embed",
+                                                                                "selections": [
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "title",
+                                                                                    "storageKey": null
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "thumbnailUrl",
+                                                                                    "storageKey": null
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "html",
+                                                                                    "storageKey": null
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "width",
+                                                                                    "storageKey": null
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "ScalarField",
+                                                                                    "alias": null,
+                                                                                    "args": null,
+                                                                                    "name": "height",
+                                                                                    "storageKey": null
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            ],
+                                                                            "storageKey": null
                                                                           }
                                                                         ]
                                                                       },
@@ -1417,7 +1807,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query Term_Query(\n  $slug: String!\n  $taxonomy: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Term_viewer\n    id\n  }\n}\n\nfragment Term_viewer on Viewer {\n  term(slug: $slug, taxonomy: $taxonomy) {\n    __typename\n    id\n    name\n    slug\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(term: $slug, taxonomy: $taxonomy, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n  excerpt {\n    raw\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment ContentNode_content on ContentNode {\n  __typename\n  ... on Embed {\n    ...Embed_node\n  }\n  ... on Text {\n    text\n  }\n  ... on Element {\n    ...Element_node\n    children {\n      __typename\n      ... on ContentNode {\n        __typename\n        ... on Embed {\n          ...Embed_node\n        }\n        ... on Text {\n          text\n        }\n        ... on Element {\n          ...Element_node\n        }\n      }\n      ... on Element {\n        children {\n          __typename\n          ... on ContentNode {\n            __typename\n            ... on Embed {\n              ...Embed_node\n            }\n            ... on Text {\n              text\n            }\n            ... on Element {\n              ...Element_node\n            }\n          }\n          ... on Element {\n            children {\n              __typename\n              ... on ContentNode {\n                __typename\n                ... on Embed {\n                  ...Embed_node\n                }\n                ... on Text {\n                  text\n                }\n                ... on Element {\n                  ...Element_node\n                }\n              }\n              ... on Element {\n                children {\n                  __typename\n                  ... on ContentNode {\n                    __typename\n                    ... on Embed {\n                      ...Embed_node\n                    }\n                    ... on Text {\n                      text\n                    }\n                    ... on Element {\n                      ...Element_node\n                    }\n                  }\n                  ... on Element {\n                    children {\n                      __typename\n                      ... on ContentNode {\n                        __typename\n                        ... on Embed {\n                          ...Embed_node\n                        }\n                        ... on Text {\n                          text\n                        }\n                        ... on Element {\n                          ...Element_node\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n\nfragment Embed_node on Embed {\n  title\n  thumbnailUrl\n  html\n  width\n  height\n}\n\nfragment Element_node on Element {\n  tagName\n  attributes {\n    name\n    value\n  }\n}\n"
+  "text": "query Term_Query(\n  $slug: String!\n  $taxonomy: String!\n  $cursor: String\n  $count: Int = 10\n) {\n  viewer {\n    ...Term_viewer\n    id\n  }\n}\n\nfragment Term_viewer on Viewer {\n  term(slug: $slug, taxonomy: $taxonomy) {\n    __typename\n    id\n    name\n    slug\n    taxonomy {\n      rewrite {\n        slug\n      }\n      labels {\n        singular\n        plural\n      }\n      id\n    }\n  }\n  posts(term: $slug, taxonomy: $taxonomy, after: $cursor, first: $count) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  date\n  content {\n    data {\n      __typename\n      ...ContentNode_content\n    }\n  }\n  excerpt {\n    raw\n  }\n  featuredMedia {\n    __typename\n    ...Media_media\n    ... on Image {\n      id\n    }\n    ... on Audio {\n      id\n    }\n    ... on Video {\n      id\n    }\n  }\n  ...PostLink_post\n}\n\nfragment ContentNode_content on ContentNode {\n  __typename\n  ... on Embed {\n    ...Embed_node\n  }\n  ... on Text {\n    text\n  }\n  ... on Element {\n    tagName\n    ...Element_node\n    children {\n      __typename\n      ... on ContentNode {\n        __typename\n        ... on Embed {\n          ...Embed_node\n        }\n        ... on Text {\n          text\n        }\n        ... on Element {\n          tagName\n          ...Element_node\n        }\n      }\n      ... on Element {\n        children {\n          __typename\n          ... on ContentNode {\n            __typename\n            ... on Embed {\n              ...Embed_node\n            }\n            ... on Text {\n              text\n            }\n            ... on Element {\n              tagName\n              ...Element_node\n            }\n          }\n          ... on Element {\n            children {\n              __typename\n              ... on ContentNode {\n                __typename\n                ... on Embed {\n                  ...Embed_node\n                }\n                ... on Text {\n                  text\n                }\n                ... on Element {\n                  tagName\n                  ...Element_node\n                }\n              }\n              ... on Element {\n                children {\n                  __typename\n                  ... on ContentNode {\n                    __typename\n                    ... on Embed {\n                      ...Embed_node\n                    }\n                    ... on Text {\n                      text\n                    }\n                    ... on Element {\n                      tagName\n                      ...Element_node\n                    }\n                  }\n                  ... on Element {\n                    children {\n                      __typename\n                      ... on ContentNode {\n                        __typename\n                        ... on Embed {\n                          ...Embed_node\n                        }\n                        ... on Text {\n                          text\n                        }\n                        ... on Element {\n                          tagName\n                          ...Element_node\n                        }\n                      }\n                      ... on Element {\n                        children {\n                          __typename\n                          ... on ContentNode {\n                            __typename\n                            ... on Embed {\n                              ...Embed_node\n                            }\n                            ... on Text {\n                              text\n                            }\n                            ... on Element {\n                              tagName\n                              ...Element_node\n                            }\n                          }\n                          ... on Element {\n                            children {\n                              __typename\n                              ... on ContentNode {\n                                __typename\n                                ... on Embed {\n                                  ...Embed_node\n                                }\n                                ... on Text {\n                                  text\n                                }\n                                ... on Element {\n                                  tagName\n                                  ...Element_node\n                                }\n                              }\n                              ... on Element {\n                                children {\n                                  __typename\n                                  ... on ContentNode {\n                                    __typename\n                                    ... on Embed {\n                                      ...Embed_node\n                                    }\n                                    ... on Text {\n                                      text\n                                    }\n                                    ... on Element {\n                                      tagName\n                                      ...Element_node\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Media_media on Media {\n  __typename\n  ...Image_image\n}\n\nfragment PostLink_post on Post {\n  id\n  date\n  title {\n    raw\n  }\n}\n\nfragment Image_image on Media {\n  ... on Image {\n    source_url\n    media_details {\n      sizes {\n        name\n        source_url\n      }\n    }\n  }\n}\n\nfragment Embed_node on Embed {\n  title\n  thumbnailUrl\n  html\n  width\n  height\n}\n\nfragment Element_node on Element {\n  tagName\n  attributes {\n    name\n    value\n  }\n}\n"
 };
 
 module.exports = batch;

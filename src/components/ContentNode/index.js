@@ -17,6 +17,7 @@ export const dataFragment = graphql`
       text
     }
     ... on Element {
+      tagName
       ...Element_node
     }
   }
@@ -40,6 +41,21 @@ export const dataFragment = graphql`
                     ... on Element {
                       children {
                         ...ContentNode_content_data @inline
+                        ... on Element {
+                          children {
+                            ...ContentNode_content_data @inline
+                            ... on Element {
+                              children {
+                                ...ContentNode_content_data @inline
+                                ... on Element {
+                                  children {
+                                    ...ContentNode_content_data @inline
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
