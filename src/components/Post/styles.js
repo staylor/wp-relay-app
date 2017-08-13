@@ -18,11 +18,6 @@ export default {
     },
   },
 
-  image: {
-    display: 'block',
-    maxWidth: '100%',
-  },
-
   content: {
     '& p': {
       marginBottom: vars.padding,
