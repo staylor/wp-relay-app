@@ -5,13 +5,13 @@ import { getFarceResult } from 'found/lib/server';
 import { Resolver } from 'found-relay';
 import { CookiesProvider } from 'react-cookie';
 import createEnviroment from 'relay/environment';
-import { getRequestCache } from 'relay/fetcher';
 import template from 'server/template';
 import { historyMiddlewares, render, routeConfig } from 'routes';
 
 export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (req, res) => {
   try {
-    const environment = createEnviroment('http://localhost:8080/graphql');
+    const requestCache = {};
+    const environment = createEnviroment('http://localhost:8080/graphql', requestCache);
     const resolver = new Resolver(environment);
 
     const { redirect, element } = await getFarceResult({
@@ -39,7 +39,7 @@ export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (re
     res.send(
       template({
         root: html,
-        data: getRequestCache(),
+        data: requestCache,
         css,
         ids,
         manifestJSBundle,

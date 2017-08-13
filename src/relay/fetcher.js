@@ -3,11 +3,6 @@ import md5 from 'md5';
 import 'isomorphic-fetch';
 
 const isClient = typeof document !== 'undefined';
-let requestCache = {};
-
-export function getRequestCache() {
-  return requestCache;
-}
 
 const getServerCache = id => {
   // eslint-disable-next-line no-underscore-dangle
@@ -20,9 +15,7 @@ const getServerCache = id => {
   return payload;
 };
 
-export default function createFetch(url) {
-  requestCache = {};
-
+export default function createFetch(url, requestCache = {}) {
   return async function fetchQuery(batch, variables) {
     const vars = { variables };
     if (batch.query.operation === 'mutation') {
