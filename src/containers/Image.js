@@ -18,6 +18,7 @@ import FragmentContainer from 'decorators/FragmentContainer';
   }
 `)
 export default class Image extends Component {
+  /* eslint-disable react/no-unused-prop-types */
   static propTypes = {
     crop: PropTypes.string,
     image: PropTypes.shape({
@@ -30,36 +31,7 @@ export default class Image extends Component {
     crop: 'large',
   };
 
-  getCrop(sizes) {
-    let chosen;
-    const choices = [this.props.crop, this.constructor.defaultProps.crop, 'full'];
-
-    for (let i = 0; i < choices.length; i += 1) {
-      chosen = sizes.find(size => size.name === choices[i]);
-      if (chosen) {
-        return chosen;
-      }
-    }
-
-    return null;
-  }
-
   render() {
-    const { sourceUrl, mediaDetails } = this.props.image;
-
-    if (!sourceUrl) {
-      return null;
-    }
-
-    const chosen = this.getCrop(mediaDetails.sizes);
-    if (!chosen) {
-      return null;
-    }
-
-    return (
-      <figure>
-        <ResponsiveImage alt="" src={chosen.sourceUrl} />
-      </figure>
-    );
+    return <ResponsiveImage {...this.props} />;
   }
 }

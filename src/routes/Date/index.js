@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import Helmet from 'react-helmet';
-import DateQuery from 'queries/Date';
 import { ContentWrapper, Heading } from 'wp-styled-components';
-import Archive from 'components/Archive';
+import DateQuery from 'queries/Date';
+import Archive from 'containers/Archive';
 import { SITE_URL } from 'utils/constants';
 
 const DateRoute = ({ params, viewer: { posts }, relay }) => {

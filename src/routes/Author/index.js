@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
-import AuthorQuery from 'queries/Author';
 import { ContentWrapper, Heading } from 'wp-styled-components';
-import Archive from 'components/Archive';
+import Archive from 'containers/Archive';
+import AuthorQuery from 'queries/Author';
 
 const Author = ({ viewer: { author, posts }, relay }) =>
   <ContentWrapper>

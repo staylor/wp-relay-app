@@ -88,14 +88,7 @@ export default class ContentNode extends Component {
         return node.text;
       }
       if (node.__typename === 'Embed') {
-        return (
-          <Embed
-            key={key}
-            node={node}
-            onEmbedClick={this.props.onEmbedClick}
-            styles={this.props.styles}
-          />
-        );
+        return <Embed key={key} node={node} onEmbedClick={this.props.onEmbedClick} />;
       }
       return this.parseElement(node, key);
     });
@@ -121,7 +114,6 @@ export default class ContentNode extends Component {
       component: ContentComponent,
       content,
       onEmbedClick,
-      styles,
       relay,
       // only pass extra props
       ...rest

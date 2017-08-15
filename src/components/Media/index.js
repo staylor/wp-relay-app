@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createFragmentContainer } from 'react-relay';
-import Image from '../Image';
+import Image from 'containers/Image';
 
 const Media = ({ media, crop = null }) => {
   switch (media.__typename) {

@@ -6,7 +6,7 @@ import { ContentWrapper } from 'wp-styled-components';
 import { LoadMore } from 'wp-styled-components/lib/Archive';
 import RefetchContainer from 'decorators/RefetchContainer';
 import SearchQuery from 'queries/Search';
-import Archive from 'components/Archive';
+import Archive from 'containers/Archive';
 import { SITE_URL } from 'utils/constants';
 import SearchBox from './Box';
 

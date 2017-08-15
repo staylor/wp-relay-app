@@ -31,7 +31,7 @@
     "redis": "^2.8.0",
     "serialize-javascript": "^1.4.0",
     "universal-cookie-express": "^2.0.6",
-    "wp-styled-components": "^0.0.21"
+    "wp-styled-components": "^0.0.24"
   },
   "scripts": {
     "dev": "npm run persist-queries && GQL_HOST=http://localhost:8080 kyt dev",

@@ -9,7 +9,7 @@ import {
   ColumnB,
   MoreIn,
 } from 'wp-styled-components/lib/Home';
-import Archive from 'components/Archive';
+import Archive from 'containers/Archive';
 
 const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
   <HomeWrapper>
