@@ -7964,9 +7964,9 @@ worker-farm@^1.3.1:
     errno ">=0.1.1 <0.2.0-0"
     xtend ">=4.0.0 <4.1.0-0"
 
-wp-styled-components@^0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/wp-styled-components/-/wp-styled-components-0.0.27.tgz#e272ed70ce8374d4ae8508268ca896c32587979c"
+wp-styled-components@^0.0.29:
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/wp-styled-components/-/wp-styled-components-0.0.29.tgz#528619d3f0f19347c5f91f5cff45ff5acb0af4e8"
   dependencies:
     emotion "^7.0.13"
     found "^0.3.3"

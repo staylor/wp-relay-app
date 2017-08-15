@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { routerShape } from 'found/lib/PropTypes';
-import { ThemeProvider } from 'wp-styled-components/lib/App';
-import 'wp-styled-components/lib/global';
+import AppComponent from 'wp-styled-components/lib/App';
 import FragmentContainer from 'decorators/FragmentContainer';
 import IntlProvider from 'decorators/IntlProvider';
-import AppComponent from 'components/App';
+import Settings from 'components/Settings';
 
 @FragmentContainer(graphql`
   fragment App_viewer on Viewer {
@@ -87,12 +86,11 @@ export default class App extends Component {
   render() {
     const { viewer: { settings, navMenu, sidebar }, children } = this.props;
 
-    return (
-      <ThemeProvider>
-        <AppComponent {...{ settings, navMenu, sidebar }}>
-          {children}
-        </AppComponent>
-      </ThemeProvider>
-    );
+    return [
+      <Settings key="settings" settings={settings} />,
+      <AppComponent key="app" {...{ settings, navMenu, sidebar }}>
+        {children}
+      </AppComponent>,
+    ];
   }
 }
