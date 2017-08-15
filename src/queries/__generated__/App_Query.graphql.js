@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 845690912f42818c65228df74094f109
+ * @relayHash 3ebd0ca82984e90f565999e6731b2c64
  */
 
 /* eslint-disable */
@@ -33,39 +33,30 @@ fragment App_viewer on Viewer {
     language
   }
   navMenu(id: $menuID) {
-    ...NavMenu_navMenu
     id
+    name
+    items {
+      id
+      title
+      url
+      parent
+      order
+      type
+      typeName
+      typeSlug
+      dataSlug
+      dataID
+    }
   }
   sidebar(id: $sidebarID) {
-    ...Sidebar_sidebar
-    id
-  }
-}
-
-fragment NavMenu_navMenu on NavMenu {
-  id
-  name
-  items {
-    id
-    title
-    url
-    parent
-    order
-    type
-    typeName
-    typeSlug
-    dataSlug
-    dataID
-  }
-}
-
-fragment Sidebar_sidebar on Sidebar {
-  widgets {
-    id
-    classname
-    content {
-      rendered
+    widgets {
+      id
+      classname
+      content {
+        rendered
+      }
     }
+    id
   }
 }
 */
@@ -365,7 +356,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query App_Query(\n  $menuID: ID!\n  $sidebarID: ID!\n) {\n  viewer {\n    ...App_viewer\n    id\n  }\n}\n\nfragment App_viewer on Viewer {\n  settings {\n    title\n    description\n    language\n  }\n  navMenu(id: $menuID) {\n    ...NavMenu_navMenu\n    id\n  }\n  sidebar(id: $sidebarID) {\n    ...Sidebar_sidebar\n    id\n  }\n}\n\nfragment NavMenu_navMenu on NavMenu {\n  id\n  name\n  items {\n    id\n    title\n    url\n    parent\n    order\n    type\n    typeName\n    typeSlug\n    dataSlug\n    dataID\n  }\n}\n\nfragment Sidebar_sidebar on Sidebar {\n  widgets {\n    id\n    classname\n    content {\n      rendered\n    }\n  }\n}\n"
+  "text": "query App_Query(\n  $menuID: ID!\n  $sidebarID: ID!\n) {\n  viewer {\n    ...App_viewer\n    id\n  }\n}\n\nfragment App_viewer on Viewer {\n  settings {\n    title\n    description\n    language\n  }\n  navMenu(id: $menuID) {\n    id\n    name\n    items {\n      id\n      title\n      url\n      parent\n      order\n      type\n      typeName\n      typeSlug\n      dataSlug\n      dataID\n    }\n  }\n  sidebar(id: $sidebarID) {\n    widgets {\n      id\n      classname\n      content {\n        rendered\n      }\n    }\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

@@ -6,12 +6,12 @@ import {
   Content,
   Primary,
   Secondary,
+  Header,
+  Sidebar,
   Footer,
 } from 'wp-styled-components/lib/App';
 import 'wp-styled-components/lib/global';
 import Settings from 'components/Settings';
-import Header from 'components/Header';
-import Sidebar from 'containers/Sidebar';
 
 export default function App({ settings, navMenu, sidebar, children }) {
   return (

@@ -16,10 +16,29 @@ import AppComponent from 'components/App';
       language
     }
     navMenu(id: $menuID) {
-      ...NavMenu_navMenu
+      id
+      name
+      items {
+        id
+        title
+        url
+        parent
+        order
+        type
+        typeName
+        typeSlug
+        dataSlug
+        dataID
+      }
     }
     sidebar(id: $sidebarID) {
-      ...Sidebar_sidebar
+      widgets {
+        id
+        classname
+        content {
+          rendered
+        }
+      }
     }
   }
 `)
