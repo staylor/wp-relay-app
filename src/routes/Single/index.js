@@ -7,7 +7,7 @@ import { FormattedRelative } from 'react-intl';
 import { ArticleWrapper, ContentSection, Error } from 'wp-styled-components';
 import { iframe, Title, Meta, Tag } from 'wp-styled-components/lib/Single';
 import FragmentContainer from 'decorators/FragmentContainer';
-import Media from 'components/Media';
+import Media from 'containers/Media';
 import ContentNode from 'components/ContentNode';
 import Comments from 'components/Comments';
 import { dateRegex } from 'utils/regex';

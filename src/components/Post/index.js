@@ -4,7 +4,7 @@ import { graphql } from 'react-relay';
 import { routerShape } from 'found/lib/PropTypes';
 import { Article, Title, Content } from 'wp-styled-components/lib/Post';
 import FragmentContainer from 'decorators/FragmentContainer';
-import Media from 'components/Media';
+import Media from 'containers/Media';
 import ContentNode from 'components/ContentNode';
 import { dateRegex } from 'utils/regex';
 import PostLink from './PostLink';
