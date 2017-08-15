@@ -4,7 +4,7 @@ import queryMiddleware from 'farce/lib/queryMiddleware';
 import createRender from 'found/lib/createRender';
 import makeRouteConfig from 'found/lib/makeRouteConfig';
 import Route from 'found/lib/Route';
-import Loading from 'components/Loading';
+import { Loading } from 'wp-styled-components';
 import AppQuery from 'queries/App';
 import HomeQuery from 'queries/Home';
 import SingleQuery from 'queries/Single';
@@ -32,7 +32,7 @@ const renderProp = ({ Component, props }) =>
 export const routeConfig = makeRouteConfig(
   <Route
     path="/"
-    getComponent={getComponent(() => /* webpackChunkName: "app" */ import('../components/App'))}
+    getComponent={getComponent(() => /* webpackChunkName: "app" */ import('../containers/App'))}
     query={AppQuery}
     prepareVariables={params => ({
       ...params,

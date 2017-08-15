@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { intlShape } from 'react-intl';
+import withIntl from 'decorators/withIntl';
 import { SITE_URL, SITE_DESCRIPTION, TWITTER_USERNAME, TWITTER_CREATOR } from 'utils/constants';
 
+@withIntl
 export default class Settings extends Component {
   static propTypes = {
-    locale: PropTypes.string,
+    intl: intlShape.isRequired,
     settings: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
@@ -13,12 +16,8 @@ export default class Settings extends Component {
     }).isRequired,
   };
 
-  static defaultProps = {
-    locale: 'en',
-  };
-
   render() {
-    const { settings, locale } = this.props;
+    const { settings, intl: { locale } } = this.props;
 
     return (
       <Helmet titleTemplate={`%s - ${settings.title}`} defaultTitle={settings.title}>

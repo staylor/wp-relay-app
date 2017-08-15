@@ -31,10 +31,10 @@
     "redis": "^2.8.0",
     "serialize-javascript": "^1.4.0",
     "universal-cookie-express": "^2.0.6",
-    "wp-styled-components": "^0.0.19"
+    "wp-styled-components": "^0.0.21"
   },
   "scripts": {
-    "dev": "npm run persist-queries && kyt dev",
+    "dev": "npm run persist-queries && GQL_HOST=http://localhost:8080 kyt dev",
     "build": "kyt build",
     "start": "npm run persist-queries && kyt start",
     "test": "kyt test",
@@ -46,7 +46,8 @@
     "kyt:help": "kyt --help",
     "relay": "relay-compiler --src ./src --schema ./tools/schema.graphql && npm run clear-cache",
     "persist-queries": "babel-node ./tools/persistedQueries",
-    "clear-cache": "redis-cli FLUSHALL && npm run persist-queries"
+    "clear-cache": "redis-cli FLUSHALL && npm run persist-queries",
+    "prettier": "prettier-eslint \"src/**/*.js\""
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

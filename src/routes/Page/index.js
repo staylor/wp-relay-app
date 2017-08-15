@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { ArticleWrapper, Heading, ContentSection } from 'wp-styled-components';
+import { ArticleWrapper, Heading, ContentSection, Error } from 'wp-styled-components';
 import Media from 'components/Media';
-import Error from 'components/Error';
 import ContentNode from 'components/ContentNode';
 import { SITE_URL } from 'utils/constants';
 

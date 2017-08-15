@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import Helmet from 'react-helmet';
-import { ContentWrapper, Heading } from 'wp-styled-components';
+import { ContentWrapper, Heading, Error } from 'wp-styled-components';
 import TermQuery from 'queries/Term';
 import Archive from 'components/Archive';
-import Error from 'components/Error';
 import { SITE_URL } from 'utils/constants';
 
 const Term = ({ viewer: { term, posts }, relay }) => {

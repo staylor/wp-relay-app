@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { ArticleWrapper } from 'wp-styled-components';
+import { ArticleWrapper, Error } from 'wp-styled-components';
 import { Title, List, Item, Image } from 'wp-styled-components/lib/Chart';
-import Error from 'components/Error';
 
 const Chart = ({ viewer: { chart } }) => {
   if (!chart) {

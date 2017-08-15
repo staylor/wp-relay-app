@@ -4,13 +4,12 @@ import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
 import { FormattedRelative } from 'react-intl';
-import { ArticleWrapper, ContentSection } from 'wp-styled-components';
+import { ArticleWrapper, ContentSection, Error } from 'wp-styled-components';
 import { iframe, Title, Meta, Tag } from 'wp-styled-components/lib/Single';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import ContentNode from 'components/ContentNode';
 import Comments from 'components/Comments';
-import Error from 'components/Error';
 import { dateRegex } from 'utils/regex';
 import { SITE_URL } from 'utils/constants';
 

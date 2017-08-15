@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'debounce';
-import { Heading } from 'wp-styled-components';
+import { Heading, Loading } from 'wp-styled-components';
 import { SearchBox, SearchInput, A11Y } from 'wp-styled-components/lib/Search';
-import Loading from 'components/Loading';
 
 export default class Search extends Component {
   static propTypes = {
