@@ -1,11 +1,10 @@
 import React from 'react';
-import { css } from 'glamor';
-import styles from './styles';
+import { Container, ActivityIndicator } from 'wp-styled-components/lib/Loading';
 
 export default function Loading() {
   return (
-    <div className={css(styles.loading)}>
-      <div className={css(styles.activity)} />
-    </div>
+    <Container>
+      <ActivityIndicator />
+    </Container>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { css } from 'glamor';
 
 const attrMap = {
   allowfullscreen: 'allowFullScreen',
@@ -30,14 +29,10 @@ const attrMap = {
 const camelize = name => attrMap[name] || name;
 
 export default createFragmentContainer(
-  ({ node, styles = null, children }) => {
+  ({ node, children }) => {
     const props = (node.attributes || []).reduce((memo, { name, value }) => {
       if (name === 'class') {
-        if (styles && styles[value]) {
-          memo.className = css(styles[value]);
-        } else {
-          memo.className = value;
-        }
+        memo.className = value;
       } else {
         memo[camelize(name)] = value;
       }

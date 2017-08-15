@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { css } from 'glamor';
+import { ArticleWrapper, Heading, ContentSection } from 'wp-styled-components';
 import Media from 'components/Media';
 import Error from 'components/Error';
 import ContentNode from 'components/ContentNode';
 import { SITE_URL } from 'utils/constants';
-import styles from './styles';
 
 /* eslint-disable react/no-danger */
 
@@ -21,7 +20,7 @@ const Page = ({ viewer: { page } }) => {
   const featuredImage = (featuredMedia && featuredMedia.sourceUrl) || null;
 
   return (
-    <article className={css(styles.content)}>
+    <ArticleWrapper>
       <Helmet>
         <title>
           {title.raw}
@@ -35,18 +34,13 @@ const Page = ({ viewer: { page } }) => {
         {featuredImage && <meta name="twitter:image" content={featuredImage} />}
       </Helmet>
       <header>
-        <h1 className={css(styles.title)}>
+        <Heading>
           {title.raw}
-        </h1>
+        </Heading>
       </header>
       {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
-      <ContentNode
-        component={'section'}
-        styles={styles}
-        className={css(styles.content)}
-        content={content}
-      />
-    </article>
+      <ContentNode component={ContentSection} content={content} />
+    </ArticleWrapper>
   );
 };
 

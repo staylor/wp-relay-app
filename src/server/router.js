@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { renderStatic } from 'glamor/server';
+import { extractCritical } from 'wp-styled-components/lib/server';
 import { getFarceResult } from 'found/lib/server';
 import { Resolver } from 'found-relay';
 import { CookiesProvider } from 'react-cookie';
@@ -27,7 +27,7 @@ export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (re
       return;
     }
 
-    const { html, css, ids } = renderStatic(() =>
+    const { html, css, ids } = extractCritical(
       renderToString(
         <CookiesProvider cookies={req.universalCookies}>
           {element}

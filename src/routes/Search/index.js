@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import Helmet from 'react-helmet';
-import { css } from 'glamor';
+import { ContentWrapper } from 'wp-styled-components';
+import { LoadMore } from 'wp-styled-components/lib/Archive';
 import RefetchContainer from 'decorators/RefetchContainer';
 import SearchQuery from 'queries/Search';
 import Archive from 'components/Archive';
 import { SITE_URL } from 'utils/constants';
 import SearchBox from './Box';
-import styles from './styles';
 
 @RefetchContainer(
   graphql`
@@ -80,7 +80,7 @@ export default class Search extends Component {
     const showPosts = posts && !this.state.fetching;
 
     return (
-      <div className={css(styles.sections)}>
+      <ContentWrapper>
         <Helmet>
           <title>Search Results</title>
           <link rel="canonical" href={`${SITE_URL}/search`} />
@@ -94,11 +94,11 @@ export default class Search extends Component {
         {showPosts && [
           <Archive key="archive" posts={posts} />,
           posts.pageInfo.hasNextPage &&
-            <button key="button" className={css(styles.button)} onClick={() => this.loadMore()}>
+            <LoadMore key="button" onClick={() => this.loadMore()}>
               MORE
-            </button>,
+            </LoadMore>,
         ]}
-      </div>
+      </ContentWrapper>
     );
   }
 }

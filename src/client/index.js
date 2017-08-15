@@ -4,13 +4,13 @@ import BrowserProtocol from 'farce/lib/BrowserProtocol';
 import createInitialFarceRouter from 'found/lib/createInitialFarceRouter';
 import { Resolver } from 'found-relay';
 import { CookiesProvider } from 'react-cookie';
-import { rehydrate } from 'glamor';
+import { hydrate } from 'wp-styled-components';
 import { historyMiddlewares, render, routeConfig } from 'routes';
 import createEnviroment from 'relay/environment';
 
 (async () => {
   // eslint-disable-next-line no-underscore-dangle
-  rehydrate(window._glam);
+  hydrate(window.__emotion);
 
   const environment = createEnviroment('/graphql');
   const resolver = new Resolver(environment);

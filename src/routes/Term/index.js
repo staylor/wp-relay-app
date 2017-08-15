@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import Helmet from 'react-helmet';
-import { css } from 'glamor';
+import { ContentWrapper, Heading } from 'wp-styled-components';
 import TermQuery from 'queries/Term';
 import Archive from 'components/Archive';
 import Error from 'components/Error';
 import { SITE_URL } from 'utils/constants';
-import styles from './styles';
 
 const Term = ({ viewer: { term, posts }, relay }) => {
   if (!term) {
@@ -18,7 +17,7 @@ const Term = ({ viewer: { term, posts }, relay }) => {
   const url = `${SITE_URL}/${term.taxonomy.rewrite.slug}/${term.slug}`;
 
   return (
-    <div className={css(styles.sections)}>
+    <ContentWrapper>
       <Helmet>
         <title>
           {title}
@@ -27,11 +26,11 @@ const Term = ({ viewer: { term, posts }, relay }) => {
         <meta property="og:title" content={title} />
         <meta property="og:url" content={url} />
       </Helmet>
-      <h2 className={css(styles.label)}>
+      <Heading>
         {title}
-      </h2>
+      </Heading>
       <Archive {...{ posts, relay }} />
-    </div>
+    </ContentWrapper>
   );
 };
 

@@ -2,17 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import AuthorQuery from 'queries/Author';
+import { ContentWrapper, Heading } from 'wp-styled-components';
 import Archive from 'components/Archive';
-import { css } from 'glamor';
-import styles from './styles';
 
 const Author = ({ viewer: { author, posts }, relay }) =>
-  <div className={css(styles.sections)}>
-    <h2 className={css(styles.header)}>
+  <ContentWrapper>
+    <Heading>
       {author.name}
-    </h2>
+    </Heading>
     <Archive {...{ posts, relay }} />
-  </div>;
+  </ContentWrapper>;
 
 Author.propTypes = {
   viewer: PropTypes.shape({

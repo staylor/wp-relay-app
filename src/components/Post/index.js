@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { routerShape } from 'found/lib/PropTypes';
-import { css } from 'glamor';
+import { Article, Title, Content } from 'wp-styled-components/lib/Post';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import ContentNode from 'components/ContentNode';
 import { dateRegex } from 'utils/regex';
 import PostLink from './PostLink';
-import styles from './styles';
 
 /* eslint-disable react/no-danger */
 
@@ -61,28 +60,22 @@ export default class Post extends Component {
     const isEmbed = content && content.length && content[0].__typename === 'Embed';
 
     return (
-      <article className={css(styles.post)}>
+      <Article>
         <header>
-          <h1 className={css(styles.title)}>
+          <Title>
             <PostLink post={this.props.post} />
-          </h1>
+          </Title>
         </header>
         {featuredMedia &&
           <PostLink post={this.props.post}>
             <Media media={featuredMedia} />
           </PostLink>}
         {isEmbed
-          ? <ContentNode
-              component={'section'}
-              styles={styles}
-              className={css(styles.content)}
-              content={content}
-              onEmbedClick={this.onEmbedClick}
-            />
-          : <section className={css(styles.content)}>
+          ? <ContentNode component={Content} content={content} onEmbedClick={this.onEmbedClick} />
+          : <Content>
               {excerpt.raw}
-            </section>}
-      </article>
+            </Content>}
+      </Article>
     );
   }
 }

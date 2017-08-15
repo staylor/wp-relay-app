@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { css } from 'glamor';
+import { ArticleWrapper } from 'wp-styled-components';
+import { Title, List, Item, Image } from 'wp-styled-components/lib/Chart';
 import Error from 'components/Error';
-import styles from './styles';
 
 const Chart = ({ viewer: { chart } }) => {
   if (!chart) {
@@ -11,28 +11,28 @@ const Chart = ({ viewer: { chart } }) => {
   }
 
   return (
-    <article className={css(styles.content)}>
+    <ArticleWrapper>
       <header>
-        <h1 className={css(styles.title)}>
+        <Title>
           <a href={chart.authorUri}>
             {chart.authorName}
           </a>
-        </h1>
+        </Title>
       </header>
-      <ol className={css(styles.list)}>
+      <List>
         {chart.items.map(({ title, url, artist, releaseDateFormatted, images }) =>
-          <li key={url} className={css(styles.item)}>
-            {images.length && <img src={images[0].url} alt="" className={css(styles.image)} />}
+          <Item key={url}>
+            {images.length && <Image src={images[0].url} alt="" />}
             <a href={url} target="_blank" rel="noopener noreferrer">
               {title} - {artist}
             </a>
             <p>
               <strong>Released:</strong> {releaseDateFormatted}
             </p>
-          </li>
+          </Item>
         )}
-      </ol>
-    </article>
+      </List>
+    </ArticleWrapper>
   );
 };
 

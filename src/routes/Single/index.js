@@ -4,7 +4,8 @@ import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
 import { FormattedRelative } from 'react-intl';
-import { css } from 'glamor';
+import { ArticleWrapper, ContentSection } from 'wp-styled-components';
+import { iframe, Title, Meta, Tag } from 'wp-styled-components/lib/Single';
 import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'components/Media';
 import ContentNode from 'components/ContentNode';
@@ -12,7 +13,6 @@ import Comments from 'components/Comments';
 import Error from 'components/Error';
 import { dateRegex } from 'utils/regex';
 import { SITE_URL } from 'utils/constants';
-import styles from './styles';
 
 /* eslint-disable react/no-danger */
 
@@ -70,7 +70,7 @@ export default class Single extends Component {
     let height = data.height;
     let html = data.html;
     if (html.indexOf('<iframe') === 0) {
-      html = html.replace(/<iframe /, `<iframe class="${css(styles.iframe)}" `);
+      html = html.replace(/<iframe /, `<iframe class="${iframe}" `);
       if (width < maxWidth) {
         height = Math.ceil(height * maxWidth / width);
         width = maxWidth;
@@ -107,7 +107,7 @@ export default class Single extends Component {
     const featuredImage = (featuredMedia && featuredMedia.sourceUrl) || null;
 
     return (
-      <article className={css(styles.content)}>
+      <ArticleWrapper>
         <Helmet>
           <title>
             {title.raw}
@@ -123,10 +123,10 @@ export default class Single extends Component {
           {featuredImage && <meta name="twitter:image" content={featuredImage} />}
         </Helmet>
         <header>
-          <h1 className={css(styles.title)}>
+          <Title>
             {title.raw}
-          </h1>
-          <div className={css(styles.meta)}>
+          </Title>
+          <Meta>
             Posted:{' '}
             <Link to={`/${year}/${month}`}>
               <FormattedRelative
@@ -134,27 +134,25 @@ export default class Single extends Component {
                 style="numeric" // eslint-disable-line react/style-prop-object
               />
             </Link>
-          </div>
+          </Meta>
         </header>
         {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
         <ContentNode
-          component={'section'}
-          styles={styles}
-          className={css(styles.content)}
+          component={ContentSection}
           content={content}
           onEmbedClick={this.onEmbedClick}
         />
         {tags &&
-          <footer className={css(styles.footer)}>
+          <footer>
             Tags:{' '}
             {tags.map(tag =>
-              <Link className={css(styles.tag)} key={tag.id} to={`/tag/${tag.slug}`}>
+              <Tag key={tag.id} to={`/tag/${tag.slug}`}>
                 {tag.name}
-              </Link>
+              </Tag>
             )}
           </footer>}
         <Comments post={id} comments={comments} />
-      </article>
+      </ArticleWrapper>
     );
   }
 }

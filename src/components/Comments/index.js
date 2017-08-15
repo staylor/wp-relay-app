@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'glamor';
+import { Heading } from 'wp-styled-components';
+import { CommentsWrapper } from 'wp-styled-components/lib/Comments';
 import Walker from 'components/Comments/Walker';
 import { CommentConnectionType } from 'components/Comments/types';
-import styles from './styles';
 
 export default function Comments({ post, comments }) {
   return (
-    <aside className={css(styles.comments)}>
-      <h2 className={css(styles.header)}>Comments</h2>
+    <CommentsWrapper>
+      <Heading>Comments</Heading>
       <Walker post={post} comments={comments} />
-    </aside>
+    </CommentsWrapper>
   );
 }
 

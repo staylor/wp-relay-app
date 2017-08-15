@@ -1,24 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'found';
-import { css } from 'glamor';
+import { Masthead, Title, Description } from 'wp-styled-components/lib/Header';
 import NavMenu from 'components/NavMenu';
-import styles from './styles';
 
 const Header = ({ settings, navMenu }) =>
-  <header className={css(styles.header)} role="banner">
+  <Masthead role="banner">
     <hgroup>
-      <h1 className={css(styles.siteTitle)}>
+      <Title>
         <Link to="/">
           {settings.title}
         </Link>
-      </h1>
-      <h2 className={css(styles.siteDescription)}>
+      </Title>
+      <Description>
         {settings.description}
-      </h2>
+      </Description>
     </hgroup>
     <NavMenu navMenu={navMenu} />
-  </header>;
+  </Masthead>;
 
 Header.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types

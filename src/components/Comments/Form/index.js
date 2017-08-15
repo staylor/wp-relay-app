@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
-import { css } from 'glamor';
+import { SubmitButton, ResetButton, formField } from 'wp-styled-components';
+import { CommentForm, Field, Label, submit, reset } from 'wp-styled-components/lib/Comments';
 import AddCommentMutation from 'mutations/AddComment';
 import {
   AUTHOR_NAME_COOKIE,
   AUTHOR_EMAIL_COOKIE,
   AUTHOR_URL_COOKIE,
 } from 'components/Comments/constants';
-import styles from './styles';
 
 const fields = {
   authorName: { name: 'Name', cookie: AUTHOR_NAME_COOKIE },
@@ -92,44 +92,46 @@ export default class Form extends Component {
     const { cookies } = this.props;
 
     return (
-      <form className={css(styles.form)} onSubmit={e => e.preventDefault()}>
+      <CommentForm onSubmit={e => e.preventDefault()}>
         {Object.keys(fields).map(field => {
           const cookieVal = cookies.get(fields[field].cookie);
           return (
-            <p key={field}>
-              <label htmlFor={`field-${field}`}>
+            <Field key={field}>
+              <Label htmlFor={`field-${field}`}>
                 {fields[field].name}:
-              </label>
+              </Label>
               {cookieVal ||
                 <input
+                  className={formField}
                   type="text"
                   id={`field-${field}`}
                   name={field}
                   value={this.state.comment[field]}
                   onChange={this.onChange}
                 />}
-            </p>
+            </Field>
           );
         })}
-        <p>
-          <label htmlFor="field-content">Comment:</label>
+        <Field>
+          <Label htmlFor="field-content">Comment:</Label>
           <textarea
+            className={formField}
             rows="6"
             id="field-content"
             name="content"
             value={this.state.comment.content}
             onChange={this.onChange}
           />
-        </p>
-        <button type="submit" className={css(styles.button)} onClick={this.onClick}>
+        </Field>
+        <SubmitButton type="submit" className={submit} onClick={this.onClick}>
           Submit
-        </button>
+        </SubmitButton>
         {this.props.replyTo
-          ? <button type="reset" className={css(styles.reset)} onClick={this.onCancel}>
+          ? <ResetButton type="reset" className={reset} onClick={this.onCancel}>
               Cancel
-            </button>
+            </ResetButton>
           : null}
-      </form>
+      </CommentForm>
     );
   }
 }

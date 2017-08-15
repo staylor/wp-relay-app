@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
-import { css } from 'glamor';
+import { NavWrapper, Level, NavItem } from 'wp-styled-components/lib/NavMenu';
 import FragmentContainer from 'decorators/FragmentContainer';
 import { sortOrderedHierarchy } from 'utils/walker';
-import styles from './styles';
 
 @FragmentContainer(graphql`
   fragment NavMenu_navMenu on NavMenu {
@@ -68,25 +67,25 @@ export default class NavMenu extends Component {
       this.level += 1;
     }
     return (
-      <li key={id} className={css(styles.navItem, styles[`level${this.level}`])}>
+      <NavItem key={id}>
         <Link to={path}>
           {title}
         </Link>
         {this.sorted[id] ? this.walk(this.sorted[id]) : null}
-      </li>
+      </NavItem>
     );
   }
 
   walk(node) {
     return (
-      <ul>
+      <Level>
         {node.map(child => {
           if (!child.parent) {
             this.level = 0;
           }
           return this.parseItem(child);
         })}
-      </ul>
+      </Level>
     );
   }
 
@@ -101,9 +100,9 @@ export default class NavMenu extends Component {
     const navMenuHtml = this.walk(this.sorted.top);
 
     return (
-      <nav className={css(styles.access)}>
+      <NavWrapper>
         {navMenuHtml}
-      </nav>
+      </NavWrapper>
     );
   }
 }

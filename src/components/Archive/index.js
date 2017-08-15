@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'glamor';
+import { LoadMore } from 'wp-styled-components/lib/Archive';
 import Post from '../Post';
-import styles from './styles';
 
 const Archive = ({ posts: { edges }, relay }) => [
   <ul key={'ul'}>
@@ -14,9 +13,8 @@ const Archive = ({ posts: { edges }, relay }) => [
   </ul>,
   relay &&
     relay.hasMore() &&
-    <button
+    <LoadMore
       key={'button'}
-      className={css(styles.button)}
       onClick={() => {
         if (relay.isLoading()) {
           return;
@@ -31,7 +29,7 @@ const Archive = ({ posts: { edges }, relay }) => [
       }}
     >
       MORE
-    </button>,
+    </LoadMore>,
 ];
 
 Archive.propTypes = {

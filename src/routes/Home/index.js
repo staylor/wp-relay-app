@@ -1,43 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Link } from 'found';
-import { css } from 'glamor';
+import {
+  HomeWrapper,
+  HomeSection,
+  HomeHeader,
+  ColumnA,
+  ColumnB,
+  MoreIn,
+} from 'wp-styled-components/lib/Home';
 import Archive from 'components/Archive';
-import styles from './styles';
 
 const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
-  <div className={css(styles.columns)}>
-    <div className={css(styles.columnA)}>
-      <section className={css(styles.section)}>
-        <h2 className={css(styles.header)}>Latest</h2>
+  <HomeWrapper>
+    <ColumnA>
+      <HomeSection>
+        <HomeHeader>Latest</HomeHeader>
         <Archive posts={stickies} />
-      </section>
-      <section className={css(styles.section)}>
-        <h2 className={css(styles.header)}>Read This</h2>
+      </HomeSection>
+      <HomeSection>
+        <HomeHeader>Read This</HomeHeader>
         <Archive posts={readThis} />
-        <Link to={'/music/read-this'} className={css(styles.moreIn)}>
+        <MoreIn to={'/music/read-this'}>
           More posts in <em>Read This</em> »
-        </Link>
-      </section>
-    </div>
-    <div className={css(styles.columnB)}>
-      <section className={css(styles.section)}>
-        <h2 className={css(styles.header)}>Watch This</h2>
+        </MoreIn>
+      </HomeSection>
+    </ColumnA>
+    <ColumnB>
+      <HomeSection>
+        <HomeHeader>Watch This</HomeHeader>
         <Archive posts={watchThis} />
-        <Link to={'/music/watch-this'} className={css(styles.moreIn)}>
+        <MoreIn to={'/music/watch-this'}>
           More posts in <em>Watch This</em> »
-        </Link>
-      </section>
-      <section className={css(styles.section)}>
-        <h2 className={css(styles.header)}>Listen to This</h2>
+        </MoreIn>
+      </HomeSection>
+      <HomeSection>
+        <HomeHeader>Listen to This</HomeHeader>
         <Archive posts={listenToThis} />
-        <Link to={'/music/listen-to-this'} className={css(styles.moreIn)}>
+        <MoreIn to={'/music/listen-to-this'}>
           More posts in <em>Listen To This</em> »
-        </Link>
-      </section>
-    </div>
-  </div>;
+        </MoreIn>
+      </HomeSection>
+    </ColumnB>
+  </HomeWrapper>;
 
 Home.propTypes = {
   viewer: PropTypes.shape({

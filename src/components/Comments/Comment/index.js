@@ -4,14 +4,25 @@ import md5 from 'md5';
 import { graphql } from 'react-relay';
 import { withCookies, Cookies } from 'react-cookie';
 import { intlShape } from 'react-intl';
-import { css } from 'glamor';
+import {
+  CommentWrapper,
+  Meta,
+  Image,
+  Author,
+  Time,
+  Content,
+  Reply,
+  activeReply,
+  Actions,
+  EditButton,
+  DeleteButton,
+} from 'wp-styled-components/lib/Comments';
 import FragmentContainer from 'decorators/FragmentContainer';
 import withIntl from 'decorators/withIntl';
 import { AUTHOR_EMAIL_COOKIE } from 'components/Comments/constants';
 import { CommentType } from 'components/Comments/types';
 import DeleteCommentMutation from 'mutations/DeleteComment';
 import EditComment from './Edit';
-import styles from './styles';
 
 /* eslint-disable react/no-danger */
 /* eslint-disable react/forbid-prop-types */
@@ -126,40 +137,31 @@ export default class Comment extends Component {
         />
       );
     } else {
-      commentContent = (
-        <div className={css(styles.content)} dangerouslySetInnerHTML={{ __html: content }} />
-      );
+      commentContent = <Content dangerouslySetInnerHTML={{ __html: content }} />;
     }
 
     return (
-      <div className={css(styles.comment)}>
-        <div className={css(styles.meta)}>
-          {avatar ? <img alt="" className={css(styles.image)} src={avatar.url} /> : null}
-          <span className={css(styles.author)}>
+      <CommentWrapper>
+        <Meta>
+          {avatar ? <Image alt="" src={avatar.url} /> : null}
+          <Author>
             {authorDisplay}
-          </span>
-          <span className={css(styles.time)}>
+          </Author>
+          <Time>
             {this.props.intl.formatRelative(date)}
-          </span>
-        </div>
+          </Time>
+        </Meta>
         {commentContent}
-        <button
-          className={css(styles.reply, this.props.active && styles.active)}
-          onClick={() => this.onClick(id)}
-        >
+        <Reply className={this.props.active ? activeReply : null} onClick={() => this.onClick(id)}>
           ↵
-        </button>
+        </Reply>
         {this.viewerOwns() &&
           !this.state.editing &&
-          <div className={css(styles.actions)}>
-            <button className={css(styles.edit)} onClick={this.onEditClick}>
-              Edit
-            </button>
-            <button className={css(styles.deletion)} onClick={this.onDelete}>
-              Delete
-            </button>
-          </div>}
-      </div>
+          <Actions>
+            <EditButton onClick={this.onEditClick}>Edit</EditButton>
+            <DeleteButton onClick={this.onDelete}>Delete</DeleteButton>
+          </Actions>}
+      </CommentWrapper>
     );
   }
 }

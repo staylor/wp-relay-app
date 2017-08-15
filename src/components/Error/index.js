@@ -1,12 +1,11 @@
 import React from 'react';
-import { css } from 'glamor';
-import styles from './styles';
+import { Heading } from 'wp-styled-components';
 
 export default function Error() {
   return (
     <article>
       <header>
-        <h1 className={css(styles.title)}>Not Found</h1>
+        <Heading>Not Found</Heading>
       </header>
       <p>Sorry not sorry.</p>
     </article>

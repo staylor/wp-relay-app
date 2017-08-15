@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'debounce';
-import { css } from 'glamor';
+import { Heading } from 'wp-styled-components';
+import { SearchBox, SearchInput, A11Y } from 'wp-styled-components/lib/Search';
 import Loading from 'components/Loading';
-import styles from './styles';
 
 export default class Search extends Component {
   static propTypes = {
@@ -64,16 +64,13 @@ export default class Search extends Component {
     }
 
     return (
-      <section className={css(styles.box)}>
-        <h2 className={css(styles.label)}>
+      <SearchBox>
+        <Heading>
           {title}
-        </h2>
+        </Heading>
         <form>
-          <label className={css(styles.a11y)} htmlFor="field-term">
-            Search Term
-          </label>
-          <input
-            className={css(styles.input)}
+          <A11Y htmlFor="field-term">Search Term</A11Y>
+          <SearchInput
             type="search"
             id="field-term"
             name="term"
@@ -82,7 +79,7 @@ export default class Search extends Component {
           />
         </form>
         {searching && <Loading />}
-      </section>
+      </SearchBox>
     );
   }
 }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'glamor';
+import { ListItem, nested } from 'wp-styled-components/lib/Comments';
 import Form from 'components/Comments/Form';
 import Comment from 'components/Comments/Comment';
 import { CommentConnectionType } from 'components/Comments/types';
 import { sortHierarchy } from 'utils/walker';
-import styles from './styles';
 
 export default class CommentsWalker extends Component {
   static propTypes = {
@@ -37,17 +36,17 @@ export default class CommentsWalker extends Component {
     const active = this.state.replyTo === id;
 
     return (
-      <li key={id} className={css(styles.comment, styles[`level${this.level}`])}>
+      <ListItem key={id}>
         <Comment comment={comment} active={active} setReplyTo={this.setReplyTo} />
         {this.sorted[id] ? this.walk(this.sorted[id]) : null}
         {active ? <Form post={this.props.post} replyTo={id} setReplyTo={this.setReplyTo} /> : null}
-      </li>
+      </ListItem>
     );
   }
 
   walk(node) {
     return (
-      <ul key={`level-${this.level}`} className={this.level ? css(styles.nested) : null}>
+      <ul key={`level-${this.level}`} className={this.level ? nested : null}>
         {node.map(child => {
           if (!child.parent) {
             this.level = 0;

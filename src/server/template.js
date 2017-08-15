@@ -24,7 +24,7 @@ ${helmet.title.toString()}
 ${helmet.meta.toString()}${helmet.link.toString()}${helmet.script.toString()}
 </head>
 <body>
-<script>window._glam = ${JSON.stringify(ids)}</script>
+<script>window.__emotion = ${JSON.stringify(ids)}</script>
 <script>window.__RELAY_PAYLOADS__ = ${serialize(data, {
     isJSON: true,
   })};</script>

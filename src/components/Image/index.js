@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
-import { css } from 'glamor';
+import ResponsiveImage from 'wp-styled-components/lib/Image';
 import FragmentContainer from 'decorators/FragmentContainer';
-import styles from './styles';
 
 @FragmentContainer(graphql`
   fragment Image_image on Media {
@@ -59,7 +58,7 @@ export default class Image extends Component {
 
     return (
       <figure>
-        <img alt="" className={css(styles.image)} src={chosen.sourceUrl} />
+        <ResponsiveImage alt="" src={chosen.sourceUrl} />
       </figure>
     );
   }

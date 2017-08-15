@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import Helmet from 'react-helmet';
-import { css } from 'glamor';
 import DateQuery from 'queries/Date';
+import { ContentWrapper, Heading } from 'wp-styled-components';
 import Archive from 'components/Archive';
 import { SITE_URL } from 'utils/constants';
-import styles from './styles';
 
 const DateRoute = ({ params, viewer: { posts }, relay }) => {
   const values = [params.month, params.day, params.year].filter(value => value);
@@ -14,18 +13,18 @@ const DateRoute = ({ params, viewer: { posts }, relay }) => {
   const title = `Archives: ${path}`;
 
   return (
-    <div className={css(styles.sections)}>
+    <ContentWrapper>
       <Helmet>
         <title>
           {title}
         </title>
         <link rel="canonical" href={`${SITE_URL}/${path}`} />
       </Helmet>
-      <h2 className={css(styles.label)}>
+      <Heading>
         {title}
-      </h2>
+      </Heading>
       <Archive {...{ posts, relay }} />
-    </div>
+    </ContentWrapper>
   );
 };
 

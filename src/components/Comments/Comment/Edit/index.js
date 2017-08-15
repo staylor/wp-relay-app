@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'glamor';
+import { formField } from 'wp-styled-components';
+import { EditForm, SubmitButton, EditCancelButton } from 'wp-styled-components/lib/Comments';
 import UpdateCommentMutation from 'mutations/UpdateComment';
 import { CommentType } from 'components/Comments/types';
-import styles from './styles';
 
 export default class Edit extends Component {
   static contextTypes = {
@@ -48,21 +48,21 @@ export default class Edit extends Component {
 
   render() {
     return (
-      <form onSubmit={e => e.preventDefault()} className={css(styles.form)}>
+      <EditForm onSubmit={e => e.preventDefault()}>
         <textarea
-          className={css(styles.content)}
+          className={formField}
           rows="6"
           name="content"
           value={this.state.content}
           onChange={this.onChange}
         />
-        <button type="submit" className={css(styles.button)} onClick={this.onEdit}>
+        <SubmitButton type="submit" onClick={this.onEdit}>
           Submit
-        </button>
-        <button type="reset" className={css(styles.cancel)} onClick={this.props.onEditSubmit}>
+        </SubmitButton>
+        <EditCancelButton type="reset" onClick={this.props.onEditSubmit}>
           Cancel
-        </button>
-      </form>
+        </EditCancelButton>
+      </EditForm>
     );
   }
 }
