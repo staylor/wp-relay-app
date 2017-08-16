@@ -171,7 +171,7 @@ declare module 'wp-relay-app' {
       term: Term,
       posts: Connection,
     |},
-    relay: PaginationProp,
+    relay: RelayPaginationProp,
   };
 
   declare type ChartImage = {|
