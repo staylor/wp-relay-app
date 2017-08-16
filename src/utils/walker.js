@@ -1,4 +1,8 @@
-export function sortHierarchy(list) {
+// @flow
+import type { HierarchyItem } from 'wp-relay-app';
+
+// eslint-disable-next-line import/prefer-default-export
+export function sortHierarchy(list: Array<HierarchyItem>) {
   const nested = {
     top: [],
   };

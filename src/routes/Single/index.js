@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'react-relay';
 import { Link } from 'found';
@@ -12,8 +12,7 @@ import ContentNode from 'components/ContentNode';
 import Comments from 'components/Comments';
 import { dateRegex } from 'utils/regex';
 import { SITE_URL } from 'utils/constants';
-
-/* eslint-disable react/no-danger */
+import type { SingleProps } from 'wp-relay-app';
 
 @FragmentContainer(graphql`
   fragment Single_viewer on Viewer {
@@ -55,11 +54,7 @@ import { SITE_URL } from 'utils/constants';
   }
 `)
 export default class Single extends Component {
-  static propTypes = {
-    viewer: PropTypes.shape({
-      post: PropTypes.object,
-    }).isRequired,
-  };
+  props: SingleProps;
 
   onEmbedClick = data => e => {
     const maxWidth = 740;

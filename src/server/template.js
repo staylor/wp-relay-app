@@ -1,7 +1,26 @@
+// @flow
 import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 
-export default ({ root, data, css, ids, manifestJSBundle, vendorJSBundle, mainJSBundle }) => {
+type ServerTemplate = {
+  root: string,
+  data: Object,
+  css: string,
+  ids: Array<string>,
+  manifestJSBundle: string,
+  vendorJSBundle: string,
+  mainJSBundle: string,
+};
+
+export default ({
+  root,
+  data,
+  css,
+  ids,
+  manifestJSBundle,
+  vendorJSBundle,
+  mainJSBundle,
+}: ServerTemplate) => {
   const helmet = Helmet.rewind();
 
   return `<!DOCTYPE html>

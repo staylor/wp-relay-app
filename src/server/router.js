@@ -1,14 +1,27 @@
+// @flow
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { extractCritical } from 'wp-styled-components/lib/server';
 import { getFarceResult } from 'found/lib/server';
 import { Resolver } from 'found-relay';
 import { CookiesProvider } from 'react-cookie';
+import { historyMiddlewares, render, routeConfig } from 'routes';
 import createEnviroment from 'relay/environment';
 import template from 'server/template';
-import { historyMiddlewares, render, routeConfig } from 'routes';
+import type { $Request, $Response } from 'express';
 
-export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }) => async (req, res) => {
+type RequestWithCookies = $Request & { universalCookies: Object };
+
+type KYTAssets = {
+  manifestJSBundle: string,
+  mainJSBundle: string,
+  vendorJSBundle: string,
+};
+
+export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }: KYTAssets) => async (
+  req: RequestWithCookies,
+  res: $Response
+) => {
   try {
     const requestCache = {};
     const environment = createEnviroment('http://localhost:8080/graphql', requestCache);

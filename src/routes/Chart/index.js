@@ -1,10 +1,11 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ArticleWrapper, Error } from 'wp-styled-components';
 import { Title, List, Item, Image } from 'wp-styled-components/lib/Chart';
+import type { ChartProps } from 'wp-relay-app';
 
-const Chart = ({ viewer: { chart } }) => {
+const Chart = ({ viewer: { chart } }: ChartProps) => {
   if (!chart) {
     return <Error />;
   }
@@ -33,12 +34,6 @@ const Chart = ({ viewer: { chart } }) => {
       </List>
     </ArticleWrapper>
   );
-};
-
-Chart.propTypes = {
-  viewer: PropTypes.shape({
-    chart: PropTypes.object,
-  }).isRequired,
 };
 
 export default createFragmentContainer(

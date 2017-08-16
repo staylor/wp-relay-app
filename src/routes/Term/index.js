@@ -1,13 +1,14 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import Helmet from 'react-helmet';
 import { ContentWrapper, Heading, Error } from 'wp-styled-components';
 import TermQuery from 'queries/Term';
 import Archive from 'containers/Archive';
 import { SITE_URL } from 'utils/constants';
+import type { TermProps } from 'wp-relay-app';
 
-const Term = ({ viewer: { term, posts }, relay }) => {
+const Term = ({ viewer: { term, posts }, relay }: TermProps) => {
   if (!term) {
     return <Error />;
   }
@@ -31,15 +32,6 @@ const Term = ({ viewer: { term, posts }, relay }) => {
       <Archive {...{ posts, relay }} />
     </ContentWrapper>
   );
-};
-
-Term.propTypes = {
-  viewer: PropTypes.shape({
-    term: PropTypes.object,
-    posts: PropTypes.object,
-  }).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  relay: PropTypes.object.isRequired,
 };
 
 export default createPaginationContainer(

@@ -1,26 +1,18 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql, createPaginationContainer } from 'react-relay';
 import { ContentWrapper, Heading } from 'wp-styled-components';
 import Archive from 'containers/Archive';
 import AuthorQuery from 'queries/Author';
+import type { AuthorProps } from 'wp-relay-app';
 
-const Author = ({ viewer: { author, posts }, relay }) =>
+const Author = ({ viewer: { author, posts }, relay }: AuthorProps) =>
   <ContentWrapper>
     <Heading>
       {author.name}
     </Heading>
     <Archive {...{ posts, relay }} />
   </ContentWrapper>;
-
-Author.propTypes = {
-  viewer: PropTypes.shape({
-    author: PropTypes.object,
-    posts: PropTypes.object,
-  }).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  relay: PropTypes.object.isRequired,
-};
 
 export default createPaginationContainer(
   Author,

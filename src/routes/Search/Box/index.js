@@ -1,18 +1,12 @@
+// @flow
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import debounce from 'debounce';
 import { Heading, Loading } from 'wp-styled-components';
 import { SearchBox, SearchInput, A11Y } from 'wp-styled-components/lib/Search';
+import type { SearchBoxProps } from 'wp-relay-app';
 
 export default class Search extends Component {
-  static propTypes = {
-    onSetTerm: PropTypes.func.isRequired,
-    onRefetch: PropTypes.func.isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    pageInfo: PropTypes.object,
-    // eslint-disable-next-line react/forbid-prop-types
-    relay: PropTypes.object.isRequired,
-  };
+  props: SearchBoxProps;
 
   static defaultProps = {
     pageInfo: null,

@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import Helmet from 'react-helmet';
 import { ContentWrapper } from 'wp-styled-components';
@@ -8,6 +8,7 @@ import RefetchContainer from 'decorators/RefetchContainer';
 import SearchQuery from 'queries/Search';
 import Archive from 'containers/Archive';
 import { SITE_URL } from 'utils/constants';
+import type { SearchProps } from 'wp-relay-app';
 import SearchBox from './Box';
 
 @RefetchContainer(
@@ -32,14 +33,7 @@ import SearchBox from './Box';
   SearchQuery
 )
 export default class Search extends Component {
-  static propTypes = {
-    viewer: PropTypes.shape({
-      tag: PropTypes.object,
-      posts: PropTypes.object,
-    }).isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    relay: PropTypes.object.isRequired,
-  };
+  props: SearchProps;
 
   state = {
     fetching: false,
@@ -65,7 +59,7 @@ export default class Search extends Component {
     );
   }
 
-  onSetTerm(term) {
+  onSetTerm(term: string) {
     this.setState({ fetching: true });
     this.count = 10;
     this.term = term;
@@ -76,7 +70,7 @@ export default class Search extends Component {
   }
 
   render() {
-    const { viewer: { posts = null }, relay } = this.props;
+    const { viewer: { posts = {} }, relay } = this.props;
     const showPosts = posts && !this.state.fetching;
 
     return (

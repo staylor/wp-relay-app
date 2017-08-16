@@ -1,5 +1,5 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
   HomeWrapper,
@@ -10,8 +10,9 @@ import {
   MoreIn,
 } from 'wp-styled-components/lib/Home';
 import Archive from 'containers/Archive';
+import type { HomeProps } from 'wp-relay-app';
 
-const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
+const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }: HomeProps) =>
   <HomeWrapper>
     <ColumnA>
       <HomeSection>
@@ -43,15 +44,6 @@ const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }) =>
       </HomeSection>
     </ColumnB>
   </HomeWrapper>;
-
-Home.propTypes = {
-  viewer: PropTypes.shape({
-    readThis: PropTypes.object,
-    watchThis: PropTypes.object,
-    listenToThis: PropTypes.object,
-    stickies: PropTypes.object,
-  }).isRequired,
-};
 
 export default createFragmentContainer(
   Home,

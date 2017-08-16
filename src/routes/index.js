@@ -1,4 +1,6 @@
-import 'isomorphic-fetch';
+// @flow
+import type { Props } from 'wp-relay-app';
+
 import React from 'react';
 import queryMiddleware from 'farce/lib/queryMiddleware';
 import createRender from 'found/lib/createRender';
@@ -23,8 +25,7 @@ const getComponent = loader => (location, cb) =>
 
 export const historyMiddlewares = [queryMiddleware];
 
-// eslint-disable-next-line
-const renderProp = ({ Component, props }) =>
+const renderProp = ({ Component, props }: { Component: any, props: Props }) =>
   Component && props ? <Component {...props} /> : <Loading />;
 
 /* eslint-disable global-require */
