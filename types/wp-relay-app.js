@@ -31,6 +31,7 @@ declare module 'wp-relay-app' {
   declare type Text = {
     text: string,
   };
+
   declare type Embed = {
     title: string,
     thumbnailUrl: string,
@@ -38,6 +39,7 @@ declare module 'wp-relay-app' {
     width: number,
     height: number,
   };
+
   declare type Element = {
     tagName: string,
     attributes: Array<Meta>,
@@ -48,7 +50,7 @@ declare module 'wp-relay-app' {
 
   // Home
 
-  declare type HomeProps = Props & {
+  declare type HomeProps = {
     viewer: {|
       readThis: Connection,
       watchThis: Connection,
@@ -75,14 +77,14 @@ declare module 'wp-relay-app' {
 
   // Single
 
-  declare type PostTag = {
+  declare type PostTag = {|
     id: string,
     name: string,
     slug: string,
-  };
+  |};
 
-  declare type SingleProps = Props & {
-    viewer: {
+  declare type SingleProps = {
+    viewer: {|
       post: Singular & {
         date: string,
         excerpt: {|
@@ -91,65 +93,65 @@ declare module 'wp-relay-app' {
         tags: Array<PostTag>,
         comments: Connection,
       },
-    },
+    |},
   };
 
   // Page
 
-  declare type PageProps = Props & {
-    viewer: {
+  declare type PageProps = {
+    viewer: {|
       page: Singular & {
         slug: string,
       },
-    },
+    |},
   };
 
   // Search
 
-  declare type SearchProps = Props & {
+  declare type SearchProps = {
     viewer: {|
       posts: Connection,
     |},
-    relay: RefetchProp,
+    relay: RelayRefetchProp,
   };
 
-  declare type SearchBoxProps = Props & {
+  declare type SearchBoxProps = {
     onSetTerm: func,
     onRefetch: func,
     pageInfo: PageInfo,
-    relay: RefetchProp,
+    relay: RelayRefetchProp,
   };
 
   // Date
 
-  declare type DateProps = Props & {
-    viewer: {
+  declare type DateProps = {
+    viewer: {|
       posts: Connection,
-    },
+    |},
     params: {
       month: string | number,
       day: string | number,
       year: string | number,
     },
-    relay: PaginationProp,
+    relay: RelayPaginationProp,
   };
 
   // Author
 
-  declare type AuthorProps = Props & {
-    viewer: {
+  declare type AuthorProps = {
+    viewer: {|
       author: {
         id: string,
         name: string,
       },
       posts: Connection,
-    },
-    relay: PaginationProp,
+    |},
+    relay: RelayPaginationProp,
   };
 
   // Term
 
-  declare type Term = {
+  declare type Term = {|
     id: string,
     name: string,
     slug: string,
@@ -162,40 +164,42 @@ declare module 'wp-relay-app' {
         plural: string,
       },
     |},
-  };
+  |};
 
-  declare type TermProps = Props & {
-    viewer: {
+  declare type TermProps = {
+    viewer: {|
       term: Term,
       posts: Connection,
-    },
+    |},
     relay: PaginationProp,
   };
 
+  declare type ChartImage = {|
+    url: string,
+    height: number,
+  |};
+
   // Charts
-  declare type ChartItem = {
+  declare type ChartItem = {|
     title: string,
     artist: string,
     releaseDate: string,
     releaseDateFormatted: string,
     url: string,
     copyright: string,
-    images: {
-      url: string,
-      height: number,
-    },
-  };
+    images: Array<ChartImage>,
+  |};
 
-  declare type ITunesChart = {
+  declare type ITunesChart = {|
     title: string,
     copyright: string,
     updated: string,
     authorName: string,
     authorUri: string,
     items: Array<ChartItem>,
-  };
+  |};
 
-  declare type ChartProps = Props & {
+  declare type ChartProps = {
     viewer: {|
       chart: ITunesChart,
     |},

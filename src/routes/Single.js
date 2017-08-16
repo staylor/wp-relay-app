@@ -12,7 +12,7 @@ import ContentNode from 'components/ContentNode';
 import Comments from 'components/Comments';
 import { dateRegex } from 'utils/regex';
 import { SITE_URL } from 'utils/constants';
-import type { SingleProps } from 'wp-relay-app';
+import type { SingleProps, Embed } from 'wp-relay-app';
 
 @FragmentContainer(graphql`
   fragment Single_viewer on Viewer {
@@ -56,7 +56,7 @@ import type { SingleProps } from 'wp-relay-app';
 export default class Single extends Component {
   props: SingleProps;
 
-  onEmbedClick = data => e => {
+  onEmbedClick = (data: Embed) => (e: Event & { currentTarget: HTMLElement }) => {
     const maxWidth = 740;
     e.preventDefault();
 

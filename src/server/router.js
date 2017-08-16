@@ -8,6 +8,7 @@ import { CookiesProvider } from 'react-cookie';
 import { historyMiddlewares, render, routeConfig } from 'routes';
 import createEnviroment from 'relay/environment';
 import template from 'server/template';
+
 import type { $Request, $Response } from 'express';
 
 type RequestWithCookies = $Request & { universalCookies: Object };
