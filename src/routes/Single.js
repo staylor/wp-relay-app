@@ -83,21 +83,11 @@ export default class Single extends Component {
     }
 
     const {
-      post: {
-        id,
-        slug,
-        date,
-        title,
-        content: { data: content },
-        excerpt,
-        featuredMedia,
-        tags,
-        comments,
-      },
+      post: { id, date, title, content: { data: content }, excerpt, featuredMedia, tags, comments },
     } = this.props.viewer;
 
     const [, year, month, day] = dateRegex.exec(date);
-    const url = `${SITE_URL}/${year}/${month}/${day}/${slug}`;
+    const url = `${SITE_URL}/${year}/${month}/${day}/${id}`;
     const featuredImage = (featuredMedia && featuredMedia.sourceUrl) || null;
 
     return (
