@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import FragmentContainer from 'decorators/FragmentContainer';
+import type { ContentNodeProps } from 'wp-relay-app';
 import Element from './Element';
 import Embed from './Embed';
 
@@ -69,11 +69,7 @@ export const dataFragment = graphql`
   }
 `)
 export default class ContentNode extends Component {
-  static propTypes = {
-    content: PropTypes.array.isRequired,
-    component: PropTypes.any.isRequired,
-    onEmbedClick: PropTypes.func,
-  };
+  props: ContentNodeProps;
 
   static defaultProps = {
     onEmbedClick: null,

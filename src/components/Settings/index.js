@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { intlShape } from 'react-intl';
 import withIntl from 'decorators/withIntl';
 import { SITE_URL, SITE_DESCRIPTION, TWITTER_USERNAME, TWITTER_CREATOR } from 'utils/constants';
+import type { SettingsProps } from 'wp-relay-app';
 
 @withIntl
 export default class Settings extends Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    settings: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      language: PropTypes.string,
-    }).isRequired,
-  };
+  props: SettingsProps;
 
   render() {
     const { settings, intl: { locale } } = this.props;

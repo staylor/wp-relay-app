@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import md5 from 'md5';
 import { graphql } from 'react-relay';
-import { withCookies, Cookies } from 'react-cookie';
-import { intlShape } from 'react-intl';
+import { withCookies } from 'react-cookie';
 import {
   CommentWrapper,
   Meta,
@@ -20,8 +18,8 @@ import {
 import FragmentContainer from 'decorators/FragmentContainer';
 import withIntl from 'decorators/withIntl';
 import { AUTHOR_EMAIL_COOKIE } from 'components/Comments/constants';
-import { CommentType } from 'components/Comments/types';
 import DeleteCommentMutation from 'mutations/DeleteComment';
+import type { CommentProps } from 'wp-relay-app';
 import EditComment from './Edit';
 
 /* eslint-disable react/no-danger */
@@ -49,14 +47,7 @@ import EditComment from './Edit';
 @withIntl
 @withCookies
 export default class Comment extends Component {
-  static propTypes = {
-    cookies: PropTypes.instanceOf(Cookies).isRequired,
-    active: PropTypes.bool.isRequired,
-    setReplyTo: PropTypes.func.isRequired,
-    comment: CommentType.isRequired,
-    intl: intlShape.isRequired,
-    relay: PropTypes.object.isRequired,
-  };
+  props: CommentProps;
 
   editToken = null;
 

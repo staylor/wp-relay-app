@@ -1,20 +1,16 @@
+// @flow
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { formField } from 'wp-styled-components';
 import { EditForm, SubmitButton, EditCancelButton } from 'wp-styled-components/lib/Comments';
 import UpdateCommentMutation from 'mutations/UpdateComment';
-import { CommentType } from 'components/Comments/types';
+import type { EditCommentProps } from 'wp-relay-app';
 
 export default class Edit extends Component {
   static contextTypes = {
-    relay: PropTypes.object.isRequired,
+    relay: Object,
   };
 
-  static propTypes = {
-    comment: CommentType.isRequired,
-    token: PropTypes.string.isRequired,
-    onEditSubmit: PropTypes.func.isRequired,
-  };
+  props: EditCommentProps;
 
   constructor(props) {
     super(props);

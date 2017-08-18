@@ -21,7 +21,6 @@
     "md5": "^2.2.1",
     "morgan": "^1.8.2",
     "path-to-regexp": "^1.7.0",
-    "prop-types": "^15.5.10",
     "react": "16.0.0-beta.5",
     "react-cookie": "^2.0.8",
     "react-dom": "16.0.0-beta.5",
@@ -31,7 +30,7 @@
     "redis": "^2.8.0",
     "serialize-javascript": "^1.4.0",
     "universal-cookie-express": "^2.0.6",
-    "wp-styled-components": "^0.0.32"
+    "wp-styled-components": "^0.0.33"
   },
   "scripts": {
     "dev": "npm run persist-queries && GQL_HOST=http://localhost:8080 kyt dev",

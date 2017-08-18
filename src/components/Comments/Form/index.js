@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withCookies, Cookies } from 'react-cookie';
+import { withCookies } from 'react-cookie';
 import { SubmitButton, ResetButton, formField } from 'wp-styled-components';
 import { CommentForm, Field, Label, submit, reset } from 'wp-styled-components/lib/Comments';
 import AddCommentMutation from 'mutations/AddComment';
@@ -9,6 +8,7 @@ import {
   AUTHOR_EMAIL_COOKIE,
   AUTHOR_URL_COOKIE,
 } from 'components/Comments/constants';
+import type { CommentFormProps } from 'wp-relay-app';
 
 const fields = {
   authorName: { name: 'Name', cookie: AUTHOR_NAME_COOKIE },
@@ -31,15 +31,10 @@ const getDefaultState = props => {
 @withCookies
 export default class Form extends Component {
   static contextTypes = {
-    relay: PropTypes.object.isRequired,
+    relay: Object,
   };
 
-  static propTypes = {
-    cookies: PropTypes.instanceOf(Cookies).isRequired,
-    post: PropTypes.string.isRequired,
-    replyTo: PropTypes.string,
-    setReplyTo: PropTypes.func.isRequired,
-  };
+  props: CommentFormProps;
 
   static defaultProps = {
     replyTo: null,

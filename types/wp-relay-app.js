@@ -48,9 +48,67 @@ declare module 'wp-relay-app' {
 
   declare type ContentNode = Text | Embed | Element;
 
+  declare type ContentNodeProps = {
+    content: Array<ContentNode>,
+    component: any,
+    onEmbedClick: () => void,
+  };
+
   declare type ArchiveProps = {
     posts: Connection,
     relay?: RelayPaginationProp,
+  };
+
+  declare type MediaProps = {
+    crop: string,
+    media: Object,
+  };
+
+  declare type ImageSize = {
+    name: string,
+    sourceUrl: string,
+  };
+
+  declare type ImageProps = {
+    sourceUrl: string,
+    mediaDetails: {
+      sizes: Array<ImageSize>,
+    },
+  };
+
+  // App
+
+  declare type AppProps = {
+    viewer: {
+      settings: Object,
+      navMenu: Object,
+      sidebar: Object,
+    },
+    children: any,
+    router: any,
+  };
+
+  // Settings
+
+  declare type SettingsProps = {
+    intl: intlShape,
+    settings: {
+      title: string,
+      description: string,
+      language: string,
+    },
+  };
+
+  // Post
+
+  declare type PostProps = {
+    post: {
+      id: string,
+      date: string,
+      content: Object,
+      excerpt: Object,
+      featuredMedia: Object,
+    },
   };
 
   // Home
@@ -201,5 +259,65 @@ declare module 'wp-relay-app' {
     viewer: {|
       chart: ITunesChart,
     |},
+  };
+
+  // Comments
+
+  declare type CommentEdge = {
+    node: {
+      id: string,
+      parent: string,
+    },
+  };
+
+  declare type CommentConnection = {
+    edges: Array<CommentEdge>,
+  };
+
+  declare type CommentsProps = {
+    post: string,
+    comments: CommentConnection,
+  };
+
+  declare type AuthorAvatar = {
+    size: number,
+    url: string,
+  };
+
+  declare type Comment = {
+    id: string,
+    authorName: string,
+    authorUrl: string,
+    authorHash: string,
+    date: string,
+    content: {|
+      rendered: string,
+      raw: string,
+    |},
+    authorAvatarUrls: Array<AuthorAvatar>,
+    parent: string,
+    post: string,
+  };
+
+  declare type EditCommentProps = {
+    comment: Comment,
+    token: string,
+    onEditSubmit: () => void,
+  };
+
+  declare type CommentProps = {
+    cookies: any,
+    active: boolean,
+    setReplyTo: () => void,
+    comment: Comment,
+    intl: intlShape,
+    relay: Object,
+  };
+
+  declare type CommentFormProps = {
+    cookies: any,
+    post: string,
+    replyTo: string,
+    setReplyTo: () => void,
   };
 }

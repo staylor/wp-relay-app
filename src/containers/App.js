@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { routerShape } from 'found/lib/PropTypes';
 import AppComponent from 'wp-styled-components/lib/App';
 import FragmentContainer from 'decorators/FragmentContainer';
 import IntlProvider from 'decorators/IntlProvider';
 import Settings from 'components/Settings';
+import type { AppProps } from 'wp-relay-app';
 
 @FragmentContainer(graphql`
   fragment App_viewer on Viewer {
@@ -43,15 +43,7 @@ import Settings from 'components/Settings';
 `)
 @IntlProvider
 export default class App extends Component {
-  static propTypes = {
-    viewer: PropTypes.shape({
-      settings: PropTypes.object,
-      navMenu: PropTypes.object,
-      sidebar: PropTypes.object,
-    }).isRequired,
-    children: PropTypes.node,
-    router: routerShape.isRequired,
-  };
+  props: AppProps;
 
   static defaultProps = {
     children: null,

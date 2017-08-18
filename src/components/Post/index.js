@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
 import { routerShape } from 'found/lib/PropTypes';
 import { Article, Title, Content } from 'wp-styled-components/lib/Post';
@@ -7,6 +6,7 @@ import FragmentContainer from 'decorators/FragmentContainer';
 import Media from 'containers/Media';
 import ContentNode from 'components/ContentNode';
 import { dateRegex } from 'utils/regex';
+import type { PostProps } from 'wp-relay-app';
 import PostLink from './PostLink';
 
 /* eslint-disable react/no-danger */
@@ -31,15 +31,7 @@ import PostLink from './PostLink';
   }
 `)
 export default class Post extends Component {
-  static propTypes = {
-    post: PropTypes.shape({
-      id: PropTypes.string,
-      date: PropTypes.string,
-      content: PropTypes.object,
-      excerpt: PropTypes.object,
-      featuredMedia: PropTypes.object,
-    }).isRequired,
-  };
+  props: PostProps;
 
   static contextTypes = {
     router: routerShape.isRequired,

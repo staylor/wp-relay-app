@@ -1,11 +1,11 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Heading } from 'wp-styled-components';
 import { CommentsWrapper } from 'wp-styled-components/lib/Comments';
 import Walker from 'components/Comments/Walker';
-import { CommentConnectionType } from 'components/Comments/types';
+import type { CommentsProps } from 'wp-relay-app';
 
-export default function Comments({ post, comments }) {
+export default function Comments({ post, comments = null }: CommentsProps) {
   return (
     <CommentsWrapper>
       <Heading>Comments</Heading>
@@ -13,12 +13,3 @@ export default function Comments({ post, comments }) {
     </CommentsWrapper>
   );
 }
-
-Comments.propTypes = {
-  post: PropTypes.string.isRequired,
-  comments: CommentConnectionType,
-};
-
-Comments.defaultProps = {
-  comments: null,
-};

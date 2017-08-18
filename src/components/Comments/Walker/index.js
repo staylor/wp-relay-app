@@ -1,16 +1,13 @@
+// @flow
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ListItem, nested } from 'wp-styled-components/lib/Comments';
 import Form from 'components/Comments/Form';
 import Comment from 'components/Comments/Comment';
-import { CommentConnectionType } from 'components/Comments/types';
 import { sortHierarchy } from 'utils/walker';
+import type { CommentsProps } from 'wp-relay-app';
 
 export default class CommentsWalker extends Component {
-  static propTypes = {
-    post: PropTypes.string.isRequired,
-    comments: CommentConnectionType,
-  };
+  props: CommentsProps;
 
   static defaultProps = {
     comments: null,
