@@ -12,10 +12,10 @@ declare module 'wp-relay-app' {
   };
 
   declare type PageInfo = {
-    startCursor: string,
-    endCursor: string,
-    hasNextPage: boolean,
-    hasPreviousPage: boolean,
+    startCursor?: string,
+    endCursor?: string,
+    hasNextPage?: boolean,
+    hasPreviousPage?: boolean,
   };
 
   declare type Connection = {
@@ -47,6 +47,11 @@ declare module 'wp-relay-app' {
   };
 
   declare type ContentNode = Text | Embed | Element;
+
+  declare type ArchiveProps = {
+    posts: Connection,
+    relay?: RelayPaginationProp,
+  };
 
   // Home
 
@@ -110,15 +115,8 @@ declare module 'wp-relay-app' {
 
   declare type SearchProps = {
     viewer: {|
-      posts: Connection,
+      posts: Connection | null,
     |},
-    relay: RelayRefetchProp,
-  };
-
-  declare type SearchBoxProps = {
-    onSetTerm: func,
-    onRefetch: func,
-    pageInfo: PageInfo,
     relay: RelayRefetchProp,
   };
 

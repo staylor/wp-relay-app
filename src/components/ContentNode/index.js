@@ -25,31 +25,31 @@ export const dataFragment = graphql`
 
 @FragmentContainer(graphql`
   fragment ContentNode_content on ContentNode @relay(plural: true) {
-    ...ContentNode_content_data @inline
+    ...ContentNode_content_data @relay(mask: false)
     ... on Element {
       children {
-        ...ContentNode_content_data @inline
+        ...ContentNode_content_data @relay(mask: false)
         ... on Element {
           children {
-            ...ContentNode_content_data @inline
+            ...ContentNode_content_data @relay(mask: false)
             ... on Element {
               children {
-                ...ContentNode_content_data @inline
+                ...ContentNode_content_data @relay(mask: false)
                 ... on Element {
                   children {
-                    ...ContentNode_content_data @inline
+                    ...ContentNode_content_data @relay(mask: false)
                     ... on Element {
                       children {
-                        ...ContentNode_content_data @inline
+                        ...ContentNode_content_data @relay(mask: false)
                         ... on Element {
                           children {
-                            ...ContentNode_content_data @inline
+                            ...ContentNode_content_data @relay(mask: false)
                             ... on Element {
                               children {
-                                ...ContentNode_content_data @inline
+                                ...ContentNode_content_data @relay(mask: false)
                                 ... on Element {
                                   children {
-                                    ...ContentNode_content_data @inline
+                                    ...ContentNode_content_data @relay(mask: false)
                                   }
                                 }
                               }

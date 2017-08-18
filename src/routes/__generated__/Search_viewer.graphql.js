@@ -15,9 +15,7 @@ export type Search_viewer = {|
       +cursor: string;
     |}>;
     +pageInfo: {|
-      +startCursor: ?string;
       +endCursor: ?string;
-      +hasPreviousPage: boolean;
       +hasNextPage: boolean;
     |};
   |};
@@ -88,6 +86,13 @@ const fragment /*: ConcreteFragment*/ = {
                   "kind": "FragmentSpread",
                   "name": "Post_post",
                   "args": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "__typename",
+                  "storageKey": null
                 }
               ],
               "storageKey": null
@@ -114,21 +119,7 @@ const fragment /*: ConcreteFragment*/ = {
               "kind": "ScalarField",
               "alias": null,
               "args": null,
-              "name": "startCursor",
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
               "name": "endCursor",
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "hasPreviousPage",
               "storageKey": null
             },
             {

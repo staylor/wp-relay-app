@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ArchiveComponent from 'wp-styled-components/lib/Archive';
 import Post from 'components/Post';
+import type { ArchiveProps } from 'wp-relay-app';
 
 export default class Archive extends Component {
-  static propTypes = {
-    posts: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-        PropTypes.shape({
-          node: PropTypes.object,
-          cursor: PropTypes.string,
-        })
-      ),
-    }).isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    relay: PropTypes.object,
-  };
-
-  static defaultProps = {
-    relay: null,
-  };
+  props: ArchiveProps;
 
   render() {
     const { relay, posts } = this.props;

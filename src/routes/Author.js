@@ -29,12 +29,6 @@ export default createPaginationContainer(
           }
           cursor
         }
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-          hasPreviousPage
-        }
       }
     }
   `,
