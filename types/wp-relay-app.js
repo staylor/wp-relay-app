@@ -6,8 +6,8 @@ declare module 'wp-relay-app' {
     node: Object,
   };
 
-  declare type Edge = {
-    node: Object,
+  declare type Edge<T> = {
+    node: T,
     cursor: string,
   };
 
@@ -18,8 +18,8 @@ declare module 'wp-relay-app' {
     hasPreviousPage?: boolean,
   };
 
-  declare type Connection = {
-    edges: Array<Edge>,
+  declare type Connection<T> = {
+    edges: Array<Edge<T>>,
     pageInfo: PageInfo,
   };
 
@@ -101,24 +101,26 @@ declare module 'wp-relay-app' {
 
   // Post
 
+  declare type Post = {
+    id: string,
+    date: string,
+    content: Object,
+    excerpt: Object,
+    featuredMedia: Object,
+  };
+
   declare type PostProps = {
-    post: {
-      id: string,
-      date: string,
-      content: Object,
-      excerpt: Object,
-      featuredMedia: Object,
-    },
+    post: Post,
   };
 
   // Home
 
   declare type HomeProps = {
     viewer: {|
-      readThis: Connection,
-      watchThis: Connection,
-      listenToThis: Connection,
-      stickies: Connection,
+      readThis: Connection<Post>,
+      watchThis: Connection<Post>,
+      listenToThis: Connection<Post>,
+      stickies: Connection<Post>,
     |},
   };
 
@@ -263,27 +265,6 @@ declare module 'wp-relay-app' {
 
   // Comments
 
-  declare type CommentEdge = {
-    node: {
-      id: string,
-      parent: string,
-    },
-  };
-
-  declare type CommentConnection = {
-    edges: Array<CommentEdge>,
-  };
-
-  declare type CommentsProps = {
-    post: string,
-    comments: CommentConnection,
-  };
-
-  declare type AuthorAvatar = {
-    size: number,
-    url: string,
-  };
-
   declare type Comment = {
     id: string,
     authorName: string,
@@ -297,6 +278,16 @@ declare module 'wp-relay-app' {
     authorAvatarUrls: Array<AuthorAvatar>,
     parent: string,
     post: string,
+  };
+
+  declare type CommentsProps = {
+    post: string,
+    comments: Connection<Comment>,
+  };
+
+  declare type AuthorAvatar = {
+    size: number,
+    url: string,
   };
 
   declare type EditCommentProps = {
