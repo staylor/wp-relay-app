@@ -55,7 +55,7 @@ declare module 'wp-relay-app' {
   };
 
   declare type ArchiveProps = {
-    posts: Connection,
+    posts: Connection<Post>,
     relay?: RelayPaginationProp,
   };
 
@@ -156,7 +156,7 @@ declare module 'wp-relay-app' {
           raw: string,
         |},
         tags: Array<PostTag>,
-        comments: Connection,
+        comments: Connection<Comment>,
       },
     |},
   };
@@ -175,7 +175,7 @@ declare module 'wp-relay-app' {
 
   declare type SearchProps = {
     viewer: {|
-      posts: Connection | null,
+      posts: Connection<Post> | null,
     |},
     relay: RelayRefetchProp,
   };
@@ -184,7 +184,7 @@ declare module 'wp-relay-app' {
 
   declare type DateProps = {
     viewer: {|
-      posts: Connection,
+      posts: Connection<Post>,
     |},
     params: {
       month: string | number,
@@ -202,7 +202,7 @@ declare module 'wp-relay-app' {
         id: string,
         name: string,
       },
-      posts: Connection,
+      posts: Connection<Post>,
     |},
     relay: RelayPaginationProp,
   };
@@ -227,7 +227,7 @@ declare module 'wp-relay-app' {
   declare type TermProps = {
     viewer: {|
       term: Term,
-      posts: Connection,
+      posts: Connection<Post>,
     |},
     relay: RelayPaginationProp,
   };
