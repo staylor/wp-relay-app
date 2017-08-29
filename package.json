@@ -46,7 +46,7 @@
     "relay": "relay-compiler --src ./src --schema ./tools/schema.graphql && npm run clear-cache",
     "persist-queries": "babel-node ./tools/persistedQueries",
     "clear-cache": "redis-cli FLUSHALL && npm run persist-queries",
-    "prettier": "prettier-eslint \"src/**/*.js\" --write"
+    "prettier": "prettier-eslint \"src/**/*.js\" --ignore \"**/__generated__/**\" --write"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
