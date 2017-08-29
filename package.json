@@ -20,13 +20,13 @@
     "kyt": "^0.8.0",
     "md5": "^2.2.1",
     "morgan": "^1.8.2",
-    "path-to-regexp": "^1.7.0",
+    "path-to-regexp": "^2.0.0",
     "react": "16.0.0-beta.5",
     "react-cookie": "^2.0.8",
     "react-dom": "16.0.0-beta.5",
     "react-helmet": "^5.1.3",
     "react-intl": "^2.3.0",
-    "react-relay": "^1.2.0",
+    "react-relay": "^1.3.0",
     "redis": "^2.8.0",
     "serialize-javascript": "^1.4.0",
     "universal-cookie-express": "^2.0.6",
@@ -46,14 +46,14 @@
     "relay": "relay-compiler --src ./src --schema ./tools/schema.graphql && npm run clear-cache",
     "persist-queries": "babel-node ./tools/persistedQueries",
     "clear-cache": "redis-cli FLUSHALL && npm run persist-queries",
-    "prettier": "prettier-eslint \"src/**/*.js\""
+    "prettier": "prettier-eslint \"src/**/*.js,!**/*.graphql.js,!**/*.min.js\" --write"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-module-resolver": "^2.7.1",
-    "babel-plugin-relay": "^1.2.0",
+    "babel-plugin-relay": "^1.3.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-flow": "^6.23.0",
@@ -62,8 +62,8 @@
     "bluebird": "^3.5.0",
     "enzyme": "^2.9.1",
     "eslint-import-resolver-babel-module": "^3.0.0",
-    "flow-bin": "^0.53.0",
+    "flow-bin": "^0.53.1",
     "react-test-renderer": "16.0.0-beta.5",
-    "relay-compiler": "^1.2.0"
+    "relay-compiler": "^1.3.0"
   }
 }
