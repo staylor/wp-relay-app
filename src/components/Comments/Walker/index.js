@@ -64,8 +64,9 @@ export default class CommentsWalker extends Component {
     this.level = 0;
     return [
       this.walk(this.sorted.top),
-      !this.state.replyTo &&
-        <Form key="form" post={this.props.post} setReplyTo={this.setReplyTo} />,
+      !this.state.replyTo && (
+        <Form key="form" post={this.props.post} setReplyTo={this.setReplyTo} />
+      ),
     ];
   }
 }

@@ -115,10 +115,6 @@ export default class ContentNode extends Component {
       ...rest
     } = this.props;
 
-    return (
-      <ContentComponent {...rest}>
-        {this.parseNodes(content)}
-      </ContentComponent>
-    );
+    return <ContentComponent {...rest}>{this.parseNodes(content)}</ContentComponent>;
   }
 }

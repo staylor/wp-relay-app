@@ -6,13 +6,12 @@ import Archive from 'containers/Archive';
 import AuthorQuery from 'queries/Author';
 import type { AuthorProps } from 'wp-relay-app';
 
-const Author = ({ viewer: { author, posts }, relay }: AuthorProps) =>
+const Author = ({ viewer: { author, posts }, relay }: AuthorProps) => (
   <ContentWrapper>
-    <Heading>
-      {author.name}
-    </Heading>
+    <Heading>{author.name}</Heading>
     <Archive {...{ posts, relay }} />
-  </ContentWrapper>;
+  </ContentWrapper>
+);
 
 export default createPaginationContainer(
   Author,

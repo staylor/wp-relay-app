@@ -14,13 +14,11 @@ const Chart = ({ viewer: { chart } }: ChartProps) => {
     <ArticleWrapper>
       <header>
         <Title>
-          <a href={chart.authorUri}>
-            {chart.authorName}
-          </a>
+          <a href={chart.authorUri}>{chart.authorName}</a>
         </Title>
       </header>
       <List>
-        {chart.items.map(({ title, url, artist, releaseDateFormatted, images }) =>
+        {chart.items.map(({ title, url, artist, releaseDateFormatted, images }) => (
           <Item key={url}>
             {images.length && <Image src={images[0].url} alt="" />}
             <a href={url} target="_blank" rel="noopener noreferrer">
@@ -30,7 +28,7 @@ const Chart = ({ viewer: { chart } }: ChartProps) => {
               <strong>Released:</strong> {releaseDateFormatted}
             </p>
           </Item>
-        )}
+        ))}
       </List>
     </ArticleWrapper>
   );

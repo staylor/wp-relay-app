@@ -93,9 +93,7 @@ export default class Single extends Component {
     return (
       <ArticleWrapper>
         <Helmet>
-          <title>
-            {title.raw}
-          </title>
+          <title>{title.raw}</title>
           <link rel="canonical" href={url} />
           <meta property="og:type" content="article" />
           <meta property="og:title" content={title.raw} />
@@ -107,9 +105,7 @@ export default class Single extends Component {
           {featuredImage && <meta name="twitter:image" content={featuredImage} />}
         </Helmet>
         <header>
-          <Title>
-            {title.raw}
-          </Title>
+          <Title>{title.raw}</Title>
           <Meta>
             Posted:{' '}
             <Link to={`/${year}/${month}`}>
@@ -126,15 +122,16 @@ export default class Single extends Component {
           content={content}
           onEmbedClick={this.onEmbedClick}
         />
-        {tags &&
+        {tags && (
           <footer>
             Tags:{' '}
-            {tags.map(tag =>
+            {tags.map(tag => (
               <Tag key={tag.id} to={`/tag/${tag.slug}`}>
                 {tag.name}
               </Tag>
-            )}
-          </footer>}
+            ))}
+          </footer>
+        )}
         <Comments post={id} comments={comments} />
       </ArticleWrapper>
     );

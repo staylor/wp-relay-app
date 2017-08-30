@@ -20,9 +20,7 @@ const Page = ({ viewer: { page } }: PageProps) => {
   return (
     <ArticleWrapper>
       <Helmet>
-        <title>
-          {title.raw}
-        </title>
+        <title>{title.raw}</title>
         <link rel="canonical" href={url} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={title.raw} />
@@ -32,9 +30,7 @@ const Page = ({ viewer: { page } }: PageProps) => {
         {featuredImage && <meta name="twitter:image" content={featuredImage} />}
       </Helmet>
       <header>
-        <Heading>
-          {title.raw}
-        </Heading>
+        <Heading>{title.raw}</Heading>
       </header>
       {featuredMedia && <Media media={featuredMedia} crop={'large'} />}
       <ContentNode component={ContentSection} content={content} />

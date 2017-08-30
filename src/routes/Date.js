@@ -16,14 +16,10 @@ const DateRoute = ({ params, viewer: { posts }, relay }: DateProps) => {
   return (
     <ContentWrapper>
       <Helmet>
-        <title>
-          {title}
-        </title>
+        <title>{title}</title>
         <link rel="canonical" href={`${SITE_URL}/${path}`} />
       </Helmet>
-      <Heading>
-        {title}
-      </Heading>
+      <Heading>{title}</Heading>
       <Archive {...{ posts, relay }} />
     </ContentWrapper>
   );

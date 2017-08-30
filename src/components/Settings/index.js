@@ -14,9 +14,7 @@ export default class Settings extends Component {
     return (
       <Helmet titleTemplate={`%s - ${settings.title}`} defaultTitle={settings.title}>
         <html lang={locale} prefix="og: http://ogp.me/ns#" />
-        <title>
-          {settings.description}
-        </title>
+        <title>{settings.description}</title>
         <meta httpEquiv="Content-Language" content={locale} />
         <meta property="og:site_name" content={settings.title} />
         <meta property="og:description" content={SITE_DESCRIPTION} />

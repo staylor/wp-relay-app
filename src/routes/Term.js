@@ -19,16 +19,12 @@ const Term = ({ viewer: { term, posts }, relay }: TermProps) => {
   return (
     <ContentWrapper>
       <Helmet>
-        <title>
-          {title}
-        </title>
+        <title>{title}</title>
         <link rel="canonical" href={url} />
         <meta property="og:title" content={title} />
         <meta property="og:url" content={url} />
       </Helmet>
-      <Heading>
-        {title}
-      </Heading>
+      <Heading>{title}</Heading>
       <Archive {...{ posts, relay }} />
     </ContentWrapper>
   );

@@ -111,11 +111,7 @@ export default class Comment extends Component {
     const avatar = authorAvatarUrls && authorAvatarUrls.find(data => data.size === 48);
     let authorDisplay = authorName;
     if (authorUrl) {
-      authorDisplay = (
-        <a href={authorUrl}>
-          {authorName}
-        </a>
-      );
+      authorDisplay = <a href={authorUrl}>{authorName}</a>;
     }
 
     let commentContent = null;
@@ -135,23 +131,20 @@ export default class Comment extends Component {
       <CommentWrapper>
         <Meta>
           {avatar ? <Image alt="" src={avatar.url} /> : null}
-          <Author>
-            {authorDisplay}
-          </Author>
-          <Time>
-            {this.props.intl.formatRelative(date)}
-          </Time>
+          <Author>{authorDisplay}</Author>
+          <Time>{this.props.intl.formatRelative(date)}</Time>
         </Meta>
         {commentContent}
         <Reply className={this.props.active ? activeReply : null} onClick={() => this.onClick(id)}>
           ↵
         </Reply>
         {this.viewerOwns() &&
-          !this.state.editing &&
+        !this.state.editing && (
           <Actions>
             <EditButton onClick={this.onEditClick}>Edit</EditButton>
             <DeleteButton onClick={this.onDelete}>Delete</DeleteButton>
-          </Actions>}
+          </Actions>
+        )}
       </CommentWrapper>
     );
   }

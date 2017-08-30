@@ -12,7 +12,7 @@ import {
 import Archive from 'containers/Archive';
 import type { HomeProps } from 'wp-relay-app';
 
-const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }: HomeProps) =>
+const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }: HomeProps) => (
   <HomeWrapper>
     <ColumnA>
       <HomeSection>
@@ -43,7 +43,8 @@ const Home = ({ viewer: { readThis, watchThis, listenToThis, stickies } }: HomeP
         </MoreIn>
       </HomeSection>
     </ColumnB>
-  </HomeWrapper>;
+  </HomeWrapper>
+);
 
 export default createFragmentContainer(
   Home,

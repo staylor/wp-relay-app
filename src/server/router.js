@@ -42,11 +42,7 @@ export default ({ manifestJSBundle, mainJSBundle, vendorJSBundle }: KYTAssets) =
     }
 
     const { html, css, ids } = extractCritical(
-      renderToString(
-        <CookiesProvider cookies={req.universalCookies}>
-          {element}
-        </CookiesProvider>
-      )
+      renderToString(<CookiesProvider cookies={req.universalCookies}>{element}</CookiesProvider>)
     );
 
     res.status(200);

@@ -79,9 +79,7 @@ class Search extends Component {
           <link rel="canonical" href={`${SITE_URL}/search`} />
         </Helmet>
         <SearchBox>
-          <Heading>
-            {title}
-          </Heading>
+          <Heading>{title}</Heading>
           <form>
             <A11Y htmlFor="field-term">Search Term</A11Y>
             <SearchInput
@@ -96,10 +94,11 @@ class Search extends Component {
         </SearchBox>
         {posts && [
           <Archive key="archive" posts={posts} />,
-          posts.pageInfo.hasNextPage &&
+          posts.pageInfo.hasNextPage && (
             <LoadMore key="button" onClick={() => this.loadMore()}>
               MORE
-            </LoadMore>,
+            </LoadMore>
+          ),
         ]}
       </ContentWrapper>
     );

@@ -17,11 +17,13 @@ import SearchQuery from 'queries/Search';
 import TermQuery from 'queries/Term';
 
 const getComponent = loader => (location, cb) =>
-  loader().then(module => module.default).catch(error => {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    cb(error, null);
-  });
+  loader()
+    .then(module => module.default)
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.error(error);
+      cb(error, null);
+    });
 
 export const historyMiddlewares = [queryMiddleware];
 

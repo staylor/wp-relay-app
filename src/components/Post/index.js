@@ -58,15 +58,16 @@ export default class Post extends Component {
             <PostLink post={this.props.post} />
           </Title>
         </header>
-        {featuredMedia &&
+        {featuredMedia && (
           <PostLink post={this.props.post}>
             <Media media={featuredMedia} />
-          </PostLink>}
-        {isEmbed
-          ? <ContentNode component={Content} content={content} onEmbedClick={this.onEmbedClick} />
-          : <Content>
-              {excerpt.raw}
-            </Content>}
+          </PostLink>
+        )}
+        {isEmbed ? (
+          <ContentNode component={Content} content={content} onEmbedClick={this.onEmbedClick} />
+        ) : (
+          <Content>{excerpt.raw}</Content>
+        )}
       </Article>
     );
   }
