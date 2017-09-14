@@ -35,7 +35,7 @@ const renderProp = ({ Component, props }: { Component: any, props: Props }) =>
 export const routeConfig = makeRouteConfig(
   <Route
     path="/"
-    getComponent={getComponent(() => /* webpackChunkName: "app" */ import('../containers/App'))}
+    getComponent={getComponent(() => import(/* webpackChunkName: "app" */ '../containers/App'))}
     query={AppQuery}
     prepareVariables={params => ({
       ...params,
@@ -45,7 +45,7 @@ export const routeConfig = makeRouteConfig(
   >
     <Route
       path="music/:slug"
-      getComponent={getComponent(() => /* webpackChunkName: "term" */ import('./Term'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "term" */ './Term'))}
       query={TermQuery}
       render={renderProp}
       prepareVariables={params => ({
@@ -55,7 +55,7 @@ export const routeConfig = makeRouteConfig(
     />
     <Route
       path="tag/:slug"
-      getComponent={getComponent(() => /* webpackChunkName: "term" */ import('./Term'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "term" */ './Term'))}
       query={TermQuery}
       render={renderProp}
       prepareVariables={params => ({
@@ -65,13 +65,13 @@ export const routeConfig = makeRouteConfig(
     />
     <Route
       path=":year(\d{4})/:month(\d{2})/:day(\d{2})/:id"
-      getComponent={getComponent(() => /* webpackChunkName: "single" */ import('./Single'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "single" */ './Single'))}
       query={SingleQuery}
       render={renderProp}
     />
     <Route
       path=":year(\d{4})/:month(\d{2})?/:day(\d{2})?"
-      getComponent={getComponent(() => /* webpackChunkName: "date" */ import('./Date'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "date" */ './Date'))}
       query={DateQuery}
       prepareVariables={params => {
         const vars = Object.assign({}, params);
@@ -85,24 +85,24 @@ export const routeConfig = makeRouteConfig(
     />
     <Route
       path="search"
-      getComponent={getComponent(() => /* webpackChunkName: "search" */ import('./Search'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "search" */ './Search'))}
       query={SearchQuery}
       render={renderProp}
     />
     <Route
       path="charts"
-      getComponent={getComponent(() => /* webpackChunkName: "chart" */ import('./Chart'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "chart" */ './Chart'))}
       query={ChartQuery}
       render={renderProp}
     />
     <Route
       path=":slug"
-      getComponent={getComponent(() => /* webpackChunkName: "page" */ import('./Page'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "page" */ './Page'))}
       query={PageQuery}
       render={renderProp}
     />
     <Route
-      getComponent={getComponent(() => /* webpackChunkName: "home" */ import('./Home'))}
+      getComponent={getComponent(() => import(/* webpackChunkName: "home" */ './Home'))}
       query={HomeQuery}
       render={renderProp}
     />
