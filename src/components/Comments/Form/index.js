@@ -1,4 +1,6 @@
+// @flow
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withCookies } from 'react-cookie';
 import { SubmitButton, ResetButton, formField } from 'wp-styled-components';
 import { CommentForm, Field, Label, submit, reset } from 'wp-styled-components/lib/Comments';
@@ -31,7 +33,7 @@ const getDefaultState = props => {
 @withCookies
 export default class Form extends Component {
   static contextTypes = {
-    relay: Object,
+    relay: PropTypes.object,
   };
 
   props: CommentFormProps;

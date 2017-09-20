@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { formField } from 'wp-styled-components';
 import { EditForm, SubmitButton, EditCancelButton } from 'wp-styled-components/lib/Comments';
 import UpdateCommentMutation from 'mutations/UpdateComment';
@@ -7,7 +8,7 @@ import type { EditCommentProps } from 'wp-relay-app';
 
 export default class Edit extends Component {
   static contextTypes = {
-    relay: Object,
+    relay: PropTypes.object,
   };
 
   props: EditCommentProps;

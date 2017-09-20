@@ -705,6 +705,10 @@ babel-loader@7.1.1:
     loader-utils "^1.0.2"
     mkdirp "^0.5.1"
 
+babel-macros@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/babel-macros/-/babel-macros-1.0.2.tgz#04475889990243cc58a0afb5ea3308ec6b89e797"
+
 babel-messages@7.0.0-beta.0:
   version "7.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-7.0.0-beta.0.tgz#6df01296e49fc8fbd0637394326a167f36da817b"
@@ -721,13 +725,14 @@ babel-plugin-check-es2015-constants@^6.22.0, babel-plugin-check-es2015-constants
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-emotion@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-7.1.0.tgz#a426861c50f2c42b9d15aef8796da143752a981b"
+babel-plugin-emotion@^7.3.2:
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-7.3.2.tgz#2d07d990281ac680ef981326debbe115a67d436a"
   dependencies:
     autoprefixer "^7.1.2"
+    babel-macros "^1.0.2"
     babel-plugin-syntax-jsx "^6.18.0"
-    emotion-utils "^7.1.0"
+    emotion-utils "^7.3.1"
     postcss "^6.0.9"
     postcss-js "^1.0.0"
     postcss-nested "^2.1.1"
@@ -2818,27 +2823,27 @@ emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
 
-emotion-server@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/emotion-server/-/emotion-server-7.2.0.tgz#be7c8ffd4e7e2e56fcdf8e94b42b545ddecbd7f6"
+emotion-server@^7.3.2:
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/emotion-server/-/emotion-server-7.3.2.tgz#64a1727beb71fe615671bddcc674cbeb71abd52b"
   dependencies:
-    emotion "^7.2.0"
-    emotion-utils "^7.1.0"
+    emotion "^7.3.2"
+    emotion-utils "^7.3.1"
 
-emotion-utils@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/emotion-utils/-/emotion-utils-7.1.0.tgz#e59fb81e1edf3a50c4ed79f48f03123a0e7dfcb1"
+emotion-utils@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/emotion-utils/-/emotion-utils-7.3.1.tgz#e54446e4008a44150a45403ae0266e35b609ee36"
   dependencies:
     fbjs "^0.8.12"
 
-emotion@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/emotion/-/emotion-7.2.0.tgz#52badb10c89c4d34a97820684dd04efd575b31a7"
+emotion@^7.3.2:
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/emotion/-/emotion-7.3.2.tgz#54d2533f2451a6b96e7bf600b54ede5ce0160fe1"
   dependencies:
-    babel-plugin-emotion "^7.1.0"
-    emotion-server "^7.2.0"
-    emotion-utils "^7.1.0"
-    react-emotion "^7.2.0"
+    babel-plugin-emotion "^7.3.2"
+    emotion-server "^7.3.2"
+    emotion-utils "^7.3.1"
+    react-emotion "^7.3.2"
 
 encodeurl@~1.0.1:
   version "1.0.1"
@@ -3043,9 +3048,9 @@ eslint-config-prettier@2.3.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-config-prettier@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.4.0.tgz#fb7cf29c0ab2ba61af5164fb1930f9bef3be2872"
+eslint-config-prettier@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.5.0.tgz#9ecb9296bae4e2e59a3ce361a96c9f825fe67b75"
   dependencies:
     get-stdin "^5.0.1"
 
@@ -3122,12 +3127,12 @@ eslint-plugin-prettier@2.1.2:
     fast-diff "^1.1.1"
     jest-docblock "^20.0.1"
 
-eslint-plugin-prettier@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.2.0.tgz#f2837ad063903d73c621e7188fb3d41486434088"
+eslint-plugin-prettier@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.3.1.tgz#e7a746c67e716f335274b88295a9ead9f544e44d"
   dependencies:
     fast-diff "^1.1.1"
-    jest-docblock "^20.0.1"
+    jest-docblock "^21.0.0"
 
 eslint-plugin-react@7.1.0:
   version "7.1.0"
@@ -3239,19 +3244,19 @@ eslint@^4.5.0:
     table "^4.0.1"
     text-table "~0.2.0"
 
-eslint@^4.6.1:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.6.1.tgz#ddc7fc7fd70bf93205b0b3449bb16a1e9e7d4950"
+eslint@^4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.7.1.tgz#849804136953ebe366782f9f8611e2cbd1b54681"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
     chalk "^2.1.0"
     concat-stream "^1.6.0"
     cross-spawn "^5.1.0"
-    debug "^2.6.8"
+    debug "^3.0.1"
     doctrine "^2.0.0"
     eslint-scope "^3.7.1"
-    espree "^3.5.0"
+    espree "^3.5.1"
     esquery "^1.0.0"
     estraverse "^4.2.0"
     esutils "^2.0.2"
@@ -3272,7 +3277,7 @@ eslint@^4.6.1:
     natural-compare "^1.4.0"
     optionator "^0.8.2"
     path-is-inside "^1.0.2"
-    pluralize "^4.0.0"
+    pluralize "^7.0.0"
     progress "^2.0.0"
     require-uncached "^1.0.3"
     semver "^5.3.0"
@@ -3291,6 +3296,13 @@ espree@^3.4.0:
 espree@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.0.tgz#98358625bdd055861ea27e2867ea729faf463d8d"
+  dependencies:
+    acorn "^5.1.1"
+    acorn-jsx "^3.0.0"
+
+espree@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.1.tgz#0c988b8ab46db53100a1954ae4ba995ddd27d87e"
   dependencies:
     acorn "^5.1.1"
     acorn-jsx "^3.0.0"
@@ -3759,9 +3771,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.54.1:
-  version "0.54.1"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.54.1.tgz#7101bcccf006dc0652714a8aef0c72078a760510"
+flow-bin@^0.55.0:
+  version "0.55.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.55.0.tgz#9083da9327bd8cab6b4076d63d85f2247a7eae1b"
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -3812,22 +3824,6 @@ found-relay@next:
     lodash "^4.17.4"
     prop-types "^15.5.10"
     prop-types-extra "^1.0.1"
-    warning "^3.0.0"
-
-found@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/found/-/found-0.3.3.tgz#575526ad5c8fa140080fe602e91ae1e11cf1bbaa"
-  dependencies:
-    babel-runtime "^6.23.0"
-    farce "^0.2.1"
-    is-promise "^2.1.0"
-    lodash "^4.17.4"
-    path-to-regexp "^1.7.0"
-    prop-types "^15.5.10"
-    prop-types-extra "^1.0.1"
-    react-redux "^5.0.5"
-    react-static-container "^1.0.1"
-    redux "^3.7.2"
     warning "^3.0.0"
 
 found@^0.3.4:
@@ -4985,6 +4981,10 @@ jest-diff@^20.0.3:
 jest-docblock@^20.0.1, jest-docblock@^20.0.3:
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-20.0.3.tgz#17bea984342cc33d83c50fbe1545ea0efaa44712"
+
+jest-docblock@^21.0.0:
+  version "21.1.0"
+  resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-21.1.0.tgz#43154be2441fb91403e36bb35cb791a5017cea81"
 
 jest-environment-jsdom@^20.0.3:
   version "20.0.3"
@@ -6561,15 +6561,11 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
-path-to-regexp@^1.7.0:
+path-to-regexp@1.7.0, path-to-regexp@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
   dependencies:
     isarray "0.0.1"
-
-path-to-regexp@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-2.0.0.tgz#b77a8168c2e78bc31f3d312d71b1ace97df23870"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -6657,6 +6653,10 @@ pluralize@^1.2.1:
 pluralize@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
+
+pluralize@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
 pn@^1.0.0:
   version "1.0.0"
@@ -7083,9 +7083,25 @@ prettier-eslint@^6.0.0:
     pretty-format "^20.0.3"
     require-relative "^0.8.7"
 
-prettier-eslint@^8.0.0, prettier-eslint@^8.1.0:
+prettier-eslint@^8.0.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/prettier-eslint/-/prettier-eslint-8.1.0.tgz#8b0366e180c0d4ec1f76ccd635bb20e3f47bc156"
+  dependencies:
+    common-tags "^1.4.0"
+    dlv "^1.1.0"
+    eslint "^4.5.0"
+    indent-string "^3.2.0"
+    lodash.merge "^4.6.0"
+    loglevel-colored-level-prefix "^1.0.0"
+    prettier "^1.7.0"
+    pretty-format "^20.0.3"
+    require-relative "^0.8.7"
+    typescript "^2.4.2"
+    typescript-eslint-parser "^7.0.0"
+
+prettier-eslint@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/prettier-eslint/-/prettier-eslint-8.1.1.tgz#826d71d79389c93d59edd56e3f0d58264a6ce36f"
   dependencies:
     common-tags "^1.4.0"
     dlv "^1.1.0"
@@ -7283,13 +7299,13 @@ react-dom@next:
     object-assign "^4.1.0"
     prop-types "^15.5.6"
 
-react-emotion@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-7.2.0.tgz#e5331036aeb30e3fd374f4cf948fd8ddd980be74"
+react-emotion@^7.3.2:
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-7.3.2.tgz#f935105369641efb02d49ad063d274d1ac7bdfa3"
   dependencies:
-    babel-plugin-emotion "^7.1.0"
-    emotion "^7.2.0"
-    emotion-utils "^7.1.0"
+    babel-plugin-emotion "^7.3.2"
+    emotion "^7.3.2"
+    emotion-utils "^7.3.1"
 
 react-helmet@^5.2.0:
   version "5.2.0"
@@ -7365,15 +7381,6 @@ react-test-renderer@16.0.0-beta.5:
   dependencies:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
-
-react@16.0.0-beta.5:
-  version "16.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-beta.5.tgz#b4abba9bce7db72c30633db54a148614b6574e79"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.6"
 
 react@^15.5.4:
   version "15.6.1"
@@ -9246,13 +9253,13 @@ worker-farm@^1.3.1:
     errno ">=0.1.1 <0.2.0-0"
     xtend ">=4.0.0 <4.1.0-0"
 
-wp-styled-components@^0.0.34:
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/wp-styled-components/-/wp-styled-components-0.0.34.tgz#294c55ffe6502be3c5273747cc7393f2155016c7"
+wp-styled-components@^0.0.35:
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/wp-styled-components/-/wp-styled-components-0.0.35.tgz#75f54db2b7e5aa80ad38c4522f3c1ba9a56c9f29"
   dependencies:
-    emotion "^7.2.0"
-    found "^0.3.3"
-    react "16.0.0-beta.5"
+    emotion "^7.3.2"
+    found "^0.3.4"
+    react next
     theming "^1.1.0"
 
 wrap-ansi@^2.0.0:

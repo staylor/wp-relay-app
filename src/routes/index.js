@@ -15,6 +15,7 @@ import DateQuery from 'queries/Date';
 import PageQuery from 'queries/Page';
 import SearchQuery from 'queries/Search';
 import TermQuery from 'queries/Term';
+import ErrorBoundary from 'components/ErrorBoundary';
 
 const getComponent = loader => (location, cb) =>
   loader()
@@ -28,7 +29,13 @@ const getComponent = loader => (location, cb) =>
 export const historyMiddlewares = [queryMiddleware];
 
 const renderProp = ({ Component, props }: { Component: any, props: Props }) =>
-  Component && props ? <Component {...props} /> : <Loading />;
+  Component && props ? (
+    <ErrorBoundary>
+      <Component {...props} />
+    </ErrorBoundary>
+  ) : (
+    <Loading />
+  );
 
 /* eslint-disable global-require */
 
