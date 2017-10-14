@@ -1,9 +1,0 @@
-{
-  "presets": ["babel-preset-expo"],
-  "plugins": ["relay"],
-  "env": {
-    "development": {
-      "plugins": ["transform-react-jsx-source"]
-    }
-  }
-}
